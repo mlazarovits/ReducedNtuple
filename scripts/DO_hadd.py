@@ -27,13 +27,13 @@ if __name__ == "__main__":
     # create and organize output folders
     os.system("rm -rf "+OUT_DIR)
     os.system("mkdir -p "+OUT_DIR)
-
+    
     for dirs in os.walk(IN_DIR):
         target = dirs[0].split("/")
         target = target[-2]
         print "target: ", target
 	haddcmd = "hadd "+OUT_DIR+target+".root "
-        haddcmd += IN_DIR+"/*.root"
+        haddcmd += IN_DIR+"*.root"
         print haddcmd
         os.system(haddcmd)
 
