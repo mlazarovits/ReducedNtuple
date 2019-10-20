@@ -1,0 +1,111 @@
+#include <iostream>
+
+#include "prod2016MC_reducedNANO_Triggers.h"
+#include "prod2017MC_reducedNANO_Triggers.h"
+#include "prod2018MC_reducedNANO_Triggers.h"
+#include "TEfficiency.h"
+
+using namespace std;
+
+void Plot_Efficiency(){
+	if(gSystem->OpenDirectory("plots") == 0){
+		gSystem->mkdir("plots");
+		cout << "Created plots folder." << endl;
+	}
+
+	TCanvas* cv = new TCanvas("cv","cv",500,600);
+	TLegend* leg = new TLegend(0.688,0.22,0.93,0.42);
+
+	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
+	TString dyJets16Pathname = gPathame+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
+	TString dyJets17Pathname = gPathame+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
+	TString dyJets18Pathname = gPathame+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
+
+
+	TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
+	//DYJets2016
+	TChain* chain = new TChain("Events");		
+	chain16->Add(dyJets16Pathname+"*.root");
+
+	prod2016MC_reducedNANO_Triggers* trigClass16 = new prod2016MC_reducedNANO_Triggers(chain);
+
+	int nEntries16 = trigClass16->fChain->GetEntries();
+	TEfficiency* eff16 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000)
+	
+	bool trigPass16;
+	Float_t ele_pt16;
+	Float_t mu_pt16;
+
+	for(int evt = 0; evt < nEntries16; i++){
+		trigClass16->GetEntry(evt);
+		ele_pt16 = trigClass16->Electron_pt->at(0);
+		trigPass16 = trigClass16->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
+
+		eff16->Fill(trigPass16,ele_pt16);
+	}
+	eff16->SetFillColor(kGreen);
+	leg->AddEntry(eff16,"2016");
+	eff16->Draw("AP");
+	delete chain;
+
+	//DYJets2017
+	TChain* chain = new TChain("Events");		
+	chain17->Add(dyJets17Pathname+"*.root");
+
+	prod2017MC_reducedNANO_Triggers* trigClass17 = new prod2017MC_reducedNANO_Triggers(chain);
+
+	int nEntries17 = trigClass17->fChain->GetEntries();
+	TEfficiency* eff17 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000)
+	
+	bool trigPass17;
+	Float_t ele_pt17;
+	Float_t mu_pt17;
+
+	for(int evt = 0; evt < nEntries17; i++){
+		trigClass17->GetEntry(evt);
+		ele_pt17 = trigClass17->Electron_pt->at(0);
+		trigPass17 = trigClass17->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
+
+		
+		eff17->Fill(trigPass17,ele_pt17);
+
+	}
+	eff17->SetFillColor(kRed);
+	leg->AddEntry(eff17,"2017");
+	eff17->Draw("SAME");
+	delete chain;
+
+	//DYJets2018
+	TChain* chain = new TChain("Events");		
+	chain18->Add(dyJets18Pathname+"*.root");
+
+	prod2018MC_reducedNANO_Triggers* trigClass18 = new prod2018MC_reducedNANO_Triggers(chain);
+
+	int nEntries18 = trigClass18->fChain->GetEntries();
+	TEfficiency* eff18 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000)
+	
+	bool trigPass18;
+	Float_t ele_pt18;
+	Float_t mu_pt18;
+
+	for(int evt = 0; evt < nEntries18; i++){
+		trigClass18->GetEntry(evt);
+		ele_pt18 = trigClass18->Electron_pt->at(0);
+		trigPass18 = trigClass18->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
+
+		
+		eff18->Fill(trigPass18,ele_pt18);
+	}
+	eff18->SetFillColor(kBlue);
+	leg->AddEntry(eff18,"2018");
+	eff18->Draw("SAME");
+
+	cv->SaveAs("plots/"+filename+".pdf");
+	cv->Close();
+	delete cv;
+
+
+
+
+	
+}
