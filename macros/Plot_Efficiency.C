@@ -17,9 +17,9 @@ void Plot_Efficiency(){
 	TLegend* leg = new TLegend(0.688,0.22,0.93,0.42);
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
-	TString dyJets16Pathname = gPathame+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
-	TString dyJets17Pathname = gPathame+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
-	TString dyJets18Pathname = gPathame+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
+	TString dyJets16Pathname = gPathname+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
+	TString dyJets17Pathname = gPathname+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
+	TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
 
 
 	TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
@@ -27,7 +27,7 @@ void Plot_Efficiency(){
 	TChain* chain16 = new TChain("Events");		
 	chain16->Add(dyJets16Pathname+"*.root");
 
-	prod2016MC_reducedNANO_Triggers* trigClass16 = new prod2016MC_reducedNANO_Triggers(chain);
+	prod2016MC_reducedNANO_Triggers* trigClass16 = new prod2016MC_reducedNANO_Triggers(chain16);
 
 	int nEntries16 = trigClass16->fChain->GetEntries();
 	TEfficiency* eff16 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
@@ -51,7 +51,7 @@ void Plot_Efficiency(){
 	TChain* chain17 = new TChain("Events");		
 	chain17->Add(dyJets17Pathname+"*.root");
 
-	prod2017MC_reducedNANO_Triggers* trigClass17 = new prod2017MC_reducedNANO_Triggers(chain);
+	prod2017MC_reducedNANO_Triggers* trigClass17 = new prod2017MC_reducedNANO_Triggers(chain17);
 
 	int nEntries17 = trigClass17->fChain->GetEntries();
 	TEfficiency* eff17 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
@@ -62,7 +62,7 @@ void Plot_Efficiency(){
 
 	for(int evt = 0; evt < nEntries17; evt++){
 		trigClass17->GetEntry(evt);
-		ele_pt17 = trigClass17->Electron_pt->at(0);
+		ele_pt17 = trigClass17->Electron_pt;
 		trigPass17 = trigClass17->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
 
 		
@@ -78,7 +78,7 @@ void Plot_Efficiency(){
 	TChain* chain18 = new TChain("Events");		
 	chain18->Add(dyJets18Pathname+"*.root");
 
-	prod2018MC_reducedNANO_Triggers* trigClass18 = new prod2018MC_reducedNANO_Triggers(chain);
+	prod2018MC_reducedNANO_Triggers* trigClass18 = new prod2018MC_reducedNANO_Triggers(chain18);
 
 	int nEntries18 = trigClass18->fChain->GetEntries();
 	TEfficiency* eff18 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
