@@ -24,7 +24,11 @@ public :
    // Declaration of leaf types
 //   UInt_t          run;
  //  UInt_t          luminosityBlock;
+<<<<<<< HEAD
    ULong64_t       event;
+=======
+  ULong64_t       event;
+>>>>>>> 149523c2441e605d5ec26688ec85c752926eb8d0
  //  UInt_t          nPFcand;
  //  Float_t         PFcand_chiso0p1[27];   //[nPFcand]
  //  Float_t         PFcand_chiso0p2[27];   //[nPFcand]
@@ -1164,7 +1168,7 @@ public :
    // List of branches
 //   TBranch        *b_run;   //!
  //  TBranch        *b_luminosityBlock;   //!
- //  TBranch        *b_event;   //!
+  TBranch        *b_event;   //!
  //  TBranch        *b_nPFcand;   //!
  //  TBranch        *b_PFcand_chiso0p1;   //!
  //  TBranch        *b_PFcand_chiso0p2;   //!
@@ -2374,7 +2378,7 @@ fChain->SetBranchStatus("*", 0);
 
    // fChain->SetBranchAddress("run", &run, &b_run);
    // fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
-   // fChain->SetBranchAddress("event", &event, &b_event);
+   fChain->SetBranchAddress("event", &event, &b_event);
    // fChain->SetBranchAddress("nPFcand", &nPFcand, &b_nPFcand);
    // fChain->SetBranchAddress("PFcand_chiso0p1", PFcand_chiso0p1, &b_PFcand_chiso0p1);
    // fChain->SetBranchAddress("PFcand_chiso0p2", PFcand_chiso0p2, &b_PFcand_chiso0p2);

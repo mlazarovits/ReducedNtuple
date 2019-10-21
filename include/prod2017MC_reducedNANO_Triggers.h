@@ -1126,7 +1126,7 @@ public :
    // List of branches
    // TBranch        *b_run;   //!
    // TBranch        *b_luminosityBlock;   //!
-   // TBranch        *b_event;   //!
+    TBranch        *b_event;   //!
    // TBranch        *b_nPFcand;   //!
    // TBranch        *b_PFcand_chiso0p1;   //!
    // TBranch        *b_PFcand_chiso0p2;   //!
@@ -2298,7 +2298,7 @@ fChain->SetBranchStatus("*", 0);
 
    // fChain->SetBranchAddress("run", &run, &b_run);
    // fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
-   // fChain->SetBranchAddress("event", &event, &b_event);
+   fChain->SetBranchAddress("event", &event, &b_event);
    // fChain->SetBranchAddress("nPFcand", &nPFcand, &b_nPFcand);
    // fChain->SetBranchAddress("PFcand_chiso0p1", PFcand_chiso0p1, &b_PFcand_chiso0p1);
    // fChain->SetBranchAddress("PFcand_chiso0p2", PFcand_chiso0p2, &b_PFcand_chiso0p2);
