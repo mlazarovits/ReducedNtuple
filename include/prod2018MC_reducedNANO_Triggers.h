@@ -2394,9 +2394,9 @@ prod2018MC_reducedNANO_Triggers::prod2018MC_reducedNANO_Triggers(TTree *tree) : 
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//eos/uscms/store/user/lpcsusyhad/Stop_production/Autumn18_102X_v1/PreProcessed_22March2019/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/2018_Data_RunIIAutumn18MiniAOD-102X_v15-v2/190326_032957/0000/prod2018MC_NANO_1-1.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../prod2018MC_NANO_1-1.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmseos.fnal.gov//eos/uscms/store/user/lpcsusyhad/Stop_production/Autumn18_102X_v1/PreProcessed_22March2019/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/2018_Data_RunIIAutumn18MiniAOD-102X_v15-v2/190326_032957/0000/prod2018MC_NANO_1-1.root");
+         f = new TFile("../prod2018MC_NANO_1-1.root");
       }
       f->GetObject("Events",tree);
 
