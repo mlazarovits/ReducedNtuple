@@ -2388,7 +2388,7 @@ public :
 
 #endif
 
-#ifdef Events_cxx
+#ifdef prod2018MC_reducedNANO_Triggers_cxx
 prod2018MC_reducedNANO_Triggers::prod2018MC_reducedNANO_Triggers(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
