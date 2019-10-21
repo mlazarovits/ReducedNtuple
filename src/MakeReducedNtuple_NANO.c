@@ -40,12 +40,9 @@ using std::vector;
 template<class selectortype>
 void produceReducedTree(selectortype& selector, std::string ofilename){
 	//copy branches to output file	
-	cout << "outfile" << endl;
 	auto ofile =  new TFile(ofilename.c_str(), "RECREATE");
 //	auto reducedTree = selector.fReader.GetTree()->CloneTree();
-	cout << "clone tree" << endl;
 	auto reducedTree = selector.fChain->CloneTree();
-	cout << "write tree" << endl;
 	//auto reducedTree = selector.fChain->CloneTree();
 	//reducedTree->Write();
 	//reducedTree->CopyEntries(selector.fReader.GetTree());
