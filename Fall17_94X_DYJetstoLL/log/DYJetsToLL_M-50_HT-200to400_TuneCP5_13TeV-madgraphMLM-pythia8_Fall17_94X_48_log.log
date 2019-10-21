@@ -1,21 +1,26 @@
-000 (457435.000.000) 10/21 10:20:11 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
+000 (457511.000.000) 10/21 10:58:16 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
 ...
-001 (457435.000.000) 10/21 10:21:11 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
+001 (457511.000.000) 10/21 10:58:38 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
 ...
-006 (457435.000.000) 10/21 10:21:20 Image size of job updated: 140528
+006 (457511.000.000) 10/21 10:58:47 Image size of job updated: 86640
 	85  -  MemoryUsage of job (MB)
-	86276  -  ResidentSetSize of job (KB)
-	138431  -  ProportionalSetSize of job (KB)
+	86640  -  ResidentSetSize of job (KB)
+	88808  -  ProportionalSetSize of job (KB)
 ...
-005 (457435.000.000) 10/21 10:22:04 Job terminated.
+006 (457511.000.000) 10/21 10:59:32 Image size of job updated: 86668
+	85  -  MemoryUsage of job (MB)
+	86640  -  ResidentSetSize of job (KB)
+	88808  -  ProportionalSetSize of job (KB)
+...
+005 (457511.000.000) 10/21 10:59:34 Job terminated.
 	(1) Normal termination (return value 0)
-		Usr 0 00:00:07, Sys 0 00:00:01  -  Run Remote Usage
+		Usr 0 00:00:08, Sys 0 00:00:01  -  Run Remote Usage
 		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
-		Usr 0 00:00:07, Sys 0 00:00:01  -  Total Remote Usage
+		Usr 0 00:00:08, Sys 0 00:00:01  -  Total Remote Usage
 		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
-	5525  -  Run Bytes Sent By Job
+	5526  -  Run Bytes Sent By Job
 	148574  -  Run Bytes Received By Job
-	5525  -  Total Bytes Sent By Job
+	5526  -  Total Bytes Sent By Job
 	148574  -  Total Bytes Received By Job
 	Partitionable Resources :    Usage  Request Allocated
 	   Cpus                 :                 1         1

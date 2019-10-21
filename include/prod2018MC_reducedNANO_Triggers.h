@@ -60,7 +60,7 @@ public :
    // Float_t         Electron_dzErr[6];   //[nElectron]
    // Float_t         Electron_eInvMinusPInv[6];   //[nElectron]
    // Float_t         Electron_energyErr[6];   //[nElectron]
-   Float_t         Electron_eta[7];   //[nElectron]
+   Float_t         Electron_eta[6];   //[nElectron]
    // Float_t         Electron_hoe[6];   //[nElectron]
    // Float_t         Electron_ip3d[6];   //[nElectron]
    // Float_t         Electron_jetRelIso[6];   //[nElectron]
@@ -73,8 +73,8 @@ public :
    // Float_t         Electron_mvaFall17V2noIso[6];   //[nElectron]
    // Float_t         Electron_pfRelIso03_all[6];   //[nElectron]
    // Float_t         Electron_pfRelIso03_chg[6];   //[nElectron]
-   Float_t         Electron_phi[7];   //[nElectron]
-   Float_t         Electron_pt[7];   //[nElectron]
+   Float_t         Electron_phi[6];   //[nElectron]
+   Float_t         Electron_pt[6];   //[nElectron]
    // Float_t         Electron_r9[6];   //[nElectron]
    // Float_t         Electron_sieie[6];   //[nElectron]
    // Float_t         Electron_sip3d[6];   //[nElectron]
@@ -1201,7 +1201,7 @@ public :
    // List of branches
    // TBranch        *b_run;   //!
    // TBranch        *b_luminosityBlock;   //!
-   // TBranch        *b_event;   //!
+   TBranch        *b_event;   //!
    // TBranch        *b_nPFcand;   //!
    // TBranch        *b_PFcand_chiso0p1;   //!
    // TBranch        *b_PFcand_chiso0p2;   //!
@@ -2448,7 +2448,7 @@ fChain->SetBranchStatus("*", 0);
 
    // fChain->SetBranchAddress("run", &run, &b_run);
    // fChain->SetBranchAddress("luminosityBlock", &luminosityBlock, &b_luminosityBlock);
-   // fChain->SetBranchAddress("event", &event, &b_event);
+   fChain->SetBranchAddress("event", &event, &b_event);
    // fChain->SetBranchAddress("nPFcand", &nPFcand, &b_nPFcand);
    // fChain->SetBranchAddress("PFcand_chiso0p1", PFcand_chiso0p1, &b_PFcand_chiso0p1);
    // fChain->SetBranchAddress("PFcand_chiso0p2", PFcand_chiso0p2, &b_PFcand_chiso0p2);

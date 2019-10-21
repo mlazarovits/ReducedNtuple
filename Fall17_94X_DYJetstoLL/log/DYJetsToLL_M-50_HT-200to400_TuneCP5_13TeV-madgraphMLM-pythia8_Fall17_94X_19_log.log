@@ -1,13 +1,13 @@
-000 (457406.000.000) 10/21 10:20:04 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
+000 (457482.000.000) 10/21 10:57:46 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
 ...
-001 (457406.000.000) 10/21 10:20:30 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
+001 (457482.000.000) 10/21 10:57:59 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
 ...
-006 (457406.000.000) 10/21 10:20:38 Image size of job updated: 86264
+006 (457482.000.000) 10/21 10:58:08 Image size of job updated: 98200
 	85  -  MemoryUsage of job (MB)
-	86264  -  ResidentSetSize of job (KB)
-	87233  -  ProportionalSetSize of job (KB)
+	86584  -  ResidentSetSize of job (KB)
+	102774  -  ProportionalSetSize of job (KB)
 ...
-005 (457406.000.000) 10/21 10:21:10 Job terminated.
+005 (457482.000.000) 10/21 10:58:40 Job terminated.
 	(1) Normal termination (return value 0)
 		Usr 0 00:00:05, Sys 0 00:00:01  -  Run Remote Usage
 		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage

@@ -1,13 +1,18 @@
-000 (457417.000.000) 10/21 10:20:07 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
+000 (457493.000.000) 10/21 10:58:00 Job submitted from host: <129.93.239.166:9618?addrs=129.93.239.166-9618+[2600-900-6-1101-290-faff-feb8-f318]-9618&noUDP&sock=3702_9271_3>
 ...
-001 (457417.000.000) 10/21 10:20:35 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
+001 (457493.000.000) 10/21 10:58:19 Job executing on host: <129.93.182.234:9618?addrs=129.93.182.234-9618+[2600-900-6-1102-d267-e5ff-fef9-1c59]-9618&alias=red-c1911.unl.edu&noUDP&sock=startd_31162_1e58_3>
 ...
-006 (457417.000.000) 10/21 10:20:43 Image size of job updated: 85836
-	84  -  MemoryUsage of job (MB)
-	85836  -  ResidentSetSize of job (KB)
-	87205  -  ProportionalSetSize of job (KB)
+006 (457493.000.000) 10/21 10:58:27 Image size of job updated: 88132
+	87  -  MemoryUsage of job (MB)
+	88132  -  ResidentSetSize of job (KB)
+	89663  -  ProportionalSetSize of job (KB)
 ...
-005 (457417.000.000) 10/21 10:21:17 Job terminated.
+006 (457493.000.000) 10/21 10:58:56 Image size of job updated: 88420
+	87  -  MemoryUsage of job (MB)
+	88132  -  ResidentSetSize of job (KB)
+	89663  -  ProportionalSetSize of job (KB)
+...
+005 (457493.000.000) 10/21 10:58:58 Job terminated.
 	(1) Normal termination (return value 0)
 		Usr 0 00:00:05, Sys 0 00:00:01  -  Run Remote Usage
 		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
@@ -19,6 +24,6 @@
 	148574  -  Total Bytes Received By Job
 	Partitionable Resources :    Usage  Request Allocated
 	   Cpus                 :                 1         1
-	   Disk (KB)            :      214      150  11341492
-	   Memory (MB)          :       84     1000      4006
+	   Disk (KB)            :      213      150  11341492
+	   Memory (MB)          :       87     1000      4006
 ...
