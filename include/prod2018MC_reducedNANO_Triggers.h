@@ -24,7 +24,7 @@ public :
    // Declaration of leaf types
    // UInt_t          run;
    // UInt_t          luminosityBlock;
-    //ULong64_t       event;
+   ULong64_t       event;
    // UInt_t          nPFcand;
    // Float_t         PFcand_chiso0p1[17];   //[nPFcand]
    // Float_t         PFcand_chiso0p2[17];   //[nPFcand]
@@ -60,7 +60,7 @@ public :
    // Float_t         Electron_dzErr[6];   //[nElectron]
    // Float_t         Electron_eInvMinusPInv[6];   //[nElectron]
    // Float_t         Electron_energyErr[6];   //[nElectron]
-   Float_t         Electron_eta[6];   //[nElectron]
+   Float_t         Electron_eta[7];   //[nElectron]
    // Float_t         Electron_hoe[6];   //[nElectron]
    // Float_t         Electron_ip3d[6];   //[nElectron]
    // Float_t         Electron_jetRelIso[6];   //[nElectron]
@@ -73,8 +73,8 @@ public :
    // Float_t         Electron_mvaFall17V2noIso[6];   //[nElectron]
    // Float_t         Electron_pfRelIso03_all[6];   //[nElectron]
    // Float_t         Electron_pfRelIso03_chg[6];   //[nElectron]
-   Float_t         Electron_phi[6];   //[nElectron]
-   Float_t         Electron_pt[6];   //[nElectron]
+   Float_t         Electron_phi[7];   //[nElectron]
+   Float_t         Electron_pt[7];   //[nElectron]
    // Float_t         Electron_r9[6];   //[nElectron]
    // Float_t         Electron_sieie[6];   //[nElectron]
    // Float_t         Electron_sip3d[6];   //[nElectron]
