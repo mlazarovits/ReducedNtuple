@@ -62,7 +62,7 @@ void Plot_Efficiency(){
 
 	for(int evt = 0; evt < nEntries17; evt++){
 		trigClass17->GetEntry(evt);
-		ele_pt17 = trigClass17->Electron_pt;
+		ele_pt17 = trigClass17->Electron_pt[0];
 		trigPass17 = trigClass17->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
 
 		
