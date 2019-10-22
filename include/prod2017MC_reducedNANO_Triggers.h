@@ -165,7 +165,7 @@ public :
    // Float_t         SubGenJetAK8_pt[8];   //[nSubGenJetAK8]
    // Float_t         Generator_binvar;
    // Float_t         Generator_scalePDF;
-   // Float_t         Generator_weight;
+    Float_t         Generator_weight;
    // Float_t         Generator_x1;
    // Float_t         Generator_x2;
    // Float_t         Generator_xpdf1;
@@ -1267,7 +1267,7 @@ public :
    // TBranch        *b_SubGenJetAK8_pt;   //!
    // TBranch        *b_Generator_binvar;   //!
    // TBranch        *b_Generator_scalePDF;   //!
-   // TBranch        *b_Generator_weight;   //!
+    TBranch        *b_Generator_weight;   //!
    // TBranch        *b_Generator_x1;   //!
    // TBranch        *b_Generator_x2;   //!
    // TBranch        *b_Generator_xpdf1;   //!
@@ -2439,7 +2439,7 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("SubGenJetAK8_pt", SubGenJetAK8_pt, &b_SubGenJetAK8_pt);
    // fChain->SetBranchAddress("Generator_binvar", &Generator_binvar, &b_Generator_binvar);
    // fChain->SetBranchAddress("Generator_scalePDF", &Generator_scalePDF, &b_Generator_scalePDF);
-   // fChain->SetBranchAddress("Generator_weight", &Generator_weight, &b_Generator_weight);
+    fChain->SetBranchAddress("Generator_weight", &Generator_weight, &b_Generator_weight);
    // fChain->SetBranchAddress("Generator_x1", &Generator_x1, &b_Generator_x1);
    // fChain->SetBranchAddress("Generator_x2", &Generator_x2, &b_Generator_x2);
    // fChain->SetBranchAddress("Generator_xpdf1", &Generator_xpdf1, &b_Generator_xpdf1);

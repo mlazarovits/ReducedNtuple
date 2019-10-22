@@ -114,7 +114,7 @@ inline string TriggerSet::GetVar(){
 
 inline TEfficiency* TriggerSet::Analyze(TChain* chain){
 	TLeaf* var_leaf = chain->GetLeaf(m_var.c_str());
-	TLeaf* weight_leaf = chain->GetLeaf("")
+	TLeaf* weight_leaf = chain->GetLeaf("Generator_weight");
 
 }
 
