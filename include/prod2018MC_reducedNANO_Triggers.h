@@ -24,11 +24,7 @@ public :
    // Declaration of leaf types
    // UInt_t          run;
    // UInt_t          luminosityBlock;
-<<<<<<< HEAD
     ULong64_t       event;
-=======
-   ULong64_t       event;
->>>>>>> 149523c2441e605d5ec26688ec85c752926eb8d0
    // UInt_t          nPFcand;
    // Float_t         PFcand_chiso0p1[10];   //[nPFcand]
    // Float_t         PFcand_chiso0p2[10];   //[nPFcand]
