@@ -45,7 +45,7 @@ void Plot_Efficiency(){
 
 	cv->cd();
 	for(int i = 0; i < effs16.size(); i++){
-		effs16[i]->Draw();
+		effs16[i]->Draw("same");
 	}
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
