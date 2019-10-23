@@ -44,7 +44,7 @@ void Plot_Efficiency(){
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");
 	effs16 = trigs16.Analyze();
 	vector<TGraphAsymmErrors*> gr_effs16;
-	TMultiGraph* mg;
+	TMultiGraph* mg = new TMultiGraph();
 
 
 	cv->cd();
