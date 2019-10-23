@@ -58,18 +58,18 @@ void Plot_Efficiency(){
 
 
 	cout << "# of triggers: " << gr_effs16.size() << endl;
-	double fmax = -1.;
-	int imax = -1;
-	for(int i = 0; i < gr_effs16.size(); i++){
-		if(gr_effs16[i]->GetMaximum() > fmax){
-			fmax = gr_effs16[i]->GetMaximum();
-			imax = i;
-		}
-	}
-	cout << "imax: " << endl;
+	// double fmax = -1.;
+	// int imax = -1;
+	// for(int i = 0; i < gr_effs16.size(); i++){
+	// 	if(gr_effs16[i]->GetMaximum() > fmax){
+	// 		fmax = gr_effs16[i]->GetMaximum();
+	// 		imax = i;
+	// 	}
+	// }
+	// cout << "imax: " << endl;
 	// gr_effs16[imax]->Draw();
-	gr_effs16[imax]->SetMinimum(0.0);
-	gr_effs16[imax]->SetMaximum(1.0);
+	gr_effs16[0]->SetMinimum(0.0);
+	gr_effs16[0]->SetMaximum(1.0);
 
 	for(int i = 0; i < effs16.size(); i++){
 		leg->AddEntry(gr_effs16[i]);
