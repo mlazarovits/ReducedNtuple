@@ -73,7 +73,6 @@ inline TriggerSet::TriggerSet(TFile* file){
 	m_tree = (TTree*)file->Get("Events");
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
-		return;
 	}
 }
 

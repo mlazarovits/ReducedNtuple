@@ -24,8 +24,8 @@ void Plot_Efficiency(){
 	// TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
 
 	TFile* file16 = TFile::Open(gPathname+"prod2016MC_reducedNANO_Triggers_DYinclusive.root");
-	TTree* tree16 = (TTree*)file16->Get("Events");
-	file16->Close();
+	// TTree* tree16 = (TTree*)file16->Get("Events");
+	
 
 
 
@@ -33,6 +33,7 @@ void Plot_Efficiency(){
 	// TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
 	TriggerSet trigs16(file16);
+	file16->Close();
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetSampleName("DYJetstoLL, 2016");
 	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
