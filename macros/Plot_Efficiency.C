@@ -19,7 +19,7 @@ void Plot_Efficiency(){
 	}
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TLegend* leg = new TLegend(0.3,0.62,0.8,0.82);
+	TLegend* leg = new TLegend(0.2,0.62,0.8,0.82);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
@@ -84,7 +84,7 @@ void Plot_Efficiency(){
 	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
-		gr_effs16[i]->SetMarkerStyle(7);
+		gr_effs16[i]->SetMarkerStyle(9);
 		gr_effs16[i]->SetMarkerSize(1);
 		gr_effs16[i]->SetLineWidth(2);
 		if(i % 3 == 0){
@@ -114,7 +114,7 @@ void Plot_Efficiency(){
 	leg->Draw("SAME");
 	cv->Update();
 
-	mg->SetTitle((title+" Trigger Efficiencies").c_str());
+	string g_PlotTitle = title+" Trigger Efficiencies";
 	mg->GetXaxis()->SetTitle(x_label.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
 	// mg->SetMinimum(0.0);
@@ -129,7 +129,12 @@ void Plot_Efficiency(){
 	l.SetTextFont(61);
 	l.DrawLatex(0.16,0.92,"CMS");
 	l.SetTextFont(52);
-	l.DrawLatex(0.25,0.92,"Preliminary");
+	l.DrawLatex(0.20,0.92,"Preliminary");
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.05);
+	l.SetTextFont(132);
+	l.DrawLatex(0.65,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
