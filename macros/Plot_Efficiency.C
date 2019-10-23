@@ -98,15 +98,17 @@ void Plot_Efficiency(){
 		// cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
+
+
+	mg->Draw("SAME");
+	leg->Draw("SAME");
+	cv->Update();
+
 	mg->SetTitle((title+" Trigger Efficiencies").c_str());
 	mg->GetXaxis()->SetTitle(x_label.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
 	mg->SetMinimum(0.0);
 	mg->SetMaximum(1.0);
-
-	mg->Draw("SAME");
-	leg->Draw("SAME");
-	cv->Update();
 
 	TLatex l;
 	l.SetTextFont(132);
