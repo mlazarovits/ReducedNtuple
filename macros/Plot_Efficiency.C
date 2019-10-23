@@ -5,6 +5,7 @@
 #include "../include/prod2018MC_reducedNANO_Triggers.h"
 #include "../include/TriggerSet.hh"
 #include "TEfficiency.h"
+#include "TGraphAsymmErrors.h"
 
 using namespace std;
 
