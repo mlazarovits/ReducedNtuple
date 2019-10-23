@@ -49,11 +49,15 @@ void Plot_Efficiency(){
 	cv->SetGridx();
 	cv->SetGridy();
 
+
+
 	
 	for(int i = 0; i < effs16.size(); i++){
 		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
 	}
-	effs16[0]->GetPaintedGraph()->Draw();
+	if(gr_effs16[0] == NULL){
+		cout << "null graph" << endl;
+	}
 
 	// cout << "# of triggers: " << gr_effs16.size() << endl;
 	// double fmax = -1.;
