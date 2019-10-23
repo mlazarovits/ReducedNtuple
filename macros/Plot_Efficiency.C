@@ -66,7 +66,7 @@ void Plot_Efficiency(){
 			imax = i;
 		}
 	}
-	
+	cout << "imax: " << endl;
 	// gr_effs16[imax]->Draw();
 	gr_effs16[imax]->SetMinimum(0.0);
 	gr_effs16[imax]->SetMaximum(1.0);
