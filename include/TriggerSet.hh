@@ -163,7 +163,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
-			vec_eff.at(nTrig)->Fill(m_tree->vec_btrig.at(nTrig)->GetValue(),m_tree->b_var->GetValue());
+			vec_eff.at(nTrig)->Fill(vec_btrig.at(nTrig),b_var);
 		}
 	}
 
@@ -227,8 +227,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
 {
  bool cut = true;
- TLeaf* leaf = m_tree->GetLeaf(m_var);
- leaf->GetBranch()->GetEntry(jentry);
+ TBranch* br = m_tree->GetBranch(m_var);
+ br->GetEntry(jentry);
  if(x_val/leaf->GetValue() < 5.) cut = false;
  return cut;
 }
