@@ -21,7 +21,7 @@ public:
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig16);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig17);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig18);
-	virtual ~TriggerSet();
+	virtual ~TriggerSet(){};
 
 	void AddFile(const string& filename);
 	int GetNFile() const;
