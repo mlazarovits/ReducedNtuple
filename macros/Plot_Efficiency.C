@@ -19,7 +19,7 @@ void Plot_Efficiency(){
 	}
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TLegend* leg = new TLegend(0.15,0.7,0.8,0.9);
+	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
@@ -43,7 +43,7 @@ void Plot_Efficiency(){
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
 	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
 	trigs16.SetVar("Electron_pt");
-	trigs16.SetOutputName("DYJets16_AllTrigs.root");
+	trigs16.SetOutputName("DYJets16_AllTrigs_ElepT.root");
 	string x_label = trigs16.GetVar();
 	string title = trigs16.GetSampleName();
 	effs16 = trigs16.Analyze();
@@ -84,7 +84,7 @@ void Plot_Efficiency(){
 	cv->Update();
 
 	for(int i = 0; i < gr_effs16.size(); i++){
-		gr_effs16[i]->SetMarkerSize(1);
+		gr_effs16[i]->SetMarkerSize(2);
 		gr_effs16[i]->SetLineWidth(2);
 		if(i/3 == 0){
 			gr_effs16[i]->SetMarkerStyle(22);
@@ -142,7 +142,7 @@ void Plot_Efficiency(){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TFile* file = new TFile("dy16triggers_elept.root","RECREATE");
+	TFile* file = new TFile((trigs16.GetOutputName()).c_str();,"RECREATE");
 	file->cd();
 	cv->Write();
 	
