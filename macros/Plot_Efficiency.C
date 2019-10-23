@@ -34,7 +34,7 @@ void Plot_Efficiency(){
 	
 	TriggerSet trigs16(file16);
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
-	trigs16.SetTitle("DYJetstoLL, 2016");
+	trigs16.SetSampleName("DYJetstoLL, 2016");
 	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
 	trigs16.SetVar("Electron_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");

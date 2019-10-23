@@ -43,7 +43,7 @@ public:
 
 
 
-	bool global_cuts(TTree*& fChain, const Long64_t& jentry, double x_val);
+	bool global_cuts(const Long64_t& jentry, double x_val);
 
 
 private:
@@ -97,7 +97,7 @@ inline string TriggerSet::GetFile(int n){
   int N = GetNFile();
   if(n < 0 || n >= N)
     return "NO FILE";
-  return m_filemames[n];
+  return m_filenames[n];
 }
 
 
