@@ -27,7 +27,7 @@ void Plot_Efficiency(){
 	// TString dyJets17Pathname = gPathname+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
 	// TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
 
-	TFile* file16 = TFile::Open(gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root");
+	TFile* file16 = TFile::Open((gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root").c_str());
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
 
