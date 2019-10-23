@@ -18,8 +18,8 @@ void Plot_Efficiency(){
 		cout << "Created plots folder." << endl;
 	}
 
-	TCanvas* cv = new TCanvas("cv","cv",600,800);
-	TLegend* leg = new TLegend(0.3,0.62,0.9,0.82);
+	TCanvas* cv = new TCanvas("cv","cv",800,600);
+	TLegend* leg = new TLegend(0.1,0.62,0.8,0.82);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
@@ -105,7 +105,7 @@ void Plot_Efficiency(){
 		leg->AddEntry(gr_effs16[i]);
 	}
 	leg->SetTextFont(132);
-	leg->SetTextSize(0.03);
+	leg->SetTextSize(0.01);
 	leg->SetFillColor(kWhite);
 	leg->SetLineColor(kWhite);
 	leg->SetShadowColor(kWhite);
@@ -127,9 +127,9 @@ void Plot_Efficiency(){
 	l.SetTextFont(42);
 	l.SetTextSize(0.04);
 	l.SetTextFont(61);
-	l.DrawLatex(0.16,0.9,"CMS");
+	l.DrawLatex(0.16,0.92,"CMS");
 	l.SetTextFont(52);
-	l.DrawLatex(0.25,0.9,"Preliminary");
+	l.DrawLatex(0.25,0.92,"Preliminary");
 	cv->Update();
 
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
