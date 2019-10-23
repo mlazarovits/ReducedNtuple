@@ -51,9 +51,11 @@ private:
 	string m_trigname;
 	string m_outname;
 	TTree* m_tree;
+	string m_var;
+
 	// TChain* m_chain;
 	vector<string> m_triggers;
-	string m_var;
+	
 	vector<string> m_filenames;
 
 	// prod2016MC_reducedNANO_Triggers m_Triggers_2016(NULL);
@@ -142,7 +144,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
-
+	cout << m_var.c_str() << endl;
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
