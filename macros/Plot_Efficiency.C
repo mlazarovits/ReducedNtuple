@@ -26,14 +26,13 @@ void Plot_Efficiency(){
 	TFile* file16 = TFile::Open(gPathname+"prod2016MC_reducedNANO_Triggers_DYinclusive.root");
 	TTree* tree16 = (TTree*)file16->Get("Events");
 
-	int nEntries
 
 
 
 
 	TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
-	TriggerClass trigs16(tree16);
+	TriggerSet trigs16(tree16);
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetTitle("DYJetstoLL, 2016");
 	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");

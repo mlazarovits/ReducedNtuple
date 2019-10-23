@@ -54,11 +54,11 @@ private:
 	// TChain* m_chain;
 	vector<string> m_triggers;
 	string m_var;
-	vector<string> m_FileNames;
+	vector<string> m_filenames;
 
-	prod2016MC_reducedNANO_Triggers m_Triggers_2016(NULL);
-	prod2017MC_reducedNANO_Triggers m_Triggers_2017(NULL);
-	prod2018MC_reducedNANO_Triggers m_Triggers_2018(NULL);
+	// prod2016MC_reducedNANO_Triggers m_Triggers_2016(NULL);
+	// prod2017MC_reducedNANO_Triggers m_Triggers_2017(NULL);
+	// prod2018MC_reducedNANO_Triggers m_Triggers_2018(NULL);
 
 
 
@@ -112,17 +112,17 @@ inline string TriggerSet::GetSampleName() const{
 }
 
 inline void TriggerSet::SetOutputName(const string& outname){
-	m_outname = outname
+	m_outname = outname;
 }
 inline string TriggerSet::GetOutputName() const {
-	return m_outname
+	return m_outname;
 }
 
 
 
 
-inline void TriggerSet::SetTriggers(vector<string> triggers){
-	m_triggers.push_back(triggers);
+inline void TriggerSet::AddTriggers(string trigger){
+	m_triggers.push_back(trigger);
 }
 
 inline vector<string> TriggerSet::GetTriggers(){
@@ -147,21 +147,21 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	int nEntries;
 
 	for(int i = 0; i < m_triggers.size(); i++){
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var+" Efficiency").c_str(),20,0,200);
 		TBranch* b_trig = m_tree->GetBranch(m_triggers.at(i).c_str());
 		vec_eff.push_back(eff);
 		vec_btrig.push_back(b_trig);
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(evt = 0; evt < nEntries; evt++){
+	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
 
-		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
 			vec_eff.at(i)->Fill(m_tree->vec_btrig.at(nTrig),m_tree->b_var);
 		}
