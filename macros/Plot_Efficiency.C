@@ -14,7 +14,7 @@ void Plot_Efficiency(){
 		cout << "Created plots folder." << endl;
 	}
 
-	TCanvas* cv = new TCanvas("cv","cv",500,600);
+	TCanvas* cv = new TCanvas("cv","cv",800,800);
 	TLegend* leg = new TLegend(0.688,0.22,0.93,0.42);
 	vector<TEfficiency*> effs16;
 
