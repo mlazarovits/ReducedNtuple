@@ -229,7 +229,7 @@ inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
  bool cut = true;
  // TBranch* br = m_tree->GetBranch(m_var.c_str());
  TLeaf* leaf = m_tree->GetLeaf(m_var.c_str());
- leaf->GetBranch()->GetEntry(jentry;)
+ leaf->GetBranch()->GetEntry(jentry);
  // br->GetEntry(jentry);
  if(x_val/leaf->GetValue() < 5.) cut = false;
  return cut;
