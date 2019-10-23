@@ -33,7 +33,7 @@ public:
 	void SetOutputName(const string& outname);
 	string GetOutputName() const;
 
-	void AddTriggers(string trigger);
+	void AddTrigger(string trigger);
 	vector<string> GetTriggers();
 
 	void SetVar(string var);
@@ -126,7 +126,7 @@ inline string TriggerSet::GetOutputName() const {
 
 
 
-inline void TriggerSet::AddTriggers(string trigger){
+inline void TriggerSet::AddTrigger(string trigger){
 	m_triggers.push_back(trigger);
 }
 
@@ -148,6 +148,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
+	if(l_var == NULL){
+		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
+		return;
+	}
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
@@ -155,6 +159,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	for(int i = 0; i < m_triggers.size(); i++){
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var+" Efficiency").c_str(),20,0,200);
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
+		if(l_trig == NULL){
+			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
+			return;
+		}
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
 	}

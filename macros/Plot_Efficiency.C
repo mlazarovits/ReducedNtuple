@@ -36,7 +36,9 @@ void Plot_Efficiency(){
 	// file16->Close();
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetSampleName("DYJetstoLL, 2016");
-	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
+	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
+	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
+	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
 	trigs16.SetVar("Electron_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");
 	effs16 = trigs16.Analyze();
