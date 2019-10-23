@@ -53,10 +53,17 @@ void Plot_Efficiency(){
 
 	
 	for(int i = 0; i < effs16.size(); i++){
+		effs16[i]->Draw();
+		cv->Update();
 		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
 	}
 	if(gr_effs16[0] == NULL){
 		cout << "null graph" << endl;
+		return;
+	}
+	else{
+		cout << "ok graph!!" << endl;
+		return;
 	}
 
 	// cout << "# of triggers: " << gr_effs16.size() << endl;
