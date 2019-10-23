@@ -52,7 +52,7 @@ void Plot_Efficiency(){
 	cv->Draw();
 	for(int i = 0; i < effs16.size(); i++){
 		effs16[i]->Draw("SAME");
-		cv->Update();
+		// cv->Update();
 		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
 	}
 
