@@ -51,6 +51,7 @@ void Plot_Efficiency(){
 
 	effs16[0]->Draw("AP");
 	cv->Update();
+	gr_effs16.push_back(effs16[0]->GetPaintedGraph());
 	for(int i = 1; i < effs16.size(); i++){
 		effs16[i]->Draw("same");
 		cv->Update();
