@@ -2443,6 +2443,7 @@ void prod2018MC_reducedNANO_Triggers::Init(TTree *tree)
    if (!tree) return;
    fChain = tree;
    fCurrent = -1;
+   fChain->SetBranchStatus("*",0);
    fChain->SetMakeClass(1);
 
    // fChain->SetBranchAddress("run", &run, &b_run);
