@@ -44,7 +44,10 @@ void Plot_Efficiency(){
 	effs16 = trigs16.Analyze();
 
 	cv->cd();
-	for(int i = 0; i < effs16.size(); i++){
+
+
+	effs16[0]->Draw();
+	for(int i = 1; i < effs16.size(); i++){
 		effs16[i]->Draw("same");
 	}
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
