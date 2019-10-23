@@ -19,7 +19,7 @@ void Plot_Efficiency(){
 	}
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TLegend* leg = new TLegend(0.1,0.62,0.8,0.82);
+	TLegend* leg = new TLegend(0.3,0.62,0.8,0.82);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
@@ -84,9 +84,9 @@ void Plot_Efficiency(){
 	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
-		gr_effs16[i]->SetMarkerStyle(6);
+		gr_effs16[i]->SetMarkerStyle(7);
 		gr_effs16[i]->SetMarkerSize(1);
-		gr_effs16[i]->SetLineWidth(4);
+		gr_effs16[i]->SetLineWidth(2);
 		if(i % 3 == 0){
 			gr_effs16[i]->SetMarkerColor(kBlue-7);
 			gr_effs16[i]->SetLineColor(kBlue-7);
@@ -105,7 +105,7 @@ void Plot_Efficiency(){
 		leg->AddEntry(gr_effs16[i]);
 	}
 	leg->SetTextFont(132);
-	leg->SetTextSize(0.01);
+	leg->SetTextSize(0.03);
 	leg->SetFillColor(kWhite);
 	leg->SetLineColor(kWhite);
 	leg->SetShadowColor(kWhite);
@@ -137,7 +137,7 @@ void Plot_Efficiency(){
 	cv->Write();
 	
 	
-	cv->Close();
+	// cv->Close();
 	file->Close();
 
 
