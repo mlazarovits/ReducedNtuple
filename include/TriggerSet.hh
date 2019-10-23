@@ -140,17 +140,20 @@ inline string TriggerSet::GetVar(){
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
-	TBranch* b_var = m_tree->GetBranch(m_var.c_str());
-	TBranch* b_weight = m_tree->GetBranch("Generator_weight");
+	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
+	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
+
+	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
+	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
-	vector<TBranch*> vec_btrig;
+	vector<TLeaf*> vec_ltrig;
 	int nEntries;
 
 	for(int i = 0; i < m_triggers.size(); i++){
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var+" Efficiency").c_str(),20,0,200);
-		TBranch* b_trig = m_tree->GetBranch(m_triggers.at(i).c_str());
+		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 		vec_eff.push_back(eff);
-		vec_btrig.push_back(b_trig);
+		vec_ltrig.push_back(l_trig);
 	}
 
 	nEntries = m_tree->GetEntries();
@@ -163,7 +166,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
-			vec_eff.at(nTrig)->Fill(vec_btrig.at(nTrig),b_var);
+			vec_eff.at(nTrig)->Fill(vec_ltrig.at(nTrig)->GetValue(),l_var->GetValue());
 		}
 	}
 
@@ -227,10 +230,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
 {
  bool cut = true;
- // TBranch* br = m_tree->GetBranch(m_var.c_str());
  TLeaf* leaf = m_tree->GetLeaf(m_var.c_str());
  leaf->GetBranch()->GetEntry(jentry);
- // br->GetEntry(jentry);
  if(x_val/leaf->GetValue() < 5.) cut = false;
  return cut;
 }
