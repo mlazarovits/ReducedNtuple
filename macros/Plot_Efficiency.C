@@ -129,12 +129,12 @@ void Plot_Efficiency(){
 	l.SetTextFont(61);
 	l.DrawLatex(0.16,0.92,"CMS");
 	l.SetTextFont(52);
-	l.DrawLatex(0.20,0.92,"Preliminary");
+	l.DrawLatex(0.22,0.92,"Preliminary");
 	l.SetTextFont(132);
 	l.SetNDC();
 	l.SetTextSize(0.05);
 	l.SetTextFont(132);
-	l.DrawLatex(0.65,0.92,g_PlotTitle.c_str());
+	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
@@ -143,7 +143,7 @@ void Plot_Efficiency(){
 	
 	
 	// cv->Close();
-	file->Close();
+	// file->Close();
 
 
 
