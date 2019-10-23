@@ -22,7 +22,7 @@ void Plot_Efficiency(){
 	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
 	vector<TEfficiency*> effs16;
 
-	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
+	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
 	// TString dyJets16Pathname = gPathname+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
 	// TString dyJets17Pathname = gPathname+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
 	// TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
