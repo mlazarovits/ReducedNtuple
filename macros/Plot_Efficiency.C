@@ -44,6 +44,7 @@ void Plot_Efficiency(){
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");
 	effs16 = trigs16.Analyze();
 	vector<TGraphAsymmErrors*> gr_effs16;
+	TMultiGraphy* mg;
 
 
 	cv->cd();
@@ -89,15 +90,15 @@ void Plot_Efficiency(){
 			gr_effs16[i]->SetMarkerColor(kGreen-7);
 			gr_effs16[i]->SetLineColor(kGreen-7);
 		}
-		gr_effs16[i]->Draw("same");
-		cv->Update();
+		// gr_effs16[i]->Draw("same");
+		mg->Add(gr_effs16[i]);
+		// cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
-
+	mg->Draw("SAME");
 	leg->Draw("SAME");
 	cv->Update();
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
-	file16->Close();
 	file->cd();
 	cv->Write();
 	
