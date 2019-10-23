@@ -95,10 +95,10 @@ void Plot_Efficiency(){
 		// cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
-	mg->SetTitle(title+" Trigger Efficiencies");
-	mg->GetXaxis()->SetTitle(x_label);
+	mg->SetTitle((title+" Trigger Efficiencies").c_str());
+	mg->GetXaxis()->SetTitle(x_label.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
-	mg]->SetMinimum(0.0);
+	mg->SetMinimum(0.0);
 	mg->SetMaximum(1.0);
 
 	mg->Draw("SAME");
