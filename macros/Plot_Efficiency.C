@@ -22,12 +22,12 @@ void Plot_Efficiency(){
 	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
 	vector<TEfficiency*> effs16;
 
-	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
+	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
 	// TString dyJets16Pathname = gPathname+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
 	// TString dyJets17Pathname = gPathname+"Fall17_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8_Fall17_94X/";
 	// TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
 
-	TFile* file16 = TFile::Open(gPathname+"prod2016MC_reducedNANO_Triggers_DYinclusive.root");
+	TFile* file16 = TFile::Open(gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root");
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
 
@@ -42,8 +42,8 @@ void Plot_Efficiency(){
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
 	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
-	trigs16.SetVar("Electron_pt");
-	trigs16.SetOutputName("DYJets16_AllTrigs_ElepT.root");
+	trigs16.SetVar("Muon_pt");
+	trigs16.SetOutputName("DYJets16_AllTrigs_MupT.root");
 	string x_label = trigs16.GetVar();
 	string title = trigs16.GetSampleName();
 	effs16 = trigs16.Analyze();
@@ -134,7 +134,7 @@ void Plot_Efficiency(){
 	l.SetTextFont(61);
 	l.DrawLatex(0.16,0.92,"CMS");
 	l.SetTextFont(52);
-	l.DrawLatex(0.23,0.92,"Preliminary");
+	l.DrawLatex(0.21,0.92,"Preliminary");
 	l.SetTextFont(132);
 	l.SetNDC();
 	l.SetTextSize(0.05);
@@ -142,7 +142,7 @@ void Plot_Efficiency(){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TFile* file = new TFile((trigs16.GetOutputName()).c_str(),"RECREATE");
+	TFile* file = new TFile((gPathname+"effPlots/"+trigs16.GetOutputName()).c_str(),"RECREATE");
 	file->cd();
 	cv->Write();
 	
