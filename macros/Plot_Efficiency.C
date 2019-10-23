@@ -75,12 +75,23 @@ void Plot_Efficiency(){
 	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
+		gr_effs16[i]->SetMarkerStyle(kCircle);
+		if(i % 3 == 0){
+			gr_effs16[i]->SetMarkerColor(kBlue-7);
+		}
+		if(i % 3 == 1){
+			gr_effs16[i]->SetMarkerColor(kRed-7);
+		}
+		if(i % 3 == 2){
+			gr_effs16[i]->SetMarkerColor(kGreen-7);
+		}
 		gr_effs16[i]->Draw("same");
 		cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
 
 	leg->Draw("SAME");
+	cv->Update();
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
 	cv->Write();
