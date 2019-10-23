@@ -49,6 +49,7 @@ void Plot_Efficiency(){
 	cout << "# of triggers: " << effs16.size() << endl;
 
 	effs16[0]->Draw();
+	effs16[0]->GetYaxis()->SetRangeUser(0.0,1.0);
 	leg->AddEntry(effs16[0]);
 	for(int i = 1; i < effs16.size(); i++){
 		leg->AddEntry(effs16[i]);
