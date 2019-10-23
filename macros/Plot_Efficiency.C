@@ -32,7 +32,7 @@ void Plot_Efficiency(){
 
 	TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
-	TriggerSet trigs16(tree16);
+	TriggerSet trigs16(file16);
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetTitle("DYJetstoLL, 2016");
 	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");

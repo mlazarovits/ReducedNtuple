@@ -33,7 +33,7 @@ public:
 	void SetOutputName(const string& outname);
 	string GetOutputName() const;
 
-	void SetTriggers(vector<string> triggers);
+	void AddTriggers(string trigger);
 	vector<string> GetTriggers();
 
 	void SetVar(string var);
@@ -91,13 +91,13 @@ inline void TriggerSet::AddFile(const string& filename){
 }
 
 inline int TriggerSet::GetNFile() const {
-  return m_FileNames.size();
+  return m_filenames.size();
 }
 inline string TriggerSet::GetFile(int n){
   int N = GetNFile();
   if(n < 0 || n >= N)
     return "NO FILE";
-  return m_FileNames[n];
+  return m_filemames[n];
 }
 
 
@@ -163,7 +163,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
-			vec_eff.at(i)->Fill(m_tree->vec_btrig.at(nTrig),m_tree->b_var);
+			vec_eff.at(nTrig)->Fill(m_tree->vec_btrig.at(nTrig)->GetValue(),m_tree->b_var->GetValue());
 		}
 	}
 
@@ -224,11 +224,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	return vec_eff;
 }
 
-inline bool TriggerSet::global_cuts(TTree*& fChain, const Long64_t& jentry, double x_val)
+inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
 {
  bool cut = true;
- TLeaf* leafr = fChain->GetLeaf(m_var);
- lear->GetBranch()->GetEntry(jentry);
+ TLeaf* leaf = m_tree->GetLeaf(m_var);
+ leaf->GetBranch()->GetEntry(jentry);
  if(x_val/leaf->GetValue() < 5.) cut = false;
  return cut;
 }
