@@ -19,7 +19,7 @@ void Plot_Efficiency(){
 	}
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TLegend* leg = new TLegend(0.2,0.62,0.8,0.82);
+	TLegend* leg = new TLegend(0.15,0.7,0.8,0.9);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
