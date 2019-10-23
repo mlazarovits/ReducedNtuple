@@ -30,7 +30,6 @@ void Plot_Efficiency(){
 
 
 
-
 	// TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
 	TriggerSet trigs16(file16);
@@ -42,6 +41,8 @@ void Plot_Efficiency(){
 	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
 	trigs16.SetVar("Electron_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");
+	string x_label = trigs16.GetVar();
+	string title = trigs16.GetSampleName();
 	effs16 = trigs16.Analyze();
 	vector<TGraphAsymmErrors*> gr_effs16;
 	TMultiGraph* mg = new TMultiGraph();
@@ -72,8 +73,7 @@ void Plot_Efficiency(){
 	// }
 	// cout << "imax: " << endl;
 	// gr_effs16[imax]->Draw();
-	gr_effs16[0]->SetMinimum(0.0);
-	gr_effs16[0]->SetMaximum(1.0);
+
 	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
@@ -95,9 +95,28 @@ void Plot_Efficiency(){
 		// cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
+	mg->SetTitle(title+" Trigger Efficiencies");
+	mg->GetXaxis()->SetTitle(x_label);
+	mg->GetYaxis()->SetTitle("#epsilon");
+	mg]->SetMinimum(0.0);
+	mg->SetMaximum(1.0);
+
 	mg->Draw("SAME");
 	leg->Draw("SAME");
 	cv->Update();
+
+	TLatex l;
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.035);
+	l.SetTextFont(42);
+	l.SetTextSize(0.04);
+	l.SetTextFont(61);
+	l.DrawLatex(0.16,0.943,"CMS");
+	l.SetTextFont(52);
+	l.DrawLatex(0.23,0.943,"Preliminary");
+	cv->Update();
+
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
 	cv->Write();
