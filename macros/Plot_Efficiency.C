@@ -33,7 +33,7 @@ void Plot_Efficiency(){
 	// TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
 	TriggerSet trigs16(file16);
-	file16->Close();
+	// file16->Close();
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetSampleName("DYJetstoLL, 2016");
 	trigs16.AddTriggers("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
@@ -48,8 +48,9 @@ void Plot_Efficiency(){
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
 	cv->Write();
-	cv->Close();
+	
 	file->Close();
+	cv->Close();
 
 
 

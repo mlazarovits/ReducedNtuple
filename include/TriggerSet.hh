@@ -147,19 +147,19 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
-	cout << m_var.c_str() << endl;
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 	int nEntries;
-
+	cout << "initialized variables" << endl;
 	for(int i = 0; i < m_triggers.size(); i++){
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var+" Efficiency").c_str(),20,0,200);
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
 	}
+	cout << "initialized effs" << endl;
 
 	nEntries = m_tree->GetEntries();
 	for(int evt = 0; evt < nEntries; evt++){
