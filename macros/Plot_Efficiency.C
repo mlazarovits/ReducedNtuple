@@ -72,8 +72,11 @@ void Plot_Efficiency(){
 	// gr_effs16[imax]->Draw();
 	gr_effs16[0]->SetMinimum(0.0);
 	gr_effs16[0]->SetMaximum(1.0);
+	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
+		gr_effs16[i]->Draw("same");
+		cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
 
