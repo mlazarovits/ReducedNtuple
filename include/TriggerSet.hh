@@ -17,18 +17,21 @@ using namespace std;
 
 class TriggerClass{
 public:
-	TriggerSet(){};
-	TriggerSet(prod2016MC_reducedNANO_Triggers trig16);
-	TriggerSet(prod2016MC_reducedNANO_Triggers trig17);
-	TriggerSet(prod2016MC_reducedNANO_Triggers trig18);
+	TriggerSet(TFile* file);
+	// TriggerSet(prod2016MC_reducedNANO_Triggers trig16);
+	// TriggerSet(prod2016MC_reducedNANO_Triggers trig17);
+	// TriggerSet(prod2016MC_reducedNANO_Triggers trig18);
 	virtual ~TriggerSet();
 
 	void AddFile(const string& filename);
 	int GetNFile() const;
 	string GetFile(int n);
 
-	void SetTitle(const string& title);
-	string GetTitle() const;
+	void SetSampleName(const string& samplename);
+	string GetSampleName() const;
+
+	void SetOutputName(const string& outname);
+	string GetOutputName() const;
 
 	void SetTriggers(vector<string> triggers);
 	vector<string> GetTriggers();
@@ -36,7 +39,7 @@ public:
 	void SetVar(string var);
 	string GetVar();
 
-	TEfficiency* Analyze();
+	vector<TEfficiency*> Analyze();
 
 
 
@@ -44,7 +47,11 @@ public:
 
 
 private:
-	string m_title;
+	string m_samplename;
+	string m_trigname;
+	string m_outname;
+	TTree* m_tree;
+	// TChain* m_chain;
 	vector<string> m_triggers;
 	string m_var;
 	vector<string> m_FileNames;
@@ -60,18 +67,24 @@ private:
 #endif
 // #define 
 
-
-inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig16){
-	m_Triggers_2016 = trig16;
+inline TriggerSet::TriggerSet(TFile* file){
+	m_tree = (TTree*)file->Get("Events");
 }
 
-inline TriggerSet::TriggerSet(prod2017MC_reducedNANO_Triggers trig17){
-	m_Triggers_2017 = trig17;
-}
 
-inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig18){
-	m_Triggers_2018 = trig18;
-}
+// inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig16){
+// 	m_Triggers_2016 = trig16;
+// }
+
+// inline TriggerSet::TriggerSet(prod2017MC_reducedNANO_Triggers trig17){
+// 	m_Triggers_2017 = trig17;
+// }
+
+// inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig18){
+// 	m_Triggers_2018 = trig18;
+// }
+
+
 
 inline void TriggerSet::AddFile(const string& filename){
 	m_filenames.push_back(filename);
@@ -88,13 +101,25 @@ inline string TriggerSet::GetFile(int n){
 }
 
 
-inline void TriggerSet::SetTitle(const string& title){
-	title = m_title;
+
+
+inline void TriggerSet::SetSampleName(const string& samplename){
+	m_samplename = samplename;
 }
 
-inline string TriggerSet::GetTitle() const{
-	return m_title;
+inline string TriggerSet::GetSampleName() const{
+	return m_samplename;
 }
+
+inline void TriggerSet::SetOutputName(const string& outname){
+	m_outname = outname
+}
+inline string TriggerSet::GetOutputName() const {
+	return m_outname
+}
+
+
+
 
 inline void TriggerSet::SetTriggers(vector<string> triggers){
 	m_triggers.push_back(triggers);
@@ -112,10 +137,91 @@ inline string TriggerSet::GetVar(){
 	return m_var;
 }
 
-inline TEfficiency* TriggerSet::Analyze(TChain* chain){
-	TLeaf* var_leaf = chain->GetLeaf(m_var.c_str());
-	TLeaf* weight_leaf = chain->GetLeaf("Generator_weight");
+inline vector<TEfficiency*> TriggerSet::Analyze(){
 
+
+	TBranch* b_var = m_tree->GetBranch(m_var.c_str());
+	TBranch* b_weight = m_tree->GetBranch("Generator_weight");
+	vector<TEfficiency*> vec_eff;
+	vector<TBranch*> vec_btrig;
+	int nEntries;
+
+	for(int i = 0; i < m_triggers.size(); i++){
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
+		TBranch* b_trig = m_tree->GetBranch(m_triggers.at(i).c_str());
+		vec_eff.push_back(eff);
+		vec_btrig.push_back(b_trig);
+	}
+
+	nEntries = m_tree->GetEntries();
+	for(evt = 0; evt < nEntries; evt++){
+		m_tree->GetEntry(evt);
+		if (evt % 1000 == 0) {
+			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
+		}
+	    fflush(stdout);
+
+		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
+			vec_eff.at(i)->Fill(m_tree->vec_btrig.at(nTrig),m_tree->b_var);
+		}
+	}
+
+
+	// //2017
+	// if(m_Triggers_2016 == NULL && m_Triggers_2017 != NULL && m_Triggers_2018 == NULL){
+	// 	TLeaf* var_leaf = m_Triggers_2017->GetLeaf(m_var.c_str());
+	// 	TLeaf* weight_leaf = m_Triggers_2017->GetLeaf("Generator_weight");
+	// 	vector<TEfficiency*> vec_eff;
+	// 	vector<TLeaf*> vec_leaf;
+	// 	int nEntries;
+
+	// 	for(int i = 0; i < m_triggers.size(); i++){
+	// 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
+	// 		TLeaf* leaf = m_Triggers_2017->GetLeaf(m_triggers.at(i).c_str());
+	// 		vec_eff.push_back(eff);
+	// 		vec_leaf.push_back(leaf);
+	// 	}
+
+	// 	nEntries = m_Triggers_2017->GetEntries();
+	// 	for(evt = 0; evt < nEntries; evt++){
+	// 		var_leaf->GetBranch()->GetEntry(evt);
+	// 		weight_leaf->GetBranch()->GetEntru(evt);
+	// 		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+	// 			vec_leaf.at(i)->GetBranch->GetEntry(evt);
+	// 			vec_eff.at(i)->Fill(vec_leaf.at(nTrig)->GetValue(),var_leaf->GetValue());
+	// 		}
+	// 	}
+	// }
+
+
+
+	// //2018
+	// if(m_Triggers_2016 == NULL && m_Triggers_2017 == NULL && m_Triggers_2018 != NULL){
+	// 	TLeaf* var_leaf = m_Triggers_2018->GetLeaf(m_var.c_str());
+	// 	TLeaf* weight_leaf = m_Triggers_2018->GetLeaf("Generator_weight");
+	// 	vector<TEfficiency*> vec_eff;
+	// 	vector<TLeaf*> vec_leaf;
+	// 	int nEntries;
+
+	// 	for(int i = 0; i < m_triggers.size(); i++){
+	// 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
+	// 		TLeaf* leaf = m_Triggers_2018->GetLeaf(m_triggers.at(i).c_str());
+	// 		vec_eff.push_back(eff);
+	// 		vec_leaf.push_back(leaf);
+	// 	}
+
+	// 	nEntries = m_Triggers_2018->GetEntries();
+	// 	for(evt = 0; evt < nEntries; evt++){
+	// 		var_leaf->GetBranch()->GetEntry(evt);
+	// 		weight_leaf->GetBranch()->GetEntru(evt);
+	// 		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+	// 			vec_leaf.at(i)->GetBranch->GetEntry(evt);
+	// 			vec_eff.at(i)->Fill(vec_leaf.at(nTrig)->GetValue(),var_leaf->GetValue());
+	// 		}
+	// 	}
+	// }	
+	return vec_eff;
 }
 
 inline bool TriggerSet::global_cuts(TTree*& fChain, const Long64_t& jentry, double x_val)
