@@ -142,7 +142,7 @@ void Plot_Efficiency(){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TFile* file = new TFile((trigs16.GetOutputName()).c_str();,"RECREATE");
+	TFile* file = new TFile((trigs16.GetOutputName()).c_str(),"RECREATE");
 	file->cd();
 	cv->Write();
 	
