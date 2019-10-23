@@ -81,7 +81,8 @@ void Plot_Efficiency(){
 
 	for(int i = 0; i < effs16.size(); i++){
 		gr_effs16[i]->SetMarkerStyle(kCircle);
-		gr_effs16[i]->SetMarkerSize(2);
+		gr_effs16[i]->SetMarkerSize(1);
+		gr_effs16[i]->SetLineWidth(4);
 		if(i % 3 == 0){
 			gr_effs16[i]->SetMarkerColor(kBlue-7);
 			gr_effs16[i]->SetLineColor(kBlue-7);
@@ -99,7 +100,11 @@ void Plot_Efficiency(){
 		// cv->Update();
 		leg->AddEntry(gr_effs16[i]);
 	}
-
+	leg->SetTextFont(132);
+	leg->SetTextSize(0.045);
+	leg->SetFillColor(kWhite);
+	leg->SetLineColor(kWhite);
+	leg->SetShadowColor(kWhite);
 
 	mg->Draw("AP");
 	leg->Draw("SAME");
