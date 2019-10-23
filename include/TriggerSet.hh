@@ -178,13 +178,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
-	    cout << "\n" << endl;
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
 			vec_eff.at(nTrig)->Fill(vec_ltrig.at(nTrig)->GetValue(),l_var->GetValue());
 		}
 	}
+	cout << endl;
 
 
 	// //2017

@@ -46,7 +46,7 @@ void Plot_Efficiency(){
 	cv->cd();
 	cv->SetGridx();
 	cv->SetGridy();
-
+	cout << "# of triggers: " << effs16.size() << endl;
 
 	effs16[0]->Draw();
 	leg->AddEntry(effs16[0]);
@@ -54,6 +54,7 @@ void Plot_Efficiency(){
 		leg->AddEntry(effs16[i]);
 		effs16[i]->Draw("same");
 	}
+	leg->Draw("SAME");
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
 	cv->Write();
