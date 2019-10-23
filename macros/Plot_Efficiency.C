@@ -25,12 +25,12 @@ void Plot_Efficiency(){
 
 	TFile* file16 = TFile::Open(gPathname+"prod2016MC_reducedNANO_Triggers_DYinclusive.root");
 	TTree* tree16 = (TTree*)file16->Get("Events");
+	file16->Close();
 
 
 
 
-
-	TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
+	// TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
 	TriggerSet trigs16(file16);
 	// trigs16.AddFile(gPathname+dyJets16Pathname);
@@ -42,11 +42,12 @@ void Plot_Efficiency(){
 
 	cv->cd();
 	for(int i = 0; i < effs16.size(); i++){
-		effs16[i]->Draw("same");
+		effs16[i]->Draw();
 	}
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
 	file->cd();
 	cv->Write();
+	cv->Close();
 	file->Close();
 
 
