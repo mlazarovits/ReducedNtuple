@@ -6,6 +6,9 @@
 #include "../include/TriggerSet.hh"
 #include "TEfficiency.h"
 #include "TGraphAsymmErrors.h"
+#include "TMultiGraph.h"
+#include "TCanvas.h"
+#include "TGraph.h"
 
 using namespace std;
 
