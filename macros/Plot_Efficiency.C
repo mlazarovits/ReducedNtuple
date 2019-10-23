@@ -19,7 +19,7 @@ void Plot_Efficiency(){
 	}
 
 	TCanvas* cv = new TCanvas("cv","cv",600,600);
-	TLegend* leg = new TLegend(0.688,0.22,0.93,0.42);
+	TLegend* leg = new TLegend(0.3,0.72,0.9,0.92);
 	vector<TEfficiency*> effs16;
 
 	TString gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/single_root_files/";
@@ -81,6 +81,7 @@ void Plot_Efficiency(){
 
 	for(int i = 0; i < effs16.size(); i++){
 		gr_effs16[i]->SetMarkerStyle(kCircle);
+		gr_effs16[i]->SetMarkerSize(2);
 		if(i % 3 == 0){
 			gr_effs16[i]->SetMarkerColor(kBlue-7);
 			gr_effs16[i]->SetLineColor(kBlue-7);
@@ -100,15 +101,15 @@ void Plot_Efficiency(){
 	}
 
 
-	mg->Draw("SAME");
+	mg->Draw("AP");
 	leg->Draw("SAME");
 	cv->Update();
 
 	mg->SetTitle((title+" Trigger Efficiencies").c_str());
 	mg->GetXaxis()->SetTitle(x_label.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
-	mg->SetMinimum(0.0);
-	mg->SetMaximum(1.0);
+	// mg->SetMinimum(0.0);
+	// mg->SetMaximum(1.0);
 
 	TLatex l;
 	l.SetTextFont(132);
@@ -117,9 +118,9 @@ void Plot_Efficiency(){
 	l.SetTextFont(42);
 	l.SetTextSize(0.04);
 	l.SetTextFont(61);
-	l.DrawLatex(0.16,0.943,"CMS");
+	l.DrawLatex(0.16,0.9,"CMS");
 	l.SetTextFont(52);
-	l.DrawLatex(0.23,0.943,"Preliminary");
+	l.DrawLatex(0.25,0.9,"Preliminary");
 	cv->Update();
 
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
@@ -132,94 +133,6 @@ void Plot_Efficiency(){
 
 
 
-
-
-
-
-
-
-
-
-	//DYJets2016
-
-	// int nEntries16 = trigClass16->fChain->GetEntries();
-	// TEfficiency* eff16 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
-	
-	// bool trigPass16;
-	// Float_t ele_pt16;
-	// Float_t mu_pt16;
-
-	// for(int evt = 0; evt < nEntries16; evt++){
-	// 	trigClass16->GetEntry(evt);
-	// 	for(int ele = 0; ele < Electron_pt.size(); ele++){
-	// 		ele_pt16 = trigClass16->Electron_pt->at(ele);
-	// 		// trigPass16 = trigClass16->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
-
-	// 		eff16->Fill(trigClass16->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL,ele_pt16);
-	// 	}
-	// }
-	// eff16->SetFillColor(kGreen);
-	// leg->AddEntry(eff16,"2016");
-	// eff16->Draw("AP");
-
-	// //DYJets2017
-	// TChain* chain17 = new TChain("Events");		
-	// chain17->Add(dyJets17Pathname+"*.root");
-
-	// prod2017MC_reducedNANO_Triggers* trigClass17 = new prod2017MC_reducedNANO_Triggers(chain17);
-
-	// int nEntries17 = trigClass17->fChain->GetEntries();
-	// TEfficiency* eff17 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
-	
-	// bool trigPass17;
-	// Float_t ele_pt17;
-	// Float_t mu_pt17;
-
-	// for(int evt = 0; evt < nEntries17; evt++){
-	// 	trigClass17->GetEntry(evt);
-	// 	ele_pt17 = trigClass17->Electron_pt[0];
-	// 	trigPass17 = trigClass17->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
-
-		
-	// 	eff17->Fill(trigPass17,ele_pt17);
-
-	// }
-	// eff17->SetFillColor(kRed);
-	// leg->AddEntry(eff17,"2017");
-	// eff17->Draw("SAME");
-	// // delete chain;
-
-	// //DYJets2018
-	// TChain* chain18 = new TChain("Events");		
-	// chain18->Add(dyJets18Pathname+"*.root");
-
-	// prod2018MC_reducedNANO_Triggers* trigClass18 = new prod2018MC_reducedNANO_Triggers(chain18);
-
-	// int nEntries18 = trigClass18->fChain->GetEntries();
-	// TEfficiency* eff18 = new TEfficiency("eff","my_efficiency;x;#epsilon",20,0,2000);
-	
-	// bool trigPass18;
-	// Float_t ele_pt18;
-	// Float_t mu_pt18;
-
-	// for(int evt = 0; evt < nEntries18; evt++){
-	// 	trigClass18->GetEntry(evt);
-	// 	ele_pt18 = trigClass18->Electron_pt->at(0);
-	// 	trigPass18 = trigClass18->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL == 1; //pass trigger
-
-		
-	// 	eff18->Fill(trigPass18,ele_pt18);
-	// }
-	// eff18->SetFillColor(kBlue);
-	// leg->AddEntry(eff18,"2018");
-	// eff18->Draw("SAME");
-
-	// cv->SaveAs("plots/"+filename+".pdf");
-	// cv->Close();
-	// delete cv;
-	// delete chain16;
-	// delete chain17;
-	// delete chain18;
 
 
 
