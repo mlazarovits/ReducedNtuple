@@ -161,7 +161,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),title+x_label+y_label,20,0,200);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(title+x_label+y_label).c_str(),20,0,200);
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 		if(l_trig == NULL){
 			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
