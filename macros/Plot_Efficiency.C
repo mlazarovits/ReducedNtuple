@@ -44,6 +44,8 @@ void Plot_Efficiency(){
 	effs16 = trigs16.Analyze();
 
 	cv->cd();
+	cv->SetGridx();
+	cv->SetGridy();
 
 
 	effs16[0]->Draw();
