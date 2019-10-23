@@ -18,7 +18,7 @@ void Plot_Efficiency(){
 		cout << "Created plots folder." << endl;
 	}
 
-	TCanvas* cv = new TCanvas("cv","cv",600,600);
+	TCanvas* cv = new TCanvas("cv","cv",600,800);
 	TLegend* leg = new TLegend(0.3,0.62,0.9,0.82);
 	vector<TEfficiency*> effs16;
 
@@ -54,6 +54,10 @@ void Plot_Efficiency(){
 	cv->cd();
 	cv->SetGridx();
 	cv->SetGridy();
+	cv->SetLeftMargin(0.13);
+	cv->SetRightMargin(0.04);
+	cv->SetBottomMargin(0.15);
+	cv->SetTopMargin(0.085);
 
 	effs16[0]->Draw("AP");
 	cv->Update();
@@ -80,7 +84,7 @@ void Plot_Efficiency(){
 	cv->Update();
 
 	for(int i = 0; i < effs16.size(); i++){
-		gr_effs16[i]->SetMarkerStyle(kCircle);
+		gr_effs16[i]->SetMarkerStyle(6);
 		gr_effs16[i]->SetMarkerSize(1);
 		gr_effs16[i]->SetLineWidth(4);
 		if(i % 3 == 0){
@@ -101,7 +105,7 @@ void Plot_Efficiency(){
 		leg->AddEntry(gr_effs16[i]);
 	}
 	leg->SetTextFont(132);
-	leg->SetTextSize(0.045);
+	leg->SetTextSize(0.03);
 	leg->SetFillColor(kWhite);
 	leg->SetLineColor(kWhite);
 	leg->SetShadowColor(kWhite);
