@@ -52,7 +52,7 @@ void Plot_Efficiency(){
 	for(int i = 0; i < effs16.size(); i++){
 		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
 	}
-	effs16[i]->GetPaintedGraph()->Draw();
+	effs16[0]->GetPaintedGraph()->Draw();
 
 	// cout << "# of triggers: " << gr_effs16.size() << endl;
 	// double fmax = -1.;
