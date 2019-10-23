@@ -150,7 +150,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	if(l_var == NULL){
 		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
-		return;
+		break;
 	}
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
@@ -161,7 +161,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 		if(l_trig == NULL){
 			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
-			return;
+			break;
 		}
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
