@@ -45,6 +45,7 @@ void Plot_Efficiency(){
 	effs16 = trigs16.Analyze();
 	vector<TGraphAsymmErrors*> gr_effs16;
 
+
 	cv->cd();
 	cv->SetGridx();
 	cv->SetGridy();
@@ -78,12 +79,15 @@ void Plot_Efficiency(){
 		gr_effs16[i]->SetMarkerStyle(kCircle);
 		if(i % 3 == 0){
 			gr_effs16[i]->SetMarkerColor(kBlue-7);
+			gr_effs16[i]->SetLineColor(kBlue-7);
 		}
 		if(i % 3 == 1){
 			gr_effs16[i]->SetMarkerColor(kRed-7);
+			gr_effs16[i]->SetLineColor(kRed-7);
 		}
 		if(i % 3 == 2){
 			gr_effs16[i]->SetMarkerColor(kGreen-7);
+			gr_effs16[i]->SetLineColor(kGreen-7);
 		}
 		gr_effs16[i]->Draw("same");
 		cv->Update();
@@ -93,11 +97,13 @@ void Plot_Efficiency(){
 	leg->Draw("SAME");
 	cv->Update();
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
+	file16->Close();
 	file->cd();
 	cv->Write();
 	
-	file->Close();
+	
 	cv->Close();
+	file->Close();
 
 
 
