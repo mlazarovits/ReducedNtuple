@@ -42,18 +42,32 @@ void Plot_Efficiency(){
 	trigs16.SetVar("Electron_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs.root");
 	effs16 = trigs16.Analyze();
+	vector<TGraphAsymmErrors*> gr_effs16;
 
 	cv->cd();
 	cv->SetGridx();
 	cv->SetGridy();
-	cout << "# of triggers: " << effs16.size() << endl;
 
-	effs16[0]->Draw();
-	effs16[0]->GetYaxis()->SetRangeUser(0.0,1.0);
-	leg->AddEntry(effs16[0]);
-	for(int i = 1; i < effs16.size(); i++){
-		leg->AddEntry(effs16[i]);
-		effs16[i]->Draw("same");
+	cout << "# of triggers: " << effs16.size() << endl;
+	for(int i = 0; i < effs16.size(); i++){
+		gr_effs16[i] = effs16[i]->GetPaintedGraph();
+	}
+
+	double fmax = -1.;
+	int imax = -1;
+		for(int i = 0; i < gr_effs16.size(); i++){
+		if(gr_effs16[i]->GetMaximum() > fmax){
+			fmax = gr_effs16[i]->GetMaximum();
+			imax = i;
+		}
+	}
+
+
+	gr_effs16[imax]->Draw();
+	gr_effs16[imax]->GetYaxis()->SetRangeUser(0.0,1.0);
+	for(int i = 0; i < effs16.size(); i++){
+		leg->AddEntry(gr_effs16[i]);
+		gr_effs16[i]->Draw("same");
 	}
 	leg->Draw("SAME");
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
