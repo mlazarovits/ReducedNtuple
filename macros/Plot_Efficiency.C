@@ -49,10 +49,11 @@ void Plot_Efficiency(){
 	cv->SetGridx();
 	cv->SetGridy();
 
-	cv->Draw();
-	for(int i = 0; i < effs16.size(); i++){
+	effs16[0]->Draw();
+	cv->Update();
+	for(int i = 1; i < effs16.size(); i++){
 		effs16[i]->Draw("SAME");
-		// cv->Update();
+		cv->Update();
 		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
 	}
 
