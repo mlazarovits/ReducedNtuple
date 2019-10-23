@@ -158,7 +158,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	for(int i = 0; i < m_triggers.size(); i++){
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var+" Efficiency").c_str(),20,0,200);
+		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
+		string x_label = ";"+m_var.c_str();
+		string y_label = ";#epsilon";
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),title+x_label+y_label,20,0,200);
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 		if(l_trig == NULL){
 			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
@@ -175,6 +178,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
+	    cout << "\n" << endl;
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);

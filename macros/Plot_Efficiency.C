@@ -14,7 +14,7 @@ void Plot_Efficiency(){
 		cout << "Created plots folder." << endl;
 	}
 
-	TCanvas* cv = new TCanvas("cv","cv",800,800);
+	TCanvas* cv = new TCanvas("cv","cv",600,600);
 	TLegend* leg = new TLegend(0.688,0.22,0.93,0.42);
 	vector<TEfficiency*> effs16;
 
@@ -47,7 +47,9 @@ void Plot_Efficiency(){
 
 
 	effs16[0]->Draw();
+	leg->AddEntry(effs16[0]);
 	for(int i = 1; i < effs16.size(); i++){
+		leg->AddEntry(effs16[i]);
 		effs16[i]->Draw("same");
 	}
 	TFile* file = new TFile("EFFTEST.root","RECREATE");
