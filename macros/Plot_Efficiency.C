@@ -43,7 +43,7 @@ void Plot_Efficiency(){
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
 	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
-	trigs16.SetVar("Muon_pt");
+	trigs16.SetVar("Electron_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs_MupT.root");
 
 	// effs = trigs16.Analyze();
