@@ -51,9 +51,9 @@ void Plot_Efficiency(){
 	//DY incl. - 2017
 	TriggerSet trigs17(file17);
 	trigs17.SetSampleName("DYJetstoLL 2017");
-	trigs17.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
+	trigs17.AddTrigger("HLT_Mu8_TrkIsoVVL_Ele17_TrkIsoVVL");
+	trigs17.AddTrigger("HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL");
 	trigs17.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
-	trigs17.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
 	trigs17.SetVar("Muon_pt");
 	trigs17.SetOutputName("DYJets17_AllTrigs_MupT.root");
 
