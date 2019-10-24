@@ -45,22 +45,21 @@ void Plot_Efficiency(){
 	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
 	trigs16.SetVar("Muon_pt");
 	trigs16.SetOutputName("DYJets16_AllTrigs_MupT.root");
-	string x_label = trigs16.GetVar();
-	string title = trigs16.GetSampleName();
+
 	// effs = trigs16.Analyze();
 
 	//DY incl. - 2017
-	TriggerSet trigs17(file16);
-	trigs16.SetSampleName("DYJetstoLL 2017");
-	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
-	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
-	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
-	trigs16.SetVar("Muon_pt");
-	trigs16.SetOutputName("DYJets17_AllTrigs_MupT.root");
-	string x_label = trigs17.GetVar();
-	string title = trigs17.GetSampleName();
+	TriggerSet trigs17(file17);
+	trigs17.SetSampleName("DYJetstoLL 2017");
+	trigs17.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
+	trigs17.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
+	trigs17.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
+	trigs17.SetVar("Muon_pt");
+	trigs17.SetOutputName("DYJets17_AllTrigs_MupT.root");
 
 
+	string x_label = trigs16.GetVar();
+	string title = trigs16.GetSampleName();
 	effs = trigs17.Analyze();
 
 
@@ -82,7 +81,7 @@ void Plot_Efficiency(){
 	effs[0]->Draw("AP");
 	cv->Update();
 	gr_effs.push_back(effs[0]->GetPaintedGraph());
-	for(int i = 1; i < effs16.size(); i++){
+	for(int i = 1; i < effs.size(); i++){
 		effs[i]->Draw("same");
 		cv->Update();
 		gr_effs.push_back(effs[i]->GetPaintedGraph());
