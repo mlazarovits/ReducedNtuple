@@ -140,7 +140,7 @@ void Plot_Efficiency(){
 
 	string g_PlotTitle = title+" Trigger Efficiencies";
 	mg->GetXaxis()->SetTitle(x_label.c_str());
-	mg->GetYaxis()->SetTitle("1 - #epsilon");
+	mg->GetYaxis()->SetTitle("#epsilon");
 	// mg->SetMinimum(0.0);
 	// mg->SetMaximum(1.0);
 
