@@ -28,6 +28,8 @@ void Plot_Efficiency(){
 	// TString dyJets18Pathname = gPathname+"Autumn18_102X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8_Autumn18_102X/";
 
 	TFile* file16 = TFile::Open((gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root").c_str());
+	TFile* file17 = TFile::Open((gPathname+"single_root_files/prod2017MC_reducedNANO_Triggers_DYinclusive.root").c_str());
+
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
 
@@ -35,9 +37,8 @@ void Plot_Efficiency(){
 
 	// TString filename = "dyJetsToLL_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL";
 	
+	//DY incl. - 2016
 	TriggerSet trigs16(file16);
-	// file16->Close();
-	// trigs16.AddFile(gPathname+dyJets16Pathname);
 	trigs16.SetSampleName("DYJetstoLL 2016");
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
 	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
@@ -46,8 +47,27 @@ void Plot_Efficiency(){
 	trigs16.SetOutputName("DYJets16_AllTrigs_MupT.root");
 	string x_label = trigs16.GetVar();
 	string title = trigs16.GetSampleName();
-	effs16 = trigs16.Analyze();
-	vector<TGraphAsymmErrors*> gr_effs16;
+	// effs = trigs16.Analyze();
+
+	//DY incl. - 2017
+	TriggerSet trigs17(file16);
+	trigs16.SetSampleName("DYJetstoLL 2017");
+	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
+	trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
+	trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
+	trigs16.SetVar("Muon_pt");
+	trigs16.SetOutputName("DYJets17_AllTrigs_MupT.root");
+	string x_label = trigs17.GetVar();
+	string title = trigs17.GetSampleName();
+
+
+	effs = trigs17.Analyze();
+
+
+
+
+
+	vector<TGraphAsymmErrors*> gr_effs;
 	TMultiGraph* mg = new TMultiGraph();
 
 
@@ -59,55 +79,55 @@ void Plot_Efficiency(){
 	cv->SetBottomMargin(0.15);
 	cv->SetTopMargin(0.085);
 
-	effs16[0]->Draw("AP");
+	effs[0]->Draw("AP");
 	cv->Update();
-	gr_effs16.push_back(effs16[0]->GetPaintedGraph());
+	gr_effs.push_back(effs[0]->GetPaintedGraph());
 	for(int i = 1; i < effs16.size(); i++){
-		effs16[i]->Draw("same");
+		effs[i]->Draw("same");
 		cv->Update();
-		gr_effs16.push_back(effs16[i]->GetPaintedGraph());
+		gr_effs.push_back(effs[i]->GetPaintedGraph());
 	}
 
 
-	cout << "# of triggers: " << gr_effs16.size() << endl;
+	cout << "# of triggers: " << gr_effs.size() << endl;
 	// double fmax = -1.;
 	// int imax = -1;
-	// for(int i = 0; i < gr_effs16.size(); i++){
-	// 	if(gr_effs16[i]->GetMaximum() > fmax){
-	// 		fmax = gr_effs16[i]->GetMaximum();
+	// for(int i = 0; i < gr_effs.size(); i++){
+	// 	if(gr_effs[i]->GetMaximum() > fmax){
+	// 		fmax = gr_effs[i]->GetMaximum();
 	// 		imax = i;
 	// 	}
 	// }
 	// cout << "imax: " << endl;
-	// gr_effs16[imax]->Draw();
+	// gr_effs[imax]->Draw();
 
 	cv->Update();
 
-	for(int i = 0; i < gr_effs16.size(); i++){
-		gr_effs16[i]->SetMarkerSize(2);
-		gr_effs16[i]->SetLineWidth(2);
+	for(int i = 0; i < gr_effs.size(); i++){
+		gr_effs[i]->SetMarkerSize(2);
+		gr_effs[i]->SetLineWidth(2);
 		if(i/3 == 0){
-			gr_effs16[i]->SetMarkerStyle(22);
+			gr_effs[i]->SetMarkerStyle(22);
 		} 
 		else {
-			gr_effs16[i]->SetMarkerStyle(21);
+			gr_effs[i]->SetMarkerStyle(21);
 		}
 		if(i % 3 == 0){
-			gr_effs16[i]->SetMarkerColor(kBlue-7);
-			gr_effs16[i]->SetLineColor(kBlue-7);
+			gr_effs[i]->SetMarkerColor(kBlue-7);
+			gr_effs[i]->SetLineColor(kBlue-7);
 		}
 		if(i % 3 == 1){
-			gr_effs16[i]->SetMarkerColor(kRed-7);
-			gr_effs16[i]->SetLineColor(kRed-7);
+			gr_effs[i]->SetMarkerColor(kRed-7);
+			gr_effs[i]->SetLineColor(kRed-7);
 		}
 		if(i % 3 == 2){
-			gr_effs16[i]->SetMarkerColor(kGreen-7);
-			gr_effs16[i]->SetLineColor(kGreen-7);
+			gr_effs[i]->SetMarkerColor(kGreen-7);
+			gr_effs[i]->SetLineColor(kGreen-7);
 		}
-		// gr_effs16[i]->Draw("same");
-		mg->Add(gr_effs16[i]);
+		// gr_effs[i]->Draw("same");
+		mg->Add(gr_effs[i]);
 		// cv->Update();
-		leg->AddEntry(gr_effs16[i]);
+		leg->AddEntry(gr_effs[i]);
 	}
 	leg->SetTextFont(132);
 	leg->SetTextSize(0.03);
