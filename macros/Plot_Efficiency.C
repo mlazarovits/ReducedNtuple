@@ -60,7 +60,7 @@ void Plot_Efficiency(){
 
 	string x_label = trigs16.GetVar();
 	string title = trigs16.GetSampleName();
-	effs = trigs17.Analyze();
+	effs = trigs16.Analyze();
 
 
 
