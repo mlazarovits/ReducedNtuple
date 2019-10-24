@@ -181,7 +181,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
-			vec_eff.at(nTrig)->Fill(!(vec_ltrig.at(nTrig)->GetValue()),l_var->GetValue());
+			vec_eff.at(nTrig)->Fill((vec_ltrig.at(nTrig)->GetValue()),l_var->GetValue());
 		}
 	}
 	cout << endl;
