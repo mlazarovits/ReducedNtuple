@@ -1444,7 +1444,7 @@ public :
  //  TBranch        *b_Muon_pfRelIso03_chg;   //!
  //  TBranch        *b_Muon_pfRelIso04_all;   //!
   TBranch        *b_Muon_phi;   //!
- //  TBranch        *b_Muon_pt;   //!
+  TBranch        *b_Muon_pt;   //!
  //  TBranch        *b_Muon_ptErr;   //!
  //  TBranch        *b_Muon_segmentComp;   //!
  //  TBranch        *b_Muon_sip3d;   //!
@@ -2654,7 +2654,7 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("Muon_pfRelIso03_chg", Muon_pfRelIso03_chg, &b_Muon_pfRelIso03_chg);
    // fChain->SetBranchAddress("Muon_pfRelIso04_all", Muon_pfRelIso04_all, &b_Muon_pfRelIso04_all);
    fChain->SetBranchAddress("Muon_phi", Muon_phi, &b_Muon_phi);
-   // fChain->SetBranchAddress("Muon_pt", Muon_pt, &b_Muon_pt);
+   fChain->SetBranchAddress("Muon_pt", Muon_pt, &b_Muon_pt);
    // fChain->SetBranchAddress("Muon_ptErr", Muon_ptErr, &b_Muon_ptErr);
    // fChain->SetBranchAddress("Muon_segmentComp", Muon_segmentComp, &b_Muon_segmentComp);
    // fChain->SetBranchAddress("Muon_sip3d", Muon_sip3d, &b_Muon_sip3d);
