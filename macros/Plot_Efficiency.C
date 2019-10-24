@@ -20,7 +20,7 @@ void Plot_Efficiency(){
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
-	vector<TEfficiency*> effs16;
+	vector<TEfficiency*> effs;
 
 	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
 	// TString dyJets16Pathname = gPathname+"Summer16_94X_DYJetstoLL/root/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_Summer16_94X/";
