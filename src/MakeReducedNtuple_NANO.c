@@ -77,9 +77,9 @@ int main(int argc, char* argv[]) {
   if ( argc < 4 ){
     cout << "Error at Input: please specify an input file name, a list of input ROOT files and/or a folder path"; 
     cout << " , an output filename, and a selector class name:" << endl; 
-    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifile=input.root -ofile=output.root -dataset=dataset_name -filetag=sample_tag"  << endl;
-    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ilist=input.list -ofile=output.root -dataset=dataset_name -filetag=sample_tag"  << endl;
-    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifold=folder_path -ofile=output.root -dataset=dataset_name -filetag=sample_tag -tree=treename -eventcount=event_count --sms" << endl;
+    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifile=input.root -ofile=output.root -selector=TSelector_ClassName"  << endl;
+    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ilist=input.list -ofile=output.root -selector=TSelector_ClassName"  << endl;
+    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifold=folder_path -ofile=output.root   -selector=TSelector_ClassName" << endl;
     cout << " additional tags for object based reduced tree: -selector=TSelector_ClassName "<<endl; 
     return 1;
   }
@@ -96,18 +96,18 @@ int main(int argc, char* argv[]) {
       sscanf(argv[i],"-ifold=%s",  inputFolderName);
       DO_FOLDER = true;
     }
-    if (strncmp(argv[i],"-tree",5)==0){
-      sscanf(argv[i],"-tree=%s",  TreeName);
+    // if (strncmp(argv[i],"-tree",5)==0){
+    //   sscanf(argv[i],"-tree=%s",  TreeName);
       DO_TREE = true;
     } 
     if (strncmp(argv[i],"-selector",9)==0){
       sscanf(argv[i],"-selector=%s", SelectorClassName); 
     }
     if (strncmp(argv[i],"-ofile",6)==0) sscanf(argv[i],"-ofile=%s", outputFileName);
-    if (strncmp(argv[i],"-dataset",8)==0)   sscanf(argv[i],"-dataset=%s", DataSet);
-    if (strncmp(argv[i],"-filetag",8)==0)   sscanf(argv[i],"-filetag=%s", FileTag);
-    if (strncmp(argv[i],"-eventcount",11)==0)   sscanf(argv[i],"-eventcount=%s", EventCount);
-    if (strncmp(argv[i],"--sms",5)==0)  DO_SMS = true;
+    // if (strncmp(argv[i],"-dataset",8)==0)   sscanf(argv[i],"-dataset=%s", DataSet);
+    // if (strncmp(argv[i],"-filetag",8)==0)   sscanf(argv[i],"-filetag=%s", FileTag);
+    // if (strncmp(argv[i],"-eventcount",11)==0)   sscanf(argv[i],"-eventcount=%s", EventCount);
+    // if (strncmp(argv[i],"--sms",5)==0)  DO_SMS = true;
   }
 
 
