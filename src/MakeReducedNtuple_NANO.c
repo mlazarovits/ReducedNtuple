@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
     // if (strncmp(argv[i],"-tree",5)==0){
     //   sscanf(argv[i],"-tree=%s",  TreeName);
       DO_TREE = true;
-    } 
+    // } 
     if (strncmp(argv[i],"-selector",9)==0){
       sscanf(argv[i],"-selector=%s", SelectorClassName); 
     }
