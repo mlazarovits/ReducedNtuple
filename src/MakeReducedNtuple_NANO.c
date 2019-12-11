@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
     cout << "Error at Input: please specify an input file name, a list of input ROOT files and/or a folder path"; 
     cout << " , an output filename, and a selector class name:" << endl; 
     cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifile=input.root -ofile=output.root -selector=TSelector_ClassName"  << endl;
-    cout << "  Example:      ./MakeReducedNtuple_NANO.x -ilist=input.list -ofile=output.root -selector=TSelector_ClassName"  << endl;
+    cout << "  FOR CONDOR USE ONLY Example:      ./MakeReducedNtuple_NANO.x -ilist=input.list -ofile=output.root -selector=TSelector_ClassName"  << endl;
     cout << "  Example:      ./MakeReducedNtuple_NANO.x -ifold=folder_path -ofile=output.root   -selector=TSelector_ClassName" << endl;
     cout << " additional tags for object based reduced tree: -selector=TSelector_ClassName "<<endl; 
     return 1;
