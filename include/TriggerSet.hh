@@ -149,6 +149,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
+	TBranch* b_nMuon = m_tree->GetBranch("nMuon");
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 	vector<TEfficiency*> vec_eff;
@@ -182,6 +183,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+			if(m_tree->nMuon > 1) continue;
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
 			vec_eff.at(nTrig)->Fill((vec_ltrig.at(nTrig)->GetValue()),l_var->GetValue());
 		}
