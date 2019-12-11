@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
       if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
 	sscanf(Buffer,"%s",MyRootFile);
 	filenames.push_back(MyRootFile);
-	cout << "file: " << MyRootFile << endl;
+	// cout << "file: " << MyRootFile << endl;
       }
     }
     inputFile->close();
