@@ -247,7 +247,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 
-inline void makePlots(vector<TEfficiency*> effs){
+inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
 	vector<TGraphAsymmErrors*> gr_effs;

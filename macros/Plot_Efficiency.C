@@ -10,6 +10,7 @@
 #include "TCanvas.h"
 #include "TGraph.h"
 
+
 using namespace std;
 
 void Plot_Efficiency(){
@@ -25,7 +26,7 @@ void Plot_Efficiency(){
 
 	TFile* file16 = TFile::Open((gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root").c_str());
 	TFile* file17 = TFile::Open((gPathname+"single_root_files/prod2017MC_reducedNANO_Triggers_DYinclusive.root").c_str());
-	TFile* f_wjets17 = TFile::Open(gPathname+"output/wjets17.root");
+	TFile* f_wjets17 = TFile::Open(gPathname+"output/wjets17.root").c_str();
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
 	
