@@ -174,7 +174,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < nEntries; evt++){
+	for(int evt = 0; evt < 100000; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -345,7 +345,10 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TFile* file = new TFile(("/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/effPlots/"+m_outname).c_str(),"RECREATE");
+	string filename = ("/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/effPlots/"+m_outname+".root").c_str()
+
+	TFile* file = new TFile(filename,"RECREATE");
+	cout << "file: " << filename << "created" << endl;
 	file->cd();
 	cv->Write();
 
