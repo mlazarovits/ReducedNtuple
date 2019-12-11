@@ -136,17 +136,19 @@ int main(int argc, char* argv[]) {
   }
 
   if(DO_LIST){
-    ifstream *inputFile = new ifstream(inputListName);
-    while( !(inputFile->eof()) ){
-      inputFile->getline(Buffer,500);
-      if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
-	sscanf(Buffer,"%s",MyRootFile);
-	filenames.push_back(MyRootFile);
-	cout << "file: " << MyRootFile << endl;
-      }
-    }
-    inputFile->close();
-    delete inputFile;
+   cout << "Error: list capability only with condor submission" << endl;
+    continue;
+ //    ifstream *inputFile = new ifstream(inputListName);
+ //    while( !(inputFile->eof()) ){
+ //      inputFile->getline(Buffer,500);
+ //      if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
+	// sscanf(Buffer,"%s",MyRootFile);
+	// filenames.push_back(MyRootFile);
+	// cout << "file: " << MyRootFile << endl;
+ //      }
+ //    }
+ //    inputFile->close();
+ //    delete inputFile;
   }
 
   if(DO_FILE){
@@ -154,10 +156,10 @@ int main(int argc, char* argv[]) {
   }
 
   TChain* chain;
-  if(DO_TREE)
-    chain = (TChain*) new TChain(TreeName);
-  else
-    chain = (TChain*) new TChain("Events");
+  // if(DO_TREE)
+  //   chain = (TChain*) new TChain(TreeName);
+  // else
+   chain = (TChain*) new TChain("Events");
   
   int Nfile = filenames.size();
   for(int i = 0; i < Nfile; i++){
