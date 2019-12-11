@@ -136,19 +136,17 @@ int main(int argc, char* argv[]) {
   }
 
   if(DO_LIST){
-   cout << "Error: list capability only with condor submission" << endl;
-    return 0;
- //    ifstream *inputFile = new ifstream(inputListName);
- //    while( !(inputFile->eof()) ){
- //      inputFile->getline(Buffer,500);
- //      if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
-	// sscanf(Buffer,"%s",MyRootFile);
-	// filenames.push_back(MyRootFile);
-	// cout << "file: " << MyRootFile << endl;
- //      }
- //    }
- //    inputFile->close();
- //    delete inputFile;
+    ifstream *inputFile = new ifstream(inputListName);
+    while( !(inputFile->eof()) ){
+      inputFile->getline(Buffer,500);
+      if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
+	sscanf(Buffer,"%s",MyRootFile);
+	filenames.push_back(MyRootFile);
+	cout << "file: " << MyRootFile << endl;
+      }
+    }
+    inputFile->close();
+    delete inputFile;
   }
 
   if(DO_FILE){
