@@ -41,6 +41,8 @@ public:
 
 	vector<TEfficiency*> Analyze();
 
+	void makePlots();
+
 
 
 	bool global_cuts(const Long64_t& jentry, double x_val);
@@ -241,6 +243,112 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// 	}
 	// }	
 	return vec_eff;
+}
+
+
+
+inline void makePlots(vector<TEfficiency*> effs){
+	vector<TGraphAsymmErrors*> gr_effs;
+	TMultiGraph* mg = new TMultiGraph();
+
+
+	cv->cd();
+	cv->SetGridx();
+	cv->SetGridy();
+	cv->SetLeftMargin(0.13);
+	cv->SetRightMargin(0.04);
+	cv->SetBottomMargin(0.15);
+	cv->SetTopMargin(0.085);
+
+	effs[0]->Draw("AP");
+	cv->Update();
+	gr_effs.push_back(effs[0]->GetPaintedGraph());
+	for(int i = 1; i < effs.size(); i++){
+		effs[i]->Draw("same");
+		cv->Update();
+		gr_effs.push_back(effs[i]->GetPaintedGraph());
+	}
+
+
+	cout << "# of triggers: " << gr_effs.size() << endl;
+	// double fmax = -1.;
+	// int imax = -1;
+	// for(int i = 0; i < gr_effs.size(); i++){
+	// 	if(gr_effs[i]->GetMaximum() > fmax){
+	// 		fmax = gr_effs[i]->GetMaximum();
+	// 		imax = i;
+	// 	}
+	// }
+	// cout << "imax: " << endl;
+	// gr_effs[imax]->Draw();
+
+	cv->Update();
+
+	for(int i = 0; i < gr_effs.size(); i++){
+		gr_effs[i]->SetMarkerSize(2);
+		gr_effs[i]->SetLineWidth(2);
+		if(i/3 == 0){
+			gr_effs[i]->SetMarkerStyle(22);
+		} 
+		else {
+			gr_effs[i]->SetMarkerStyle(21);
+		}
+		if(i % 3 == 0){
+			gr_effs[i]->SetMarkerColor(kBlue-7);
+			gr_effs[i]->SetLineColor(kBlue-7);
+		}
+		if(i % 3 == 1){
+			gr_effs[i]->SetMarkerColor(kRed-7);
+			gr_effs[i]->SetLineColor(kRed-7);
+		}
+		if(i % 3 == 2){
+			gr_effs[i]->SetMarkerColor(kGreen-7);
+			gr_effs[i]->SetLineColor(kGreen-7);
+		}
+		// gr_effs[i]->Draw("same");
+		mg->Add(gr_effs[i]);
+		// cv->Update();
+		leg->AddEntry(gr_effs[i]);
+	}
+	leg->SetTextFont(132);
+	leg->SetTextSize(0.03);
+	leg->SetFillColor(kWhite);
+	leg->SetLineColor(kWhite);
+	leg->SetShadowColor(kWhite);
+
+	mg->Draw("AP");
+	leg->Draw("SAME");
+	cv->Update();
+
+	string g_PlotTitle = m_samplename+" Trigger Efficiencies";
+	mg->GetXaxis()->SetTitle(m_var.c_str());
+	mg->GetYaxis()->SetTitle("#epsilon");
+	// mg->SetMinimum(0.0);
+	// mg->SetMaximum(1.0);
+
+	TLatex l;
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.035);
+	l.SetTextFont(42);
+	l.SetTextSize(0.03);
+	l.SetTextFont(61);
+	l.DrawLatex(0.16,0.92,"CMS");
+	l.SetTextFont(52);
+	l.DrawLatex(0.21,0.92,"Preliminary");
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.05);
+	l.SetTextFont(132);
+	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
+	cv->Update();
+
+	TFile* file = new TFile((gPathname+"effPlots/"+m_outname).c_str(),"RECREATE");
+	file->cd();
+	cv->Write();
+
+
+
 }
 
 inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
