@@ -18,8 +18,7 @@ void Plot_Efficiency(){
 		cout << "Created plots folder." << endl;
 	}
 
-	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
+	
 	vector<TEfficiency*> effs;
 
 	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
