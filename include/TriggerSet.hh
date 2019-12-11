@@ -174,7 +174,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < 100000; evt++){
+	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -189,59 +189,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	cout << endl;
 
 
-	// //2017
-	// if(m_Triggers_2016 == NULL && m_Triggers_2017 != NULL && m_Triggers_2018 == NULL){
-	// 	TLeaf* var_leaf = m_Triggers_2017->GetLeaf(m_var.c_str());
-	// 	TLeaf* weight_leaf = m_Triggers_2017->GetLeaf("Generator_weight");
-	// 	vector<TEfficiency*> vec_eff;
-	// 	vector<TLeaf*> vec_leaf;
-	// 	int nEntries;
-
-	// 	for(int i = 0; i < m_triggers.size(); i++){
-	// 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
-	// 		TLeaf* leaf = m_Triggers_2017->GetLeaf(m_triggers.at(i).c_str());
-	// 		vec_eff.push_back(eff);
-	// 		vec_leaf.push_back(leaf);
-	// 	}
-
-	// 	nEntries = m_Triggers_2017->GetEntries();
-	// 	for(evt = 0; evt < nEntries; evt++){
-	// 		var_leaf->GetBranch()->GetEntry(evt);
-	// 		weight_leaf->GetBranch()->GetEntru(evt);
-	// 		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-	// 			vec_leaf.at(i)->GetBranch->GetEntry(evt);
-	// 			vec_eff.at(i)->Fill(vec_leaf.at(nTrig)->GetValue(),var_leaf->GetValue());
-	// 		}
-	// 	}
-	// }
-
-
-
-	// //2018
-	// if(m_Triggers_2016 == NULL && m_Triggers_2017 == NULL && m_Triggers_2018 != NULL){
-	// 	TLeaf* var_leaf = m_Triggers_2018->GetLeaf(m_var.c_str());
-	// 	TLeaf* weight_leaf = m_Triggers_2018->GetLeaf("Generator_weight");
-	// 	vector<TEfficiency*> vec_eff;
-	// 	vector<TLeaf*> vec_leaf;
-	// 	int nEntries;
-
-	// 	for(int i = 0; i < m_triggers.size(); i++){
-	// 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)+" vs. "+m_var" Efficiency").c_str(),20,0,200);
-	// 		TLeaf* leaf = m_Triggers_2018->GetLeaf(m_triggers.at(i).c_str());
-	// 		vec_eff.push_back(eff);
-	// 		vec_leaf.push_back(leaf);
-	// 	}
-
-	// 	nEntries = m_Triggers_2018->GetEntries();
-	// 	for(evt = 0; evt < nEntries; evt++){
-	// 		var_leaf->GetBranch()->GetEntry(evt);
-	// 		weight_leaf->GetBranch()->GetEntru(evt);
-	// 		for(nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-	// 			vec_leaf.at(i)->GetBranch->GetEntry(evt);
-	// 			vec_eff.at(i)->Fill(vec_leaf.at(nTrig)->GetValue(),var_leaf->GetValue());
-	// 		}
-	// 	}
-	// }	
+	
 	return vec_eff;
 }
 
