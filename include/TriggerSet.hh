@@ -345,10 +345,10 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/effPlots/"+m_outname+".root").c_str();
+	TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
 
 	TFile* file = new TFile(filename,"RECREATE");
-	cout << "file: " << filename << "created" << endl;
+	cout << "file: " << filename << " created" << endl;
 	file->cd();
 	cv->Write();
 
