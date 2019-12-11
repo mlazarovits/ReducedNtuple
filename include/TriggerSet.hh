@@ -183,7 +183,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(m_tree->nMuon > 1) continue;
+			if(b_nMuon > 1){
+				cout <<"nMuon: " << b_nMuon << endl;
+				continue;
+			} 
+
+				
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
 			vec_eff.at(nTrig)->Fill((vec_ltrig.at(nTrig)->GetValue()),l_var->GetValue());
 		}
