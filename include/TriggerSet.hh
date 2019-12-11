@@ -41,7 +41,7 @@ public:
 
 	vector<TEfficiency*> Analyze();
 
-	void makePlots();
+	void makePlots(vector<TEfficiency*> effs);
 
 
 
@@ -345,7 +345,7 @@ inline void makePlots(vector<TEfficiency*> effs){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TFile* file = new TFile((gPathname+"effPlots/"+m_outname).c_str(),"RECREATE");
+	TFile* file = new TFile(("/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/effPlots/"+m_outname).c_str(),"RECREATE");
 	file->cd();
 	cv->Write();
 

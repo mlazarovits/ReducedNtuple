@@ -21,7 +21,7 @@ void Plot_Efficiency(){
 	
 	vector<TEfficiency*> effs;
 
-	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_1_4_patch1/src/ReducedNtuple/";
+	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/";
 
 	TFile* file16 = TFile::Open((gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root").c_str());
 	TFile* file17 = TFile::Open((gPathname+"single_root_files/prod2017MC_reducedNANO_Triggers_DYinclusive.root").c_str());
@@ -62,7 +62,6 @@ void Plot_Efficiency(){
 
 	string x_label = wjets17_trigs.GetVar();
 	string title = wjets17_trigs.GetSampleName();
-	string outname = wjets17_tr
 	effs = wjets17_trigs.Analyze();
 
 
