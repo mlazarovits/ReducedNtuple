@@ -183,7 +183,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(l_nMuon->GetValue() > 1){
+			if(l_nMuon->GetValue() < 1){
 				cout <<"nMuon: " << l_nMuon->GetValue() << endl;
 				continue;
 			} 
