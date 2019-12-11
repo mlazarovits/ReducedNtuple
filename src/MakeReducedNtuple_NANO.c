@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
 
   if(DO_LIST){
    cout << "Error: list capability only with condor submission" << endl;
-    continue;
+    return 0;
  //    ifstream *inputFile = new ifstream(inputListName);
  //    while( !(inputFile->eof()) ){
  //      inputFile->getline(Buffer,500);
