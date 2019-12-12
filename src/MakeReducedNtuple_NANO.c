@@ -182,31 +182,34 @@ int main(int argc, char* argv[]) {
 	prod2018MC_reducedNANO_MET s(chain);
 	produceReducedTree(s,_ofilename);
   }
-  if(_selectorClassName.compare("prod2017MC_reducedNANO_MET") == 0){
+  else if(_selectorClassName.compare("prod2017MC_reducedNANO_MET") == 0){
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2017MC_reducedNANO_MET s(chain);
 	produceReducedTree(s,_ofilename);
   }
-  if(_selectorClassName.compare("prod2016MC_reducedNANO_MET") == 0){
+  else if(_selectorClassName.compare("prod2016MC_reducedNANO_MET") == 0){
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2016MC_reducedNANO_MET s(chain);
 	produceReducedTree(s,_ofilename);
   }
 // Trigger classes
-  if(_selectorClassName.compare("prod2018MC_reducedNANO_Triggers") == 0){
+  else if(_selectorClassName.compare("prod2018MC_reducedNANO_Triggers") == 0){
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2018MC_reducedNANO_Triggers s(chain);
 	produceReducedTree(s,_ofilename);
   }
-  if(_selectorClassName.compare("prod2017MC_reducedNANO_Triggers") == 0){
+  else if(_selectorClassName.compare("prod2017MC_reducedNANO_Triggers") == 0){
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2017MC_reducedNANO_Triggers s(chain);
 	produceReducedTree(s,_ofilename);
   }
-  if(_selectorClassName.compare("prod2016MC_reducedNANO_Triggers") == 0){
+  else if(_selectorClassName.compare("prod2016MC_reducedNANO_Triggers") == 0){
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2016MC_reducedNANO_Triggers s(chain);
 	produceReducedTree(s,_ofilename);
+  }
+  else{
+    std::cout<<"Error: invalid selector class specified" <<std::endl; 
   }
 
 
