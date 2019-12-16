@@ -150,8 +150,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
 	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
+	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
+	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
+	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
+
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
+
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 	int nEntries;
@@ -183,7 +188,21 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(l_nMuon->GetValue() < 1) continue;
+			//at least 1 muon
+			int nMuon = l_nMuon->GetValue();
+			if(nMuon < 1) continue; //at least 1 muon
+			int MuonmediumId_counter = 0;
+			int MuontightId_counter = 0;
+			int MuonmisiIsoId_counter = 0;
+			
+			for(int i = 0, i < nMuon; i++){
+				if(l_Muon_mediumId->GetValue()->at(i) == true) MuonmediumId_counter += 1;
+				if(l_Muon_tightId->GetValue()->at(i) == true) MuontightId_counter += 1;
+				if(l_Muon_miniIsoId->GetValue()->at(i) == true) MuonmisiIsoId_counter += 1;
+				else continue;	
+			}
+
+			if(MuonmediumId_counter < 1) continue; //at least 1 mediumId muon
 			
 
 				
