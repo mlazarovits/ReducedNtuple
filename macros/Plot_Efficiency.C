@@ -59,7 +59,7 @@ void Plot_Efficiency(){
 	wjets17_trigs.AddTrigger("HLT_Mu50");
 	wjets17_trigs.AddTrigger("HLT_Mu55");
 	wjets17_trigs.SetVar("Muon_pt");
-	wjets17_trigs.SetOutputName("WJets17_AllTrigs_MupT_tight.root");
+	wjets17_trigs.SetOutputName("WJets17_AllTrigs_MupT_loose.root");
 
 
 	string x_label = wjets17_trigs.GetVar();

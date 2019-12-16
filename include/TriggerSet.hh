@@ -204,7 +204,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-			if(MuontightId_counter < 1) continue;
+			// if(MuontightId_counter < 1) continue;
 
 				
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
