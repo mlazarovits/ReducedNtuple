@@ -195,10 +195,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int MuontightId_counter = 0;
 			int MuonmisiIsoId_counter = 0;
 			
-			for(int i = 0, i < nMuon; i++){
-				if(l_Muon_mediumId->GetValue()->at(i) == true) MuonmediumId_counter += 1;
-				if(l_Muon_tightId->GetValue()->at(i) == true) MuontightId_counter += 1;
-				if(l_Muon_miniIsoId->GetValue()->at(i) == true) MuonmisiIsoId_counter += 1;
+			for(int i = 0; i < nMuon; i++){
+				if(l_Muon_mediumId->GetValue().at(i) == true) MuonmediumId_counter += 1;
+				if(l_Muon_tightId->GetValue().at(i) == true) MuontightId_counter += 1;
+				if(l_Muon_miniIsoId->GetValue().at(i) == true) MuonmisiIsoId_counter += 1;
 				else continue;	
 			}
 
