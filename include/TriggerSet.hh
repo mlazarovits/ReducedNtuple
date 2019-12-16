@@ -193,18 +193,18 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(nMuon < 1) continue; //at least 1 muon
 			int MuonmediumId_counter = 0;
 			int MuontightId_counter = 0;
-			int MuonmisiIsoId_counter = 0;
+			int MuonminiIsoId_counter = 0;
 			
 			for(int i = 0; i < nMuon; i++){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-				if(l_Muon_miniIsoId->GetValue(i) == true) MuonmisiIsoId_counter += 1;
+				if(l_Muon_miniIsoId->GetValue(i) == true) MuonminiIsoId_counter += 1;
 				else continue;	
 			}
 
-			if(MuonmediumId_counter < 1) continue; //continue; //at least 1 mediumId muon
-			
+			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
+			if(MuontightId_counter < 1) continue;
 
 				
 			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
