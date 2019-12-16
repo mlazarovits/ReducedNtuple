@@ -180,7 +180,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < 10; evt++){
+	for(int evt = 0; evt < 100; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -203,7 +203,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// else continue;	
 			}
 
-			if(MuonmediumId_counter < 1) continue; //at least 1 mediumId muon
+			if(MuonmediumId_counter < 1) cout << "didnt pass" << endl; //continue; //at least 1 mediumId muon
 			
 
 				
