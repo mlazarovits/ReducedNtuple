@@ -180,7 +180,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < 100; evt++){
+	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -196,14 +196,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int MuonmisiIsoId_counter = 0;
 			
 			for(int i = 0; i < nMuon; i++){
-				cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-				// if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-				// if(l_Muon_miniIsoId->GetValue(i) == true) MuonmisiIsoId_counter += 1;
-				// else continue;	
+				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+				if(l_Muon_miniIsoId->GetValue(i) == true) MuonmisiIsoId_counter += 1;
+				else continue;	
 			}
 
-			if(MuonmediumId_counter < 1) cout << "didnt pass" << endl; //continue; //at least 1 mediumId muon
+			if(MuonmediumId_counter < 1) continue; //continue; //at least 1 mediumId muon
 			
 
 				
