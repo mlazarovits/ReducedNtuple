@@ -181,6 +181,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
 	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
+	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 
@@ -233,6 +234,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int MuonmediumId_counter = 0;
 			int MuontightId_counter = 0;
 			int MuonminiIsoId_counter = 0;
+			int MuonmedpromptId_counter = 0;
 
 
 			
@@ -240,12 +242,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+				if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 				if(l_Muon_miniIsoId->GetValue(i) == true) MuonminiIsoId_counter += 1;
 				else continue;	
 			}
 
 			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-			if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+			// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+			if(MuonminiIsoId_counter < 1) continue; //at least 1 miniIso muon
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
