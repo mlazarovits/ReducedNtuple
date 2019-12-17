@@ -146,22 +146,22 @@ inline string TriggerSet::GetVar(){
 }
 
 inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
-	int numOR = 0;
-		size_t posOR = 0;
+	int num = 0;
+		size_t pos = 0;
 		// string targetOR = "||"
 		while( (pos = trigger.find(target,pos)) != std::string::npos ){
-			++numOR;
+			++num;
 			pos += target.length();
 		}
-		nTrigOR = numOR+1;
+	int nTrig = num+1;
 
-		vector<TLeaf*> vec_trig;
-		char str_trig[nTrigOR][100];
-		string choptrig;
-		for(int i = 1; i < nTrigOR; i++){
-			choptrig += "%s "+ target;
-		}
-		choptrig += " %s";
+	vector<TLeaf*> vec_trig;
+	char str_trig[nTrig][100];
+	string choptrig;
+	for(int i = 1; i < nTrig; i++){
+		choptrig += "%s "+ target;
+	}
+	choptrig += " %s";
 
 		// sscanf(trigger.c_str(),choptrig,str_trig[i]); //scan for triggers and store them in separate strings
 		
@@ -245,7 +245,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-			// if(MuontightId_counter < 1) continue;
+			// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 

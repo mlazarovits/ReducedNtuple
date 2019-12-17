@@ -20,7 +20,7 @@ void Plot_Efficiency(){
 	}
 
 	
-	vector<TEfficiency*> effs;
+	
 
 	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/";
 
@@ -31,6 +31,7 @@ void Plot_Efficiency(){
 	
 
 	//wjets incl. - 2017 muons
+	vector<TEfficiency*> wjets17_mu_effs;
 	TriggerSet wjets17_mu(f_wjets17);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017");
 	wjets17_mu.AddTrigger("HLT_IsoMu24");
@@ -48,19 +49,19 @@ void Plot_Efficiency(){
 
 
 	//wjets incl. - 2017 electrons
-	// TriggerSet wjets17_ele(f_wjets17);
-	// wjets17_ele.SetSampleName("WJetsToLNu 2017");
-	// wjets17_ele.AddTrigger("HLT_IsoMu24");
-	// wjets17_ele.AddTrigger("HLT_IsoMu27");
-	// wjets17_ele.AddTrigger("HLT_OldMu100");
-	// wjets17_ele.AddTrigger("HLT_TkMu100");
-	// wjets17_ele.AddTrigger("HLT_Mu50");
-	// wjets17_ele.AddTrigger("HLT_Mu55");
-	// wjets17_ele.SetVar("Muon_pt");
-	// wjets17_ele.SetOutputName("WJets17_AllTrigs_ElepT_loose.root");
+	TriggerSet wjets17_ele(f_wjets17);
+	wjets17_ele.SetSampleName("WJetsToLNu 2017");
+	wjets17_ele.AddTrigger("HLT_IsoMu24");
+	wjets17_ele.AddTrigger("HLT_IsoMu27");
+	wjets17_ele.AddTrigger("HLT_OldMu100");
+	wjets17_ele.AddTrigger("HLT_TkMu100");
+	wjets17_ele.AddTrigger("HLT_Mu50");
+	wjets17_ele.AddTrigger("HLT_Mu55");
+	wjets17_ele.SetVar("Muon_pt");
+	wjets17_ele.SetOutputName("WJets17_AllTrigs_ElepT_loose.root");
 
-	// wjets17_ele_effs = wjets17_ele.Analyze();
-	// wjets17_ele.makePlots(wjets17_ele_effs);
+	wjets17_ele_effs = wjets17_ele.Analyze();
+	wjets17_ele.makePlots(wjets17_ele_effs);
 
 
 
