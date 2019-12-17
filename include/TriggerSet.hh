@@ -244,8 +244,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				else continue;	
 			}
 
-			if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-			// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
+			if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
@@ -302,7 +302,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	cv->Update();
 
 	for(int i = 0; i < gr_effs.size(); i++){
-		gr_effs[i]->SetMarkerSize(2);
+		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
 		if(i/3 == 0){
 			gr_effs[i]->SetMarkerStyle(22);

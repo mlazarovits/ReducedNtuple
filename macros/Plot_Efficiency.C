@@ -69,7 +69,7 @@ void Plot_Efficiency(){
 	//wjets incl. - 2017 muons
 	vector<TEfficiency*> wjets17_mu_effs;
 	TriggerSet wjets17_mu(f_wjets17);
-	wjets17_mu.SetSampleName("WJetsToLNu 2017 Medium ID");
+	wjets17_mu.SetSampleName("WJetsToLNu 2017 Tight ID");
 	wjets17_mu.AddTrigger("HLT_IsoMu24");
 	wjets17_mu.AddTrigger("HLT_IsoMu27");
 	wjets17_mu.AddTrigger("HLT_OldMu100");
@@ -77,7 +77,7 @@ void Plot_Efficiency(){
 	wjets17_mu.AddTrigger("HLT_Mu50");
 	wjets17_mu.AddTrigger("HLT_Mu55");
 	wjets17_mu.SetVar("Muon_pt");
-	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_medium.root");
+	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_tight.root");
 
 	wjets17_mu_effs = wjets17_mu.Analyze();
 	wjets17_mu.makePlots(wjets17_mu_effs);
