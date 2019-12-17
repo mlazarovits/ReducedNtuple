@@ -39,10 +39,11 @@ public:
 	void SetVar(string var);
 	string GetVar();
 
+	vector<TLeaf*> ScanTriggers(string target,string trigger);
+
 	vector<TEfficiency*> Analyze();
 
 	void makePlots(vector<TEfficiency*> effs);
-
 
 
 	bool global_cuts(const Long64_t& jentry, double x_val);
@@ -144,6 +145,35 @@ inline string TriggerSet::GetVar(){
 	return m_var;
 }
 
+inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
+	int numOR = 0;
+		size_t posOR = 0;
+		// string targetOR = "||"
+		while( (pos = trigger.find(target,pos)) != std::string::npos ){
+			++numOR;
+			pos += target.length();
+		}
+		nTrigOR = numOR+1;
+
+		vector<TLeaf*> vec_trig;
+		char str_trig[nTrigOR][100];
+		string choptrig;
+		for(int i = 1; i < nTrigOR; i++){
+			choptrig += "%s "+ target;
+		}
+		choptrig += " %s";
+
+		// sscanf(trigger.c_str(),choptrig,str_trig[i]); //scan for triggers and store them in separate strings
+		
+		// for(int i = 0; i < nTrigOR; i++){ //add to vector
+		// 	TLeaf* l_temp = m_tree->GetLeaf(str_trig[i]);
+		// 	vec_trig.push_back(l_temp);
+		// 	delete l_temp;
+		// }
+
+	return vec_trig;
+}
+
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
@@ -165,12 +195,21 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
+	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),40,0,100);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),100,0,200);
+		
+		//scan for trigger ORs and ANDs
+		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
+	
+		// else if(strstr(m_triggers.at(i).c_str(),"&&")) //AND triggers
+		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
+
+		
 		if(l_trig == NULL){
 			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
 			return vec_eff;
@@ -194,6 +233,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int MuonmediumId_counter = 0;
 			int MuontightId_counter = 0;
 			int MuonminiIsoId_counter = 0;
+
+
 			
 			for(int i = 0; i < nMuon; i++){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
@@ -206,9 +247,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 			// if(MuontightId_counter < 1) continue;
 
-				
-			// vec_branch.at(i)->GetBranch()->GetEntry(evt);
-			vec_eff.at(nTrig)->Fill((vec_ltrig.at(nTrig)->GetValue()),l_var->GetValue());
+			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
+
+			
+			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
 		}
 	}
 	cout << endl;
