@@ -26,9 +26,9 @@ void Plot_Efficiency(){
 
 	TFile* file16 = TFile::Open((gPathname+"single_root_files/prod2016MC_reducedNANO_Triggers_DYinclusive.root").c_str());
 	TFile* file17 = TFile::Open((gPathname+"single_root_files/prod2017MC_reducedNANO_Triggers_DYinclusive.root").c_str());
-	TFile* f_wjets16 = TFile::Open((gPathname+"output/wjets16.root").c_str());
+	// TFile* f_wjets16 = TFile::Open((gPathname+"output/wjets16.root").c_str());
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
-	TFile* f_wjets18 = TFile::Open((gPathname+"output/wjets18.root").c_str());
+	// TFile* f_wjets18 = TFile::Open((gPathname+"output/wjets18.root").c_str());
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
