@@ -8,4 +8,5 @@
 *.pcm
 *.log
 *.sh
-*.pyc
+scripts/DO_hadd.pyc
+Fall17_94X_WJetsToLNu/
