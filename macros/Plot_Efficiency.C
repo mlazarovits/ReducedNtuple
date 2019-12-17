@@ -29,46 +29,38 @@ void Plot_Efficiency(){
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
 	// TTree* tree16 = (TTree*)file16->Get("Events");
 	
-	
-	//DY incl. - 2016
-	TriggerSet trigs16(file16);
-	trigs16.SetSampleName("DYJetstoLL 2016");
-	trigs16.AddTrigger("HLT_Ele27_WPTight_Gsf"); //isolated
-	trigs16.AddTrigger("HLT_Ele25_eta2p1_WPTight_Gsf"); 
-	// trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL");
-	// trigs16.AddTrigger("HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
-	// trigs16.AddTrigger("HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL");
-	trigs16.SetVar("Electron_pt");
-	trigs16.SetOutputName("DYJets16_AllTrigs_ElepT.root");
 
-	// effs = trigs16.Analyze();
+	//wjets incl. - 2017 muons
+	TriggerSet wjets17_mu(f_wjets17);
+	wjets17_mu.SetSampleName("WJetsToLNu 2017");
+	wjets17_mu.AddTrigger("HLT_IsoMu24");
+	wjets17_mu.AddTrigger("HLT_IsoMu27");
+	wjets17_mu.AddTrigger("HLT_OldMu100");
+	wjets17_mu.AddTrigger("HLT_TkMu100");
+	wjets17_mu.AddTrigger("HLT_Mu50");
+	wjets17_mu.AddTrigger("HLT_Mu55");
+	wjets17_mu.SetVar("Muon_pt");
+	wjets17_mu.SetOutputName("WJets17_AllTrigs_MupT_loose.root");
 
-	//DY incl. - 2017
-	TriggerSet dytrigs17(file17);
-	dytrigs17.SetSampleName("DYJetstoLL 2017");
-	dytrigs17.AddTrigger("HLT_IsoMu24");
-	dytrigs17.AddTrigger("HLT_Mu50");
-	dytrigs17.AddTrigger("HLT_Mu55");
-	dytrigs17.SetVar("Muon_pt");
-	dytrigs17.SetOutputName("DYJets17_AllTrigs_MupT.root");
-
-	//wjets incl. - 2017
-	TriggerSet wjets17_trigs(f_wjets17);
-	wjets17_trigs.SetSampleName("WJetsToLNu 2017");
-	wjets17_trigs.AddTrigger("HLT_IsoMu24");
-	wjets17_trigs.AddTrigger("HLT_Mu50");
-	wjets17_trigs.AddTrigger("HLT_Mu55");
-	wjets17_trigs.SetVar("Muon_pt");
-	wjets17_trigs.SetOutputName("WJets17_AllTrigs_MupT_loose.root");
-
-
-	string x_label = wjets17_trigs.GetVar();
-	string title = wjets17_trigs.GetSampleName();
-	effs = wjets17_trigs.Analyze();
+	wjets17_mu_effs = wjets17_mu.Analyze();
+	wjets17_mu.makePlots(wjets17_mu_effs);
 
 
 
-	wjets17_trigs.makePlots(effs);
+	//wjets incl. - 2017 electrons
+	// TriggerSet wjets17_ele(f_wjets17);
+	// wjets17_ele.SetSampleName("WJetsToLNu 2017");
+	// wjets17_ele.AddTrigger("HLT_IsoMu24");
+	// wjets17_ele.AddTrigger("HLT_IsoMu27");
+	// wjets17_ele.AddTrigger("HLT_OldMu100");
+	// wjets17_ele.AddTrigger("HLT_TkMu100");
+	// wjets17_ele.AddTrigger("HLT_Mu50");
+	// wjets17_ele.AddTrigger("HLT_Mu55");
+	// wjets17_ele.SetVar("Muon_pt");
+	// wjets17_ele.SetOutputName("WJets17_AllTrigs_ElepT_loose.root");
+
+	// wjets17_ele_effs = wjets17_ele.Analyze();
+	// wjets17_ele.makePlots(wjets17_ele_effs);
 
 
 
