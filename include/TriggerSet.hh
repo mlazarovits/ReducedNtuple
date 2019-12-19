@@ -187,10 +187,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 
-	TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
-	TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
-	TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
-	TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
+	//replace leaves with electron IDs
+	// TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
+	// TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
+	// TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
+	// TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
 
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
@@ -261,18 +262,18 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
-				int ElemediumId_counter = 0;
-				int EletightId_counter = 0;
-				int ElemedpromptId_counter = 0;
+				// int ElemediumId_counter = 0;
+				// int EletightId_counter = 0;
+				// int ElemedpromptId_counter = 0;
 
-
-				for(int i = 0; i < nElectron; i++){
-				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-				if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
-				if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
-				if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
-				else continue;	
-				}
+				//replace with electron IDs
+				// for(int i = 0; i < nElectron; i++){
+				// // cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+				// if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
+				// if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
+				// if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
+				// else continue;	
+				// }
 
 				// if(ElemediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(EletightId_counter < 1) continue; //at least 1 tightId muon
