@@ -266,7 +266,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int ElemedpromptId_counter = 0;
 
 
-				for(int i = 0; i < nMuon; i++){
+				for(int i = 0; i < nElectron; i++){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 				if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
 				if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
