@@ -67,37 +67,37 @@ void Plot_Efficiency(){
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE MUON//////////////////////////////////////////////////////////////////
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 muons
-	vector<TEfficiency*> wjets17_mu_effs;
-	TriggerSet wjets17_mu(f_wjets17);
-	wjets17_mu.SetSampleName("WJetsToLNu 2017 Tight ID");
-	wjets17_mu.AddTrigger("HLT_IsoMu24");
-	wjets17_mu.AddTrigger("HLT_IsoMu27");
-	wjets17_mu.AddTrigger("HLT_OldMu100");
-	wjets17_mu.AddTrigger("HLT_TkMu100");
-	wjets17_mu.AddTrigger("HLT_Mu50");
-	wjets17_mu.AddTrigger("HLT_Mu55");
-	wjets17_mu.SetVar("Muon_pt");
-	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_miniIso.root");
+	// vector<TEfficiency*> wjets17_mu_effs;
+	// TriggerSet wjets17_mu(f_wjets17);
+	// wjets17_mu.SetSampleName("WJetsToLNu 2017 Tight ID");
+	// wjets17_mu.AddTrigger("HLT_IsoMu24");
+	// wjets17_mu.AddTrigger("HLT_IsoMu27");
+	// wjets17_mu.AddTrigger("HLT_OldMu100");
+	// wjets17_mu.AddTrigger("HLT_TkMu100");
+	// wjets17_mu.AddTrigger("HLT_Mu50");
+	// wjets17_mu.AddTrigger("HLT_Mu55");
+	// wjets17_mu.SetVar("Muon_pt");
+	// wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_miniIsomed.root");
 
-	wjets17_mu_effs = wjets17_mu.Analyze();
-	wjets17_mu.makePlots(wjets17_mu_effs);
+	// wjets17_mu_effs = wjets17_mu.Analyze();
+	// wjets17_mu.makePlots(wjets17_mu_effs);
 
 
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
-// 	//wjets incl. - 2017 electrons
-// 	vector<TEfficiency*> wjets17_ele_effs;
-// 	TriggerSet wjets17_ele(f_wjets17);
-// 	wjets17_ele.SetSampleName("WJetsToLNu 2017 Loose ID");
-// 	wjets17_ele.AddTrigger("HLT_Ele32_WPTight_Gsf_L1DoubleEG"); //with HLT_Ele35_WPTight_Gsf_L1EGMT requirement
-// 	wjets17_ele.AddTrigger("HLT_Ele35_WPTight_Gsf");
-// 	wjets17_ele.AddTrigger("HLT_Photon200");
-// 	wjets17_ele.AddTrigger("HLT_Ele115_CaloIdVT_GsfTrkIdT");
-// 	wjets17_ele.AddTrigger("HLT_Ele50_CaloIdVT_GsfTrkIdT_PFJet165");
-// 	wjets17_ele.SetVar("Electron_pt");
-// 	wjets17_ele.SetOutputName("WJets17_AllTrigs_SingleEle_loose.root");
+	//wjets incl. - 2017 electrons
+	vector<TEfficiency*> wjets17_ele_effs;
+	TriggerSet wjets17_ele(f_wjets17);
+	wjets17_ele.SetSampleName("WJetsToLNu 2017 Loose ID");
+	wjets17_ele.AddTrigger("HLT_Ele32_WPTight_Gsf_L1DoubleEG"); //with HLT_Ele35_WPTight_Gsf_L1EGMT requirement
+	wjets17_ele.AddTrigger("HLT_Ele35_WPTight_Gsf");
+	wjets17_ele.AddTrigger("HLT_Photon200");
+	wjets17_ele.AddTrigger("HLT_Ele115_CaloIdVT_GsfTrkIdT");
+	wjets17_ele.AddTrigger("HLT_Ele50_CaloIdVT_GsfTrkIdT_PFJet165");
+	wjets17_ele.SetVar("Electron_pt");
+	wjets17_ele.SetOutputName("WJets17_AllTrigs_SingleEle_loose.root");
 
-// 	wjets17_ele_effs = wjets17_ele.Analyze();
-// 	wjets17_ele.makePlots(wjets17_ele_effs);
+	wjets17_ele_effs = wjets17_ele.Analyze();
+	wjets17_ele.makePlots(wjets17_ele_effs);
 
 
 

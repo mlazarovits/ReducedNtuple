@@ -234,7 +234,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int MuonmediumId_counter = 0;
 			int MuontightId_counter = 0;
 			int MuonminiIsoId_counter = 0;
-			int MuonmedpromptId_counter = 0;
 
 
 			
@@ -243,13 +242,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 				if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-				if(l_Muon_miniIsoId->GetValue(i) == true) MuonminiIsoId_counter += 1;
 				else continue;	
 			}
 
 			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 			// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
-			if(MuonminiIsoId_counter < 1) continue; //at least 1 miniIso muon
+
+			if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
