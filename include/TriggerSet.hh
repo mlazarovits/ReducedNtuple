@@ -180,10 +180,17 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
 	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
 	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
+	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
+
 	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
 	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
+
+	TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
+	TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
+	TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
+	TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
 
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
@@ -228,27 +235,52 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			//at least 1 muon
-			int nMuon = l_nMuon->GetValue();
-			if(nMuon < 1) continue; //at least 1 muon
-			int MuonmediumId_counter = 0;
-			int MuontightId_counter = 0;
-			int MuonminiIsoId_counter = 0;
+			if(m_var=="Muon_pt"){
+
+				int nMuon = l_nMuon->GetValue();
+				if(nMuon < 1) continue; //at least 1 muon
+				int MuonmediumId_counter = 0;
+				int MuontightId_counter = 0;
+				int MuonmedpromptId_counter = 0;
 
 
-			
-			for(int i = 0; i < nMuon; i++){
+				for(int i = 0; i < nMuon; i++){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 				if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 				else continue;	
+				}
+
+				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
+				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+
+				// if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
+			}
+			if(m_var=="Electron_pt"){
+
+				int nElectron = l_nElectron->GetValue();
+				if(nElectron < 1) continue; //at least 1 muon
+				int ElemediumId_counter = 0;
+				int EletightmId_counter = 0;
+				int ElemedpromptId_counter = 0;
+
+
+				for(int i = 0; i < nMuon; i++){
+				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+				if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
+				if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
+				if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
+				else continue;	
+				}
+
+				// if(ElemediumId_counter < 1) continue;  //at least 1 mediumId muon
+				// if(EletightId_counter < 1) continue; //at least 1 tightId muon
+
+				// if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
 			}
 
-			// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-			// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
-
-			if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
+			
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
