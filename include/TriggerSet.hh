@@ -262,7 +262,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
 				int ElemediumId_counter = 0;
-				int EletightmId_counter = 0;
+				int EletightId_counter = 0;
 				int ElemedpromptId_counter = 0;
 
 
