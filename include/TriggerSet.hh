@@ -177,8 +177,10 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
+	cout << m_var << endl;
 
 	if(strstr(m_var.c_str(),"Muon")){
+		cout << "point a" << endl;
 		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 
 		TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
@@ -188,6 +190,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	if(strstr(m_var.c_str(),"Electron")){
+		cout << "point b" << endl;
 	
 		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
 		//replace leaves with electron IDs
@@ -246,6 +249,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
+				cout << "point c" << endl;
 
 				int nMuon = l_nMuon->GetValue();
 				if(nMuon < 1) continue; //at least 1 muon
@@ -269,6 +273,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){
+				cout << "point d" << endl;
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
