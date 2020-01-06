@@ -177,38 +177,22 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
-	cout << "variable" << m_var << endl;
-
-	// if(strstr(m_var.c_str(),"Muon")){
-		cout << "point a" << endl;
-		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
-
-		TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
-		TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
-		TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
-		TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
-	// }
-
-	// if(strstr(m_var.c_str(),"Electron")){
-		cout << "point b" << endl;
 	
-		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
-		//replace leaves with electron IDs
-		TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
-		TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
-		TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
-		TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
-	// }
+	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
+	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
+	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
+	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
+	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 
-	// else{
-		// cout << "Invalid physics object specified" << endl;
-		// return vec_eff;
-	// }
-
+	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
+	TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
+	TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
+	TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
+	TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
+	
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 
-	
 	int nEntries;
 	if(l_var == NULL){
 		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
@@ -249,7 +233,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
-				cout << "point c" << endl;
 
 				int nMuon = l_nMuon->GetValue();
 				if(nMuon < 1) continue; //at least 1 muon
@@ -273,7 +256,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){
-				cout << "point d" << endl;
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
