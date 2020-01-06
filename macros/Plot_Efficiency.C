@@ -21,9 +21,9 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 
 	
 	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/";
-	TFile* f_wjets16 = NULL	//TFile::Open((gPathname+"output/wjets16.root").c_str());
+	TFile* f_wjets16 = NULL;	//TFile::Open((gPathname+"output/wjets16.root").c_str());
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
-	TFile* f_wjets18 = NULL	//TFile::Open((gPathname+"output/wjets18.root").c_str());
+	TFile* f_wjets18 = NULL;	//TFile::Open((gPathname+"output/wjets18.root").c_str());
 	
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
