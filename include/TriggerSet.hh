@@ -223,7 +223,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < nEntries; evt++){
+	for(int evt = 0; evt < 100000; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -252,7 +252,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
-				if(l_Muon_miniIsoId->GetValue() != 2) continue; //medium miniIsoId
+				// if(l_Muon_miniIsoId->GetValue() != 2) continue; //medium miniIsoId
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){
