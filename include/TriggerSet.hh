@@ -175,29 +175,37 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 }
 
 inline vector<TEfficiency*> TriggerSet::Analyze(){
+	vector<TEfficiency*> vec_eff;
+	vector<TLeaf*> vec_ltrig;
 
+	if(strstr(m_var,"Muon") == !NULL){
+		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 
-	// TBranch* b_var = m_tree->GetBranch(m_var.c_str());
-	// TBranch* b_weight = m_tree->GetBranch("Generator_weight");
-	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
-	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
+		TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
+		TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
+		TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
+		TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
+	}
 
-	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
-	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
-	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
-	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
+	if(strstr(m_var,"Electron") == !NULL){
+	
+		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
+		//replace leaves with electron IDs
+		TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
+		TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
+		TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
+		TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
+	}
 
-	//replace leaves with electron IDs
-	// TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
-	// TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
-	// TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
-	// TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
+	else{
+		cout << "Invalid physics object specified" << endl;
+		return vec_eff;
+	}
 
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
 
-	vector<TEfficiency*> vec_eff;
-	vector<TLeaf*> vec_ltrig;
+	
 	int nEntries;
 	if(l_var == NULL){
 		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
@@ -236,7 +244,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(m_var=="Muon_pt"){
+			//VARIABLE SELECTION - MUON
+			if(strstr(m_var,"Muon") == !NULL){
 
 				int nMuon = l_nMuon->GetValue();
 				if(nMuon < 1) continue; //at least 1 muon
@@ -246,19 +255,20 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 				for(int i = 0; i < nMuon; i++){
-				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-				if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-				if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-				if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-				else continue;	
+					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
+					if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+					if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+					else continue;	
 				}
 
 				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
-				// if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
+				if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
 			}
-			if(m_var=="Electron_pt"){
+			//VARIABLE SELECTION - ELECTRON
+			if(strstr(m_var,"Electron") == !NULL){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
