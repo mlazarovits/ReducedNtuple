@@ -178,7 +178,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 
-	if(strstr(m_var.c_str(),"Muon") = !NULL){
+	if(strstr(m_var.c_str(),"Muon")){
 		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 
 		TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
@@ -187,7 +187,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	}
 
-	if(strstr(m_var.c_str(),"Electron") = !NULL){
+	if(strstr(m_var.c_str(),"Electron")){
 	
 		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
 		//replace leaves with electron IDs
@@ -245,7 +245,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			//VARIABLE SELECTION - MUON
-			if(strstr(m_var.c_str(),"Muon") = !NULL){
+			if(strstr(m_var.c_str(),"Muon")){
 
 				int nMuon = l_nMuon->GetValue();
 				if(nMuon < 1) continue; //at least 1 muon
@@ -268,7 +268,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
 			}
 			//VARIABLE SELECTION - ELECTRON
-			if(strstr(m_var.c_str(),"Electron") = !NULL){
+			if(strstr(m_var.c_str(),"Electron")){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
