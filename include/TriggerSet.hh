@@ -252,7 +252,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
-				// if(l_Muon_miniIsoId->GetValue() != 2) continue; //medium miniIsoId
+				if(l_Muon_miniIsoId->GetValue() != 2) continue; //medium miniIsoId
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){

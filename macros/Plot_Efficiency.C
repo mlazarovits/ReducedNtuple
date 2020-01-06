@@ -44,7 +44,7 @@ if(sampleName=="wjets16" && physicsobj=="Muon"){
 }
 // ////////////////////////////////////WJETSTOLNU 2016 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 // 	//wjets incl. - 2016 electrons
-if(sampleName=="wjets16" && physicsobj=="Electron"){
+else if(sampleName=="wjets16" && physicsobj=="Electron"){
 	if(f_wjets16 == NULL) return;
 	vector<TEfficiency*> wjets16_ele_effs;
 	TriggerSet wjets16_ele(f_wjets16);
@@ -65,7 +65,7 @@ if(sampleName=="wjets16" && physicsobj=="Electron"){
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE MUON//////////////////////////////////////////////////////////////////
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 muons
-if(sampleName=="wjets17" && physicsobj=="Muon"){
+else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	if(f_wjets17 == NULL) return;
 
 	vector<TEfficiency*> wjets17_mu_effs;
@@ -86,7 +86,7 @@ if(sampleName=="wjets17" && physicsobj=="Muon"){
 
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 electrons
-if(sampleName=="wjets16" && physicsobj=="Electron"){
+else if(sampleName=="wjets16" && physicsobj=="Electron"){
 	if(f_wjets17 == NULL) return;
 
 	vector<TEfficiency*> wjets17_ele_effs;
@@ -108,7 +108,7 @@ if(sampleName=="wjets16" && physicsobj=="Electron"){
 // ////////////////////////////////////WJETSTOLNU 2018 SINGLE MUON//////////////////////////////////////////////////////////////////
 // ////////////////////////////////////WJETSTOLNU 2018 SINGLE MUON//////////////////////////////////////////////////////////////////
 // 	//wjets incl. - 2018 muons
-if(sampleName=="wjets18" && physicsobj=="Muon"){
+else if(sampleName=="wjets18" && physicsobj=="Muon"){
 	if(f_wjets18 == NULL) return;
 
 	vector<TEfficiency*> wjets18_mu_effs;
@@ -127,7 +127,7 @@ if(sampleName=="wjets18" && physicsobj=="Muon"){
 }
 // ////////////////////////////////////WJETSTOLNU 2018 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 // 	//wjets incl. - 2018 electrons
-if(sampleName=="wjets18" && physicsobj=="Electron"){
+else if(sampleName=="wjets18" && physicsobj=="Electron"){
 	if(f_wjets18 == NULL) return;
 
 	vector<TEfficiency*> wjets18_ele_effs;
