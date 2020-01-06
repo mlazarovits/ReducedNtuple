@@ -21,14 +21,14 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 
 	
 	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/";
-	// TFile* f_wjets16 = TFile::Open((gPathname+"output/wjets16.root").c_str());
+	TFile* f_wjets16 = NULL	//TFile::Open((gPathname+"output/wjets16.root").c_str());
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
-	// TFile* f_wjets18 = TFile::Open((gPathname+"output/wjets18.root").c_str());
-	// TTree* tree16 = (TTree*)file16->Get("Events");
+	TFile* f_wjets18 = NULL	//TFile::Open((gPathname+"output/wjets18.root").c_str());
 	
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
 if(sampleName=="wjets16" && physicsobj=="Muon"){
+	if(f_wjets16 == NULL) return;
 	vector<TEfficiency*> wjets16_mu_effs;
 	TriggerSet wjets16_mu(f_wjets16);
 	wjets16_mu.SetSampleName("WJetsToLNu 2016 Loose ID");
@@ -43,11 +43,12 @@ if(sampleName=="wjets16" && physicsobj=="Muon"){
 	wjets16_mu.makePlots(wjets16_mu_effs);
 }
 // ////////////////////////////////////WJETSTOLNU 2016 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
-// 	//wjets incl. - 2017 electrons
-if(sampleName=="wjets17" && physicsobj=="Electron"){
+// 	//wjets incl. - 2016 electrons
+if(sampleName=="wjets16" && physicsobj=="Electron"){
+	if(f_wjets16 == NULL) return;
 	vector<TEfficiency*> wjets16_ele_effs;
-	TriggerSet wjets17_ele(f_wjets16);
-	wjets16_ele.SetSampleName("WJetsToLNu 2017 Loose ID");
+	TriggerSet wjets16_ele(f_wjets16);
+	wjets16_ele.SetSampleName("WJetsToLNu 2016 Loose ID");
 	wjets16_ele.AddTrigger("HLT_Ele27_WPTight_Gsf");
 	wjets16_ele.AddTrigger("HLT_Photon175");
 	wjets16_ele.AddTrigger("HLT_Ele115_CaloIdVT_GsfTrkIdT");
@@ -65,6 +66,8 @@ if(sampleName=="wjets17" && physicsobj=="Electron"){
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 muons
 if(sampleName=="wjets17" && physicsobj=="Muon"){
+	if(f_wjets17 == NULL) return;
+
 	vector<TEfficiency*> wjets17_mu_effs;
 	TriggerSet wjets17_mu(f_wjets17);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
@@ -84,6 +87,8 @@ if(sampleName=="wjets17" && physicsobj=="Muon"){
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 electrons
 if(sampleName=="wjets16" && physicsobj=="Electron"){
+	if(f_wjets17 == NULL) return;
+
 	vector<TEfficiency*> wjets17_ele_effs;
 	TriggerSet wjets17_ele(f_wjets17);
 	wjets17_ele.SetSampleName("WJetsToLNu 2017 Loose ID");
@@ -104,6 +109,8 @@ if(sampleName=="wjets16" && physicsobj=="Electron"){
 // ////////////////////////////////////WJETSTOLNU 2018 SINGLE MUON//////////////////////////////////////////////////////////////////
 // 	//wjets incl. - 2018 muons
 if(sampleName=="wjets18" && physicsobj=="Muon"){
+	if(f_wjets18 == NULL) return;
+
 	vector<TEfficiency*> wjets18_mu_effs;
 	TriggerSet wjets18_mu(f_wjets18);
 	wjets18_mu.SetSampleName("WJetsToLNu 2018 Loose ID");
@@ -121,9 +128,11 @@ if(sampleName=="wjets18" && physicsobj=="Muon"){
 // ////////////////////////////////////WJETSTOLNU 2018 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 // 	//wjets incl. - 2018 electrons
 if(sampleName=="wjets18" && physicsobj=="Electron"){
+	if(f_wjets18 == NULL) return;
+
 	vector<TEfficiency*> wjets18_ele_effs;
 	TriggerSet wjets18_ele(f_wjets18);
-	wjets18_ele.SetSampleName("WJetsToLNu 2017 Loose ID");
+	wjets18_ele.SetSampleName("WJetsToLNu 2018 Loose ID");
 	wjets18_ele.AddTrigger("HLT_Ele32_WPTight_Gsf");
 	wjets18_ele.AddTrigger("HLT_Photon200");
 	wjets18_ele.AddTrigger("HLT_Ele115_CaloIdVT_GsfTrkIdT");

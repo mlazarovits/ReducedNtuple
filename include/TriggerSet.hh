@@ -178,7 +178,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 
-	if(strstr(m_var,"Muon") == !NULL){
+	if(strstr(m_var.c_str(),"Muon") == !NULL){
 		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 
 		TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
@@ -187,7 +187,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	}
 
-	if(strstr(m_var,"Electron") == !NULL){
+	if(strstr(m_var.c_str(),"Electron") == !NULL){
 	
 		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
 		//replace leaves with electron IDs
