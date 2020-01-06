@@ -249,7 +249,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					else continue;	
 				}
 
-				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
+				if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 
 				if(l_Muon_miniIsoId->GetValue() != 2) continue; //medium miniIsoId
