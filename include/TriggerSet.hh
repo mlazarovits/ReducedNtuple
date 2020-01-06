@@ -177,9 +177,9 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
-	cout << m_var << endl;
+	cout << "variable" << m_var << endl;
 
-	if(strstr(m_var.c_str(),"Muon")){
+	// if(strstr(m_var.c_str(),"Muon")){
 		cout << "point a" << endl;
 		TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
 
@@ -187,9 +187,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 		TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 		TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
-	}
+	// }
 
-	if(strstr(m_var.c_str(),"Electron")){
+	// if(strstr(m_var.c_str(),"Electron")){
 		cout << "point b" << endl;
 	
 		TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
@@ -198,7 +198,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
 		TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
 		TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
-	}
+	// }
 
 	else{
 		cout << "Invalid physics object specified" << endl;
