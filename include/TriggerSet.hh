@@ -222,7 +222,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			cout << m_triggers.at(i).c_str() << endl;
+			cout << m_triggers.at(nTrig).c_str() << endl;
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
 
