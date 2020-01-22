@@ -61,6 +61,8 @@ private:
 	
 	vector<string> m_filenames;
 
+	bool debug;
+
 	// prod2016MC_reducedNANO_Triggers m_Triggers_2016(NULL);
 	// prod2017MC_reducedNANO_Triggers m_Triggers_2017(NULL);
 	// prod2018MC_reducedNANO_Triggers m_Triggers_2018(NULL);
@@ -77,20 +79,8 @@ inline TriggerSet::TriggerSet(TFile* file){
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
 	}
+	debug = true;
 }
-
-
-// inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig16){
-// 	m_Triggers_2016 = trig16;
-// }
-
-// inline TriggerSet::TriggerSet(prod2017MC_reducedNANO_Triggers trig17){
-// 	m_Triggers_2017 = trig17;
-// }
-
-// inline TriggerSet::TriggerSet(prod2016MC_reducedNANO_Triggers trig18){
-// 	m_Triggers_2018 = trig18;
-// }
 
 
 
@@ -222,7 +212,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	nEntries = m_tree->GetEntries();
+	if(debug == true) nEntries = 100000;
+	else if (debug == false) nEntries = m_tree->GetEntries();
 	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
