@@ -17,7 +17,7 @@ using namespace std;
 
 class TriggerSet{
 public:
-	TriggerSet(TFile* file);
+	TriggerSet(TFile* file,i_debug=false);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig16);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig17);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig18);
