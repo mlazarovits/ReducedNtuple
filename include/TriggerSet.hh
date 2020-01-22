@@ -222,7 +222,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	    fflush(stdout);
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			cout << m_triggers.at(nTrig).c_str() << endl;
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
 
@@ -239,7 +238,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-					if(l_Muon_miniIsoId->GetValue(i) == 3) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+					if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 					// else continue;	
 				}
 
