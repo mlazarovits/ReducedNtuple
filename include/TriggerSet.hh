@@ -226,7 +226,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_var.c_str(),"Muon")){
 
 				int nMuon = l_nMuon->GetValue();
-				if(nMuon < 1) continue; //at least 1 muon
+				if(nMuon != 1) continue; //exactly 1 muon
 				int MuonmediumId_counter = 0;
 				int MuontightId_counter = 0;
 				int MuonmedpromptId_counter = 0;
@@ -238,19 +238,15 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-					if(l_Muon_miniIsoId->GetValue(i) == 4) cout << "here!" << endl;
-						// muonminiIso_counter += 1;
-					else continue;	
+					if(l_Muon_miniIsoId->GetValue(i) == 3) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+					// else continue;	
 				}
 
 				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
-				// if(muonminiIso_counter < 1) continue;
+				if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
 
-				cout << "Muon miniIso ID: " << l_Muon_miniIsoId->GetValue() << endl;
-				cout << "\n" << endl;
-
-				// if(l_Muon_miniIsoId->GetValue() != 4) continue; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+				
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){
