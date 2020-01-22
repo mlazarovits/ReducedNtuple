@@ -239,20 +239,23 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int MuonmediumId_counter = 0;
 				int MuontightId_counter = 0;
 				int MuonmedpromptId_counter = 0;
+				int muonminiIso_counter = 0;
 
 
 				for(int i = 0; i < nMuon; i++){
 					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-					if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-					if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+					if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1;
 					else continue;	
 				}
 
 				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+				if(muonminiIso_counter < 1) continue;
 
-				if(l_Muon_miniIsoId->GetValue() != 4) continue; //medium miniIsoId
+				// if(l_Muon_miniIsoId->GetValue() != 4) continue; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 			}
 			//VARIABLE SELECTION - ELECTRON
 			if(strstr(m_var.c_str(),"Electron")){
