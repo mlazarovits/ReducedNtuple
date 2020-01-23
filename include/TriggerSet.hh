@@ -242,8 +242,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					// else continue;	
 				}
 
-				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
-				if(MuontightId_counter < 1) continue; //at least 1 tightId muon
+				if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
+				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 					if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
 				}	
