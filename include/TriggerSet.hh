@@ -214,7 +214,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
-	for(int evt = 0; evt < nEntries; evt++){
+	for(int evt = 0; evt < nEntries/10; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
