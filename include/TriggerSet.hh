@@ -238,11 +238,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
 					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-					if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+					if(l_Muon_miniIsoId->GetValue(i) == 2) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 					// else continue;	
 				}
 
-				// if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
+				if(MuonmediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(MuontightId_counter < 1) continue; //at least 1 tightId muon
 				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 					if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
