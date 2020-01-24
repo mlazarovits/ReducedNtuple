@@ -190,21 +190,24 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
-	Double_t effbins[71];
+	Double_t effbins[61];
 	effbins[0] = 0.0;
-	for(int i = 1; i < 50; i++){
+	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
+		cout << effbins[i] << endl;
 	}
-	for(int i = 50; i < 72; i++){
+	for(int i = 51; i < 62; i++){
 		effbins[i] = effbins[i-1] + 10.0;
+		cout << effbins[i] << endl;
 	}
+
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),70,effbins);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
 
 		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),100,0,200);
 		
