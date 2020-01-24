@@ -70,7 +70,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 
 	vector<TEfficiency*> wjets17_mu_effs;
 	TriggerSet wjets17_mu(f_wjets17);
-	wjets17_mu.SetSampleName("WJetsToLNu 2017 Medium ID");
+	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
 	wjets17_mu.AddTrigger("HLT_IsoMu24");
 	wjets17_mu.AddTrigger("HLT_IsoMu27");
 	wjets17_mu.AddTrigger("HLT_OldMu100");
@@ -78,7 +78,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	wjets17_mu.AddTrigger("HLT_Mu50");
 	wjets17_mu.AddTrigger("HLT_Mu55");
 	wjets17_mu.SetVar("Muon_pt");
-	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_med_miniIsoVeryTight.root");
+	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_pfRelIso03.root");
 
 	wjets17_mu_effs = wjets17_mu.Analyze();
 	wjets17_mu.makePlots(wjets17_mu_effs);
