@@ -190,14 +190,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
-	Double_t effbins[56];
+	Double_t effbins[61];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
 		// cout << effbins[i] << endl;
 	}
-	for(int i = 51; i < 57; i++){
-		effbins[i] = effbins[i-1] + 20.0;
+	for(int i = 51; i < 62; i++){
+		effbins[i] = effbins[i-1] + 10.0;
 		// cout << effbins[i] << endl;
 	}
 
