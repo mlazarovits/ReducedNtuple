@@ -210,7 +210,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string y_label = ";#epsilon";
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
 
-		if(i = 0 || i = 1){
+		if(i == 0 || i == 1){
 			TEfficiency* eff = new TEfficiency((m_triggers.at(i)+" w/ iso").c_str(),(m_triggers.at(i)+" w/ iso").c_str(),60,effbins);
 		}
 		//scan for trigger ORs and ANDs
@@ -277,6 +277,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int ElemediumId_counter = 0;
 				int EletightId_counter = 0;
 				int ElemedpromptId_counter = 0;
+				int ElepfRelIso03_counter = 0;
 
 				//replace with electron IDs
 				for(int i = 0; i < nElectron; i++){
@@ -284,7 +285,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
 					if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
 					if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
-					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
+					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
 				}
 
 				// if(ElemediumId_counter < 1) continue;  //at least 1 mediumId muon
