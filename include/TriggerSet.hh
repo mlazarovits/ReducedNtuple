@@ -180,6 +180,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
 	TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
 	TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
+	TLeaf* l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
 	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
@@ -209,8 +210,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string y_label = ";#epsilon";
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
 
-		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),100,0,200);
-		
+		if(i = 0 || i = 1){
+			TEfficiency* eff = new TEfficiency((m_triggers.at(i)+" w/ iso").c_str(),(m_triggers.at(i)+" w/ iso").c_str(),60,effbins);
+		}
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
 	
@@ -272,18 +274,18 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron < 1) continue; //at least 1 muon
-				// int ElemediumId_counter = 0;
-				// int EletightId_counter = 0;
-				// int ElemedpromptId_counter = 0;
+				int ElemediumId_counter = 0;
+				int EletightId_counter = 0;
+				int ElemedpromptId_counter = 0;
 
 				//replace with electron IDs
-				// for(int i = 0; i < nElectron; i++){
-				// // cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-				// if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
-				// if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
-				// if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
-				// else continue;	
-				// }
+				for(int i = 0; i < nElectron; i++){
+				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+					if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
+					if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
+					if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
+					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
+				}
 
 				// if(ElemediumId_counter < 1) continue;  //at least 1 mediumId muon
 				// if(EletightId_counter < 1) continue; //at least 1 tightId muon
