@@ -190,12 +190,23 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
+	Double_t effbins[71];
+	effbins[0] = 0.0;
+	for(int i = 1; i < 50; i++){
+		effbins[i] = effbins[i-1] + 2.0;
+	}
+	for(int i = 50; i < 72; i++){
+		effbins[i] = effbins[i-1] + 10.0;
+	}
+
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),100,0,200);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),70,effbins);
+
+		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),100,0,200);
 		
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
@@ -218,7 +229,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	for(int evt = 0; evt < nEntries/10; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
-			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
+			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries/10);
 		}
 	    fflush(stdout);
 
