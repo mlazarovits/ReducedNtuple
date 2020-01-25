@@ -174,12 +174,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	TLeaf* l_Muon_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
+	TLeaf* l_Muon_minipfRelIso03_all = m_tree->GetLeaf("Muon_minipfRelIso_all");
 
 	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
-	TLeaf* l_Electron_mediumId = m_tree->GetLeaf("Electron_mediumId");
-	TLeaf* l_Electron_mediumPromptId = m_tree->GetLeaf("Electron_mediumPromptId");
-	TLeaf* l_Electron_tightId = m_tree->GetLeaf("Electron_tightId");
-	TLeaf* l_Electron_miniIsoId = m_tree->GetLeaf("Electron_miniIsoId");
 	TLeaf* l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	
 	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
@@ -246,6 +243,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int MuonmedpromptId_counter = 0;
 				int muonminiIso_counter = 0;
 				int muonpfRelIso03_counter = 0;
+				int muonminipfRelIso_counter = 0;
 
 
 				for(int i = 0; i < nMuon; i++){
@@ -255,7 +253,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 					// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 					if(l_Muon_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
-					// else continue;	
+					if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
+\					// else continue;	
 				}
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
@@ -263,6 +262,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 					if(muonpfRelIso03_counter != 1) continue;
 					// if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
+				}
+				else if(nTrig == 2 || nTrig == 3){
+					if(muonminipfRelIso_counter != 1) continue;
 				}	
 				
 			}
@@ -370,7 +372,8 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
 		else{
-
+			gr_effs[i]->SetMarkerColor(kCyan-7);
+			gr_effs[i]->SetLineColor(kCyan-7);
 		}
 		// gr_effs[i]->Draw("same");
 		mg->Add(gr_effs[i]);
