@@ -210,9 +210,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string y_label = ";#epsilon";
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
 
-		if(i == 0 || i == 1){
-			TEfficiency* eff = new TEfficiency((m_triggers.at(i)+" w/ iso").c_str(),(m_triggers.at(i)+" w/ iso").c_str(),60,effbins);
-		}
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
 	
@@ -273,7 +270,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_var.c_str(),"Electron")){
 
 				int nElectron = l_nElectron->GetValue();
-				if(nElectron < 1) continue; //at least 1 muon
+				if(nElectron != 1) continue; //at least 1 muon
 				int ElemediumId_counter = 0;
 				int EletightId_counter = 0;
 				int ElemedpromptId_counter = 0;
@@ -288,10 +285,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
 				}
 
-				// if(ElemediumId_counter < 1) continue;  //at least 1 mediumId muon
-				// if(EletightId_counter < 1) continue; //at least 1 tightId muon
+				// if(ElemediumId_counter != 1) continue;  //at least 1 mediumId ele
+				// if(EletightId_counter != 1) continue; //at least 1 tightId ele
 
-				// if(l_Muon_miniIsoId != 2) continue; //medium miniIsoId
 			}
 
 			
