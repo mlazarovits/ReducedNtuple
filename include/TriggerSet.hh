@@ -174,7 +174,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	TLeaf* l_Muon_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
-	TLeaf* l_Muon_minipfRelIso03_all = m_tree->GetLeaf("Muon_minipfRelIso_all");
+	TLeaf* l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_minipfRelIso_all");
 
 	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
 	TLeaf* l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
@@ -254,7 +254,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 					if(l_Muon_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
 					if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
-\					// else continue;	
+					// else continue;	
 				}
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
@@ -281,14 +281,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				//replace with electron IDs
 				for(int i = 0; i < nElectron; i++){
 				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-					if(l_Electron_mediumId->GetValue(i) == true) ElemediumId_counter += 1;
-					if(l_Electron_tightId->GetValue(i) == true) EletightId_counter += 1;
-					if(l_Electron_mediumPromptId->GetValue(i) == true) ElemedpromptId_counter += 1;
 					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
 				}
 
-				// if(ElemediumId_counter != 1) continue;  //at least 1 mediumId ele
-				// if(EletightId_counter != 1) continue; //at least 1 tightId ele
+				// if(ElepfRelIso03_counter != 1) continue;  //at least 1 pfrel ele
 
 			}
 
