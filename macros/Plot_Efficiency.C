@@ -90,7 +90,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 
 ////////////////////////////////////WJETSTOLNU 2017 SINGLE ELECTRON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2017 electrons
-else if(sampleName=="wjets16" && physicsobj=="Electron"){
+else if(sampleName=="wjets17" && physicsobj=="Electron"){
 	if(f_wjets17 == NULL) return;
 
 	vector<TEfficiency*> wjets17_ele_effs;
