@@ -246,7 +246,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int muonpfRelIso03_counter = 0;
 				int muonminipfRelIso_counter = 0;
 
-				cout << nMuon << endl;
 				for(int i = 0; i < nMuon; i++){
 					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
