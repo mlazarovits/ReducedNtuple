@@ -189,13 +189,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
-	Double_t effbins[61];
+	Double_t effbins[56];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
 		// cout << effbins[i] << endl;
 	}
-	for(int i = 51; i < 62; i++){
+	for(int i = 51; i < 57; i++){
 		effbins[i] = effbins[i-1] + 10.0;
 		// cout << effbins[i] << endl;
 	}
@@ -206,7 +206,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),55,effbins);
 
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
@@ -260,15 +260,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
+				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 					// if(muonpfRelIso03_counter != 1) continue;
 					if(muonminipfRelIso_counter != 1){
 						continue; //exactly 1 miniIsoId muon
 					}
-					// else{
-					// 	cout << "# passed: " << muonminiIso_counter << endl;
-					// }
-				// }
+					
+				}
 
 				
 				
@@ -348,7 +346,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chop = gr_effs.size()/2;
+	Int_t chop = gr_effs.size();
 
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
