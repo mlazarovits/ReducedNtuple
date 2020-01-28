@@ -87,7 +87,7 @@ inline TriggerSet::TriggerSet(TFile* file,bool i_debug){
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
 	}
-	i_debug = debug;
+	debug = i_debug;
 	if(debug == false) cout << "false" << endl;
 	else if(debug == true) cout << 'true' << endl;
 }
