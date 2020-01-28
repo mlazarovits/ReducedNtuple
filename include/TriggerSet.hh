@@ -258,13 +258,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
+				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 					// if(muonpfRelIso03_counter != 1) continue;
 					if(muonminiIso_counter != 1){
 						cout << "here" << endl;
 						continue; //exactly 1 miniIsoId muon
 					}
-				}
+				// }
 
 				
 				

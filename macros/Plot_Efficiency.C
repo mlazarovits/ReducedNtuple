@@ -74,8 +74,8 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	wjets17_mu.AddTrigger("HLT_IsoMu24");
 	wjets17_mu.AddTrigger("HLT_IsoMu27");
 
-	wjets17_mu.AddTrigger("HLT_IsoMu24");
-	wjets17_mu.AddTrigger("HLT_IsoMu27");
+	// wjets17_mu.AddTrigger("HLT_IsoMu24");
+	// wjets17_mu.AddTrigger("HLT_IsoMu27");
 
 
 
