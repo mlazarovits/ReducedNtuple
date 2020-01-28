@@ -71,7 +71,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	bool debug = true;
 
 	vector<TEfficiency*> wjets17_mu_effs;
-	TriggerSet wjets17_mu(f_wjets17, i_debug=debug);
+	TriggerSet wjets17_mu(f_wjets17, true);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
 	wjets17_mu.AddTrigger("HLT_IsoMu24");
 	wjets17_mu.AddTrigger("HLT_IsoMu27");
