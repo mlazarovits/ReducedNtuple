@@ -81,8 +81,6 @@ inline TriggerSet::TriggerSet(TFile* file,bool i_debug=false){
 		cout << "Error: No tree found" << endl;
 	}
 	debug = i_debug;
-	if(debug == false) cout << "false" << endl;
-	else if(debug == true) cout << "true" << endl;
 }
 
 
@@ -267,7 +265,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 						continue; //exactly 1 miniIsoId muon
 					}
 					else{
-						cout << "passed" << endl;
+						cout << "# passed: " << muonminiIso_counter << endl;
 					}
 				// }
 
