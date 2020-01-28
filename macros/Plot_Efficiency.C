@@ -68,8 +68,6 @@ else if(sampleName=="wjets16" && physicsobj=="Electron"){
 else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	if(f_wjets17 == NULL) return;
 
-	bool debug = true;
-
 	vector<TEfficiency*> wjets17_mu_effs;
 	TriggerSet wjets17_mu(f_wjets17, true);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
