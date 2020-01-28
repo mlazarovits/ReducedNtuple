@@ -17,8 +17,8 @@ using namespace std;
 
 class TriggerSet{
 public:
-	TriggerSet(TFile* file);
-	TriggerSet(TFile* file, bool i_debug);
+	
+	TriggerSet(TFile* file, bool i_debug=false);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig16);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig17);
 	// TriggerSet(prod2016MC_reducedNANO_Triggers trig18);
@@ -75,21 +75,14 @@ private:
 #endif
 // #define 
 
-inline TriggerSet::TriggerSet(TFile* file){
-	m_tree = (TTree*)file->Get("Events");
-	if(m_tree == NULL){
-		cout << "Error: No tree found" << endl;
-	}
-}
-
-inline TriggerSet::TriggerSet(TFile* file,bool i_debug){
+inline TriggerSet::TriggerSet(TFile* file,bool i_debug=false){
 	m_tree = (TTree*)file->Get("Events");
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
 	}
 	debug = i_debug;
 	if(debug == false) cout << "false" << endl;
-	else if(debug == true) cout << 'true' << endl;
+	else if(debug == true) cout << "true" << endl;
 }
 
 
