@@ -257,6 +257,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 				}
 
+				cout << muonminiIso_counter << endl;
+
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
 				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
@@ -264,9 +266,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(muonminiIso_counter != 1){
 						continue; //exactly 1 miniIsoId muon
 					}
-					else{
-						cout << "# passed: " << muonminiIso_counter << endl;
-					}
+					// else{
+					// 	cout << "# passed: " << muonminiIso_counter << endl;
+					// }
 				// }
 
 				
