@@ -263,6 +263,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					if(muonminiIso_counter != 1){
 						continue; //exactly 1 miniIsoId muon
 					}
+					else{
+						cout << "passed" << endl;
+					}
 				// }
 
 				
