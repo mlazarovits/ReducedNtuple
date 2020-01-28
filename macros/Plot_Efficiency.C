@@ -84,7 +84,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	// wjets17_mu.AddTrigger("HLT_Mu50");
 	// wjets17_mu.AddTrigger("HLT_Mu55");
 	wjets17_mu.SetVar("Muon_pt");
-	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_COMPpfRelIso03.root");
+	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_COMPminipfRelIso03.root");
 
 	wjets17_mu_effs = wjets17_mu.Analyze();
 	wjets17_mu.makePlots(wjets17_mu_effs);

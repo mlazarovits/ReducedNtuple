@@ -173,7 +173,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
-	TLeaf* l_Muon_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
+	// TLeaf* l_Muon_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	TLeaf* l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
 
 	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
@@ -252,15 +252,15 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
 					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 					// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
-					if(l_Muon_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
-					// if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
+					// if(l_Muon_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
+					if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 				}
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
 				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
-					if(muonpfRelIso03_counter != 1) continue;
-					// if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
+					// if(muonpfRelIso03_counter != 1) continue;
+					if(muonminiIso_counter != 1) continue; //exactly 1 miniIsoId muon
 				}
 				
 				
