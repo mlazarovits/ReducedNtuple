@@ -74,7 +74,7 @@ private:
 #endif
 // #define 
 
-inline TriggerSet::TriggerSet(TFile* file,bool i_debug=false){
+inline TriggerSet::TriggerSet(TFile* file,bool i_debug){
 	m_tree = (TTree*)file->Get("Events");
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
