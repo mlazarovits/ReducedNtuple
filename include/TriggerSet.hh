@@ -272,7 +272,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	//set bins of TEff object
-	Int_t nBins= 60;
+	Int_t nBins= 70;
 	Double_t effbins[nBins+1];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
