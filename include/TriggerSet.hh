@@ -314,53 +314,23 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	    fflush(stdout);
 
+
+	    if(strstr(m_var.c_str(),"Muon")){
 	    int nMuon = l_nMuon->GetValue();
 		if(nMuon != 2) continue; //exactly x muon
 
 		vector<float> muonSelections = muonSelection(nMuon);
 		int NmuonSelections = muonSelections.size();
-		
+
 		cout << "Event # " << evt << endl;
 		cout << "0 mu pt:" << l_var->GetValue(0) << endl;
 		cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
-
-
-		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			//VARIABLE SELECTION - MUON
-			if(strstr(m_var.c_str(),"Muon")){
-
-				// int nMuon = l_nMuon->GetValue();
-				// if(nMuon != 2) continue; //exactly x muon
-				// int MuonmediumId_counter = 0;
-				// int MuontightId_counter = 0;
-				// int MuonmedpromptId_counter = 0;
-				// int muonminiIso_counter = 0;
-				// int muonminipfRelIso_counter = 0;
-				// float muon_pt;
-
-
-				
-				
-
-
-				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
-				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
-				// if(muonpfRelIso03_counter != 1) continue;
-				// if(muonSelections[NmuonSelections-1] != 1){
-				// 	continue; 
-				// }
-
-				if(muonSelections.at(NmuonSelections-1) < 200){
-					continue;
-				}
-				
-				
-
-				
+		if(muonSelections.at(NmuonSelections-1) < 200){
+				continue;
 			}
-			//VARIABLE SELECTION - ELECTRON
-			if(strstr(m_var.c_str(),"Electron")){
+		}
+
+		if(strstr(m_var.c_str(),"Electron")){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron != 1) continue; //at least 1 muon
@@ -378,11 +348,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			}
 
-
-
+		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
-
-			
+			cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
 		}
 	}
