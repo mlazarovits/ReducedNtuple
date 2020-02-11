@@ -267,13 +267,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	//set bins of TEff object
-	Double_t effbins[56];
+	Double_t effbins[60];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
 		cout << effbins[i] << endl;
 	}
-	for(int i = 51; i < 57; i++){
+	for(int i = 51; i < 61; i++){
 		effbins[i] = effbins[i-1] + 10.0;
 		cout << effbins[i] << endl;
 	}
@@ -333,9 +333,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
 				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 				// if(muonpfRelIso03_counter != 1) continue;
-				if(muonSelections[NmuonSelections-1] != 1){
-					continue; 
-				}
+				// if(muonSelections[NmuonSelections-1] != 1){
+				// 	continue; 
+				// }
 
 				cout << "leading muon_pt: " << muonSelections[NmuonSelections] << endl;
 				if(muonSelections[NmuonSelections] < 200){
