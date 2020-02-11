@@ -165,6 +165,38 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	return vec_trig;
 }
 
+inline void TriggerSet::AnalyzeMuons(TLeaf* l_nMuon){
+	int nMuon = l_nMuon->GetValue();
+	if(nMuon != 1) continue; //exactly 1 muon
+	int MuonmediumId_counter = 0;
+	int MuontightId_counter = 0;
+	int MuonmedpromptId_counter = 0;
+	int muonminiIso_counter = 0;
+	int muonpfRelIso03_counter = 0;
+	int muonminipfRelIso_counter = 0;
+
+	for(int i = 0; i < nMuon; i++){
+		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+		if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
+		else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+		else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+		// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
+	}
+
+	// cout << l_Muon_minipfRelIso_all->GetValue() << endl;
+
+	// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
+	// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
+	if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
+		// if(muonpfRelIso03_counter != 1) continue;
+		if(muonminipfRelIso_counter != 1){
+			continue; //exactly 1 miniIsoId muon
+		}
+		
+	}
+}
+
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
@@ -174,7 +206,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
-	// TLeaf* l_Muon_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	TLeaf* l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
 
 	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
@@ -189,6 +220,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
+	//set bins of TEff object
 	Double_t effbins[56];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
@@ -224,7 +256,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E6;
+	if(debug == true) nEntries = 1E1;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	for(int evt = 0; evt < nEntries/10; evt++){
 		m_tree->GetEntry(evt);
@@ -237,36 +269,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
 
-				int nMuon = l_nMuon->GetValue();
-				if(nMuon != 1) continue; //exactly 1 muon
-				int MuonmediumId_counter = 0;
-				int MuontightId_counter = 0;
-				int MuonmedpromptId_counter = 0;
-				int muonminiIso_counter = 0;
-				int muonpfRelIso03_counter = 0;
-				int muonminipfRelIso_counter = 0;
-
-				for(int i = 0; i < nMuon; i++){
-					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-					if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-					else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-					else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-					// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
-					// if(l_Muon_pfRelIso03_all->GetValue(i) < 0.1) muonpfRelIso03_counter += 1;
-					if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
-				}
-
-				// cout << l_Muon_minipfRelIso_all->GetValue() << endl;
-
-				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
-				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
-					// if(muonpfRelIso03_counter != 1) continue;
-					if(muonminipfRelIso_counter != 1){
-						continue; //exactly 1 miniIsoId muon
-					}
-					
-				}
+				AnalyzeMuons();
 
 				
 				
@@ -412,12 +415,18 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
 	cv->Update();
 
-	TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
+	if(!debug){
+		TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
 
-	TFile* file = new TFile(filename,"RECREATE");
-	cout << "file: " << filename << " created" << endl;
-	file->cd();
-	cv->Write();
+		TFile* file = new TFile(filename,"RECREATE");
+		cout << "file: " << filename << " created" << endl;
+		file->cd();
+		cv->Write();
+	}
+	else{
+		return;
+	}
+	
 
 
 
