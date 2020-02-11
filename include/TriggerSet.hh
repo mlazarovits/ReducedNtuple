@@ -51,11 +51,26 @@ public:
 
 
 private:
+	void AnalyzeMuons();
+
 	string m_samplename;
 	string m_trigname;
 	string m_outname;
 	TTree* m_tree;
 	string m_var;
+
+	TLeaf* l_nMuon;
+	TLeaf* l_Muon_mediumId;
+	TLeaf* l_Muon_mediumPromptId;
+	TLeaf* l_Muon_tightId;
+	TLeaf* l_Muon_miniIsoId;
+	TLeaf* l_Muon_minipfRelIso_all;
+
+	TLeaf* l_nElectron;
+	TLeaf* l_Electron_pfRelIso03_all;
+	
+	TLeaf* l_var;
+	TLeaf* l_weight;
 
 	// TChain* m_chain;
 	vector<string> m_triggers;
@@ -165,7 +180,7 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	return vec_trig;
 }
 
-inline void TriggerSet::AnalyzeMuons(TLeaf* l_nMuon){
+inline void TriggerSet::AnalyzeMuons(){
 	int nMuon = l_nMuon->GetValue();
 	if(nMuon != 1) continue; //exactly 1 muon
 	int MuonmediumId_counter = 0;
@@ -201,18 +216,18 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 	
-	TLeaf* l_nMuon = m_tree->GetLeaf("nMuon");
-	TLeaf* l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
-	TLeaf* l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
-	TLeaf* l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
-	TLeaf* l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
-	TLeaf* l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
+	l_nMuon = m_tree->GetLeaf("nMuon");
+	l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
+	l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
+	l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
+	l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
+	l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
 
-	TLeaf* l_nElectron = m_tree->GetLeaf("nElectron");
-	TLeaf* l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
+	l_nElectron = m_tree->GetLeaf("nElectron");
+	l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	
-	TLeaf* l_var = m_tree->GetLeaf(m_var.c_str());
-	TLeaf* l_weight = m_tree->GetLeaf("Generator_weight");
+	l_var = m_tree->GetLeaf(m_var.c_str());
+	l_weight = m_tree->GetLeaf("Generator_weight");
 
 	int nEntries;
 	if(l_var == NULL){
