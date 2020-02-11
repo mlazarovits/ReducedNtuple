@@ -368,15 +368,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 
-			if(strstr(m_var.c_str()),"Muon_eta"){
-				TLeaf* l_pt = m_tree->GetLeaf("Muon_pt");
-
-			}
-
-
-			if(strstr(m_var.c_str()),"Electron_eta"){
-				TLeaf* l_pt = m_tree->GetLeaf("Electron_pt");
-			}
+			
 
 			
 
