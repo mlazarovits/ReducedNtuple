@@ -308,7 +308,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E6;
+	if(debug == true) nEntries = 1E7;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 	for(int evt = 0; evt < nEntries/10; evt++){
