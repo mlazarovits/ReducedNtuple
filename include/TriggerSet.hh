@@ -327,7 +327,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				vector<float> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
-				cout << l_var->GetValue() << endl;
+				cout << l_var->GetValue(0) << endl;
 
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
