@@ -277,7 +277,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		effbins[i] = effbins[i-1] + 10.0;
 		cout << effbins[i] << endl;
 	}
-
+cout << "point b" << endl;
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
