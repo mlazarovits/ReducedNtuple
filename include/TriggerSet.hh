@@ -358,7 +358,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// int ElemedpromptId_counter = 0;
 				// int ElepfRelIso03_counter = 0;
 
-				vector<int> eleSelections = electronSelection(nElectron);
+				vector<float> eleSelections = electronSelection(nElectron);
 				int NeleSelections = eleSelections.size();
 
 			
