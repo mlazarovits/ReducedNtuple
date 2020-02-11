@@ -329,6 +329,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				vector<float> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
+				cout << "Event # " << evt << endl;
 				cout << "0 mu pt:" << l_var->GetValue(0) << endl;
 
 
