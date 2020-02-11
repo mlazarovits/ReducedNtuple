@@ -190,7 +190,7 @@ inline std::vector<int> TriggerSet::muonSelection(int nMuon){
 	int muonminiIso_counter = 0;
 	int muonminipfRelIso_counter = 0;
 	float mu_pt = -9999;
-	bool eta = strstr(m_var.c_str()),"eta";
+	bool eta = strstr(m_var.c_str(),"eta");
 	// if(eta){
 		TLeaf* l_mupt = m_tree->GetLeaf("Muon_pt");
 		
