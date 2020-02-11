@@ -51,8 +51,8 @@ public:
 
 
 private:
-	std::vector<int> muonSelection(int nMuon);
-	std::vector<int> electronSelection(int nElectron);
+	std::vector<float> muonSelection(int nMuon);
+	std::vector<float> electronSelection(int nElectron);
 
 	string m_samplename;
 	string m_trigname;
@@ -181,14 +181,14 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	return vec_trig;
 }
 
-inline std::vector<int> TriggerSet::muonSelection(int nMuon){
-	std::vector<int> muselections;
+inline std::vector<float> TriggerSet::muonSelection(int nMuon){
+	std::vector<float> muselections;
 
-	int MuonmediumId_counter = 0;
-	int MuontightId_counter = 0;
-	int MuonmedpromptId_counter = 0;
-	int muonminiIso_counter = 0;
-	int muonminipfRelIso_counter = 0;
+	float MuonmediumId_counter = 0;
+	float MuontightId_counter = 0;
+	float MuonmedpromptId_counter = 0;
+	float muonminiIso_counter = 0;
+	float muonminipfRelIso_counter = 0;
 	float mu_pt = -9999;
 	bool eta = strstr(m_var.c_str(),"eta");
 	// if(eta){
@@ -220,13 +220,13 @@ inline std::vector<int> TriggerSet::muonSelection(int nMuon){
 
 }
 
-inline std::vector<int> TriggerSet::electronSelection(int nElectron){
-	std::vector<int> eleselections;
+inline std::vector<float> TriggerSet::electronSelection(int nElectron){
+	std::vector<float> eleselections;
 
-	int ElemediumId_counter = 0;
-	int EletightId_counter = 0;
-	int ElemedpromptId_counter = 0;
-	int ElepfRelIso03_counter = 0;
+	float ElemediumId_counter = 0;
+	float EletightId_counter = 0;
+	float ElemedpromptId_counter = 0;
+	float ElepfRelIso03_counter = 0;
 
 
 	//replace with electron IDs
@@ -316,7 +316,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_var.c_str(),"Muon")){
 
 				int nMuon = l_nMuon->GetValue();
-				if(nMuon != 1) continue; //exactly 1 muon
+				if(nMuon != 2) continue; //exactly x muon
 				// int MuonmediumId_counter = 0;
 				// int MuontightId_counter = 0;
 				// int MuonmedpromptId_counter = 0;
@@ -325,7 +325,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// float muon_pt;
 
 
-				vector<int> muonSelections = muonSelection(nMuon);
+				vector<float> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
 				cout << l_var->GetValue() << endl;
 
