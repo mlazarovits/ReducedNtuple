@@ -307,7 +307,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					// selections.push_back(MuonmedpromptId_counter);
 					// selections.push_back(muonminiIso_counter);
 					// selections.push_back(muonminipfRelIso_counter); last
-				int NmuonSelections = muonSelections.size()
+				int NmuonSelections = muonSelections.size();
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
 				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
