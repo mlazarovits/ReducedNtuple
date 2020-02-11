@@ -306,6 +306,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
+	
 	for(int evt = 0; evt < nEntries/10; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -313,12 +314,19 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	    fflush(stdout);
 
+	    int nMuon = l_nMuon->GetValue();
+		if(nMuon != 2) continue; //exactly x muon
+		cout << "Event # " << evt << endl;
+		cout << "0 mu pt:" << l_var->GetValue(0) << endl;
+		cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
+
+
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
 
-				int nMuon = l_nMuon->GetValue();
-				if(nMuon != 2) continue; //exactly x muon
+				// int nMuon = l_nMuon->GetValue();
+				// if(nMuon != 2) continue; //exactly x muon
 				// int MuonmediumId_counter = 0;
 				// int MuontightId_counter = 0;
 				// int MuonmedpromptId_counter = 0;
@@ -329,8 +337,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				vector<float> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
-				cout << "Event # " << evt << endl;
-				cout << "0 mu pt:" << l_var->GetValue(0) << endl;
+				
 
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
@@ -341,7 +348,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// 	continue; 
 				// }
 
-				cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
 				if(muonSelections.at(NmuonSelections-1) < 200){
 					continue;
 				}
@@ -365,16 +371,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				int NeleSelections = eleSelections.size();
 
 			
-				
-
 				if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
 
 			}
 
 
-			
-
-			
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
