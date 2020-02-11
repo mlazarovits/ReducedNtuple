@@ -205,7 +205,7 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 		// if(eta){
 			// if(l_mupt->GetValue(i) > mu_pt) mu_pt = l_mupt->GetValue(i);
-		cout << l_mupt->GetValue(i) << endl;
+		cout << l_mupt->GetValue(0) << endl;
 
 		// }
 	}
