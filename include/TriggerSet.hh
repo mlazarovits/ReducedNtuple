@@ -52,6 +52,7 @@ public:
 
 private:
 	std::vector<int> muonSelection(int nMuon);
+	std::vector<int> electronSelection(int nElectron);
 
 	string m_samplename;
 	string m_trigname;
@@ -181,13 +182,19 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 }
 
 inline std::vector<int> TriggerSet::muonSelection(int nMuon){
-	std::vector<int> selections;
+	std::vector<int> muselections;
 
 	int MuonmediumId_counter = 0;
 	int MuontightId_counter = 0;
 	int MuonmedpromptId_counter = 0;
 	int muonminiIso_counter = 0;
 	int muonminipfRelIso_counter = 0;
+	float mu_pt = -9999;
+	bool eta = strstr(m_var.c_str()),"eta";
+	// if(eta){
+		TLeaf* l_mupt = m_tree->GetLeaf("Muon_pt");
+		
+	// }
 
 	for(int i = 0; i < nMuon; i++){
 		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
@@ -196,17 +203,44 @@ inline std::vector<int> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 		if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
+		// if(eta){
+			if(l_mupt->GetValue(i) > mu_pt) mu_pt = l_mupt->GetValue(i);
+		// }
 	}
 
-	selections.push_back(MuonmediumId_counter);
-	selections.push_back(MuontightId_counter);
-	selections.push_back(MuonmedpromptId_counter);
-	selections.push_back(muonminiIso_counter);
-	selections.push_back(muonminipfRelIso_counter);
+	muselections.push_back(MuonmediumId_counter);
+	muselections.push_back(MuontightId_counter);
+	muselections.push_back(MuonmedpromptId_counter);
+	muselections.push_back(muonminiIso_counter);
+	muselections.push_back(muonminipfRelIso_counter);
+	muselections.push_back(mu_pt);
 
-	return selections;
 
-	
+	return muselections;
+
+}
+
+inline std::vector<int> TriggerSet::electronSelection(int nElectron){
+	std::vector<int> eleselections;
+
+	int ElemediumId_counter = 0;
+	int EletightId_counter = 0;
+	int ElemedpromptId_counter = 0;
+	int ElepfRelIso03_counter = 0;
+
+
+	//replace with electron IDs
+	for(int i = 0; i < nElectron; i++){
+	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+		if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
+	}
+
+	eleselections.push_back(ElemediumId_counter);
+	eleselections.push_back(EletightId_counter);
+	eleselections.push_back(ElemedpromptId_counter);
+	eleselections.push_back(ElepfRelIso03_counter);
+
+	return eleselections;
 }
 
 inline vector<TEfficiency*> TriggerSet::Analyze(){
@@ -287,36 +321,28 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// int MuontightId_counter = 0;
 				// int MuonmedpromptId_counter = 0;
 				// int muonminiIso_counter = 0;
-				// int muonpfRelIso03_counter = 0;
 				// int muonminipfRelIso_counter = 0;
+				// float muon_pt;
 
-				// for(int i = 0; i < nMuon; i++){
-				// 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-				// 	if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-				// 	else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-				// 	else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-				// 	// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
-				// 	if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
-				// }
-
-				// // cout << l_Muon_minipfRelIso_all->GetValue() << endl;
 
 				vector<int> muonSelections = muonSelection(nMuon);
-					// selections.push_back(MuonmediumId_counter); first
-					// selections.push_back(MuontightId_counter);
-					// selections.push_back(MuonmedpromptId_counter);
-					// selections.push_back(muonminiIso_counter);
-					// selections.push_back(muonminipfRelIso_counter); last
 				int NmuonSelections = muonSelections.size();
+
+
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
 				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
+				// if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
 				// if(muonpfRelIso03_counter != 1) continue;
-					if(muonSelections[NmuonSelections] != 1){
-						continue; 
-					}
-
+				if(muonSelections[NmuonSelections-1] != 1){
+					continue; 
 				}
+
+
+				if(muonSelections[NmuonSelections] < 200){
+					continue;
+				}
+				
+				
 
 				
 			}
@@ -325,19 +351,31 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				int nElectron = l_nElectron->GetValue();
 				if(nElectron != 1) continue; //at least 1 muon
-				int ElemediumId_counter = 0;
-				int EletightId_counter = 0;
-				int ElemedpromptId_counter = 0;
-				int ElepfRelIso03_counter = 0;
 
-				//replace with electron IDs
-				for(int i = 0; i < nElectron; i++){
-				// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-					if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
-				}
+				// int ElemediumId_counter = 0;
+				// int EletightId_counter = 0;
+				// int ElemedpromptId_counter = 0;
+				// int ElepfRelIso03_counter = 0;
 
-				// if(ElepfRelIso03_counter != 1) continue;  //at least 1 pfrel ele
+				vector<int> eleSelections = electronSelection(nElectron);
+				int NeleSelections = eleSelections.size();
 
+			
+				
+
+				if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
+
+			}
+
+
+			if(strstr(m_var.c_str()),"Muon_eta"){
+				TLeaf* l_pt = m_tree->GetLeaf("Muon_pt");
+
+			}
+
+
+			if(strstr(m_var.c_str()),"Electron_eta"){
+				TLeaf* l_pt = m_tree->GetLeaf("Electron_pt");
 			}
 
 			
