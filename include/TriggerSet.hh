@@ -51,7 +51,7 @@ public:
 
 
 private:
-	void AnalyzeMuons();
+	std::vector<int> muonSelection(int nMuon);
 
 	string m_samplename;
 	string m_trigname;
@@ -180,36 +180,33 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	return vec_trig;
 }
 
-inline void TriggerSet::AnalyzeMuons(){
-	int nMuon = l_nMuon->GetValue();
-	if(nMuon != 1) continue; //exactly 1 muon
+inline std::vector<int> TriggerSet::muonSelection(int nMuon){
+	std::vector<int> selections;
+
 	int MuonmediumId_counter = 0;
 	int MuontightId_counter = 0;
 	int MuonmedpromptId_counter = 0;
 	int muonminiIso_counter = 0;
-	int muonpfRelIso03_counter = 0;
 	int muonminipfRelIso_counter = 0;
 
 	for(int i = 0; i < nMuon; i++){
 		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 		if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-		else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-		else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-		// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+		if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+		if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+		if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 	}
 
-	// cout << l_Muon_minipfRelIso_all->GetValue() << endl;
+	selections.push_back(MuonmediumId_counter);
+	selections.push_back(MuontightId_counter);
+	selections.push_back(MuonmedpromptId_counter);
+	selections.push_back(muonminiIso_counter);
+	selections.push_back(muonminipfRelIso_counter);
 
-	// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
-	// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
-	if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
-		// if(muonpfRelIso03_counter != 1) continue;
-		if(muonminipfRelIso_counter != 1){
-			continue; //exactly 1 miniIsoId muon
-		}
-		
-	}
+	return selections;
+
+	
 }
 
 inline vector<TEfficiency*> TriggerSet::Analyze(){
@@ -284,9 +281,43 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			//VARIABLE SELECTION - MUON
 			if(strstr(m_var.c_str(),"Muon")){
 
-				AnalyzeMuons();
+				int nMuon = l_nMuon->GetValue();
+				if(nMuon != 1) continue; //exactly 1 muon
+				// int MuonmediumId_counter = 0;
+				// int MuontightId_counter = 0;
+				// int MuonmedpromptId_counter = 0;
+				// int muonminiIso_counter = 0;
+				// int muonpfRelIso03_counter = 0;
+				// int muonminipfRelIso_counter = 0;
 
-				
+				// for(int i = 0; i < nMuon; i++){
+				// 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+				// 	if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
+				// 	else if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
+				// 	else if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
+				// 	// if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
+				// 	if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
+				// }
+
+				// // cout << l_Muon_minipfRelIso_all->GetValue() << endl;
+
+				vector<int> muonSelections = muonSelection(nMuon);
+					// selections.push_back(MuonmediumId_counter); first
+					// selections.push_back(MuontightId_counter);
+					// selections.push_back(MuonmedpromptId_counter);
+					// selections.push_back(muonminiIso_counter);
+					// selections.push_back(muonminipfRelIso_counter); last
+				int NmuonSelections = muonSelections.size()
+				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
+				// if(MuontightId_counter != 1) continue; //exactly 1 tightId muon
+				if(nTrig == 0 || nTrig == 1){ //only apply iso selection to triggers with that
+				// if(muonpfRelIso03_counter != 1) continue;
+					if(muonSelections[NmuonSelections] != 1){
+						continue; 
+					}
+
+				// }
+
 				
 			}
 			//VARIABLE SELECTION - ELECTRON
