@@ -327,6 +327,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				vector<int> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
+				cout << NmuonSelections << endl;
 
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
@@ -337,8 +338,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// 	continue; 
 				// }
 
-				cout << "leading muon_pt: " << muonSelections.at(NmuonSelections) << endl;
-				if(muonSelections.at(NmuonSelections) < 200){
+				cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
+				if(muonSelections.at(NmuonSelections-1) < 200){
 					continue;
 				}
 				
