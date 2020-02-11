@@ -271,11 +271,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
-		// cout << effbins[i] << endl;
+		cout << effbins[i] << endl;
 	}
 	for(int i = 51; i < 57; i++){
 		effbins[i] = effbins[i-1] + 10.0;
-		// cout << effbins[i] << endl;
+		cout << effbins[i] << endl;
 	}
 
 
@@ -337,7 +337,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 					continue; 
 				}
 
-
+				cout << "leading muon_pt: " << muonSelections[NmuonSelections] << endl;
 				if(muonSelections[NmuonSelections] < 200){
 					continue;
 				}
@@ -425,7 +425,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chop = gr_effs.size();
+	Int_t chop = gr_effs.size()/2;
 
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
