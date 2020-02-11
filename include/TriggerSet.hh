@@ -289,7 +289,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),55,effbins);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
 
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
