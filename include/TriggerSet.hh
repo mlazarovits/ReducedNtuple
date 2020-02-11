@@ -272,13 +272,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	//set bins of TEff object
-	Double_t effbins[61];
+	Int_t nBins= 60;
+	Double_t effbins[nBins+1];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
 		cout << effbins[i] << endl;
 	}
-	for(int i = 51; i < 62; i++){
+	for(int i = 51; i < nBins+2; i++){
 		effbins[i] = effbins[i-1] + 10.0;
 		cout << effbins[i] << endl;
 	}
@@ -289,7 +290,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),60,effbins);
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,effbins);
 
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
@@ -328,9 +329,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		// cout << "Event # " << evt << endl;
 		// cout << "0 mu pt:" << l_var->GetValue(0) << endl;
 		// cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
-		if(muonSelections.at(NmuonSelections-1) < 200){
-				continue;
-			}
+		// if(muonSelections.at(NmuonSelections-1) < 200) continue;
+			
 		}
 
 		if(strstr(m_var.c_str(),"Electron")){
