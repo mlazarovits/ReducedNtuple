@@ -209,8 +209,10 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 
 		// }
 	}
-	cout << l_mupt->GetValue(0) << endl;
-
+	//if(eta){
+	mu_pt = l_mupt->GetValue(0); //pt of leading muon
+	//}
+	
 	muselections.push_back(MuonmediumId_counter);
 	muselections.push_back(MuontightId_counter);
 	muselections.push_back(MuonmedpromptId_counter);
@@ -323,9 +325,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vector<float> muonSelections = muonSelection(nMuon);
 		int NmuonSelections = muonSelections.size();
 
-		cout << "Event # " << evt << endl;
-		cout << "0 mu pt:" << l_var->GetValue(0) << endl;
-		cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
+		// cout << "Event # " << evt << endl;
+		// cout << "0 mu pt:" << l_var->GetValue(0) << endl;
+		// cout << "leading muon_pt: " << muonSelections.at(NmuonSelections-1) << endl;
 		if(muonSelections.at(NmuonSelections-1) < 200){
 				continue;
 			}
