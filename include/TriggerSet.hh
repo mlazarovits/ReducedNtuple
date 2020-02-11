@@ -277,7 +277,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		effbins[i] = effbins[i-1] + 10.0;
 		cout << effbins[i] << endl;
 	}
-cout << "point b" << endl;
+
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
@@ -285,14 +285,14 @@ cout << "point b" << endl;
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),55,effbins);
-
+		cout << "point b" << endl;
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
 	
 		// else if(strstr(m_triggers.at(i).c_str(),"&&")) //AND triggers
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
-
+		cout << "point c" << endl;
 		
 		if(l_trig == NULL){
 			cout << "Error: Trigger " << m_triggers.at(i) << " not found" << endl;
@@ -301,7 +301,7 @@ cout << "point b" << endl;
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
 	}
-
+	cout << "point d" << endl;
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	for(int evt = 0; evt < nEntries/10; evt++){
