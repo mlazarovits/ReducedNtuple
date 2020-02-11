@@ -204,7 +204,9 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 		// if(eta){
-			if(l_mupt->GetValue(i) > mu_pt) mu_pt = l_mupt->GetValue(i);
+			// if(l_mupt->GetValue(i) > mu_pt) mu_pt = l_mupt->GetValue(i);
+		cout << l_mupt->GetValue(i) << endl;
+
 		// }
 	}
 
@@ -327,7 +329,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 				vector<float> muonSelections = muonSelection(nMuon);
 				int NmuonSelections = muonSelections.size();
-				cout << l_var->GetValue(0) << endl;
+				cout << "0 mu pt:" << l_var->GetValue(0) << endl;
 
 
 				// if(MuonmediumId_counter != 1) continue;  //exactly 1 mediumId muon
