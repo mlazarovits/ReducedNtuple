@@ -304,7 +304,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E6;
+	if(debug == true) nEntries = 1E2;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 	for(int evt = 0; evt < nEntries/10; evt++){
@@ -350,7 +350,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
-			cout << bPassed << endl;
+			// cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
 		}
 	}
