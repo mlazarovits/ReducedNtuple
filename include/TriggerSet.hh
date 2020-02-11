@@ -337,7 +337,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				// 	continue; 
 				// }
 
-				cout << "leading muon_pt: " << muonSelections.at(NmuonSelections) << endl;
+				// cout << "leading muon_pt: " << muonSelections.at(NmuonSelections) << endl;
 				if(muonSelections.at(NmuonSelections) < 200){
 					continue;
 				}
