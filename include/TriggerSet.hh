@@ -212,7 +212,7 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 	//if(eta){
 	mu_pt = l_mupt->GetValue(0); //pt of leading muon
 	//}
-	
+
 	muselections.push_back(MuonmediumId_counter);
 	muselections.push_back(MuontightId_counter);
 	muselections.push_back(MuonmedpromptId_counter);
@@ -272,13 +272,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 	//set bins of TEff object
-	Double_t effbins[56];
+	Double_t effbins[61];
 	effbins[0] = 0.0;
 	for(int i = 1; i < 51; i++){
 		effbins[i] = effbins[i-1] + 2.0;
 		cout << effbins[i] << endl;
 	}
-	for(int i = 51; i < 57; i++){
+	for(int i = 51; i < 62; i++){
 		effbins[i] = effbins[i-1] + 10.0;
 		cout << effbins[i] << endl;
 	}
@@ -307,7 +307,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E4;
+	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 	for(int evt = 0; evt < nEntries/10; evt++){
