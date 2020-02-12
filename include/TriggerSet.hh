@@ -274,34 +274,25 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 
-	Int_t nBins;
-	// Double_t effbins[nBins+1];
-		
+	Int_t nBins;		
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
-	// if(strstr(m_var.c_str(),"pt")){
-	// 	nBins = 70;
-	// 	Double_t effbins[nBins+1];
-	// 	effbins[0] = 0.0;
-	// 	for(int i = 1; i < 51; i++){
-	// 		effbins[i] = effbins[i-1] + 2.0;
-	// 	// cout << effbins[i] << endl;
-	// 	}
-	// 	for(int i = 51; i < nBins+2; i++){
-	// 		effbins[i] = effbins[i-1] + 10.0;
-	// 	// cout << effbins[i] << endl;
-	// 	}
-	// }
+	if(strstr(m_var.c_str(),"pt")){
+		nBins = 70;
+		effbins.push_back(0.0);
+		for(int i = 1; i < 51; i++){
+			effbins.push_back(effbins.at(i-1) + 2.0);
+		}
+		for(int i = 51; i < nBins+2; i++){
+			effbins.push_back(effbins.at(i-1) + 10.0);
+		}
+	}
 	if(strstr(m_var.c_str(),"eta")){
 		nBins = 40;
-		cout << "here 1" << endl;
-		effbins.push_back( 0.0);
+		effbins.push_back(0.0);
 		for(int i = 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 0.2);
-			// effbins[i] = effbins[i-1] + 0.1;
-		// cout << effbins[i] << endl;
+			effbins.push_back(effbins.at(i-1) + 0.1);
 		}
-		cout << "here" << endl;
 	}
 
 
@@ -310,9 +301,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		cout << "point a" << endl;
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
-		cout << "point b" << endl;
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
 	
