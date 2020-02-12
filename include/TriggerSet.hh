@@ -427,7 +427,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 		else if(i / chop == 1){
 			gr_effs[i]->SetMarkerStyle(21);
 		}
-		else{
+		else if(i /chop == 2){
 			gr_effs[i]->SetMarkerStyle(20);
 		}
 		if(i % chop == 0){
