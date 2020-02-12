@@ -295,9 +295,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			cout << effbins.at(i) << endl;
 		}
 	}
-	if(debug) return;
-	else continue;
-
+	
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
