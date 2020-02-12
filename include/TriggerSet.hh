@@ -360,13 +360,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// 	if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			// }
 
-			if(muonSelections.at(4) < 1){
+			if(muonSelections.at(4) >= 1){
 
-				iso = false;
+				iso = true;
 				// continue;
 			}
 
-			if(muonSelections.at(4) == 1) cout << muonSelections.at(4) << endl;
+			// if(muonSelections.at(4) == 1) cout << muonSelections.at(4) << endl;
 			
 
 
