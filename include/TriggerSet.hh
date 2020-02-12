@@ -362,7 +362,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			if(muonSelections.at(NmuonSelections-3) < 1){
 				iso = false;
-				continue;
+				// continue;
 			}
 			
 
