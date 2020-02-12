@@ -248,6 +248,8 @@ inline std::vector<float> TriggerSet::electronSelection(int nElectron){
 	return eleselections;
 }
 
+
+
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
@@ -271,17 +273,34 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
+
+	Int_t nBins;
 	//set bins of TEff object
-	Int_t nBins= 70;
-	Double_t effbins[nBins+1];
-	effbins[0] = 0.0;
-	for(int i = 1; i < 51; i++){
-		effbins[i] = effbins[i-1] + 2.0;
+	if(strstr(m_var.c_str(),"pt")){
+		nBins = 70;
+		Double_t effbins[nBins+1];
+		effbins[0] = 0.0;
+		for(int i = 1; i < 51; i++){
+			effbins[i] = effbins[i-1] + 2.0;
 		// cout << effbins[i] << endl;
+		}
+		for(int i = 51; i < nBins+2; i++){
+			effbins[i] = effbins[i-1] + 10.0;
+		// cout << effbins[i] << endl;
+		}
 	}
-	for(int i = 51; i < nBins+2; i++){
-		effbins[i] = effbins[i-1] + 10.0;
+	else if(strstr(m_var.c_str(),"eta")){
+		nBins = 20;
+		Double_t effbins[nBins+1];
+		effbins[0] = 0.0;
+		for(int i = 1; i < nBins+2; i++){
+			effbins[i] = effbins[i-1] + 0.2;
 		// cout << effbins[i] << endl;
+		}
+		// for(int i = 51; i < nBins+2; i++){
+		// 	effbins[i] = effbins[i-1] + 10.0;
+		// // cout << effbins[i] << endl;
+		// }
 	}
 
 
