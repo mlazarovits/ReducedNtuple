@@ -275,14 +275,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 	Int_t nBins;
-	nBins = 20;
-		Double_t effbins[nBins+1];
-		effbins[0] = 0.0;
-		for(int i = 1; i < nBins+2; i++){
-			// effbins.push_back(effbins[i-1] + 0.2);
-			effbins[i] = effbins[i-1] + 0.1;
-		cout << effbins[i] << endl;
-		}
+	Double_t effbins[nBins+1];
+		
 	// std::vector<Double_t> effbins;
 	//set bins of TEff object
 	// if(strstr(m_var.c_str(),"pt")){
@@ -299,7 +293,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// 	}
 	// }
 	if(strstr(m_var.c_str(),"eta")){
+		nBins = 40;
 		
+		effbins[0] = 0.0;
+		for(int i = 1; i < nBins+2; i++){
+			// effbins.push_back(effbins[i-1] + 0.2);
+			effbins[i] = effbins[i-1] + 0.1;
+		cout << effbins[i] << endl;
+		}
 		cout << "here" << endl;
 	}
 
