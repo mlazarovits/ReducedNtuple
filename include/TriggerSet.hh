@@ -290,20 +290,17 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// 	// cout << effbins[i] << endl;
 	// 	}
 	// }
-	// else if(strstr(m_var.c_str(),"eta")){
+	else if(strstr(m_var.c_str(),"eta")){
 		nBins = 20;
 		Double_t effbins[nBins+1];
 		effbins[0] = 0.0;
 		for(int i = 1; i < nBins+2; i++){
 			// effbins.push_back(effbins[i-1] + 0.2);
-			effbins[i] = effbins[i-1] + 0.2;
+			effbins[i] = effbins[i-1] + 0.1;
 		cout << effbins[i] << endl;
 		}
-		// for(int i = 51; i < nBins+2; i++){
-		// 	effbins[i] = effbins[i-1] + 10.0;
-		// // cout << effbins[i] << endl;
-		// }
-	// }
+
+	}
 
 
 	//create TEfficiency objects and get trigger leaves
@@ -342,33 +339,33 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 	    if(strstr(m_var.c_str(),"Muon")){
-	    int nMuon = l_nMuon->GetValue();
-		if(nMuon != 2) continue; //exactly x muon
+		    int nMuon = l_nMuon->GetValue();
+			if(nMuon != 2) continue; //exactly x muon
 
-		vector<float> muonSelections = muonSelection(nMuon);
-		int NmuonSelections = muonSelections.size();
+			vector<float> muonSelections = muonSelection(nMuon);
+			int NmuonSelections = muonSelections.size();
 
-		// if(strstr(m_var.c_str(),"eta")){
-		// 	if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
-		// }
+			// if(strstr(m_var.c_str(),"eta")){
+			// 	if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
+			// }
 
 		}
 
 		if(strstr(m_var.c_str(),"Electron")){
 
-				int nElectron = l_nElectron->GetValue();
-				if(nElectron != 1) continue; //at least 1 muon
+			int nElectron = l_nElectron->GetValue();
+			if(nElectron != 1) continue; //at least 1 muon
 
-				// int ElemediumId_counter = 0;
-				// int EletightId_counter = 0;
-				// int ElemedpromptId_counter = 0;
-				// int ElepfRelIso03_counter = 0;
+			// int ElemediumId_counter = 0;
+			// int EletightId_counter = 0;
+			// int ElemedpromptId_counter = 0;
+			// int ElepfRelIso03_counter = 0;
 
-				vector<float> eleSelections = electronSelection(nElectron);
-				int NeleSelections = eleSelections.size();
+			vector<float> eleSelections = electronSelection(nElectron);
+			int NeleSelections = eleSelections.size();
 
-			
-				if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
+		
+			if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
 
 			}
 
