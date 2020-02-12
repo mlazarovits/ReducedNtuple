@@ -288,10 +288,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	}
 	if(strstr(m_var.c_str(),"eta")){
-		nBins = 40;
+		nBins = 100;
 		effbins.push_back(-3.0);
 		for(int i = 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 0.1);
+			effbins.push_back(effbins.at(i-1) + 0.05);
 			cout << effbins.at(i) << endl;
 		}
 	}
