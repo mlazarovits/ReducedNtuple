@@ -66,7 +66,8 @@ private:
 	TLeaf* l_Muon_tightId;
 	TLeaf* l_Muon_miniIsoId;
 	TLeaf* l_Muon_minipfRelIso_all;
-
+	TLeaf* l_Muonpt;
+	TLeaf* l_Muoneta;
 	TLeaf* l_nElectron;
 	TLeaf* l_Electron_pfRelIso03_all;
 	
@@ -190,11 +191,10 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 	float muonminiIso_counter = 0;
 	float muonminipfRelIso_counter = 0;
 	float mu_pt = -9999;
-	bool eta = strstr(m_var.c_str(),"eta");
-	// if(eta){
-		TLeaf* l_mupt = m_tree->GetLeaf("Muon_pt");
+	float mu_eta = -9999;
+	
 		
-	// }
+	
 
 	for(int i = 0; i < nMuon; i++){
 		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
@@ -203,14 +203,11 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
 		if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
-		// if(eta){
-			// if(l_mupt->GetValue(i) > mu_pt) mu_pt = l_mupt->GetValue(i);
-		
-
-		// }
+	
 	}
 	//if(eta){
-	mu_pt = l_mupt->GetValue(0); //pt of leading muon
+	mu_pt = l_Muonpt->GetValue(0); //pt of leading muon
+	mu_eta = l_Muoneta->GetValue(0); //eta of leading muon
 	//}
 
 	muselections.push_back(MuonmediumId_counter);
@@ -219,6 +216,7 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 	muselections.push_back(muonminiIso_counter);
 	muselections.push_back(muonminipfRelIso_counter);
 	muselections.push_back(mu_pt);
+	muselections.push_back(mu_eta);
 
 
 	return muselections;
@@ -255,6 +253,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TLeaf*> vec_ltrig;
 	
 	l_nMuon = m_tree->GetLeaf("nMuon");
+	l_Muonpt = m_tree->GetLeaf("Muon_pt");
+	l_Muoneta = m_tree->GetLeaf("Muon_eta");
 	l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
 	l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
@@ -334,12 +334,24 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    int nMuon = l_nMuon->GetValue();
 			if(nMuon != 1) continue; 
 
+			// muselections.push_back(MuonmediumId_counter);
+			// muselections.push_back(MuontightId_counter);
+			// muselections.push_back(MuonmedpromptId_counter);
+			// muselections.push_back(muonminiIso_counter);
+			// muselections.push_back(muonminipfRelIso_counter);
+			// muselections.push_back(mu_pt);
+			// muselections.push_back(mu_eta);
+
+
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
 
 
 			if(strstr(m_var.c_str(),"eta")){
-				if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
+				if(muonSelections.at(NmuonSelections-2) < 200) continue; //mupt cut
+			}
+			else if(strstr(m_var.c_str(),"pt")){
+				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
 		}
