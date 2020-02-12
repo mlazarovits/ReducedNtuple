@@ -275,7 +275,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 	Int_t nBins;
-	std::vector<Double_t> effbins;
+	// std::vector<Double_t> effbins;
 	//set bins of TEff object
 	// if(strstr(m_var.c_str(),"pt")){
 	// 	nBins = 70;
@@ -292,7 +292,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	// }
 	// else if(strstr(m_var.c_str(),"eta")){
 		nBins = 20;
-		// Double_t effbins[nBins+1];
+		Double_t effbins[nBins+1];
 		effbins[0] = 0.0;
 		for(int i = 1; i < nBins+2; i++){
 			effbins.push_back(effbins[i-1] + 0.2);
@@ -312,7 +312,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
 		// cout << "point a" << endl;
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,(*effbins));
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,effbins);
 		// cout << "point b" << endl;
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
