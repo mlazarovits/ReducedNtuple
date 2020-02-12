@@ -332,14 +332,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
-			if(nMuon != 1) continue; //exactly x muon
+			if(nMuon != 1) continue; 
 
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
 
 
 			if(strstr(m_var.c_str(),"eta")){
-				if(muonSelections.at(NmuonSelections-1) < 80) continue; //mupt cut
+				if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
 			}
 
 		}
@@ -347,7 +347,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		if(strstr(m_var.c_str(),"Electron")){
 
 			int nElectron = l_nElectron->GetValue();
-			if(nElectron != 1) continue; //at least 1 muon
+			if(nElectron != 1) continue; //at least 1 electron
 
 			// int ElemediumId_counter = 0;
 			// int EletightId_counter = 0;
