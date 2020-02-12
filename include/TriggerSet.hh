@@ -356,14 +356,17 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_var.c_str(),"eta")){
 				if(muonSelections.at(NmuonSelections-2) < 200) continue; //mupt cut
 			}
-			else if(strstr(m_var.c_str(),"pt")){
-				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
-			}
+			// else if(strstr(m_var.c_str(),"pt")){
+			// 	if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
+			// }
 
 			if(muonSelections.at(4) < 1){
+
 				iso = false;
 				// continue;
 			}
+
+			if(muonSelections.at(4) == 1) cout << muonSelections.at(4) << endl;
 			
 
 
