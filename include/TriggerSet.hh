@@ -337,10 +337,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
 
-			cout << muonSelections.at(NmuonSelections-1) << endl;
 
 			if(strstr(m_var.c_str(),"eta")){
-				if(muonSelections.at(NmuonSelections-1) < 100) continue; //mupt cut
+				if(muonSelections.at(NmuonSelections-1) < 80) continue; //mupt cut
 			}
 
 		}
