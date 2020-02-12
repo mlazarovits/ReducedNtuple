@@ -354,9 +354,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
-			if(strstr(m_triggers.at(i).c_str(),"Iso")){
-				if(muonSelections.at(4) > 0.1) continue;
-			}
+
 
 		}
 
@@ -379,6 +377,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+			if(strstr(m_triggers.at(i).c_str(),"Iso")){
+				if(muonSelections.at(4) > 0.1) continue;
+			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
