@@ -292,6 +292,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins+2; i++){
 			effbins.push_back(effbins.at(i-1) + 0.1);
+			cout << effbins.at(i) << endl;
 		}
 	}
 
