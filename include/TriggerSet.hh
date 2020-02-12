@@ -297,7 +297,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		cout << "here 1" << endl;
 		effbins.at(0) = 0.0;
 		for(int i = 1; i < nBins+2; i++){
-			effbins.push_back(effbins[i-1] + 0.2);
+			effbins.push_back(effbins.at(i-1) + 0.2);
 			// effbins[i] = effbins[i-1] + 0.1;
 		// cout << effbins[i] << endl;
 		}
@@ -310,9 +310,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		// cout << "point a" << endl;
+		cout << "point a" << endl;
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
-		// cout << "point b" << endl;
+		cout << "point b" << endl;
 		//scan for trigger ORs and ANDs
 		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
 	
