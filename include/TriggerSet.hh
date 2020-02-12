@@ -421,24 +421,24 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
 		
-		if(i % chop == 0){
+		if(i / chop == 0){
 			gr_effs[i]->SetMarkerStyle(22);
 		} 
-		else if(i % chop == 1){
+		else if(i / chop == 1){
 			gr_effs[i]->SetMarkerStyle(21);
 		}
 		else{
 			gr_effs[i]->SetMarkerStyle(20);
 		}
-		if(i / chop == 0){
+		if(i % chop == 0){
 			gr_effs[i]->SetMarkerColor(kBlue-7);
 			gr_effs[i]->SetLineColor(kBlue-7);
 		}
-		else if(i / chop == 1){
+		else if(i % chop == 1){
 			gr_effs[i]->SetMarkerColor(kRed-7);
 			gr_effs[i]->SetLineColor(kRed-7);
 		}
-		else if(i / chop == 2){
+		else if(i % chop == 2){
 			gr_effs[i]->SetMarkerColor(kGreen-7);
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
