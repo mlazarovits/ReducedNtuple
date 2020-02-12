@@ -377,7 +377,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(strstr(m_triggers.at(i).c_str(),"Iso")){
+			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
 				if(muonSelections.at(4) > 0.1) continue;
 			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
