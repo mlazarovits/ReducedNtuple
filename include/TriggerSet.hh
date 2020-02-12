@@ -354,6 +354,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
+			if(strstr(m_triggers.at(i).c_str(),"Iso")){
+				if(muonSelections.at(4) > 0.1) continue;
+			}
+
 		}
 
 		if(strstr(m_var.c_str(),"Electron")){
