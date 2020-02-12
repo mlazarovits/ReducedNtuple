@@ -289,13 +289,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 	if(strstr(m_var.c_str(),"eta")){
 		nBins = 200;
-		effbins.push_back(-3.0);
+		effbins.push_back(-3.05);
 		for(int i = 1; i < nBins+2; i++){
 			effbins.push_back(effbins.at(i-1) + 0.05);
 			cout << effbins.at(i) << endl;
 		}
 	}
-	
+
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
@@ -337,9 +337,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
 
-			// if(strstr(m_var.c_str(),"eta")){
-			// 	if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
-			// }
+			if(strstr(m_var.c_str(),"eta")){
+				if(muonSelections.at(NmuonSelections-1) < 200) continue; //mupt cut
+			}
 
 		}
 
