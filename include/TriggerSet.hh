@@ -205,6 +205,7 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 	
 	}
+	cout << muonminipfRelIso_counter << endl;
 	//if(eta){
 	mu_pt = l_Muonpt->GetValue(0); //pt of leading muon
 	mu_eta = l_Muoneta->GetValue(0); //eta of leading muon
@@ -236,7 +237,10 @@ inline std::vector<float> TriggerSet::electronSelection(int nElectron){
 	for(int i = 0; i < nElectron; i++){
 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 		if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
+		
 	}
+
+
 
 	eleselections.push_back(ElemediumId_counter);
 	eleselections.push_back(EletightId_counter);
@@ -319,7 +323,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E7;
+	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
@@ -357,7 +361,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
-			if(muonSelections.at(NmuonSelections-3) > 0.1) continue;
+			
+			cout << muonSelections.at(NmuonSelections-3) << endl;
+			cout << muonSelections.at(4) << endl;
+
+			if(muonSelections.at(NmuonSelections-3) < 1) continue;
+			cout << "event #: " << evt << endl;
+
 
 
 
