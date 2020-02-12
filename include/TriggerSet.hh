@@ -360,7 +360,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
-			if(muonSelections.at(NmuonSelections-3) < 1){
+			if(muonSelections.at(4) < 1){
 				iso = false;
 				// continue;
 			}
@@ -391,12 +391,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
-
-				if(!iso){
+				if(iso) cout << "iso: " << iso << endl;
+				else if(!iso){
 					
 					continue;
 				}
-				cout << "iso: " << iso << endl;
+				
 			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
