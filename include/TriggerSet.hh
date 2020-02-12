@@ -205,7 +205,6 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
 	
 	}
-	cout << muonminipfRelIso_counter << endl;
 	//if(eta){
 	mu_pt = l_Muonpt->GetValue(0); //pt of leading muon
 	mu_eta = l_Muoneta->GetValue(0); //eta of leading muon
@@ -361,11 +360,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
-			
-			cout << muonSelections.at(NmuonSelections-3) << endl;
-			cout << muonSelections.at(4) << endl;
-			cout << "event #: " << evt << endl;
-			if(muonSelections.at(NmuonSelections-3) < 1) continue;
+			if(muonSelections.at(NmuonSelections-3) < 1){
+				iso = false;
+				continue;
+			}
 			
 
 
@@ -392,9 +390,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			// if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
-			// 	if(!iso) continue;
-			// }
+			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
+				if(!iso) continue;
+			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
