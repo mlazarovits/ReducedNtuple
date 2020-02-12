@@ -322,10 +322,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	if(debug == true) nEntries = 1E7;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
-	for(int evt = 0; evt < nEntries/10; evt++){
+	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
-			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries/10);
+			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
 
@@ -417,7 +417,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	cv->Update();
 	Int_t chopcolor = gr_effs.size()/2;
 	Int_t chopmarker = gr_effs.size()/3;
-	
+
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
