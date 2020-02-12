@@ -319,7 +319,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E8;
+	if(debug == true) nEntries = 1E7;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 	for(int evt = 0; evt < nEntries/10; evt++){
@@ -421,21 +421,24 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
 		
-		if(i/chop == 0){
+		if(i % chop == 0){
 			gr_effs[i]->SetMarkerStyle(22);
 		} 
-		else {
+		else if(i % chop == 1){
 			gr_effs[i]->SetMarkerStyle(21);
 		}
-		if(i % chop == 0){
+		else{
+			gr_effs[i]->SetMarkerStyle(20);
+		}
+		if(i / chop == 0){
 			gr_effs[i]->SetMarkerColor(kBlue-7);
 			gr_effs[i]->SetLineColor(kBlue-7);
 		}
-		else if(i % chop == 1){
+		else if(i / chop == 1){
 			gr_effs[i]->SetMarkerColor(kRed-7);
 			gr_effs[i]->SetLineColor(kRed-7);
 		}
-		else if(i % chop == 2){
+		else if(i / chop == 2){
 			gr_effs[i]->SetMarkerColor(kGreen-7);
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
