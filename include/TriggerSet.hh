@@ -415,30 +415,31 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chop = gr_effs.size()/3;
-
+	Int_t chopcolor = gr_effs.size()/2;
+	Int_t chopmarker = gr_effs.size()/3;
+	
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
 		
-		if(i / chop == 0){
+		if(i / chopmarker == 0){
 			gr_effs[i]->SetMarkerStyle(22); //triangle
 		} 
-		else if(i / chop == 1){
+		else if(i / chopmarker == 1){
 			gr_effs[i]->SetMarkerStyle(21);//square
 		}
-		else if(i /chop == 2){
+		else if(i /chopmarker == 2){
 			gr_effs[i]->SetMarkerStyle(20); //circle
 		}
-		if(i % chop == 0){
+		if(i % chopcolor == 0){
 			gr_effs[i]->SetMarkerColor(kBlue-7);
 			gr_effs[i]->SetLineColor(kBlue-7);
 		}
-		else if(i % chop == 1){
+		else if(i % chopcolor == 1){
 			gr_effs[i]->SetMarkerColor(kRed-7);
 			gr_effs[i]->SetLineColor(kRed-7);
 		}
-		else if(i % chop == 2){
+		else if(i % chopcolor == 2){
 			gr_effs[i]->SetMarkerColor(kGreen-7);
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
