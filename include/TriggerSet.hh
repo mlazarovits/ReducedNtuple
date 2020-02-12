@@ -326,7 +326,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
-	bool iso = true;
+	bool iso = false;
 
 	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
@@ -360,7 +360,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// 	if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			// }
 
-			if(muonSelections.at(4) < 1) iso = false;
+			if(muonSelections.at(4) >= 1) iso = true;
 				
 			
 
