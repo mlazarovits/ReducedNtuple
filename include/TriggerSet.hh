@@ -364,9 +364,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			
 			cout << muonSelections.at(NmuonSelections-3) << endl;
 			cout << muonSelections.at(4) << endl;
-
-			if(muonSelections.at(NmuonSelections-3) < 1) continue;
 			cout << "event #: " << evt << endl;
+			if(muonSelections.at(NmuonSelections-3) < 1) continue;
+			
 
 
 
