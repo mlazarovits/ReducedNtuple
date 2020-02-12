@@ -332,7 +332,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
-			if(nMuon != 2) continue; //exactly x muon
+			if(nMuon != 1) continue; //exactly x muon
 
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
