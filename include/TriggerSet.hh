@@ -393,9 +393,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
 
 				if(!iso){
-					cout << "iso: " << iso << endl;
+					
 					continue;
 				}
+				cout << "iso: " << iso << endl;
 			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
