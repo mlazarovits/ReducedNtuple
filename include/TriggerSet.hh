@@ -322,6 +322,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	if(debug == true) nEntries = 1E7;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
+
+	bool iso;
+
 	for(int evt = 0; evt < nEntries; evt++){
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -354,6 +357,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
+			// if(muonSelection.at(4) > 0.1) iso = false;
+
 
 
 		}
@@ -377,9 +382,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
-				if(muonSelections.at(4) > 0.1) continue;
-			}
+			// if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
+			// 	if(!iso) continue;
+			// }
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
