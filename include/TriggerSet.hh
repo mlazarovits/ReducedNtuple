@@ -322,7 +322,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		vec_ltrig.push_back(l_trig);
 	}
 
-	if(debug == true) nEntries = 1E8;
+	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
@@ -387,6 +387,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
 				if(!iso) continue;
+				if(iso) cout << "iso passed " << evt << endl;
 			}
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
