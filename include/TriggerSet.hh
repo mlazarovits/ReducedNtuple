@@ -295,8 +295,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		Double_t effbins[nBins+1];
 		effbins[0] = 0.0;
 		for(int i = 1; i < nBins+2; i++){
-			effbins.push_back(effbins[i-1] + 0.2);
-			// effbins[i] = effbins[i-1] + 0.2;
+			// effbins.push_back(effbins[i-1] + 0.2);
+			effbins[i] = effbins[i-1] + 0.2;
 		cout << effbins[i] << endl;
 		}
 		// for(int i = 51; i < nBins+2; i++){
