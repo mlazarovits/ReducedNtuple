@@ -357,7 +357,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(abs(muonSelections.at(NmuonSelections-1)) > 2.5) continue;
 			}
 
-			if(muonSelection.at(4) > 0.1) continue;
+			if(muonSelections.at(4) > 0.1) continue;
 
 
 
