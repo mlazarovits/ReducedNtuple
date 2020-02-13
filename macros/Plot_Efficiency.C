@@ -78,7 +78,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	wjets17_mu.AddTrigger("HLT_Mu50");
 	wjets17_mu.AddTrigger("HLT_Mu55");
 	wjets17_mu.SetVar("Muon_eta");
-	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_pt_eta0to0p8.root");
+	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_pt_eta0p8to1p4.root");
 
 	wjets17_mu_effs = wjets17_mu.Analyze();
 	wjets17_mu.makePlots(wjets17_mu_effs);

@@ -357,7 +357,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
 			}
 			else if(strstr(m_var.c_str(),"pt")){
-				if(abs(muonSelections.at(NmuonSelections-1)) > 0.8) continue;
+				if(abs(muonSelections.at(NmuonSelections-1)) <= 0.8 || abs(muonSelections.at(NmuonSelections-1)) > 1.4) continue;
 			}
 
 			if(muonSelections.at(4) >= 1) iso = true;
