@@ -384,7 +384,7 @@ public :
     Float_t         GenDressedLepton_pt[3];   //[nGenDressedLepton]
     Int_t           GenDressedLepton_pdgId[3];   //[nGenDressedLepton]
     UInt_t          nSoftActivityJet;
-    Float_t         SoftActivityJet_eta[6];   //[nSoftActivityJet]
+    Float_t         SoftActivityetaeta[6];   //[nSoftActivityJet]
     Float_t         SoftActivityJet_phi[6];   //[nSoftActivityJet]
     Float_t         SoftActivityJet_pt[6];   //[nSoftActivityJet]
     Float_t         SoftActivityJetHT;
@@ -2477,7 +2477,7 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("IsoTrack_isHighPurityTrack", IsoTrack_isHighPurityTrack, &b_IsoTrack_isHighPurityTrack);
    // fChain->SetBranchAddress("IsoTrack_isPFcand", IsoTrack_isPFcand, &b_IsoTrack_isPFcand);
    // fChain->SetBranchAddress("IsoTrack_isFromLostTrack", IsoTrack_isFromLostTrack, &b_IsoTrack_isFromLostTrack);
-   // fChain->SetBranchAddress("nJet", &nJet, &b_nJet);
+   fChain->SetBranchAddress("nJet", &nJet, &b_nJet);
    // fChain->SetBranchAddress("Jet_CvsB", Jet_CvsB, &b_Jet_CvsB);
    // fChain->SetBranchAddress("Jet_CvsL", Jet_CvsL, &b_Jet_CvsL);
    // fChain->SetBranchAddress("Jet_area", Jet_area, &b_Jet_area);
@@ -2501,10 +2501,10 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("Jet_deepFlavouruds", Jet_deepFlavouruds, &b_Jet_deepFlavouruds);
    // fChain->SetBranchAddress("Jet_elEF", Jet_elEF, &b_Jet_elEF);
    // fChain->SetBranchAddress("Jet_elMult", Jet_elMult, &b_Jet_elMult);
-   // fChain->SetBranchAddress("Jet_eta", Jet_eta, &b_Jet_eta);
+   fChain->SetBranchAddress("Jet_eta", Jet_eta, &b_Jet_eta);
    // fChain->SetBranchAddress("Jet_hfEMEF", Jet_hfEMEF, &b_Jet_hfEMEF);
    // fChain->SetBranchAddress("Jet_hfHadEF", Jet_hfHadEF, &b_Jet_hfHadEF);
-   // fChain->SetBranchAddress("Jet_mass", Jet_mass, &b_Jet_mass);
+   fChain->SetBranchAddress("Jet_mass", Jet_mass, &b_Jet_mass);
    // fChain->SetBranchAddress("Jet_muEF", Jet_muEF, &b_Jet_muEF);
    // fChain->SetBranchAddress("Jet_muMult", Jet_muMult, &b_Jet_muMult);
    // fChain->SetBranchAddress("Jet_neEmEF", Jet_neEmEF, &b_Jet_neEmEF);
@@ -2512,8 +2512,8 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("Jet_neHadMult", Jet_neHadMult, &b_Jet_neHadMult);
    // fChain->SetBranchAddress("Jet_phEF", Jet_phEF, &b_Jet_phEF);
    // fChain->SetBranchAddress("Jet_phMult", Jet_phMult, &b_Jet_phMult);
-   // fChain->SetBranchAddress("Jet_phi", Jet_phi, &b_Jet_phi);
-   // fChain->SetBranchAddress("Jet_pt", Jet_pt, &b_Jet_pt);
+   fChain->SetBranchAddress("Jet_phi", Jet_phi, &b_Jet_phi);
+   fChain->SetBranchAddress("Jet_pt", Jet_pt, &b_Jet_pt);
    // fChain->SetBranchAddress("Jet_qgAxis1", Jet_qgAxis1, &b_Jet_qgAxis1);
    // fChain->SetBranchAddress("Jet_qgAxis2", Jet_qgAxis2, &b_Jet_qgAxis2);
    // fChain->SetBranchAddress("Jet_qgl", Jet_qgl, &b_Jet_qgl);
@@ -2550,7 +2550,7 @@ fChain->SetBranchStatus("*", 0);
    // fChain->SetBranchAddress("METFixEE2017_MetUnclustEnUpDeltaX", &METFixEE2017_MetUnclustEnUpDeltaX, &b_METFixEE2017_MetUnclustEnUpDeltaX);
    // fChain->SetBranchAddress("METFixEE2017_MetUnclustEnUpDeltaY", &METFixEE2017_MetUnclustEnUpDeltaY, &b_METFixEE2017_MetUnclustEnUpDeltaY);
    // fChain->SetBranchAddress("METFixEE2017_phi", &METFixEE2017_phi, &b_METFixEE2017_phi);
-   // fChain->SetBranchAddress("METFixEE2017_pt", &METFixEE2017_pt, &b_METFixEE2017_pt);
+   fChain->SetBranchAddress("METFixEE2017_pt", &METFixEE2017_pt, &b_METFixEE2017_pt);
    // fChain->SetBranchAddress("METFixEE2017_sumEt", &METFixEE2017_sumEt, &b_METFixEE2017_sumEt);
    // fChain->SetBranchAddress("GenMET_phi", &GenMET_phi, &b_GenMET_phi);
    // fChain->SetBranchAddress("GenMET_pt", &GenMET_pt, &b_GenMET_pt);
