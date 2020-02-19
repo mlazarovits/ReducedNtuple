@@ -289,11 +289,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		effbins.push_back(0.0);
 		for(int i = 1; i < 51; i++){
 			effbins.push_back(effbins.at(i-1) + 2.0);
-			cout << effbins[i] << endl;
+			// cout << effbins[i] << endl;
 		}
 		for(int i = 51; i < nBins+2; i++){
 			effbins.push_back(effbins.at(i-1) + 10.0);
-			cout << effbins[i] << endl;
+			// cout << effbins[i] << endl;
 		}
 	}
 	else if(strstr(m_var.c_str(),"eta")){
@@ -315,10 +315,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
-		//scan for trigger ORs and ANDs
-		// if(strstr(m_triggers.at(i).c_str(),"||")) //OR triggers			
-	
-		// else if(strstr(m_triggers.at(i).c_str(),"&&")) //AND triggers
+		
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 
@@ -408,7 +405,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
+
 				if(!double_lep) continue; //at least two leptons for double lepton triggers
+				cout << "passed, evt #  " << evt << endl;
 			}
 
 
