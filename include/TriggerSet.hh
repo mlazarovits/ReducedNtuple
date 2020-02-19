@@ -284,6 +284,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
+		cout << "here" << endl;
 		nBins = 70;
 		effbins.push_back(0.0);
 		for(int i = 1; i < 51; i++){
@@ -301,6 +302,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// cout << effbins.at(i) << endl;
 		}
 	}
+
+	
 
 
 	//create TEfficiency objects and get trigger leaves
