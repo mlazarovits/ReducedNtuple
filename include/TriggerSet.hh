@@ -402,12 +402,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 	    if(strstr(m_var.c_str(),"Muon")){
-	    	cout << "a" << endl;
 		    int nMuon = l_nMuon->GetValue();
-		    cout << "b" << endl;
-		    float MET = l_MET->GetValue();
-		    cout << "c" << endl;
-		   
+		    float MET = l_MET->GetValue();		   
 
 		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
