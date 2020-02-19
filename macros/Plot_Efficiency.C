@@ -170,7 +170,7 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 	dyjets17_mu.SetOutputName("DYJets17_AllTrigs_DoubleMu.root");
 
 	dyjets17_mu_effs = dyjets17_mu.Analyze();
-
+}
 
 else{
 	cout << "Invalid sampleName and/or unrecognized phyiscs object" << endl;
