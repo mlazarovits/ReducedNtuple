@@ -167,7 +167,7 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
 
 	dyjets17_mu.SetVar("Muon_pt");
-	dyjets17_mu.SetOutputName("DYJets17_AllTrigs_DoubleMu.root");
+	dyjets17_mu.SetOutputName("DYJets17_AllTrigs_DoubleMu_pt.root");
 
 	dyjets17_mu_effs = dyjets17_mu.Analyze();
 }
