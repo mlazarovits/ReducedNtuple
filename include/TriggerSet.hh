@@ -332,11 +332,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
-	bool iso = false;
-		bool double_lep = false;
+	
 
 	for(int evt = 0; evt < nEntries; evt++){
 		
+		bool iso = false;
+		bool double_lep = false;
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -347,8 +348,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
-		    if(nMuon >= 2) double_lep = true;
-			// if(nMuon != 1) continue; 
+		    // if(nMuon >= 2) double_lep = true;
+			if(nMuon != 2) continue; 
+
 			cout << "nMuon: " << nMuon << endl;
 
 			// muselections.push_back(MuonmediumId_counter);
