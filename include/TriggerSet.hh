@@ -54,6 +54,10 @@ public:
 private:
 	std::vector<float> muonSelection(int nMuon);
 	std::vector<float> electronSelection(int nElectron);
+	float calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
+	TLorentzVector calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
+	void initializeAnalyze();
+	std::vector<Double_t> makeEffBins();
 
 	string m_samplename;
 	string m_trigname;
@@ -74,21 +78,22 @@ private:
 	TLeaf* l_nElectron;
 	TLeaf* l_Electron_pfRelIso03_all;
 	TLeaf* l_MET;
-	TLeaf* l_MHT;
+	TLeaf* l_nJet;
+	TLeaf* l_Jet_pt;
+	TLeaf* l_Jet_eta;
+	TLeaf* l_Jet_phi;
+	TLeaf* l_Jet_mass;
 	
 	TLeaf* l_var;
 	TLeaf* l_weight;
 
-	// TChain* m_chain;
 	vector<string> m_triggers;
 	
 	vector<string> m_filenames;
 
 	bool debug=false;
 
-	// prod2016MC_reducedNANO_Triggers m_Triggers_2016(NULL);
-	// prod2017MC_reducedNANO_Triggers m_Triggers_2017(NULL);
-	// prod2018MC_reducedNANO_Triggers m_Triggers_2018(NULL);
+	
 
 
 
@@ -253,11 +258,28 @@ inline std::vector<float> TriggerSet::electronSelection(int nElectron){
 }
 
 
+inline float TriggerSet::calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf){
+	double HT = 0.;
+	for(int i = 0; i < nJet_leaf->GetValue(); i++){
+		HT+=Jet_pt_leaf->GetValue(i);
+	}
+	return HT;
+}
 
-inline vector<TEfficiency*> TriggerSet::Analyze(){
-	vector<TEfficiency*> vec_eff;
-	vector<TLeaf*> vec_ltrig;
-	
+inline TLorentzVector TriggerSet::calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf){
+	TLorentzVector MHT(0.,0.,0.,0.);
+	for(int i = 0; i < nJet_leaf->GetValue(); i++){
+		TLorentzVector dummy;
+		dummy.SetPtEtaPhiM(Jet_pt_leaf->GetValue(i),Jet_eta_leaf->GetValue(i),Jet_phi_leaf->GetValue(i),Jet_mass_leaf->GetValue(i));
+		MHT -= dummy;
+	}
+	return MHT;
+}
+
+
+
+
+inline void TriggerSet::initializeAnalyze(){
 	l_nMuon = m_tree->GetLeaf("nMuon");
 	l_Muonpt = m_tree->GetLeaf("Muon_pt");
 	l_Muoneta = m_tree->GetLeaf("Muon_eta");
@@ -267,21 +289,27 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
 
+	if(strstr(m_samplename.c_str(),"2017")){
+		l_MET = m_tree->GetLeaf("METFixEE2017_pt");
+	}
+	
+	l_nJet = m_tree->GetLeaf("nJet");
+	l_Jet_mass = m_tree->GetLeaf("Jet_mass");
+	l_Jet_phi = m_tree->GetLeaf("Jet_phi");
+	l_Jet_eta = m_tree->GetLeaf("Jet_eta");
+	l_Jet_pt = = m_tree->GetLeaf("Jet_pt");
+
 	l_nElectron = m_tree->GetLeaf("nElectron");
 	l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
 	
 	l_var = m_tree->GetLeaf(m_var.c_str());
 	l_weight = m_tree->GetLeaf("Generator_weight");
-
-	int nEntries;
-	if(l_var == NULL){
-		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
-		return vec_eff;
-	}
+}
 
 
+
+inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	Int_t nBins;
-
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
@@ -305,6 +333,27 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// cout << effbins.at(i) << endl;
 		}
 	}
+	return effbins;
+}
+
+
+
+inline vector<TEfficiency*> TriggerSet::Analyze(){
+	vector<TEfficiency*> vec_eff;
+	vector<TLeaf*> vec_ltrig;
+
+	initializeAnalyze();
+	
+	
+
+	int nEntries;
+	if(l_var == NULL){
+		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
+		return vec_eff;
+	}
+
+
+	effbins = makeEffBins();
 
 
 
@@ -345,16 +394,25 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	    fflush(stdout);
 
+	    float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+
+
+
 
 	    if(strstr(m_var.c_str(),"Muon")){
+	    	cout << "a" << endl;
 		    int nMuon = l_nMuon->GetValue();
+		    cout << "b" << endl;
 		    float MET = l_MET->GetValue();
-		    float MHT = l_MHT->GetValue();
+		    cout << "c" << endl;
+		   
 
 		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
+			
 			if(MET < 50) continue;
-			if(MHT < 60) continue;
+			if(MHT.Pt() < 60) continue;
 
 
 			// muselections.push_back(MuonmediumId_counter);
