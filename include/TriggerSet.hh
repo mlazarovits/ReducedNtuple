@@ -313,7 +313,7 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
-		nBins = 20;
+		nBins = 40;
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins/2 + 1; i++){
 			effbins.push_back(effbins.at(i-1) + 0.5);
@@ -358,13 +358,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 
-
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),effbins.size(),&effbins.at(0));
 		
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
@@ -380,7 +379,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
-	
 
 	
 
@@ -524,7 +522,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chopcolor = gr_effs.size()/2;
+	Int_t chopcolor = gr_effs.size()/3;
 	Int_t chopmarker = gr_effs.size()/3;
 
 	for(int i = 0; i < gr_effs.size(); i++){
@@ -541,15 +539,15 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 		else if(i /chopmarker == 2){
 			gr_effs[i]->SetMarkerStyle(20); //circle
 		}
-		if(i % 1 == 0){
+		if(i % chopcolor == 0){
 			gr_effs[i]->SetMarkerColor(kBlue-7);
 			gr_effs[i]->SetLineColor(kBlue-7);
 		}
-		else if(i % 2 == 1){
+		else if(i % chopcolor == 1){
 			gr_effs[i]->SetMarkerColor(kRed-7);
 			gr_effs[i]->SetLineColor(kRed-7);
 		}
-		else if(i % 3 == 2){
+		else if(i % chopcolor == 2){
 			gr_effs[i]->SetMarkerColor(kGreen-7);
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
