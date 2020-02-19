@@ -289,12 +289,15 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		effbins.push_back(0.0);
 		for(int i = 1; i < 51; i++){
 			effbins.push_back(effbins.at(i-1) + 2.0);
+			cout << effbins[i] << endl;
 		}
 		for(int i = 51; i < nBins+2; i++){
 			effbins.push_back(effbins.at(i-1) + 10.0);
+			cout << effbins[i] << endl;
 		}
 	}
-	if(strstr(m_var.c_str(),"eta")){
+	else if(strstr(m_var.c_str(),"eta")){
+		cout << "not here" << endl;
 		nBins = 200;
 		effbins.push_back(-3.05);
 		for(int i = 1; i < nBins+2; i++){
@@ -303,7 +306,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	}
 
-	
+
 
 
 	//create TEfficiency objects and get trigger leaves
