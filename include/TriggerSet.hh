@@ -351,7 +351,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    // if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
 
-			cout << "nMuon: " << nMuon << endl;
 
 			// muselections.push_back(MuonmediumId_counter);
 			// muselections.push_back(MuontightId_counter);
@@ -406,11 +405,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!iso) continue;
 			}
 
-			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
+			// if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
 
-				if(!double_lep) continue; //at least two leptons for double lepton triggers
-				cout << "passed, evt #  " << evt << endl;
-			}
+			// 	if(!double_lep) continue; //at least two leptons for double lepton triggers
+			// 	cout << "passed, evt #  " << evt << endl;
+			// }
 
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
