@@ -242,8 +242,6 @@ inline std::vector<float> TriggerSet::electronSelection(int nElectron){
 		
 	}
 
-
-
 	eleselections.push_back(ElemediumId_counter);
 	eleselections.push_back(EletightId_counter);
 	eleselections.push_back(ElemedpromptId_counter);
@@ -412,7 +410,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
-			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
+			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0));
 		}
 	}
 	cout << endl;
