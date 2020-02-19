@@ -354,7 +354,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	vector<Double_t> effbins = makeEffBins();
 	cout << effbins.size() << endl;
-	Int_t nBins = 20;
+	Int_t nBins = 40;
 
 
 
@@ -363,7 +363,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),effbins.size(),&effbins.at(0));
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
 		
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
