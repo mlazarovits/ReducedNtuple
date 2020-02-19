@@ -73,6 +73,8 @@ private:
 	TLeaf* l_Muoneta;
 	TLeaf* l_nElectron;
 	TLeaf* l_Electron_pfRelIso03_all;
+	TLeaf* l_MET;
+	TLeaf* l_MHT;
 	
 	TLeaf* l_var;
 	TLeaf* l_weight;
@@ -283,13 +285,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
 		nBins = 20;
+		nHalf = nBins/2 + 1;
 		effbins.push_back(0.0);
-		for(int i = 1; i < 11; i++){
-			effbins.push_back(effbins.at(i-1) + 2.0);
+		for(int i = 1; i < nHalf; i++){
+			effbins.push_back(effbins.at(i-1) + 0.5);
 			// cout << effbins[i] << endl;
 		}
-		for(int i = 11; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 10.0);
+		for(int i = nHalf; i < nBins+2; i++){
+			effbins.push_back(effbins.at(i-1) + 1.0);
 			// cout << effbins[i] << endl;
 		}
 	}
@@ -344,8 +347,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
+		    float MET = l_MET->GetValue();
+		    float MHT = l_MHT->GetValue();
+
 		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
+			if(MET < 50) continue;
+			if(MHT < 60) continue;
 
 
 			// muselections.push_back(MuonmediumId_counter);
@@ -477,15 +485,15 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 		else if(i /chopmarker == 2){
 			gr_effs[i]->SetMarkerStyle(20); //circle
 		}
-		if(i % chopcolor == 0){
+		if(i % 1 == 0){
 			gr_effs[i]->SetMarkerColor(kBlue-7);
 			gr_effs[i]->SetLineColor(kBlue-7);
 		}
-		else if(i % chopcolor == 1){
+		else if(i % 2 == 1){
 			gr_effs[i]->SetMarkerColor(kRed-7);
 			gr_effs[i]->SetLineColor(kRed-7);
 		}
-		else if(i % chopcolor == 2){
+		else if(i % 3 == 2){
 			gr_effs[i]->SetMarkerColor(kGreen-7);
 			gr_effs[i]->SetLineColor(kGreen-7);
 		}
