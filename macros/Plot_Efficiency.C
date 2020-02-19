@@ -156,7 +156,7 @@ else if(sampleName=="wjets18" && physicsobj=="Electron"){
 // ////////////////////////////////////DYJETSTOLL 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
 // ////////////////////////////////////DYJETSTOLL 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
 else if(sampleName=="dyjets17" && physicsobj=="Muon"){
-	if(f_wjets18 == NULL) return;
+	if(f_dyjets17 == NULL) return;
 
 	vector<TEfficiency*> dyjets17_mu_effs;
 	TriggerSet dyjets17_mu(f_dyjets17,true);
