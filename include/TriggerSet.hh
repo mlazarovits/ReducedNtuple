@@ -296,7 +296,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 	}
 	else if(strstr(m_var.c_str(),"eta")){
-		cout << "not here" << endl;
 		nBins = 200;
 		effbins.push_back(-3.05);
 		for(int i = 1; i < nBins+2; i++){

@@ -24,7 +24,7 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 	TFile* f_wjets16 = NULL;	//TFile::Open((gPathname+"output/wjets16.root").c_str());
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
 	TFile* f_wjets18 = NULL;	//TFile::Open((gPathname+"output/wjets18.root").c_str());
-	
+	TFile* f_dyjets17 = TFile::Open((gPathname+"output/dyjets17.root").c_str());
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
 if(sampleName=="wjets16" && physicsobj=="Muon"){
@@ -71,7 +71,7 @@ else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	string var = "pt"; 
 
 	vector<TEfficiency*> wjets17_mu_effs;
-	TriggerSet wjets17_mu(f_wjets17,true);
+	TriggerSet wjets17_mu(f_wjets17);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
 
 	// wjets17_mu.AddTrigger("HLT_IsoMu24");
@@ -150,6 +150,27 @@ else if(sampleName=="wjets18" && physicsobj=="Electron"){
 	wjets18_ele_effs = wjets18_ele.Analyze();
 	wjets18_ele.makePlots(wjets18_ele_effs);
 }
+
+
+
+// ////////////////////////////////////DYJETSTOLL 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
+// ////////////////////////////////////DYJETSTOLL 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
+else if(sampleName=="dyjets17" && physicsobj=="Muon"){
+	if(f_wjets18 == NULL) return;
+
+	vector<TEfficiency*> dyjets17_mu_effs;
+	TriggerSet dyjets17_mu(f_dyjets17,true);
+	dyjets17_mu.SetSampleName("DY+JetstoLL 2017 No ID");
+
+	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
+	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET70_PFMHT70");
+	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
+
+	dyjets17_mu.SetVar("Muon_pt");
+	dyjets17_mu.SetOutputName("DYJets17_AllTrigs_DoubleMu.root");
+
+	dyjets17_mu_effs = dyjets17_mu.Analyze();
+
 
 else{
 	cout << "Invalid sampleName and/or unrecognized phyiscs object" << endl;
