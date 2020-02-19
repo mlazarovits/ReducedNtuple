@@ -10,7 +10,8 @@
 #include "../include/prod2016MC_reducedNANO_Triggers.h"
 #include "../include/prod2017MC_reducedNANO_Triggers.h"
 #include "../include/prod2018MC_reducedNANO_Triggers.h"
-#include "TEfficiency.h"
+// #include "TEfficiency.h"
+#include <TLatex.h>
 
 
 using namespace std;
@@ -59,6 +60,8 @@ private:
 	string m_outname;
 	TTree* m_tree;
 	string m_var;
+
+	float etacut;
 
 	TLeaf* l_nMuon;
 	TLeaf* l_Muon_mediumId;
@@ -447,6 +450,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
+		gr_effs[i]->GetYaxis()->SetRangeUser(0.0,1.0);
 		
 		if(i / chopmarker == 0){
 			gr_effs[i]->SetMarkerStyle(22); //triangle
