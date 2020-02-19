@@ -159,7 +159,7 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 	if(f_dyjets17 == NULL) return;
 
 	vector<TEfficiency*> dyjets17_mu_effs;
-	TriggerSet dyjets17_mu(f_dyjets17,true);
+	TriggerSet dyjets17_mu(f_dyjets17);
 	dyjets17_mu.SetSampleName("DY+JetstoLL 2017 No ID");
 
 	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
@@ -167,7 +167,7 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 	dyjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
 
 	dyjets17_mu.SetVar("Muon_pt");
-	dyjets17_mu.SetOutputName("DYJets17_AllTrigs_DoubleMu.root");
+	dyjets17_mu.SetOutputName("DYJets17_DoubleMuMETTrigs_DoubleMu_METcut200.root");
 
 	dyjets17_mu_effs = dyjets17_mu.Analyze();
 	dyjets17_mu.makePlots(dyjets17_mu_effs);
