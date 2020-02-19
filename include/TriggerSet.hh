@@ -406,7 +406,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
 
-			if(MET < 50) continue;
+			if(MET < 200) continue;
 			if(MHT.Pt() < 60) continue;
 
 
@@ -472,7 +472,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
-			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0));
+			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));
 		}
 	}
 	cout << endl;
