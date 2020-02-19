@@ -297,7 +297,7 @@ inline void TriggerSet::initializeAnalyze(){
 	l_Jet_mass = m_tree->GetLeaf("Jet_mass");
 	l_Jet_phi = m_tree->GetLeaf("Jet_phi");
 	l_Jet_eta = m_tree->GetLeaf("Jet_eta");
-	l_Jet_pt = = m_tree->GetLeaf("Jet_pt");
+	l_Jet_pt = m_tree->GetLeaf("Jet_pt");
 
 	l_nElectron = m_tree->GetLeaf("nElectron");
 	l_Electron_pfRelIso03_all = m_tree->GetLeaf("Muon_pfRelIso03_all");
@@ -314,7 +314,6 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
 		nBins = 20;
-		
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins/2 + 1; i++){
 			effbins.push_back(effbins.at(i-1) + 0.5);
@@ -353,7 +352,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 
-	effbins = makeEffBins();
+	vector<Double_t> effbins = makeEffBins();
+	cout << effbins.size() << endl;
+	Int_t nBins = 20;
 
 
 
@@ -410,7 +411,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 2) continue; 
-			
+
 			if(MET < 50) continue;
 			if(MHT.Pt() < 60) continue;
 
