@@ -332,11 +332,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
-	
+	bool iso = false;
+		bool double_lep = false;
 
 	for(int evt = 0; evt < nEntries; evt++){
-		bool iso = false;
-		bool double_lep = false;
+		
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
