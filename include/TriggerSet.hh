@@ -313,14 +313,14 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
 	if(strstr(m_var.c_str(),"pt")){
-		nBins = 40;
+		nBins = 10;
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins/2 + 1; i++){
-			effbins.push_back(effbins.at(i-1) + 0.5);
+			effbins.push_back(effbins.at(i-1) + 5.0);
 			// cout << effbins[i] << endl;
 		}
 		for(int i = nBins/2 + 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 0.5);
+			effbins.push_back(effbins.at(i-1) + 5.0);
 			// cout << effbins[i] << endl;
 		}
 	}
@@ -342,8 +342,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TLeaf*> vec_ltrig;
 
 	initializeAnalyze();
-	
-	
 
 	int nEntries;
 	if(l_var == NULL){
