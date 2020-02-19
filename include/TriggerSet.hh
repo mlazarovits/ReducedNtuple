@@ -316,11 +316,11 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 		nBins = 20;
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins/2 + 1; i++){
-			effbins.push_back(effbins.at(i-1) + 5.0);
+			effbins.push_back(effbins.at(i-1) + 2.0);
 			// cout << effbins[i] << endl;
 		}
 		for(int i = nBins/2 + 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 5.0);
+			effbins.push_back(effbins.at(i-1) + 10.0);
 			// cout << effbins[i] << endl;
 		}
 	}
