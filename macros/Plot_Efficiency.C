@@ -68,17 +68,22 @@ else if(sampleName=="wjets16" && physicsobj=="Electron"){
 else if(sampleName=="wjets17" && physicsobj=="Muon"){
 	if(f_wjets17 == NULL) return;
 
-	string var = "eta"; 
+	string var = "pt"; 
 
 	vector<TEfficiency*> wjets17_mu_effs;
-	TriggerSet wjets17_mu(f_wjets17);
+	TriggerSet wjets17_mu(f_wjets17,true);
 	wjets17_mu.SetSampleName("WJetsToLNu 2017 Loose ID");
-	wjets17_mu.AddTrigger("HLT_IsoMu24");
-	wjets17_mu.AddTrigger("HLT_IsoMu27");
-	wjets17_mu.AddTrigger("HLT_OldMu100");
-	wjets17_mu.AddTrigger("HLT_TkMu100");
-	wjets17_mu.AddTrigger("HLT_Mu50");
-	wjets17_mu.AddTrigger("HLT_Mu55");
+
+	// wjets17_mu.AddTrigger("HLT_IsoMu24");
+	// wjets17_mu.AddTrigger("HLT_IsoMu27");
+	// wjets17_mu.AddTrigger("HLT_OldMu100");
+	// wjets17_mu.AddTrigger("HLT_TkMu100");
+	// wjets17_mu.AddTrigger("HLT_Mu50");
+	// wjets17_mu.AddTrigger("HLT_Mu55");
+
+	wjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
+	wjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET70_PFMHT70");
+	wjets17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
 	wjets17_mu.SetVar("Muon_"+var);
 	wjets17_mu.SetOutputName("WJets17_AllTrigs_SingleMuon_loose_"+var+"_ptcut125.root");
 

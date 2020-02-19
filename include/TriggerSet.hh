@@ -329,9 +329,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	else if (debug == false) nEntries = m_tree->GetEntries();
 	
 
-	bool iso = false;
+	
 
 	for(int evt = 0; evt < nEntries; evt++){
+		bool iso = false;
+		bool double_lep = false;
+
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -341,7 +344,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
+		    if(nMuon >= 2) double_lep = true;
 			if(nMuon != 1) continue; 
+
 
 			// muselections.push_back(MuonmediumId_counter);
 			// muselections.push_back(MuontightId_counter);
@@ -359,9 +364,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(strstr(m_var.c_str(),"eta")){
 				if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
 			}
-			else if(strstr(m_var.c_str(),"pt")){
-				if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
-			}
+
+			//eta cut for pt plots
+			// else if(strstr(m_var.c_str(),"pt")){
+			// 	if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
+			// }
 
 			if(muonSelections.at(4) >= 1) iso = true;
 				
@@ -388,10 +395,17 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			}
 
 		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
-			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){
+
+
+			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
 				if(!iso) continue;
-				// if(iso) cout << "iso passed " << evt << endl;
 			}
+
+			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
+				if(!double_lep) continue; //at least two leptons for double lepton triggers
+			}
+
+
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
 			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue());
