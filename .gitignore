@@ -10,7 +10,7 @@
 *.sh
 scripts/DO_hadd.pyc
 Fall17_94X_WJetsToLNu/
-Fall17_94X_DYJetsToLL/
+Fall17_94X_DYJetsToLL/*
 Summer16_94X_WJetsToLNu/
 Autumn18_102X_WJetsLNu/
 samples/
