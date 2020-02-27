@@ -483,7 +483,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
-				if(!MET_val) continue;
+				if(!METval) continue;
 				if(!mHTval) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
