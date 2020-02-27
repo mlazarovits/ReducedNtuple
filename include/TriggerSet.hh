@@ -56,6 +56,7 @@ private:
 	std::vector<float> electronSelection(int nElectron);
 	float calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	TLorentzVector calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
+	Double_t calcInvMass2Muons();
 	void initializeAnalyze();
 	std::vector<Double_t> makeEffBins();
 
@@ -75,6 +76,8 @@ private:
 	TLeaf* l_Muon_minipfRelIso_all;
 	TLeaf* l_Muonpt;
 	TLeaf* l_Muoneta;
+	TLeaf* l_Muonphi;
+	TLeaf* l_Muonmass;
 	TLeaf* l_nElectron;
 	TLeaf* l_Electron_pfRelIso03_all;
 	TLeaf* l_MET;
@@ -270,11 +273,11 @@ inline TLorentzVector TriggerSet::calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, 
 	return MHT;
 }
 
-inline Double_t TriggerSet::calcInvMass(Int_t nJets){
-	for(int i = 0; i < nJets)
+inline Double_t TriggerSet::calcInvMass2Muons(){
 	TLorentzVector lep1;
 	TLorentzVector lep2;
-
+	lep1.SetPtEtaPhiM(l_Muonpt->GetValue(0),l_Muoneta->GetValue(0),l_Muonphi->GetValue(0),l_Muonmass->GetValue(0));
+	lep2.SetPtEtaPhiM(l_Muonpt->GetValue(1),l_Muoneta->GetValue(1),l_Muonphi->GetValue(1),l_Muonmass->GetValue(1));
 	Double invmass = (lep1 + lep2).M();
 	return invmass;
 }
