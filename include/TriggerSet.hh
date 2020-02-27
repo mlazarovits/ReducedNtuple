@@ -56,6 +56,7 @@ private:
 	float calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	TLorentzVector calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	Double_t calcInvMass2Muons(int Muon1, int Muon2);	
+	Double_t calcPt2Muons(int Muon1, int Muon2);
 	void initializeAnalyze();
 	std::vector<Double_t> makeEffBins();
 
@@ -278,6 +279,15 @@ inline Double_t TriggerSet::calcInvMass2Muons(int Muon1, int Muon2){
 	return invmass;
 }
 
+inline Double_t TriggerSet::calcPt2Muons(int Muon1, int Muon2){
+	TLorentzVector lep1;
+	TLorentzVector lep2;
+	lep1.SetPtEtaPhiM(l_Muonpt->GetValue(Muon1),l_Muoneta->GetValue(Muon1),l_Muonphi->GetValue(Muon1),l_Muonmass->GetValue(Muon1));
+	lep2.SetPtEtaPhiM(l_Muonpt->GetValue(Muon2),l_Muoneta->GetValue(Muon2),l_Muonphi->GetValue(Muon2),l_Muonmass->GetValue(Muon2));
+	Double_t pt = (lep1 + lep2).Pt();
+	return pt;
+}
+
 
 
 
@@ -391,6 +401,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		bool METval = false;
 		bool mHTval = false;
 		bool invMuonMassval = false;
+		bool invMuonPtval = false;
+		Double_t invMuonpT;
 		Double_t invMuonMass;
 
 		m_tree->GetEntry(evt);
@@ -416,7 +428,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 			invMuonMass = calcInvMass2Muons(0, 1);
+			invMuonpT = calcPt2Muons(0, 1);
 			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+			if(invMuonpT >= 3) invMuonpTval = true;
 
 
 			
@@ -490,6 +504,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
+				if(!invMuonPtval) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
 			else{
