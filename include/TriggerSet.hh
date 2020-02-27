@@ -404,7 +404,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    float MET = l_MET->GetValue();		   
 
 		    if(nMuon >= 2) double_lep = true;
-			// if(nMuon != 2) continue; 
+			if(nMuon != 2) continue; 
 
 			if(MET < 200) continue;
 			if(MHT.Pt() < 60) continue;
