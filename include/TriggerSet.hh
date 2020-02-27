@@ -198,9 +198,6 @@ inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 	float mu_pt = -9999;
 	float mu_eta = -9999;
 	
-		
-	
-
 	for(int i = 0; i < nMuon; i++){
 		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 		if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
@@ -321,11 +318,11 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 		nBins = 20;
 		effbins.push_back(0.0);
 		for(int i = 1; i < nBins/2 + 1; i++){
-			effbins.push_back(effbins.at(i-1) + 0.5);
+			effbins.push_back(effbins.at(i-1) + 1.0);
 			// cout << effbins[i] << endl;
 		}
 		for(int i = nBins/2 + 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 5.0);
+			effbins.push_back(effbins.at(i-1) + 2.0);
 			// cout << effbins[i] << endl;
 		}
 	}
@@ -407,7 +404,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    float MET = l_MET->GetValue();		   
 
 		    if(nMuon >= 2) double_lep = true;
-			if(nMuon != 2) continue; 
+			// if(nMuon != 2) continue; 
 
 			if(MET < 200) continue;
 			if(MHT.Pt() < 60) continue;
@@ -479,6 +476,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// cout << bPassed << endl;
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
+				if(!double_lep) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
 			else{
