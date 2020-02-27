@@ -504,7 +504,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
-				if(!invMuonPtval) continue;
+				if(!invMuonpTval) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
 			else{
