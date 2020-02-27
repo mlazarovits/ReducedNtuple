@@ -386,6 +386,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		
 		bool iso = false;
 		bool double_lep = false;
+		bool METval = false;
+		bool mHTval = false;
+		Double_t invMuonMass;
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -404,10 +407,13 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		    float MET = l_MET->GetValue();		   
 
 		    if(nMuon >= 2) double_lep = true;
-			if(nMuon != 2) continue; 
+			// if(nMuon != 2) continue; 
 
-			if(MET < 200) continue;
-			if(MHT.Pt() < 60) continue;
+			if(MET >= 200) METval = true;//continue;
+			if(MHT.Pt() >= 60) mHTval = true;//continue;
+
+			invMuonMass = calcInvMass2Muons(0, 1);
+
 
 			
 
@@ -477,6 +483,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
+				if(!MET_val) continue;
+				if(!mHTval) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
 			else{
