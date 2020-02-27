@@ -25,6 +25,7 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/wjets17.root").c_str());
 	TFile* f_wjets18 = NULL;	//TFile::Open((gPathname+"output/wjets18.root").c_str());
 	TFile* f_dyjets17 = TFile::Open((gPathname+"output/dyjets17.root").c_str());
+	TFile* f_zz2l2nu17 = TFile::Open((gPathname+"output/zz2l2nu17.root").c_str());
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
 if(sampleName=="wjets16" && physicsobj=="Muon"){
@@ -171,6 +172,26 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 
 	dyjets17_mu_effs = dyjets17_mu.Analyze();
 	dyjets17_mu.makePlots(dyjets17_mu_effs);
+}
+
+
+
+else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
+	if(f_zz2l2nu17 == NULL) return;
+
+	vector<TEfficiency*> zz2l2nu17_mu_effs;
+	TriggerSet zz2l2nu17_mu(f_zz2l2nu17,true);
+	zz2l2nu17_mu.SetSampleName("ZZ to 2L2Nu 2017 No ID");
+
+	zz2l2nu17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
+	zz2l2nu17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET70_PFMHT70");
+	zz2l2nu17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
+
+	zz2l2nu17_mu.SetVar("Muon_pt");
+	zz2l2nu17_mu.SetOutputName("ZZ2L2Nu17_DoubleMuMETTrigs_DoubleMu_METcut200.root");
+
+	zz2l2nu17_mu_effs = zz2l2nu17_mu.Analyze();
+	zz2l2nu17_mu.makePlots(zz2l2nu17_mu_effs);
 }
 
 else{

@@ -181,13 +181,6 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	}
 	choptrig += " %s";
 
-		// sscanf(trigger.c_str(),choptrig,str_trig[i]); //scan for triggers and store them in separate strings
-		
-		// for(int i = 0; i < nTrigOR; i++){ //add to vector
-		// 	TLeaf* l_temp = m_tree->GetLeaf(str_trig[i]);
-		// 	vec_trig.push_back(l_temp);
-		// 	delete l_temp;
-		// }
 
 	return vec_trig;
 }
@@ -266,6 +259,7 @@ inline float TriggerSet::calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet
 	return HT;
 }
 
+
 inline TLorentzVector TriggerSet::calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf){
 	TLorentzVector MHT(0.,0.,0.,0.);
 	for(int i = 0; i < nJet_leaf->GetValue(); i++){
@@ -274,6 +268,15 @@ inline TLorentzVector TriggerSet::calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, 
 		MHT -= dummy;
 	}
 	return MHT;
+}
+
+inline Double_t TriggerSet::calcInvMass(Int_t nJets){
+	for(int i = 0; i < nJets)
+	TLorentzVector lep1;
+	TLorentzVector lep2;
+
+	Double invmass = (lep1 + lep2).M();
+	return invmass;
 }
 
 
@@ -472,7 +475,11 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 			// cout << bPassed << endl;
-			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));
+
+			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
+				cout << "double" << endl;
+			}
+			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1)); 
 		}
 	}
 	cout << endl;
