@@ -48,12 +48,11 @@ public:
 	void makePlots(vector<TEfficiency*> effs);
 
 
-	bool global_cuts(const Long64_t& jentry, double x_val);
-
-
-private:
 	std::vector<float> muonSelection(int nMuon);
 	std::vector<float> electronSelection(int nElectron);
+
+private:
+	
 	float calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	TLorentzVector calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	Double_t calcInvMass2Muons(int Muon1, int Muon2);	
@@ -480,9 +479,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// cout << bPassed << endl;
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
-				cout << "double" << endl;
+				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
-			vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1)); 
+			else{
+				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+			}
+			
 		}
 	}
 	cout << endl;
@@ -618,13 +620,4 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 
 
 
-}
-
-inline bool TriggerSet::global_cuts(const Long64_t& jentry, double x_val)
-{
- bool cut = true;
- TLeaf* leaf = m_tree->GetLeaf(m_var.c_str());
- leaf->GetBranch()->GetEntry(jentry);
- if(x_val/leaf->GetValue() < 5.) cut = false;
- return cut;
 }
