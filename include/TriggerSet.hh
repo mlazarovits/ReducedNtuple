@@ -390,6 +390,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		bool double_lep = false;
 		bool METval = false;
 		bool mHTval = false;
+		bool invMuonMassval = false;
 		Double_t invMuonMass;
 
 		m_tree->GetEntry(evt);
@@ -415,6 +416,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 			invMuonMass = calcInvMass2Muons(0, 1);
+			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
 
 
 			
@@ -487,6 +489,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
+				if(!invMuonMassval) continue;
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
 			}
 			else{
