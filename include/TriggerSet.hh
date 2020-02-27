@@ -278,7 +278,7 @@ inline Double_t TriggerSet::calcInvMass2Muons(){
 	TLorentzVector lep2;
 	lep1.SetPtEtaPhiM(l_Muonpt->GetValue(0),l_Muoneta->GetValue(0),l_Muonphi->GetValue(0),l_Muonmass->GetValue(0));
 	lep2.SetPtEtaPhiM(l_Muonpt->GetValue(1),l_Muoneta->GetValue(1),l_Muonphi->GetValue(1),l_Muonmass->GetValue(1));
-	Double invmass = (lep1 + lep2).M();
+	Double_t invmass = (lep1 + lep2).M();
 	return invmass;
 }
 
