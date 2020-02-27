@@ -401,7 +401,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		bool METval = false;
 		bool mHTval = false;
 		bool invMuonMassval = false;
-		bool invMuonPtval = false;
+		bool invMuonpTval = false;
 		Double_t invMuonpT;
 		Double_t invMuonMass;
 
