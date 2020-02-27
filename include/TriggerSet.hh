@@ -329,13 +329,16 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	if(strstr(m_var.c_str(),"pt")){
 		nBins = 20;
 		effbins.push_back(0.0);
-		for(int i = 1; i < nBins/2 + 1; i++){
+		for(int i = 1; i < 2; i++){
+			effbins.push_back(effbins.at(i-1) + 4.0);
+			// cout << effbins[i] << endl;
+		}
+		for(int i = 2; i < 6; i++){
 			effbins.push_back(effbins.at(i-1) + 1.0);
 			// cout << effbins[i] << endl;
 		}
-		for(int i = nBins/2 + 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 2.0);
-			// cout << effbins[i] << endl;
+		for(int i = 6; i < 9; i++){
+			effbins.push_back(effbins.at(i-1) + 10);
 		}
 	}
 	else if(strstr(m_var.c_str(),"eta")){
