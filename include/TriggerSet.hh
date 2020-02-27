@@ -285,6 +285,8 @@ inline void TriggerSet::initializeAnalyze(){
 	l_nMuon = m_tree->GetLeaf("nMuon");
 	l_Muonpt = m_tree->GetLeaf("Muon_pt");
 	l_Muoneta = m_tree->GetLeaf("Muon_eta");
+	l_Muonphi = m_tree->GetLeaf("Muon_phi");
+	l_Muonmass = m_tree->GetLeaf("Muon_mass");
 	l_Muon_mediumId = m_tree->GetLeaf("Muon_mediumId");
 	l_Muon_mediumPromptId = m_tree->GetLeaf("Muon_mediumPromptId");
 	l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
