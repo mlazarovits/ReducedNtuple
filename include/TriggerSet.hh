@@ -554,7 +554,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	cv->Update();
 	if(eff == NULL) cout << "error" << endl;
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
-	cv->cd();
+	cv->Update();
 	gr->Draw();
 
 	
