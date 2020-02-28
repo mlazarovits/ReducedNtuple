@@ -538,7 +538,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				eff->Fill((bPassed),l_Muonpt->GetValue(0),l_Muoneta->GetValue(0));  //subleading lepton
 			// }
 		// 	else{
 		// 		vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
