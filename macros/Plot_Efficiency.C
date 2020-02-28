@@ -191,7 +191,7 @@ else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 	zz2l2nu17_mu.SetOutputName("ZZ2L2Nu17_DoubleMuMETTrigs_DoubleMu_METcut200.root");
 
 	zz2l2nu17_mu_effs = zz2l2nu17_mu.Analyze();
-	zz2l2nu17_mu.makePlots(zz2l2nu17_mu_effs);
+	// zz2l2nu17_mu.makePlots(zz2l2nu17_mu_effs);
 }
 
 else{

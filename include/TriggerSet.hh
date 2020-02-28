@@ -548,6 +548,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		// }
 	}
 	cout << endl;
+	vec_eff.at(0)->Draw();
 
 
 	
