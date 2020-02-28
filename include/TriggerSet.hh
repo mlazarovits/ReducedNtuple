@@ -406,7 +406,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		string y_label = ";#epsilon";
 		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0));
 		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0),nBinsy,&effbinsy.at(0));
-
+		// cout << eff << endl;
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 
@@ -539,7 +539,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				vec_eff.at(i)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
 			// }
 		// 	else{
 		// 		vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
@@ -548,8 +548,9 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		// }
 	}
 	cout << endl;
+
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TGraphAsymmErrors* gr = vec_eff.at(i)->GetPaintedGraph();
+	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
 	cv->cd();
 	gr->Draw();
 
