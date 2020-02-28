@@ -333,11 +333,11 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 			effbins.push_back(effbins.at(i-1) + 4.0);
 			// cout << effbins[i] << endl;
 		}
-		for(int i = 2; i < 6; i++){
+		for(int i = 2; i < 10; i++){
 			effbins.push_back(effbins.at(i-1) + 1.0);
 			// cout << effbins[i] << endl;
 		}
-		for(int i = 6; i < 9; i++){
+		for(int i = 10; i < 13; i++){
 			effbins.push_back(effbins.at(i-1) + 10);
 		}
 	}
