@@ -86,6 +86,8 @@ private:
 	TLeaf* l_Jet_eta;
 	TLeaf* l_Jet_phi;
 	TLeaf* l_Jet_mass;
+
+	TLeaf* l_reqTrigger;
 	
 	TLeaf* l_var;
 	TLeaf* l_weight;
@@ -303,6 +305,8 @@ inline void TriggerSet::initializeAnalyze(){
 	l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
 
+	l_reqTrigger = m_tree->GetLeaf("HLT_IsoMu27");
+
 	if(strstr(m_samplename.c_str(),"2017")){
 		l_MET = m_tree->GetLeaf("METFixEE2017_pt");
 	}
@@ -329,6 +333,7 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 	if(strstr(m_var.c_str(),"pt")){
 		nBins = 20;
 		effbins.push_back(0.0);
+		//SOS binning
 		for(int i = 1; i < 2; i++){
 			effbins.push_back(effbins.at(i-1) + 4.0);
 			// cout << effbins[i] << endl;
@@ -437,6 +442,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			invMuonpT = calcPt2Muons(0, 1);
 			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
 			if(invMuonpT >= 3) invMuonpTval = true;
+			if(l_reqTrigger->GetValue() == false) continue;
 
 
 			
