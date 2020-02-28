@@ -533,14 +533,14 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			bool bPassed = vec_ltrig.at(0)->GetValue();
 		// 	// cout << bPassed << endl;
 
-			if(strstr(m_triggers.at(i).c_str(),"Double")){ //iso req for iso triggers
+			// if(strstr(m_triggers.at(i).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
 				vec_eff.at(i)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
-			}
+			// }
 		// 	else{
 		// 		vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
 		// 	}
@@ -549,7 +549,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 	cout << endl;
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	TGraphAsymmErrors* gr = vec_eff.at(0)->GetPaintedGraph();
+	TGraphAsymmErrors* gr = vec_eff.at(i)->GetPaintedGraph();
 	cv->cd();
 	gr->Draw();
 
