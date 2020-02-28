@@ -371,7 +371,6 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 	}
 	else{
 		cout << "Invalid variable specified" << endl;
-		return effbins == NULL;
 	}
 	return effbins;
 }
