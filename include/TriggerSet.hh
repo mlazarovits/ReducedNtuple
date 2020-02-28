@@ -548,8 +548,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		// }
 	}
 	cout << endl;
-	vec_eff.at(0)->Draw();
-
+	TCanvas* cv = new TCanvas("cv","cv",800,600);
+	TGraphAsymmErrors* gr = vec_eff.at(0)->GetPaintedGraph();
+	cv->cd();
+	gr->Draw();
 
 	
 	return vec_eff;
