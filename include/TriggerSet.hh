@@ -371,7 +371,7 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 	}
 	else{
 		cout << "Invalid variable specified" << endl;
-		return effbins = NULL;
+		return effbins == NULL;
 	}
 	return effbins;
 }
@@ -531,7 +531,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		// 	// }
 
 
-		// 	bool bPassed = vec_ltrig.at(nTrig)->GetValue();
+			bool bPassed = vec_ltrig.at(0)->GetValue();
 		// 	// cout << bPassed << endl;
 
 			if(strstr(m_triggers.at(i).c_str(),"Double")){ //iso req for iso triggers
