@@ -338,10 +338,10 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 			// cout << effbins[i] << endl;
 		}
 		for(int i = 5; i < 6; i++){
-			effbins.push_back(effbins.at(i-1) + 3);
+			effbins.push_back(effbins.at(i-1) + 3.);
 		}
 		for(int i = 6; i < 9; i++){
-			effbins.push_back(effbins.at(i-1) + 3);
+			effbins.push_back(effbins.at(i-1) + 10.);
 		}
 	}
 	else if(strstr(m_var.c_str(),"eta")){
