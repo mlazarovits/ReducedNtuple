@@ -549,6 +549,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	cout << endl;
 
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
+	cv->cd();
 	eff->Draw();
 	cv->Update();
 	if(eff == NULL) cout << "error" << endl;
