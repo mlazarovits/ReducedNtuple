@@ -58,7 +58,7 @@ private:
 	Double_t calcInvMass2Muons(int Muon1, int Muon2);	
 	Double_t calcPt2Muons(int Muon1, int Muon2);
 	void initializeAnalyze();
-	std::vector<Double_t> makeEffBins();
+	std::vector<Double_t> makeEffBins(TString inputvar);
 
 	string m_samplename;
 	string m_trigname;
@@ -326,11 +326,11 @@ inline void TriggerSet::initializeAnalyze(){
 
 
 
-inline std::vector<Double_t> TriggerSet::makeEffBins(){
+inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 	Int_t nBins;
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
-	if(strstr(m_var.c_str(),"pt")){
+	if(inputvar == "pt"){
 		nBins = 20;
 		effbins.push_back(0.0);
 		//SOS binning
@@ -345,17 +345,33 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 		for(int i = 5; i < 6; i++){
 			effbins.push_back(effbins.at(i-1) + 3.);
 		}
-		for(int i = 6; i < 9; i++){
-			effbins.push_back(effbins.at(i-1) + 10.);
+		for(int i = 6; i < 11; i++){
+			effbins.push_back(effbins.at(i-1) + 5.);
 		}
 	}
-	else if(strstr(m_var.c_str(),"eta")){
-		nBins = 200;
-		effbins.push_back(-3.05);
-		for(int i = 1; i < nBins+2; i++){
-			effbins.push_back(effbins.at(i-1) + 0.05);
+	else if(inputvar == "eta"){
+
+		// nBins = 200;
+		// effbins.push_back(-3.05);
+		// for(int i = 1; i < nBins+2; i++){
+		// 	effbins.push_back(effbins.at(i-1) + 0.05);
+		// 	// cout << effbins.at(i) << endl;
+		// }
+		//SOS binning
+		nBins = 5;
+		effbins.push_back(0.0);
+		// for(int i = 1; i < 2; i++){
+		effbins.push_back(effbins.at(0) + 0.8);
+		effbins.push_back(effbins.at(1) + 0.45);
+		effbins.push_back(effbins.at(2) + 0.35);
+		effbins.push_back(effbins.at(3) + 0.7);
+		effbins.push_back(effbins.at(4) + 0.1);
 			// cout << effbins.at(i) << endl;
-		}
+		// }
+	}
+	else{
+		cout << "Invalid variable specified" << endl;
+		return effbins = NULL;
 	}
 	return effbins;
 }
@@ -366,6 +382,7 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(){
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
+	
 
 	initializeAnalyze();
 
@@ -376,18 +393,21 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 
 
-	vector<Double_t> effbins = makeEffBins();
-	Int_t nBins = effbins.size()-2;
-
+	vector<Double_t> effbinsx = makeEffBins("pt");
+	Int_t nBinsx = effbinsx.size()-2;
+	std::vector<Double_t> effbinsy = makeEffBins("eta");
+	Int_t nBinsy = effbinsy.size()-2;
 
 
 	//create TEfficiency objects and get trigger leaves
-	for(int i = 0; i < m_triggers.size(); i++){
+	// for(int i = 0; i < m_triggers.size(); i++){
+		Int_t i = 0;
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
-		
+		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0));
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0),nBinsy,&effbinsy.at(0));
+
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 
@@ -398,7 +418,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
-	}
+	// }
 
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
@@ -494,36 +514,39 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			}
 
-		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 
 
-			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
-				if(!iso) continue;
-			}
 
-			// if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
-
-			// 	if(!double_lep) continue; //at least two leptons for double lepton triggers
-			// 	cout << "passed, evt #  " << evt << endl;
-			// }
+		// for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 
 
-			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
-			// cout << bPassed << endl;
+		// 	if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
+		// 		if(!iso) continue;
+		// 	}
 
-			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
+		// 	// if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
+
+		// 	// 	if(!double_lep) continue; //at least two leptons for double lepton triggers
+		// 	// 	cout << "passed, evt #  " << evt << endl;
+		// 	// }
+
+
+		// 	bool bPassed = vec_ltrig.at(nTrig)->GetValue();
+		// 	// cout << bPassed << endl;
+
+			if(strstr(m_triggers.at(i).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(1));  //subleading lepton
+				vec_eff.at(i)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
 			}
-			else{
-				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
-			}
+		// 	else{
+		// 		vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+		// 	}
 			
-		}
+		// }
 	}
 	cout << endl;
 
