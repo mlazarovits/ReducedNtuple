@@ -551,6 +551,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	eff->Draw();
 	cv->Update();
+	if(eff == NULL) cout << "error" << endl;
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
 	cv->cd();
 	gr->Draw();
