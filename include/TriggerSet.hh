@@ -511,14 +511,14 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 
 
-			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
+			if(strstr(m_triggers.at(0).c_str(),"Iso")){ //iso req for iso triggers
 				if(!iso) continue;
 			}
 
 
 			bool bPassed = l_trig->GetValue();
 
-			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
+			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
@@ -643,8 +643,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 			if(muonSelections.at(4) >= 1) iso = true;
 				
-			
-
 		}
 
 		if(strstr(m_var.c_str(),"Electron")){
@@ -695,7 +693,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	cout << endl;
 
 	return vec_eff;
-}
+
 
 
 inline void TriggerSet::make2DPlot(TEfficiency* eff){
