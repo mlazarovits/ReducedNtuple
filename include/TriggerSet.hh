@@ -705,7 +705,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
 	if(gr == NULL){
 		cout << "error" << endl;
-		return vec_eff;
+		return eff;
 	}
 	cv->Update();
 	gr->Draw();
