@@ -180,6 +180,7 @@ else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 	if(f_zz2l2nu17 == NULL) return;
 
 	vector<TEfficiency*> zz2l2nu17_mu_effs;
+	TEfficiency* zz2l2nu17_mu_eff;
 	TriggerSet zz2l2nu17_mu(f_zz2l2nu17,false);
 	zz2l2nu17_mu.SetSampleName("ZZ to 2L2Nu 2017 No ID");
 
@@ -190,7 +191,7 @@ else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 	zz2l2nu17_mu.SetVar("Muon_pt");
 	zz2l2nu17_mu.SetOutputName("ZZ2L2Nu17_DoubleMuMETTrigs_DoubleMu_METcut200.root");
 
-	zz2l2nu17_mu_effs = zz2l2nu17_mu.Analyze2D();
+	zz2l2nu17_mu_eff = zz2l2nu17_mu.Analyze2D();
 	zz2l2nu17_mu.make2DPlot(zz2l2nu17_mu_effs);
 }
 
