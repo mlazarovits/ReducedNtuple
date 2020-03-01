@@ -46,7 +46,7 @@ public:
 	vector<TEfficiency*> Analyze();
 
 	void makePlots(vector<TEfficiency*> effs);
-	void make2DPlot(TEfficiency* eff);
+	void make2DPlot(vector<TEfficiency*> effs);
 
 
 
@@ -384,7 +384,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
 	
-
 	initializeAnalyze();
 
 	int nEntries;
@@ -543,13 +542,12 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 	cout << endl;
 
-
-	
 	return vec_eff;
 }
 
 
-inline void TriggerSet::make2DPlot(TEfficiency* eff){
+inline void TriggerSet::make2DPlot(vector<TEfficiency*> effs){
+	TEfficiency *eff = effs.at(0);
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	eff->Draw("colz");
