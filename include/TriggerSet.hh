@@ -381,7 +381,7 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 
 
 
-inline vector<TEfficiency*> TriggerSet::Analyze2D(){
+inline TEfficiency* TriggerSet::Analyze2D(){
 	// vector<TEfficiency*> vec_eff;
 	// vector<TLeaf*> vec_ltrig;
 	TEfficiency* eff;
@@ -392,7 +392,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze2D(){
 	int nEntries;
 	if(l_var == NULL){
 		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
-		return vec_eff;
+		return eff;
 	}
 
 	vector<Double_t> effbinsx = makeEffBins("pt");
@@ -412,7 +412,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze2D(){
 	
 	if(l_trig == NULL){
 		cout << "Error: Trigger " << m_triggers.at(0) << " not found" << endl;
-		return vec_eff;
+		return eff;
 	}
 	
 
@@ -516,7 +516,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze2D(){
 			}
 
 
-			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
+			bool bPassed = l_trig->GetValue();
 
 			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
@@ -524,10 +524,10 @@ inline vector<TEfficiency*> TriggerSet::Analyze2D(){
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				vec_eff.at(nTrig)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
 			}
 			else{
-				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
 			}
 			
 	}
@@ -698,8 +698,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 }
 
 
-inline void TriggerSet::make2DPlot(vector<TEfficiency*> effs){
-	TEfficiency *eff = effs.at(0);
+inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	eff->Draw("colz");
