@@ -401,7 +401,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 	//create TEfficiency objects and get trigger leaves
-	// for(int i = 0; i < m_triggers.size(); i++){
+	for(int i = 0; i < m_triggers.size(); i++){
 		Int_t i = 0;
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
@@ -418,7 +418,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		}
 		vec_eff.push_back(eff);
 		vec_ltrig.push_back(l_trig);
-	// }
+	}
 
 	if(debug == true) nEntries = 1E6;
 	else if (debug == false) nEntries = m_tree->GetEntries();
@@ -543,7 +543,6 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 	cout << endl;
 
-	
 
 	
 	return vec_eff;
