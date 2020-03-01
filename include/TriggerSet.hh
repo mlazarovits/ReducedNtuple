@@ -44,9 +44,10 @@ public:
 	vector<TLeaf*> ScanTriggers(string target,string trigger);
 
 	vector<TEfficiency*> Analyze();
+	TEfficiency* Analyze2D();
 
 	void makePlots(vector<TEfficiency*> effs);
-	void make2DPlot(vector<TEfficiency*> effs);
+	void make2DPlot(TEfficiency* eff);
 
 
 
@@ -380,6 +381,162 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 
 
 
+inline vector<TEfficiency*> TriggerSet::Analyze2D(){
+	// vector<TEfficiency*> vec_eff;
+	// vector<TLeaf*> vec_ltrig;
+	TEfficiency* eff;
+	TLeaf* l_trig;
+	
+	initializeAnalyze();
+
+	int nEntries;
+	if(l_var == NULL){
+		cout << "Error: Variable " << m_var.c_str() << " not found" << endl;
+		return vec_eff;
+	}
+
+	vector<Double_t> effbinsx = makeEffBins("pt");
+	Int_t nBinsx = effbinsx.size()-2;
+	std::vector<Double_t> effbinsy = makeEffBins("eta");
+	Int_t nBinsy = effbinsy.size()-2;
+
+
+	//create TEfficiency objects and get trigger leaves
+	string title = (m_var+" vs."+m_triggers.at(0)+" Efficiency").c_str();
+	string x_label = (";"+m_var).c_str();
+	string y_label = ";#epsilon";
+	eff = new TEfficiency(m_triggers.at(0).c_str(),(m_triggers.at(0)).c_str(),nBinsx,&effbinsx.at(0),nBinsy,&effbinsy.at(0));
+	
+	l_trig = m_tree->GetLeaf(m_triggers.at(0).c_str());
+
+	
+	if(l_trig == NULL){
+		cout << "Error: Trigger " << m_triggers.at(0) << " not found" << endl;
+		return vec_eff;
+	}
+	
+
+	if(debug == true) nEntries = 1E6;
+	else if (debug == false) nEntries = m_tree->GetEntries();
+
+	
+
+	for(int evt = 0; evt < nEntries; evt++){
+		
+		bool iso = false;
+		bool double_lep = false;
+		bool METval = false;
+		bool mHTval = false;
+		bool invMuonMassval = false;
+		bool invMuonpTval = false;
+		Double_t invMuonpT;
+		Double_t invMuonMass;
+
+		m_tree->GetEntry(evt);
+		if (evt % 1000 == 0) {
+			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
+		}
+	    fflush(stdout);
+
+	    float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+
+
+	    if(strstr(m_var.c_str(),"Muon")){
+		    int nMuon = l_nMuon->GetValue();
+		    float MET = l_MET->GetValue();		   
+
+		    if(nMuon >= 2) double_lep = true;
+			// if(nMuon != 2) continue; 
+
+			if(MET >= 200) METval = true;//continue;
+			if(MHT.Pt() >= 60) mHTval = true;//continue;
+
+			invMuonMass = calcInvMass2Muons(0, 1);
+			invMuonpT = calcPt2Muons(0, 1);
+			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+			if(invMuonpT >= 3) invMuonpTval = true;
+			if(l_reqTrigger->GetValue() == false) continue;
+
+
+
+			// muselections.push_back(MuonmediumId_counter);
+			// muselections.push_back(MuontightId_counter);
+			// muselections.push_back(MuonmedpromptId_counter);
+			// muselections.push_back(muonminiIso_counter);
+			// muselections.push_back(muonminipfRelIso_counter);
+			// muselections.push_back(mu_pt);
+			// muselections.push_back(mu_eta);
+
+
+			vector<float> muonSelections = muonSelection(nMuon);
+			int NmuonSelections = muonSelections.size();
+
+
+			if(strstr(m_var.c_str(),"eta")){
+				if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
+			}
+
+			//eta cut for pt plots
+			// else if(strstr(m_var.c_str(),"pt")){
+			// 	if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
+			// }
+
+			if(muonSelections.at(4) >= 1) iso = true;
+				
+			
+
+		}
+
+		if(strstr(m_var.c_str(),"Electron")){
+
+			int nElectron = l_nElectron->GetValue();
+			if(nElectron != 1) continue; //at least 1 electron
+
+			// int ElemediumId_counter = 0;
+			// int EletightId_counter = 0;
+			// int ElemedpromptId_counter = 0;
+			// int ElepfRelIso03_counter = 0;
+
+			vector<float> eleSelections = electronSelection(nElectron);
+			int NeleSelections = eleSelections.size();
+
+		
+			if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
+
+			}
+
+
+
+
+
+
+			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
+				if(!iso) continue;
+			}
+
+
+			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
+
+			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
+				if(!double_lep) continue;
+				if(!METval) continue;
+				if(!mHTval) continue;
+				if(!invMuonMassval) continue;
+				if(!invMuonpTval) continue;
+				vec_eff.at(nTrig)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+			}
+			else{
+				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+			}
+			
+	}
+	cout << endl;
+
+	return eff;
+}
+
+
 inline vector<TEfficiency*> TriggerSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_ltrig;
@@ -392,21 +549,16 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 		return vec_eff;
 	}
 
-
-	vector<Double_t> effbinsx = makeEffBins("pt");
-	Int_t nBinsx = effbinsx.size()-2;
-	std::vector<Double_t> effbinsy = makeEffBins("eta");
-	Int_t nBinsy = effbinsy.size()-2;
-
+	vector<Double_t> effbins = makeEffBins(m_var.c_str());
+	Int_t nBins = effbins.size()-2;
+	
 
 	//create TEfficiency objects and get trigger leaves
 	for(int i = 0; i < m_triggers.size(); i++){
-		Int_t i = 0;
 		string title = (m_var+" vs."+m_triggers.at(i)+" Efficiency").c_str();
 		string x_label = (";"+m_var).c_str();
 		string y_label = ";#epsilon";
-		// TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0));
-		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBinsx,&effbinsx.at(0),nBinsy,&effbinsy.at(0));
+		TEfficiency* eff = new TEfficiency(m_triggers.at(i).c_str(),(m_triggers.at(i)).c_str(),nBins,&effbins.at(0));
 		
 		TLeaf* l_trig = m_tree->GetLeaf(m_triggers.at(i).c_str());
 
