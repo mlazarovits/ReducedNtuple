@@ -46,6 +46,8 @@ public:
 	vector<TEfficiency*> Analyze();
 
 	void makePlots(vector<TEfficiency*> effs);
+	void make2DPlot(TEfficiency* eff);
+
 
 
 	std::vector<float> muonSelection(int nMuon);
@@ -515,39 +517,40 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 
-		// for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
+		for(int nTrig = 0; nTrig < m_triggers.size(); nTrig++){
 
 
-		// 	if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
-		// 		if(!iso) continue;
-		// 	}
-
-		// 	// if(strstr(m_triggers.at(nTrig).c_str(),"Double")){
-
-		// 	// 	if(!double_lep) continue; //at least two leptons for double lepton triggers
-		// 	// 	cout << "passed, evt #  " << evt << endl;
-		// 	// }
+			if(strstr(m_triggers.at(nTrig).c_str(),"Iso")){ //iso req for iso triggers
+				if(!iso) continue;
+			}
 
 
-			bool bPassed = vec_ltrig.at(0)->GetValue();
-		// 	// cout << bPassed << endl;
+			bool bPassed = vec_ltrig.at(nTrig)->GetValue();
 
-			// if(strstr(m_triggers.at(i).c_str(),"Double")){ //iso req for iso triggers
+			if(strstr(m_triggers.at(nTrig).c_str(),"Double")){ //iso req for iso triggers
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
-			// }
-		// 	else{
-		// 		vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
-		// 	}
+				vec_eff.at(nTrig)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+			}
+			else{
+				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+			}
 			
-		// }
+		}
 	}
 	cout << endl;
 
+	
+
+	
+	return vec_eff;
+}
+
+
+inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	eff->Draw("colz");
@@ -560,11 +563,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	}
 	cv->Update();
 	gr->Draw();
-
-	
-	return vec_eff;
 }
-
 
 
 inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
