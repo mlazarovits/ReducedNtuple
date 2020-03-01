@@ -693,7 +693,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 	cout << endl;
 
 	return vec_eff;
-
+}
 
 
 inline void TriggerSet::make2DPlot(TEfficiency* eff){
