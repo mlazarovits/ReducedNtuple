@@ -702,22 +702,19 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	//GET EFFICIENCIES ON PLOT
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
-	// eff->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
 	eff->Draw("colztext");
 	cv->Update();
 	
 	TH2* gr = eff->GetPaintedHistogram();
 
-	TString g_PlotTitle = m_samplename+" Trigger Efficiencies;Subleading Muon pT (GeV);Subleading Muon #eta;"+(m_triggers.at(0)+" Efficiency").c_str();
+	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	gr->SetTitle(g_PlotTitle);
-	// gr->GetXaxis()->SetTitle("Muon pT (GeV)");
-	// gr->GetYaxis()->SetTitle("Muon #eta");
-	// gr->
-	// gr->SetMinimum(0.0);
-	// gr->SetMaximum(1.0);
+	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
+	gr->GetYaxis()->SetTitle("Muon #eta");
+	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str())
 
 	cv->Update();
-	gr->Draw("text");
+	gr->Draw("colztext");
 }
 
 
