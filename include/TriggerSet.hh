@@ -707,10 +707,6 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	cv->Update();
 	
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
-	if(gr == NULL){
-		cout << "error: null graph" << endl;
-		return eff;
-	}
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies;Subleading Muon pT (GeV);Subleading Muon #eta;"+(m_triggers.at(0)+" Efficiency").c_str();
 	gr->SetTitle(g_PlotTitle);
