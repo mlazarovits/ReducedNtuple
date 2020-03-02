@@ -449,7 +449,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		    if(nMuon == 2) double_lep = true;
 			// if(nMuon != 2) continue; 
 
-			if(MET >= 200) METval = true;//continue;
+			if(MET >= 250) METval = true;//continue;
 			if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 			invMuonMass = calcInvMass2Muons(0, 1);
@@ -471,16 +471,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 			vector<float> muonSelections = muonSelection(nMuon);
 			int NmuonSelections = muonSelections.size();
-
-
-			if(strstr(m_var.c_str(),"eta")){
-				if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
-			}
-
-			//eta cut for pt plots
-			// else if(strstr(m_var.c_str(),"pt")){
-			// 	if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
-			// }
 
 			if(muonSelections.at(4) >= 1) iso = true;
 				
