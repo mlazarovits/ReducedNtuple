@@ -703,12 +703,12 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	// eff->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	eff->Draw("colz");
+	eff->Draw("colztext");
 	cv->Update();
 	
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
 	if(gr == NULL){
-		cout << "error" << endl;
+		cout << "error: null graph" << endl;
 		return eff;
 	}
 
@@ -717,6 +717,8 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	// gr->GetXaxis()->SetTitle("Muon pT (GeV)");
 	// gr->GetYaxis()->SetTitle("Muon #eta");
 	// gr->
+	// gr->SetMinimum(0.0);
+	// gr->SetMaximum(1.0);
 
 	cv->Update();
 	gr->Draw();
@@ -812,8 +814,7 @@ inline void TriggerSet::makePlots(vector<TEfficiency*> effs){
 	string g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	mg->GetXaxis()->SetTitle(m_var.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
-	// mg->SetMinimum(0.0);
-	// mg->SetMaximum(1.0);
+	
 
 	TLatex l;
 	l.SetTextFont(132);
