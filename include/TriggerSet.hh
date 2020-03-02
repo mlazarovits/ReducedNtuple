@@ -721,7 +721,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	// gr->SetMaximum(1.0);
 
 	cv->Update();
-	gr->Draw();
+	gr->Draw("text");
 }
 
 
