@@ -446,7 +446,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		    int nMuon = l_nMuon->GetValue();
 		    float MET = l_MET->GetValue();		   
 
-		    if(nMuon >= 2) double_lep = true;
+		    if(nMuon == 2) double_lep = true;
 			// if(nMuon != 2) continue; 
 
 			if(MET >= 200) METval = true;//continue;
@@ -703,6 +703,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	gStyle->SetPalette(kRainBow);
+	gStyle->SetPaintTextFormat("0.2f");
 	//GET EFFICIENCIES ON PLOT
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
