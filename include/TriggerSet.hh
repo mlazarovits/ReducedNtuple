@@ -711,11 +711,11 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	
 	TH2* gr = eff->GetPaintedHistogram();
 
-	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
+	TString g_PlotTitle = m_samplename+" Trigger Efficiencies;pt;eta;eff";
 	gr->SetTitle(g_PlotTitle);
-	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
-	gr->GetYaxis()->SetTitle("Muon #eta");
+	// gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
+	// gr->GetXaxis()->SetTitle("Muon pT (GeV)");
+	// gr->GetYaxis()->SetTitle("Muon #eta");
 	
 
 	cv->Update();
