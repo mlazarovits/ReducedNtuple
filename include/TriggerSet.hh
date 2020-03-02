@@ -721,6 +721,35 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 
 	cv->Update();
 	gr->Draw("colztextE");
+
+	TLatex l;
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.035);
+	l.SetTextFont(42);
+	l.SetTextSize(0.03);
+	l.SetTextFont(61);
+	l.DrawLatex(0.16,0.92,"CMS");
+	l.SetTextFont(52);
+	l.DrawLatex(0.21,0.92,"Preliminary");
+	l.SetTextFont(132);
+	l.SetNDC();
+	l.SetTextSize(0.05);
+	l.SetTextFont(132);
+	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
+	cv->Update();
+
+	if(!debug){
+		TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
+
+		TFile* file = new TFile(filename,"RECREATE");
+		cout << "file: " << filename << " created" << endl;
+		file->cd();
+		cv->Write();
+	}
+	else{
+		return;
+	}
 }
 
 
