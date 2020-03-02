@@ -703,7 +703,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	// eff->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	eff->Draw("colztext");
+	eff->Draw("colz");
 	cv->Update();
 	
 	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
