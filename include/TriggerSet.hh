@@ -703,10 +703,10 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	// eff->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	eff->Draw("colz");
+	eff->Draw("colztext");
 	cv->Update();
 	
-	TGraphAsymmErrors* gr = eff->GetPaintedGraph();
+	TH2* gr = eff->GetPaintedHistogram();
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies;Subleading Muon pT (GeV);Subleading Muon #eta;"+(m_triggers.at(0)+" Efficiency").c_str();
 	gr->SetTitle(g_PlotTitle);
