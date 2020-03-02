@@ -713,7 +713,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	}
 
 	string g_PlotTitle = m_samplename+" Trigger Efficiencies";
-	gr->SetTitle(g_PlotTitle;"Subleading Muon pT (GeV)";"Subleading Muon #eta";(m_triggers.at(0)+" Efficiency").c_str());
+	gr->SetTitle(g_PlotTitle+";Subleading Muon pT (GeV);Subleading Muon #eta;"+(m_triggers.at(0)+" Efficiency").c_str());
 	// gr->GetXaxis()->SetTitle("Muon pT (GeV)");
 	// gr->GetYaxis()->SetTitle("Muon #eta");
 	// gr->
