@@ -718,7 +718,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
 
 	cv->Update();
-	gr->Draw("colztext");
+	gr->Draw("colztextE");
 }
 
 
