@@ -524,7 +524,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				Double_t eta = abs(l_Muoneta->GetValue(1));
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1),eta);  //subleading lepton
 			}
 			else{
 				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
@@ -682,7 +683,7 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 				if(!mHTval) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
-				vec_eff.at(nTrig)->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				vec_eff.at(nTrig)->Fill((bPassed),l_Muonpt->GetValue(1));  //subleading lepton
 			}
 			else{
 				vec_eff.at(nTrig)->Fill((bPassed),l_var->GetValue(0)); //leading lepton
@@ -697,6 +698,8 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 
 
 inline void TriggerSet::make2DPlot(TEfficiency* eff){
+	gStyle->SetPalette(kRainBow);
+	//GET EFFICIENCIES ON PLOT
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
 	cv->cd();
 	eff->Draw("colz");
@@ -707,6 +710,12 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 		cout << "error" << endl;
 		return eff;
 	}
+
+	string g_PlotTitle = m_samplename+" Trigger Efficiencies";
+	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
+	gr->GetYaxis()->SetTitle("Muon #eta");
+	gr->GetZaxis()->SetTitle(m_trigger.at(0).c_str()+" Efficiency");
+
 	cv->Update();
 	gr->Draw();
 }
