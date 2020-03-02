@@ -713,9 +713,10 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	gr->SetTitle(g_PlotTitle);
+	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
 	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
 	gr->GetYaxis()->SetTitle("Muon #eta");
-	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
+	
 
 	cv->Update();
 	gr->Draw("colztextE");
