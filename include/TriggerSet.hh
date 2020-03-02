@@ -736,7 +736,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	l.SetNDC();
 	l.SetTextSize(0.05);
 	l.SetTextFont(132);
-	l.DrawLatex(0.40,0.92,g_PlotTitle;
+	l.DrawLatex(0.40,0.92,g_PlotTitle);
 	cv->Update();
 
 	if(!debug){
