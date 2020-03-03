@@ -49,10 +49,10 @@ public:
 	void makePlots(vector<TEfficiency*> effs);
 	void make2DPlot(TEfficiency* eff);
 
+	void SetCuts(string cuts);
 
 
-	std::vector<float> muonSelection(int nMuon);
-	std::vector<float> electronSelection(int nElectron);
+	
 
 private:
 	
@@ -63,11 +63,19 @@ private:
 	void initializeAnalyze();
 	std::vector<Double_t> makeEffBins(TString inputvar);
 
+
+	std::vector<float> muonSelection(int nMuon);
+	std::vector<float> electronSelection(int nElectron);
+	bool GoldenMuonSelection();
+	bool DoubleMuonSelection();
+
+
 	string m_samplename;
 	string m_trigname;
 	string m_outname;
 	TTree* m_tree;
 	string m_var;
+	string m_cuts;
 
 	float etacut;
 
@@ -81,6 +89,9 @@ private:
 	TLeaf* l_Muoneta;
 	TLeaf* l_Muonphi;
 	TLeaf* l_Muonmass;
+	TLeaf* l_Muon_sip3d;
+
+
 	TLeaf* l_nElectron;
 	TLeaf* l_Electron_pfRelIso03_all;
 	TLeaf* l_MET;
@@ -193,6 +204,12 @@ inline vector<TLeaf*> TriggerSet::ScanTriggers(string target,string trigger){
 	return vec_trig;
 }
 
+
+
+inline void TriggerSet::SetCuts(string cuts){
+	m_cuts = cuts;
+}
+
 inline std::vector<float> TriggerSet::muonSelection(int nMuon){
 	std::vector<float> muselections;
 
@@ -255,6 +272,70 @@ inline std::vector<float> TriggerSet::electronSelection(int nElectron){
 	return eleselections;
 }
 
+inline bool TriggerSet::GoldenMuonSelection(){
+	float mu_absMiniIso = 0.0;
+	float mu_sip3d = 0.0;
+	float isGoldenCounter = 0.0;
+	bool isGolden;
+	int nMuon = l_nMuon->GetValue();
+
+	//replace with electron IDs
+	for(int i = 0; i < nMuon; i++){
+	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+		mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt(i);
+		mu_sip3d = l_Muon_sip3d->GetValue(i);
+		if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
+			isGoldenCounter += 1.0;
+		}
+		else{
+			continue;
+		}
+	}
+	if(isGoldenCounter > 0.0) isGolden = true;
+	else isGolden = false;
+
+	return isGolden;
+}
+
+
+
+inline bool TriggerSet::DoubleMuonSelection(){
+	bool iso = false;
+	bool double_lep = false;
+	bool METval = false;
+	bool mHTval = false;
+	bool invMuonMassval = false;
+	bool invMuonpTval = false;
+	bool reqTrigger = false;
+	
+
+	Double_t invMuonMass = calcInvMass2Muons(0, 1);
+	Double_t invMuonpT = calcPt2Muons(0, 1);
+	float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+
+
+	bool isGood;
+
+
+	if(l_nMuon == 2) double_lep = true;
+
+	if(l_MET >= 200) METval = true
+	if(MHT.Pt() >= 60) mHTval = true;
+
+
+	if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+	if(invMuonpT >= 3) invMuonpTval = true;
+	if(l_reqTrigger->GetValue() == true) reqTrigger = true;
+
+	if(double_lep && METval && mHTval && invMuonMass && invMuonpT && reqTrigger) isGood = true;
+
+	return isGood;
+}
+
+
+
+
 
 inline float TriggerSet::calcHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf){
 	double HT = 0.;
@@ -307,6 +388,7 @@ inline void TriggerSet::initializeAnalyze(){
 	l_Muon_tightId = m_tree->GetLeaf("Muon_tightId");
 	l_Muon_miniIsoId = m_tree->GetLeaf("Muon_miniIsoId");
 	l_Muon_minipfRelIso_all = m_tree->GetLeaf("Muon_miniPFRelIso_all");
+	l_Muon_sip3d = m_tree->GetLeaf("Muon_sip3d");
 
 	l_reqTrigger = m_tree->GetLeaf("HLT_IsoMu27");
 
@@ -423,14 +505,14 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 	for(int evt = 0; evt < nEntries; evt++){
 		
-		bool iso = false;
-		bool double_lep = false;
-		bool METval = false;
-		bool mHTval = false;
-		bool invMuonMassval = false;
-		bool invMuonpTval = false;
-		Double_t invMuonpT;
-		Double_t invMuonMass;
+		// bool iso = false;
+		// bool double_lep = false;
+		// bool METval = false;
+		// bool mHTval = false;
+		// bool invMuonMassval = false;
+		// bool invMuonpTval = false;
+		// Double_t invMuonpT;
+		// Double_t invMuonMass;
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -438,27 +520,41 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		}
 	    fflush(stdout);
 
-	    float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
-	    TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    // float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    // TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
-
+	    bool cuts;
+	    bool iso;
+	    float muonminipfRelIso_counter = 0.
 	    if(strstr(m_var.c_str(),"Muon")){
-		    int nMuon = l_nMuon->GetValue();
-		    float MET = l_MET->GetValue();		   
+		    // int nMuon = l_nMuon->GetValue();
+		    // float MET = l_MET->GetValue();		   
 
-		    if(nMuon == 2) double_lep = true;
-			// if(nMuon != 2) continue; 
+		 //    if(nMuon == 2) double_lep = true;
+			// // if(nMuon != 2) continue; 
 
-			if(MET >= 200) METval = true;//continue;
-			if(MHT.Pt() >= 60) mHTval = true;//continue;
+			// if(MET >= 200) METval = true;//continue;
+			// if(MHT.Pt() >= 60) mHTval = true;//continue;
 
-			invMuonMass = calcInvMass2Muons(0, 1);
-			invMuonpT = calcPt2Muons(0, 1);
-			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
-			if(invMuonpT >= 3) invMuonpTval = true;
-			if(l_reqTrigger->GetValue() == false) continue;
+			// invMuonMass = calcInvMass2Muons(0, 1);
+			// invMuonpT = calcPt2Muons(0, 1);
 
 
+			// if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+			// if(invMuonpT >= 3) invMuonpTval = true;
+			// if(l_reqTrigger->GetValue() == false) continue;
+
+			if(m_cuts == "GoldenMuon"){
+				cuts = GoldenMuonSelection(nMuon);
+			}
+			else if(m_cuts == "DoubleMuon"){
+				cuts = DoubleMuonSelection(nMuon);
+			}
+			// if(!cuts) continue;
+
+			for(int i = 0; i < l_nMuon->GetValue();i++){
+				if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1.;
+			}
 
 			// muselections.push_back(MuonmediumId_counter);
 			// muselections.push_back(MuontightId_counter);
@@ -469,10 +565,11 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			// muselections.push_back(mu_eta);
 
 
-			vector<float> muonSelections = muonSelection(nMuon);
-			int NmuonSelections = muonSelections.size();
+			// vector<float> muonSelections = muonSelection(nMuon);
+			// int NmuonSelections = muonSelections.size();
 
-			if(muonSelections.at(4) >= 1) iso = true;
+			if(muonminipfRelIso_counter >= 1.) iso = true;
+			else iso = false;
 				
 			
 
@@ -509,17 +606,18 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			bool bPassed = l_trig->GetValue();
 
 			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
-				if(!double_lep) continue;
-				if(!METval) continue;
-				if(!mHTval) continue;
-				if(!invMuonMassval) continue;
-				if(!invMuonpTval) continue;
-				Double_t eta = abs(l_Muoneta->GetValue(1));
-				if(eta < 0){
-					cout << "error: eta" << endl;
-					return eff;
-				}
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1),eta);  //subleading lepton
+				// if(!double_lep) continue;
+				// if(!METval) continue;
+				// if(!mHTval) continue;
+				// if(!invMuonMassval) continue;
+				// if(!invMuonpTval) continue;
+				if(!cuts) continue;
+				// Double_t eta = fabs(l_Muoneta->GetValue(1));
+				// if(eta < 0){
+				// 	cout << "error: eta" << endl;
+				// 	return eff;
+				// }
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
 			}
 			else{
 				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
@@ -709,8 +807,8 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
-	gr->GetYaxis()->SetTitle("Muon #eta");
+	gr->GetXaxis()->SetTitle("Subleading Muon pT (GeV)");
+	gr->GetYaxis()->SetTitle("Subleading Muon #eta");
 	gr->SetTitle(g_PlotTitle);
 
 	TLatex l;
