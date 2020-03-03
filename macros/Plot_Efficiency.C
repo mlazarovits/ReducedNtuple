@@ -207,7 +207,7 @@ else if(sampleName=="tchiwz17" && physicsobj=="Muon"){
 
 	// vector<TEfficiency*> tchiwz17_mu_effs;
 	TEfficiency* tchiwz17_mu_eff;
-	TriggerSet tchiwz177_mu(f_tchiwz17,true);
+	TriggerSet tchiwz177_mu(f_tchiwz17,false);
 	tchiwz177_mu.SetSampleName("TChi to WZ, Z to LL 2017 No ID");
 
 	tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");

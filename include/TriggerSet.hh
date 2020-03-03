@@ -701,17 +701,17 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	cv->Update();
 	
 	TH2* gr = eff->GetPaintedHistogram();
+	
+	
+
+	cv->Update();
+	gr->Draw("colztextE");
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
 	gr->GetXaxis()->SetTitle("Muon pT (GeV)");
 	gr->GetYaxis()->SetTitle("Muon #eta");
 	gr->SetTitle(g_PlotTitle);
-	
-	
-
-	cv->Update();
-	gr->Draw("colztextE");
 
 	TLatex l;
 	l.SetTextFont(132);
