@@ -26,7 +26,7 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 	TFile* f_wjets18 = NULL;	//TFile::Open((gPathname+"output/wjets18.root").c_str());
 	TFile* f_dyjets17 = TFile::Open((gPathname+"output/dyjets17incl.root").c_str());
 	TFile* f_zz2l2nu17 = TFile::Open((gPathname+"output/zz2l2nu17.root").c_str());
-	TFile* f_tchiwz17 = TFile::Open((gPathname+"/Fall17_94X_SMS_EWK/root/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X_0.root"))
+	TFile* f_tchiwz17 = TFile::Open((gPathname+"/Fall17_94X_SMS_EWK/root/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X_0.root").c_str());
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
 if(sampleName=="wjets16" && physicsobj=="Muon"){
