@@ -26,6 +26,7 @@ void Plot_Efficiency(TString sampleName, TString physicsobj){
 	TFile* f_wjets18 = NULL;	//TFile::Open((gPathname+"output/wjets18.root").c_str());
 	TFile* f_dyjets17 = TFile::Open((gPathname+"output/dyjets17incl.root").c_str());
 	TFile* f_zz2l2nu17 = TFile::Open((gPathname+"output/zz2l2nu17.root").c_str());
+	TFile* f_tchiwz17 = TFile::Open((gPathname+"/Fall17_94X_SMS_EWK/root/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8_Fall17_94X_0.root"))
 ////////////////////////////////////WJETSTOLNU 2016 SINGLE MUON//////////////////////////////////////////////////////////////////
 	//wjets incl. - 2016 muons
 if(sampleName=="wjets16" && physicsobj=="Muon"){
@@ -174,12 +175,14 @@ else if(sampleName=="dyjets17" && physicsobj=="Muon"){
 	dyjets17_mu.makePlots(dyjets17_mu_effs);
 }
 
+// ////////////////////////////////////ZZTO2L2NU 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
+// ////////////////////////////////////ZZTO2L2NU 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
 
 
 else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 	if(f_zz2l2nu17 == NULL) return;
 
-	vector<TEfficiency*> zz2l2nu17_mu_effs;
+	// vector<TEfficiency*> zz2l2nu17_mu_effs;
 	TEfficiency* zz2l2nu17_mu_eff;
 	TriggerSet zz2l2nu17_mu(f_zz2l2nu17,false);
 	zz2l2nu17_mu.SetSampleName("ZZ to 2L2Nu 2017 No ID");
@@ -194,6 +197,30 @@ else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 	zz2l2nu17_mu_eff = zz2l2nu17_mu.Analyze2D();
 	zz2l2nu17_mu.make2DPlot(zz2l2nu17_mu_eff);
 }
+
+
+// ////////////////////////////////////TCHIWZ 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
+// ////////////////////////////////////TCHIWZ 2017 DOUBLE MUON//////////////////////////////////////////////////////////////////
+
+else if(sampleName=="tchiwz17" && physicsobj=="Muon"){
+	if(f_zz2l2nu17 == NULL) return;
+
+	// vector<TEfficiency*> tchiwz17_mu_effs;
+	TEfficiency* tchiwz17_mu_eff;
+	TriggerSet tchiwz177_mu(f_tchiwz17,true);
+	tchiwz177_mu.SetSampleName("TChi to WZ, Z to LL 2017 No ID");
+
+	tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
+	// tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET70_PFMHT70");
+	// tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
+
+	tchiwz177_mu.SetVar("Muon_pt");
+	tchiwz177_mu.SetOutputName("TChiWZ17_DoubleMuMETTrigs_METcut200.root");
+
+	tchiwz17_mu_eff = tchiwz177_mu.Analyze2D();
+	tchiwz177_mu.make2DPlot(tchiwz17_mu_eff);
+}
+
 
 else{
 	cout << "Invalid sampleName and/or unrecognized phyiscs object" << endl;
