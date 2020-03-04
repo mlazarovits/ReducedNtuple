@@ -496,8 +496,11 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 						isGoldenCounter += 1.0;
 					}
 				}
-				cout << "# goldens: " << isGoldenCounter << endl;
-				if(isGoldenCounter >= 1.0) isGolden = true;	
+				
+				if(isGoldenCounter >= 1.0){
+					isGolden = true;
+					cout << "# goldens: " << isGoldenCounter << endl;	
+				}
 				if(nMuon == 2) double_lep = true;
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
@@ -565,7 +568,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// if(!absminiIsoval) continue;
 				// if(!mediumIdval) continue;
 
-				if(!isGolden) continue;
+				// if(!isGolden) continue;
 
 				
 			}
