@@ -11,8 +11,10 @@
 scripts/DO_hadd.pyc
 Fall17_94X_WJetsToLNu/
 Fall17_94X_DYJetsToLL/
+Fall17_94X_SMS_EWK/
 Summer16_94X_WJetsToLNu/
 Autumn18_102X_WJetsLNu/
 Fall17_94X_ZZinclusive/
 effPlots/*.pdf
 samples/
+Lists/
