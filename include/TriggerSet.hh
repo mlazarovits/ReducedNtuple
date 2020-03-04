@@ -505,8 +505,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 	for(int evt = 0; evt < nEntries; evt++){
 		
-		// bool iso = false;
-		// bool double_lep = false;
+		bool iso = false;
+		bool double_lep = false;
 		// bool METval = false;
 		// bool mHTval = false;
 		// bool invMuonMassval = false;
@@ -530,7 +530,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		    // int nMuon = l_nMuon->GetValue();
 		    // float MET = l_MET->GetValue();		   
 
-		 //    if(nMuon == 2) double_lep = true;
+		    if(nMuon == 2) double_lep = true;
 			// // if(nMuon != 2) continue; 
 
 			// if(MET >= 200) METval = true;//continue;
@@ -606,12 +606,12 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			bool bPassed = l_trig->GetValue();
 
 			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
-				// if(!double_lep) continue;
+				if(!double_lep) continue;
 				// if(!METval) continue;
 				// if(!mHTval) continue;
 				// if(!invMuonMassval) continue;
 				// if(!invMuonpTval) continue;
-				if(!cuts) continue;
+				// if(!cuts) continue;
 				
 				eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 			}
