@@ -557,15 +557,15 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
 			// if(!double_lep) continue;
 			if(!METval) continue;
-			cout << "passed MET preselection" << endl;
+			// cout << "passed MET preselection" << endl;
 			if(!sip3dval) continue;
-			cout << "passed sip3d preselection" << endl;
+			// cout << "passed sip3d preselection" << endl;
 
-			if(!absminiIsoval) continue;
-			cout << "passed absMiniIso preselection" << endl;
+			// if(!absminiIsoval) continue;
+			// cout << "passed absMiniIso preselection" << endl;
 
-			if(!mediumIdval) continue;
-			cout << "passed medium preselection" << endl;
+			// if(!mediumIdval) continue;
+			// cout << "passed medium preselection" << endl;
 
 			// if(!mHTval) continue;
 			// if(!isGolden) continue;
