@@ -558,7 +558,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!invMuonpTval) continue;
 
 				// if(!sip3dval) continue;
-				// if(!absminiIsoval) continue;
+				if(!absminiIsoval) continue;
 				// if(!mediumIdval) continue;
 
 				
