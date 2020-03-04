@@ -527,13 +527,12 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	    float muonminipfRelIso_counter = 0.;
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
-		    // float MET = l_MET->GetValue();		   
+		    float MET = l_MET->GetValue();		   
 
 		    if(nMuon == 2) double_lep = true;
-			// // if(nMuon != 2) continue; 
 
-			// if(MET >= 200) METval = true;//continue;
-			// if(MHT.Pt() >= 60) mHTval = true;//continue;
+			if(MET >= 200) METval = true;//continue;
+			if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 			// invMuonMass = calcInvMass2Muons(0, 1);
 			// invMuonpT = calcPt2Muons(0, 1);
@@ -605,14 +604,14 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			
 
 			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
-				// if(!double_lep) continue;
-				// if(!METval) continue;
-				// if(!mHTval) continue;
+				if(!double_lep) continue;
+				if(!METval) continue;
+				if(!mHTval) continue;
 				// if(!invMuonMassval) continue;
 				// if(!invMuonpTval) continue;
 				// if(!cuts) continue;
 				
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 			}
 			else{
 				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
