@@ -478,9 +478,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
 				bool isGolden;
-				if(nMuon == 2) double_lep = true;
-				if(MET >= 80) METval = true;//continue;
-				if(MHT.Pt() >= 60) mHTval = true;//continue;				
+				// if(nMuon == 2) double_lep = true;
+				// if(MET >= 80) METval = true;//continue;
+				// if(MHT.Pt() >= 60) mHTval = true;//continue;				
 
 				//replace with electron IDs
 				for(int i = 0; i < nMuon; i++){
@@ -497,17 +497,17 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					}
 				}
 				if(isGoldenCounter >= 1.0) isGolden = true;	
-				// if(nMuon == 2) double_lep = true;
-				// if(MET >= 200) METval = true;//continue;
-				// if(MHT.Pt() >= 60) mHTval = true;//continue;
+				if(nMuon == 2) double_lep = true;
+				if(MET >= 200) METval = true;//continue;
+				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
-				// invMuonMass = calcInvMass2Muons(0, 1);
-				// invMuonpT = calcPt2Muons(0, 1);
+				invMuonMass = calcInvMass2Muons(0, 1);
+				invMuonpT = calcPt2Muons(0, 1);
 
 
-				// if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
-				// if(invMuonpT >= 3) invMuonpTval = true;
-				// if(l_reqTrigger->GetValue() == true) reqTrig = true;
+				if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+				if(invMuonpT >= 3) invMuonpTval = true;
+				if(l_reqTrigger->GetValue() == true) reqTrig = true;
 				
 			}
 
@@ -553,17 +553,17 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
 			if( m_cuts == "GoldenMuon"){ //iso req for iso triggers
 				if(!double_lep) continue;
-				cout << "1" << endl;
+				// cout << "1" << endl;
 				if(!METval) continue;
-				cout << "2" << endl;
+				// cout << "2" << endl;
 				if(!mHTval) continue;
-				cout << "3" << endl;
+				// cout << "3" << endl;
 				if(!reqTrig) continue;
-				cout << "4" << endl;
+				// cout << "4" << endl;
 				if(!invMuonMassval) continue;
-				cout << "5" << endl;
+				// cout << "5" << endl;
 				if(!invMuonpTval) continue;
-				cout << "6" << endl;
+				// cout << "6" << endl;
 
 
 				if(sip3dval) cout << "true" << endl;
