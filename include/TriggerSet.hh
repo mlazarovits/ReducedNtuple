@@ -553,16 +553,17 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
-
-				if(!sip3dval) continue;
-				if(!absminiIsoval) continue;
-				if(!mediumIdval) continue;
-
-				
-				// if(!isGolden) continue;
 				if(!reqTrig) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
+
+				if(!sip3dval) continue;
+				// if(!absminiIsoval) continue;
+				// if(!mediumIdval) continue;
+
+				
+				// if(!isGolden) continue;
+				
 			}
 			else if(m_cuts == "DoubleMuon"){
 				if(!double_lep) continue;
