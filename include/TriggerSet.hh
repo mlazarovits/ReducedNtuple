@@ -566,8 +566,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// cout << "6" << endl;
 
 
-				if(sip3dval) cout << "true" << endl;
-				else if(!sip3dval) cout << "false" << endl;
+				// if(sip3dval) cout << "true" << endl;
+				if(!sip3dval) continue;
 				
 				// if(!absminiIsoval) continue;
 				// if(!mediumIdval) continue;
