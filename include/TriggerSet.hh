@@ -546,15 +546,16 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			if(!reqTrig) continue;
 			if(!invMuonMassval) continue;
 			if(!invMuonpTval) continue;
-			
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
 
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
-			if(!double_lep) continue;
+			// if(!double_lep) continue;
 			if(!METval) continue;
+			cout << "passed MET preselection" << endl;
 			// if(!mHTval) continue;
 			if(!isGolden) continue;
+			cout << "passed all preselection" << endl;
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
 		else{
