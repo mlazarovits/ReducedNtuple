@@ -558,7 +558,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			// if(!double_lep) continue;
 			if(!METval) continue;
 			// cout << "passed MET preselection" << endl;
-			if(!sip3dval) continue;
+			// if(!sip3dval) continue;
 			// cout << "passed sip3d preselection" << endl;
 
 			// if(!absminiIsoval) continue;
@@ -569,7 +569,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 			// if(!mHTval) continue;
 			// if(!isGolden) continue;
-			cout << "passed all preselection" << endl;
+			// cout << "passed all preselection" << endl;
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
 		else{
