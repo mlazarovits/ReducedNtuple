@@ -489,8 +489,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 						isGoldenCounter += 1.0;
 					}
 				}
-				if(isGoldenCounter >= 1.0) isGolden = true;	
-
+				if(isGoldenCounter >= 1.0){
+					cout << "golden muon!!" << endl;
+					isGolden = true;	
+				}
 			}
 
 			else if(m_cuts == "DoubleMuon"){
