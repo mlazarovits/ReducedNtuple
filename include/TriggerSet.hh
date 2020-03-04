@@ -388,7 +388,8 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 		effbins.push_back(effbins.at(1) + 0.45);
 		effbins.push_back(effbins.at(2) + 0.35);
 		effbins.push_back(effbins.at(3) + 0.7);
-		effbins.push_back(effbins.at(4) + 0.2);
+		effbins.push_back(effbins.at(4) + 0.1);
+		effbins.push_back(effbins.at(5) + 0.1);
 		// }
 	}
 	else{
