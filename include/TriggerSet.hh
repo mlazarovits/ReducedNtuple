@@ -509,10 +509,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool double_lep = false;
 		bool METval = false;
 		bool mHTval = false;
-		// bool invMuonMassval = false;
-		// bool invMuonpTval = false;
-		// Double_t invMuonpT;
-		// Double_t invMuonMass;
+		bool invMuonMassval = false;
+		bool invMuonpTval = false;
+		Double_t invMuonpT;
+		Double_t invMuonMass;
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
@@ -520,7 +520,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		}
 	    fflush(stdout);
 
-	    // float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 	    TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
 	    bool cuts;
@@ -534,13 +534,13 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			if(MET >= 200) METval = true;//continue;
 			if(MHT.Pt() >= 60) mHTval = true;//continue;
 
-			// invMuonMass = calcInvMass2Muons(0, 1);
-			// invMuonpT = calcPt2Muons(0, 1);
+			invMuonMass = calcInvMass2Muons(0, 1);
+			invMuonpT = calcPt2Muons(0, 1);
 
 
-			// if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
-			// if(invMuonpT >= 3) invMuonpTval = true;
-			// if(l_reqTrigger->GetValue() == false) continue;
+			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+			if(invMuonpT >= 3) invMuonpTval = true;
+			if(l_reqTrigger->GetValue() == false) continue;
 
 			if(m_cuts == "GoldenMuon"){
 				cuts = GoldenMuonSelection();
@@ -607,8 +607,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
-				// if(!invMuonMassval) continue;
-				// if(!invMuonpTval) continue;
+				if(!invMuonMassval) continue;
+				if(!invMuonpTval) continue;
 				// if(!cuts) continue;
 				
 				eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
