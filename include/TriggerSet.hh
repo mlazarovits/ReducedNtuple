@@ -558,12 +558,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!reqTrig) continue;
 				if(!invMuonMassval) continue;
 				if(!invMuonpTval) continue;
+				cout << "a" << endl;
 
 
-
-				if(sip3dval){
-					cout << "true" << endl;
-				}
+				if(sip3dval) cout << "true" << endl;
 				else if(!sip3dval) cout << "false" << endl;
 				
 				// if(!absminiIsoval) continue;
