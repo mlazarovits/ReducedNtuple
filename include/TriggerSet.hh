@@ -468,6 +468,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
+		    float MET = l_MET->GetValue();
 
 			if(m_cuts == "GoldenMuon"){
 				float mu_absMiniIso = 0.0;
@@ -493,7 +494,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			}
 
 			else if(m_cuts == "DoubleMuon"){
-				float MET = l_MET->GetValue();		   
+						   
 
 				if(nMuon == 2) double_lep = true;
 
