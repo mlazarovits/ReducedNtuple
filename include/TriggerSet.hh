@@ -521,7 +521,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	    fflush(stdout);
 
 	    // float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
-	    // TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+	    TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
 	    bool cuts;
 	    float muonminipfRelIso_counter = 0.;
