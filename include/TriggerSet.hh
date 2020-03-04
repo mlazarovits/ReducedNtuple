@@ -474,27 +474,38 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		    float MET = l_MET->GetValue();
 
 			if(m_cuts == "GoldenMuon"){
-				float mu_absMiniIso = 0.0;
-				float mu_sip3d = 0.0;
-				float isGoldenCounter = 0.0;
-				bool isGolden;
-				if(nMuon == 2) double_lep = true;
-				if(MET >= 80) METval = true;//continue;
-				if(MHT.Pt() >= 60) mHTval = true;//continue;				
+				// float mu_absMiniIso = 0.0;
+				// float mu_sip3d = 0.0;
+				// float isGoldenCounter = 0.0;
+				// bool isGolden;
+				// if(nMuon == 2) double_lep = true;
+				// if(MET >= 80) METval = true;//continue;
+				// if(MHT.Pt() >= 60) mHTval = true;//continue;				
 
-				//replace with electron IDs
-				for(int i = 0; i < nMuon; i++){
-					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
-					mu_sip3d = l_Muon_sip3d->GetValue(i);
-					if(mu_sip3d < 4.) sip3dval = true;
-					if(mu_absMiniIso < 6.) absminiIsoval = true;
-					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
-					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
-						isGoldenCounter += 1.0;
-					}
-				}
-				if(isGoldenCounter >= 1.0) isGolden = true;	
+				// //replace with electron IDs
+				// for(int i = 0; i < nMuon; i++){
+				// 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+				// 	mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
+				// 	mu_sip3d = l_Muon_sip3d->GetValue(i);
+				// 	if(mu_sip3d < 4.) sip3dval = true;
+				// 	if(mu_absMiniIso < 6.) absminiIsoval = true;
+				// 	if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
+				// 	if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
+				// 		isGoldenCounter += 1.0;
+				// 	}
+				// }
+				// if(isGoldenCounter >= 1.0) isGolden = true;	
+				if(nMuon == 2) double_lep = true;
+				if(MET >= 200) METval = true;//continue;
+				if(MHT.Pt() >= 60) mHTval = true;//continue;
+
+				invMuonMass = calcInvMass2Muons(0, 1);
+				invMuonpT = calcPt2Muons(0, 1);
+
+
+				if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+				if(invMuonpT >= 3) invMuonpTval = true;
+				if(l_reqTrigger->GetValue() == true) reqTrig = true;
 				
 			}
 
