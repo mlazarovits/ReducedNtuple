@@ -565,12 +565,12 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// if(!mHTval) continue;
 				// if(!isGolden) continue;
 				// cout << "passed all preselection" << endl;
-				if(!double_lep) continue;
-				if(!METval) continue;
-				if(!mHTval) continue;
-				if(!reqTrig) continue;
-				if(!invMuonMassval) continue;
-				if(!invMuonpTval) continue;
+				// if(!double_lep) continue;
+				// if(!METval) continue;
+				// if(!mHTval) continue;
+				// if(!reqTrig) continue;
+				// if(!invMuonMassval) continue;
+				// if(!invMuonpTval) continue;
 			}
 			else if(m_cuts == "DoubleMuon"){
 				if(!double_lep) continue;
