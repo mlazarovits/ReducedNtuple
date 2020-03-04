@@ -558,6 +558,15 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			// if(!double_lep) continue;
 			if(!METval) continue;
 			cout << "passed MET preselection" << endl;
+			if(!sip3dval) continue;
+			cout << "passed sip3d preselection" << endl;
+
+			if(!absminiIsoval) continue;
+			cout << "passed absMiniIso preselection" << endl;
+
+			if(!mediumIdval) continue;
+			cout << "passed medium preselection" << endl;
+
 			// if(!mHTval) continue;
 			// if(!isGolden) continue;
 			cout << "passed all preselection" << endl;
