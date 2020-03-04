@@ -478,7 +478,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
 				bool isGolden;
-				if(nMuon == 2) continue; //double_lep = true;
+				if(nMuon == 2) double_lep = true;
 
 				if(MET >= 80) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;				
@@ -556,7 +556,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
 			// if(!double_lep) continue;
-			if(!METval) continue;
+			// if(!METval) continue;
 			// cout << "passed MET preselection" << endl;
 			// if(!sip3dval) continue;
 			// cout << "passed sip3d preselection" << endl;
