@@ -477,7 +477,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				bool isGolden;
 				if(nMuon == 2) continue; //double_lep = true;
 
-				if(MET >= 200) METval = true;//continue;
+				if(MET >= 80) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;				
 
 				//replace with electron IDs
@@ -485,7 +485,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
 					mu_sip3d = l_Muon_sip3d->GetValue(i);
-					if(mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
+					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
 						isGoldenCounter += 1.0;
 					}
 				}
@@ -553,7 +553,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
 			if(!double_lep) continue;
 			if(!METval) continue;
-			if(!mHTval) continue;
+			// if(!mHTval) continue;
 			if(!isGolden) continue;
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
