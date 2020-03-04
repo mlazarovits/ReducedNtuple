@@ -451,6 +451,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool invMuonMassval = false;
 		bool invMuonpTval = false;
 		bool isGolden = false;
+		bool sip3dval = false;
+		bool absminiIsoval = false;
+		bool mediumIdval = false;
 		Double_t invMuonpT;
 		Double_t invMuonMass;
 
@@ -485,13 +488,15 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
 					mu_sip3d = l_Muon_sip3d->GetValue(i);
+					if(mu_sip3d < 4.) sip3dval = true;
+					if(mu_absMiniIso < 6.) absminiIsoval = true;
+					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
 					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
 						isGoldenCounter += 1.0;
 					}
 				}
-				if(isGoldenCounter >= 1.0){
-					isGolden = true;	
-				}
+				if(isGoldenCounter >= 1.0) isGolden = true;	
+				
 			}
 
 			else if(m_cuts == "DoubleMuon"){
@@ -554,7 +559,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			if(!METval) continue;
 			cout << "passed MET preselection" << endl;
 			// if(!mHTval) continue;
-			if(!isGolden) continue;
+			// if(!isGolden) continue;
 			cout << "passed all preselection" << endl;
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
