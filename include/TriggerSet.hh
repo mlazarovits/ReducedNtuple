@@ -544,7 +544,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		}
 
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
-			if(!isGolden);
+			if(!isGolden) continue;
 			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 		}
 		else{
