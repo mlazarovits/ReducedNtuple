@@ -591,7 +591,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		
 			if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
 
-			}
+		}
 
 
 
@@ -612,12 +612,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// if(!invMuonMassval) continue;
 				// if(!invMuonpTval) continue;
 				if(!cuts) continue;
-				// Double_t eta = fabs(l_Muoneta->GetValue(1));
-				// if(eta < 0){
-				// 	cout << "error: eta" << endl;
-				// 	return eff;
-				// }
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),l_Muoneta->GetValue(1));  //subleading lepton
+				
+				eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
 			}
 			else{
 				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
