@@ -475,7 +475,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
 				bool isGolden;
-				if(nMuon == 2) double_lep = true;
+				if(nMuon == 2) continue; //double_lep = true;
 
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;				
@@ -486,11 +486,11 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
 					mu_sip3d = l_Muon_sip3d->GetValue(i);
 					if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
+						cout << "golden muon!! muon pT: " << l_Muonpt->GetValue(i) << endl;
 						isGoldenCounter += 1.0;
 					}
 				}
 				if(isGoldenCounter >= 1.0){
-					cout << "golden muon!!" << endl;
 					isGolden = true;	
 				}
 			}
