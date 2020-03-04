@@ -282,7 +282,7 @@ inline bool TriggerSet::GoldenMuonSelection(){
 	//replace with electron IDs
 	for(int i = 0; i < nMuon; i++){
 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-		mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt(i);
+		mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
 		mu_sip3d = l_Muon_sip3d->GetValue(i);
 		if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
 			isGoldenCounter += 1.0;
@@ -545,10 +545,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			// if(l_reqTrigger->GetValue() == false) continue;
 
 			if(m_cuts == "GoldenMuon"){
-				cuts = GoldenMuonSelection(nMuon);
+				cuts = GoldenMuonSelection();
 			}
 			else if(m_cuts == "DoubleMuon"){
-				cuts = DoubleMuonSelection(nMuon);
+				cuts = DoubleMuonSelection();
 			}
 			// if(!cuts) continue;
 
