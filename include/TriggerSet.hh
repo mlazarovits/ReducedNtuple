@@ -524,10 +524,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	    // TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
 	    bool cuts;
-	    bool iso;
 	    float muonminipfRelIso_counter = 0.;
 	    if(strstr(m_var.c_str(),"Muon")){
-		    // int nMuon = l_nMuon->GetValue();
+		    int nMuon = l_nMuon->GetValue();
 		    // float MET = l_MET->GetValue();		   
 
 		    if(nMuon == 2) double_lep = true;
