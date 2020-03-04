@@ -388,8 +388,8 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 		effbins.push_back(effbins.at(1) + 0.45);
 		effbins.push_back(effbins.at(2) + 0.35);
 		effbins.push_back(effbins.at(3) + 0.7);
-		effbins.push_back(effbins.at(4) + 0.1);
-			// cout << effbins.at(i) << endl;
+		effbins.push_back(effbins.at(4) + 0.2);
+			cout << effbins.at(i) << endl;
 		// }
 	}
 	else{
@@ -447,6 +447,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool double_lep = false;
 		bool METval = false;
 		bool mHTval = false;
+		bool reqTrig = false;
 		bool invMuonMassval = false;
 		bool invMuonpTval = false;
 		bool isGolden = false;
@@ -493,7 +494,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 				if(nMuon == 2) double_lep = true;
 
-				if(MET >= 250) METval = true;//continue;
+				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 				invMuonMass = calcInvMass2Muons(0, 1);
@@ -502,7 +503,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 				if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
 				if(invMuonpT >= 3) invMuonpTval = true;
-				if(l_reqTrigger->GetValue() == false) continue;
+				if(l_reqTrigger->GetValue() == true) reqTrig = true;
 			}
 
 			for(int i = 0; i < l_nMuon->GetValue();i++){
@@ -537,6 +538,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			if(!double_lep) continue;
 			if(!METval) continue;
 			if(!mHTval) continue;
+			if(!reqTrig) continue;
 			if(!invMuonMassval) continue;
 			if(!invMuonpTval) continue;
 			
