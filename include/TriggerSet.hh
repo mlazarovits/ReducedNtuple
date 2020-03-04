@@ -507,8 +507,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		
 		bool iso = false;
 		bool double_lep = false;
-		// bool METval = false;
-		// bool mHTval = false;
+		bool METval = false;
+		bool mHTval = false;
 		// bool invMuonMassval = false;
 		// bool invMuonpTval = false;
 		// Double_t invMuonpT;
