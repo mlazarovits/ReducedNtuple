@@ -487,7 +487,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
 					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
 					mu_sip3d = l_Muon_sip3d->GetValue(i);
-					if(mu_sip3d < 4.) sip3dval = true;
+					if(mu_sip3d < 4.){
+						cout << "sip3dval tru" << endl;
+						sip3dval = true;
+					}
 					if(mu_absMiniIso < 6.) absminiIsoval = true;
 					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
 					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
