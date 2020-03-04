@@ -479,7 +479,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float isGoldenCounter = 0.0;
 				bool isGolden;
 				if(nMuon == 2) double_lep = true;
-
 				if(MET >= 80) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;				
 
@@ -500,10 +499,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			}
 
 			else if(m_cuts == "DoubleMuon"){
-						   
-
 				if(nMuon == 2) double_lep = true;
-
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
@@ -519,10 +515,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			for(int i = 0; i < l_nMuon->GetValue();i++){
 				if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1.;
 			}
-
-
 			if(muonminipfRelIso_counter >= 1.) iso = true;
-			else iso = false;	
 		}
 		
 
@@ -555,7 +548,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		}
 
 		else if(strstr(m_triggers.at(0).c_str(),"Double") && m_cuts == "GoldenMuon"){ //iso req for iso triggers
-			// if(!double_lep) continue;
+			if(!double_lep) continue;
 			// if(!METval) continue;
 			// cout << "passed MET preselection" << endl;
 			// if(!sip3dval) continue;
