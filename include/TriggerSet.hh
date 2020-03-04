@@ -553,27 +553,19 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
 			if( m_cuts == "GoldenMuon"){ //iso req for iso triggers
 				if(!double_lep) continue;
-				// cout << "1" << endl;
 				if(!METval) continue;
-				// cout << "2" << endl;
 				if(!mHTval) continue;
-				// cout << "3" << endl;
 				if(!reqTrig) continue;
-				// cout << "4" << endl;
 				if(!invMuonMassval) continue;
-				// cout << "5" << endl;
 				if(!invMuonpTval) continue;
-				// cout << "6" << endl;
 
 
-				// if(sip3dval) cout << "true" << endl;
-				if(!sip3dval) continue;
-				
-				if(!absminiIsoval) continue;
-				if(!mediumIdval) continue;
+				// if(!sip3dval) continue;
+				// if(!absminiIsoval) continue;
+				// if(!mediumIdval) continue;
 
 				
-				// if(!isGolden) continue;
+				if(!isGolden) continue;
 				
 			}
 			else if(m_cuts == "DoubleMuon"){
