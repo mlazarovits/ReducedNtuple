@@ -216,6 +216,7 @@ else if(sampleName=="tchiwz17" && physicsobj=="Muon"){
 	// tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET90_PFMHT90");
 
 	tchiwz177_mu.SetVar("Muon_pt");
+	tchiwz177_mu.SetCuts("DoubleMuon");
 	tchiwz177_mu.SetOutputName("TChiWZ17_DoubleMuMETTrigs_METcut200.root");
 
 	tchiwz17_mu_eff = tchiwz177_mu.Analyze2D();
