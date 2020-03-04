@@ -64,10 +64,8 @@ private:
 	std::vector<Double_t> makeEffBins(TString inputvar);
 
 
-	std::vector<float> muonSelection(int nMuon);
-	std::vector<float> electronSelection(int nElectron);
-	bool GoldenMuonSelection();
-	bool DoubleMuonSelection();
+	// bool GoldenMuonSelection();
+	// bool DoubleMuonSelection();
 
 
 	string m_samplename;
@@ -210,128 +208,68 @@ inline void TriggerSet::SetCuts(string cuts){
 	m_cuts = cuts;
 }
 
-inline std::vector<float> TriggerSet::muonSelection(int nMuon){
-	std::vector<float> muselections;
-
-	float MuonmediumId_counter = 0;
-	float MuontightId_counter = 0;
-	float MuonmedpromptId_counter = 0;
-	float muonminiIso_counter = 0;
-	float muonminipfRelIso_counter = 0;
-	float mu_pt = -9999;
-	float mu_eta = -9999;
-	
-	for(int i = 0; i < nMuon; i++){
-		// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-		if(l_Muon_mediumId->GetValue(i) == true) MuonmediumId_counter += 1;
-		if(l_Muon_tightId->GetValue(i) == true) MuontightId_counter += 1;
-		if(l_Muon_mediumPromptId->GetValue(i) == true) MuonmedpromptId_counter += 1;
-		if(l_Muon_miniIsoId->GetValue(i) == 4) muonminiIso_counter += 1; //1=MiniIsoLoose, 2=MiniIsoMedium, 3=MiniIsoTight, 4=MiniIsoVeryTight
-		if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1;
-	
-	}
-	//if(eta){
-	mu_pt = l_Muonpt->GetValue(0); //pt of leading muon
-	mu_eta = l_Muoneta->GetValue(0); //eta of leading muon
-	//}
-
-	muselections.push_back(MuonmediumId_counter);
-	muselections.push_back(MuontightId_counter);
-	muselections.push_back(MuonmedpromptId_counter);
-	muselections.push_back(muonminiIso_counter);
-	muselections.push_back(muonminipfRelIso_counter);
-	muselections.push_back(mu_pt);
-	muselections.push_back(mu_eta);
 
 
-	return muselections;
+// inline bool TriggerSet::GoldenMuonSelection(){
+// 	float mu_absMiniIso = 0.0;
+// 	float mu_sip3d = 0.0;
+// 	float isGoldenCounter = 0.0;
+// 	bool isGolden;
+// 	int nMuon = l_nMuon->GetValue();
 
-}
+// 	//replace with electron IDs
+// 	for(int i = 0; i < nMuon; i++){
+// 	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+// 		mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
+// 		mu_sip3d = l_Muon_sip3d->GetValue(i);
+// 		if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
+// 			isGoldenCounter += 1.0;
+// 		}
+// 		else{
+// 			continue;
+// 		}
+// 	}
+// 	if(isGoldenCounter > 0.0) isGolden = true;
+// 	else isGolden = false;
 
-inline std::vector<float> TriggerSet::electronSelection(int nElectron){
-	std::vector<float> eleselections;
-
-	float ElemediumId_counter = 0;
-	float EletightId_counter = 0;
-	float ElemedpromptId_counter = 0;
-	float ElepfRelIso03_counter = 0;
-
-
-	//replace with electron IDs
-	for(int i = 0; i < nElectron; i++){
-	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-		if(l_Electron_pfRelIso03_all->GetValue(i) < 0.1) ElepfRelIso03_counter += 1;
-		
-	}
-
-	eleselections.push_back(ElemediumId_counter);
-	eleselections.push_back(EletightId_counter);
-	eleselections.push_back(ElemedpromptId_counter);
-	eleselections.push_back(ElepfRelIso03_counter);
-
-	return eleselections;
-}
-
-inline bool TriggerSet::GoldenMuonSelection(){
-	float mu_absMiniIso = 0.0;
-	float mu_sip3d = 0.0;
-	float isGoldenCounter = 0.0;
-	bool isGolden;
-	int nMuon = l_nMuon->GetValue();
-
-	//replace with electron IDs
-	for(int i = 0; i < nMuon; i++){
-	// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
-		mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
-		mu_sip3d = l_Muon_sip3d->GetValue(i);
-		if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
-			isGoldenCounter += 1.0;
-		}
-		else{
-			continue;
-		}
-	}
-	if(isGoldenCounter > 0.0) isGolden = true;
-	else isGolden = false;
-
-	return isGolden;
-}
+// 	return isGolden;
+// }
 
 
 
-inline bool TriggerSet::DoubleMuonSelection(){
-	bool iso = false;
-	bool double_lep = false;
-	bool METval = false;
-	bool mHTval = false;
-	bool invMuonMassval = false;
-	bool invMuonpTval = false;
-	bool reqTrigger = false;
+// inline bool TriggerSet::DoubleMuonSelection(){
+// 	bool iso = false;
+// 	bool double_lep = false;
+// 	bool METval = false;
+// 	bool mHTval = false;
+// 	bool invMuonMassval = false;
+// 	bool invMuonpTval = false;
+// 	bool reqTrigger = false;
 	
 
-	Double_t invMuonMass = calcInvMass2Muons(0, 1);
-	Double_t invMuonpT = calcPt2Muons(0, 1);
-	float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
-	TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+// 	Double_t invMuonMass = calcInvMass2Muons(0, 1);
+// 	Double_t invMuonpT = calcPt2Muons(0, 1);
+// 	float HT = calcHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
+// 	TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
 
-	bool isGood = false;
+// 	bool isGood = false;
 
 
-	if(l_nMuon->GetValue() == 2) double_lep = true;
+// 	if(l_nMuon->GetValue() == 2) double_lep = true;
 
-	if(l_MET->GetValue() >= 200) METval = true;
-	if(MHT.Pt() >= 60) mHTval = true;
+// 	if(l_MET->GetValue() >= 200) METval = true;
+// 	if(MHT.Pt() >= 60) mHTval = true;
 
 
-	if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
-	if(invMuonpT >= 3) invMuonpTval = true;
-	if(l_reqTrigger->GetValue() == true) reqTrigger = true;
+// 	if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+// 	if(invMuonpT >= 3) invMuonpTval = true;
+// 	if(l_reqTrigger->GetValue() == true) reqTrigger = true;
 
-	if(double_lep && METval && mHTval && invMuonMass && invMuonpT && reqTrigger) isGood = true;
+// 	if(double_lep && METval && mHTval && invMuonMass && invMuonpT && reqTrigger) isGood = true;
 
-	return isGood;
-}
+// 	return isGood;
+// }
 
 
 
@@ -511,6 +449,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool mHTval = false;
 		bool invMuonMassval = false;
 		bool invMuonpTval = false;
+		bool isGolden = false;
 		Double_t invMuonpT;
 		Double_t invMuonMass;
 
@@ -525,70 +464,61 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 	    bool cuts;
 	    float muonminipfRelIso_counter = 0.;
+
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
-		    float MET = l_MET->GetValue();		   
-
-		    if(nMuon == 2) double_lep = true;
-
-			if(MET >= 200) METval = true;//continue;
-			if(MHT.Pt() >= 60) mHTval = true;//continue;
-
-			invMuonMass = calcInvMass2Muons(0, 1);
-			invMuonpT = calcPt2Muons(0, 1);
-
-
-			if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
-			if(invMuonpT >= 3) invMuonpTval = true;
-			if(l_reqTrigger->GetValue() == false) continue;
 
 			if(m_cuts == "GoldenMuon"){
-				cuts = GoldenMuonSelection();
+				float mu_absMiniIso = 0.0;
+				float mu_sip3d = 0.0;
+				float isGoldenCounter = 0.0;
+				bool isGolden;
+				
+
+				//replace with electron IDs
+				for(int i = 0; i < nMuon; i++){
+					// cout << "med id: " << l_Muon_mediumId->GetValue(i) << endl;
+					mu_absMiniIso = l_Muon_minipfRelIso_all->GetValue(i)*l_Muonpt->GetValue(i);
+					mu_sip3d = l_Muon_sip3d->GetValue(i);
+					if(mu_absMiniIso < 6. && mu_sip3d < 4 && l_Muon_mediumId->GetValue(i)){
+						isGoldenCounter += 1.0;
+					}
+				}
+				if(isGoldenCounter >= 1.0) isGolden = true;	
+
 			}
+
 			else if(m_cuts == "DoubleMuon"){
-				cuts = DoubleMuonSelection();
+				float MET = l_MET->GetValue();		   
+
+				if(nMuon == 2) double_lep = true;
+
+				if(MET >= 200) METval = true;//continue;
+				if(MHT.Pt() >= 60) mHTval = true;//continue;
+
+				invMuonMass = calcInvMass2Muons(0, 1);
+				invMuonpT = calcPt2Muons(0, 1);
+
+
+				if(invMuonMass >= 4 && invMuonMass < 60) invMuonMassval = true;
+				if(invMuonpT >= 3) invMuonpTval = true;
+				if(l_reqTrigger->GetValue() == false) continue;
 			}
-			// if(!cuts) continue;
 
 			for(int i = 0; i < l_nMuon->GetValue();i++){
 				if(l_Muon_minipfRelIso_all->GetValue(i) < 0.1) muonminipfRelIso_counter += 1.;
 			}
 
-			// muselections.push_back(MuonmediumId_counter);
-			// muselections.push_back(MuontightId_counter);
-			// muselections.push_back(MuonmedpromptId_counter);
-			// muselections.push_back(muonminiIso_counter);
-			// muselections.push_back(muonminipfRelIso_counter);
-			// muselections.push_back(mu_pt);
-			// muselections.push_back(mu_eta);
-
-
-			// vector<float> muonSelections = muonSelection(nMuon);
-			// int NmuonSelections = muonSelections.size();
 
 			if(muonminipfRelIso_counter >= 1.) iso = true;
-			else iso = false;
-				
-			
-
+			else iso = false;	
 		}
+		
 
 		if(strstr(m_var.c_str(),"Electron")){
 
 			int nElectron = l_nElectron->GetValue();
 			if(nElectron != 1) continue; //at least 1 electron
-
-			// int ElemediumId_counter = 0;
-			// int EletightId_counter = 0;
-			// int ElemedpromptId_counter = 0;
-			// int ElepfRelIso03_counter = 0;
-
-			vector<float> eleSelections = electronSelection(nElectron);
-			int NeleSelections = eleSelections.size();
-
-		
-			if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
-
 		}
 
 
@@ -596,32 +526,37 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 
 
-			if(strstr(m_triggers.at(0).c_str(),"Iso")){ //iso req for iso triggers
-				if(!iso) continue;
-			}
+		if(strstr(m_triggers.at(0).c_str(),"Iso")){ //iso req for iso triggers
+			if(!iso) continue;
+		}
 
-			bool bPassed = l_trig->GetValue();
+		bool bPassed = l_trig->GetValue();
+		
+
+		if(strstr(m_triggers.at(0).c_str(),"Double" && m_cuts == "DoubleMuon")){ //iso req for iso triggers
+			if(!double_lep) continue;
+			if(!METval) continue;
+			if(!mHTval) continue;
+			if(!invMuonMassval) continue;
+			if(!invMuonpTval) continue;
 			
+			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
+		}
 
-			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
-				if(!double_lep) continue;
-				if(!METval) continue;
-				if(!mHTval) continue;
-				if(!invMuonMassval) continue;
-				if(!invMuonpTval) continue;
-				// if(!cuts) continue;
-				
-				eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
-			}
-			else{
-				eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
-			}
+		else if(strstr(m_triggers.at(0).c_str(),"Double" && m_cuts == "GoldenMuon")){ //iso req for iso triggers
+			if(!isGolden);
+			eff->Fill((bPassed),l_Muonpt->GetValue(1),fabs(l_Muoneta->GetValue(1)));  //subleading lepton
+		}
+		else{
+			eff->Fill((bPassed),l_var->GetValue(0)); //leading lepton
+		}
 			
 	}
 	cout << endl;
 
 	return eff;
 }
+
 
 
 inline vector<TEfficiency*> TriggerSet::Analyze(){
@@ -715,20 +650,20 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			// muselections.push_back(mu_eta);
 
 
-			vector<float> muonSelections = muonSelection(nMuon);
-			int NmuonSelections = muonSelections.size();
+			// vector<float> muonSelections = muonSelection(nMuon);
+			// int NmuonSelections = muonSelections.size();
 
 
-			if(strstr(m_var.c_str(),"eta")){
-				if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
-			}
-
-			//eta cut for pt plots
-			// else if(strstr(m_var.c_str(),"pt")){
-			// 	if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
+			// if(strstr(m_var.c_str(),"eta")){
+			// 	if(muonSelections.at(NmuonSelections-2) < 125.) continue; //mupt cut
 			// }
 
-			if(muonSelections.at(4) >= 1) iso = true;
+			// //eta cut for pt plots
+			// // else if(strstr(m_var.c_str(),"pt")){
+			// // 	if(abs(muonSelections.at(NmuonSelections-1)) < 1.4) continue;
+			// // }
+
+			// if(muonSelections.at(4) >= 1) iso = true;
 				
 		}
 
@@ -737,16 +672,16 @@ inline vector<TEfficiency*> TriggerSet::Analyze(){
 			int nElectron = l_nElectron->GetValue();
 			if(nElectron != 1) continue; //at least 1 electron
 
-			// int ElemediumId_counter = 0;
-			// int EletightId_counter = 0;
-			// int ElemedpromptId_counter = 0;
-			// int ElepfRelIso03_counter = 0;
+			// // int ElemediumId_counter = 0;
+			// // int EletightId_counter = 0;
+			// // int ElemedpromptId_counter = 0;
+			// // int ElepfRelIso03_counter = 0;
 
-			vector<float> eleSelections = electronSelection(nElectron);
-			int NeleSelections = eleSelections.size();
+			// vector<float> eleSelections = electronSelection(nElectron);
+			// int NeleSelections = eleSelections.size();
 
 		
-			if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
+			// if(eleSelections[NeleSelections] != 1) continue;  //at least 1 pfrel ele
 
 			}
 
