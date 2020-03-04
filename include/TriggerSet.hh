@@ -315,7 +315,7 @@ inline bool TriggerSet::DoubleMuonSelection(){
 	TLorentzVector MHT = calcMHT(l_nJet, l_Jet_pt, l_Jet_eta, l_Jet_phi, l_Jet_mass);
 
 
-	bool isGood;
+	bool isGood = false;
 
 
 	if(l_nMuon->GetValue() == 2) double_lep = true;
