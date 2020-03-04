@@ -477,7 +477,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float mu_absMiniIso = 0.0;
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
-				bool isGolden;
+				bool isGolden = false;
 				// if(nMuon == 2) double_lep = true;
 				// if(MET >= 80) METval = true;//continue;
 				// if(MHT.Pt() >= 60) mHTval = true;//continue;				
@@ -494,7 +494,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
 					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
 						isGoldenCounter += 1.0;
-						cout << "+1 golden" << endl;
 					}
 				}
 				if(isGoldenCounter >= 1.0) isGolden = true;	
@@ -565,8 +564,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// if(!absminiIsoval) continue;
 				// if(!mediumIdval) continue;
 
-				
-				if(!isGolden) continue;
+				if(isGolden) cout << "true" << endl;
+				if(!isGolden) cout << "False" << endl;
+
 				
 			}
 			else if(m_cuts == "DoubleMuon"){
