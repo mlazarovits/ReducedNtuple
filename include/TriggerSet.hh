@@ -601,11 +601,11 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!iso) continue;
 			}
 
-
 			bool bPassed = l_trig->GetValue();
+			
 
 			if(strstr(m_triggers.at(0).c_str(),"Double")){ //iso req for iso triggers
-				if(!double_lep) continue;
+				// if(!double_lep) continue;
 				// if(!METval) continue;
 				// if(!mHTval) continue;
 				// if(!invMuonMassval) continue;
