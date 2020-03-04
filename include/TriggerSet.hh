@@ -442,7 +442,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	
 
 	for(int evt = 0; evt < nEntries; evt++){
-		cout << "evt: " << i << endl;
+		cout << "evt: " << evt << endl;
 		bool iso = false;
 		bool double_lep = false;
 		bool METval = false;
