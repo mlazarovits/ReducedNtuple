@@ -442,7 +442,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	
 
 	for(int evt = 0; evt < nEntries; evt++){
-		cout << "evt: " << evt << endl;
+		
 		bool iso = false;
 		bool double_lep = false;
 		bool METval = false;
@@ -498,6 +498,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				}
 				
 				if(isGoldenCounter >= 1.0){
+					cout << "evt: " << evt << endl;
 					isGolden = true;
 					cout << "# goldens: " << isGoldenCounter << endl;	
 				}
