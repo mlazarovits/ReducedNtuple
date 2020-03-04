@@ -318,9 +318,9 @@ inline bool TriggerSet::DoubleMuonSelection(){
 	bool isGood;
 
 
-	if(l_nMuon == 2) double_lep = true;
+	if(l_nMuon->GetValue() == 2) double_lep = true;
 
-	if(l_MET >= 200) METval = true
+	if(l_MET->GetValue() >= 200) METval = true;
 	if(MHT.Pt() >= 60) mHTval = true;
 
 
@@ -525,7 +525,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 	    bool cuts;
 	    bool iso;
-	    float muonminipfRelIso_counter = 0.
+	    float muonminipfRelIso_counter = 0.;
 	    if(strstr(m_var.c_str(),"Muon")){
 		    // int nMuon = l_nMuon->GetValue();
 		    // float MET = l_MET->GetValue();		   
