@@ -387,8 +387,8 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 		effbins.push_back(effbins.at(0) + 0.8);
 		effbins.push_back(effbins.at(1) + 0.45);
 		effbins.push_back(effbins.at(2) + 0.35);
-		effbins.push_back(effbins.at(3) + 0.7);
-		effbins.push_back(effbins.at(4) + 0.1);
+		effbins.push_back(effbins.at(3) + 0.5);
+		effbins.push_back(effbins.at(4) + 0.3);
 		effbins.push_back(effbins.at(5) + 0.1);
 		// }
 	}
@@ -494,7 +494,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 				if(nMuon == 2) double_lep = true;
 
-				if(MET >= 200) METval = true;//continue;
+				if(MET >= 250) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 				invMuonMass = calcInvMass2Muons(0, 1);
