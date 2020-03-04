@@ -184,7 +184,7 @@ else if(sampleName=="zz2l2nu17" && physicsobj=="Muon"){
 
 	// vector<TEfficiency*> zz2l2nu17_mu_effs;
 	TEfficiency* zz2l2nu17_mu_eff;
-	TriggerSet zz2l2nu17_mu(f_zz2l2nu17,true);
+	TriggerSet zz2l2nu17_mu(f_zz2l2nu17,false);
 	zz2l2nu17_mu.SetSampleName("ZZ to 2L2Nu 2017 No ID");
 
 	zz2l2nu17_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
