@@ -502,7 +502,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(isGoldenCounter == 0.0){
 					isGolden = false;
 				}
-				else isgolden = true;
+				else isGolden = true;
 				cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 
 				
