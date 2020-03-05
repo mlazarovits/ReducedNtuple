@@ -457,6 +457,11 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		Double_t invMuonpT;
 		Double_t invMuonMass;
 
+		float mu_absMiniIso = 0.0;
+				float mu_sip3d = 0.0;
+				float isGoldenCounter = 0.0;
+				bool isGolden;
+
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
@@ -475,10 +480,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		    if(nMuon != 2) continue;
 
 			if(m_cuts == "GoldenMuon"){
-				float mu_absMiniIso = 0.0;
-				float mu_sip3d = 0.0;
-				float isGoldenCounter = 0.0;
-				bool isGolden;
+				
 				// if(nMuon == 2) double_lep = true;
 				// if(MET >= 80) METval = true;//continue;
 				// if(MHT.Pt() >= 60) mHTval = true;//continue;				
