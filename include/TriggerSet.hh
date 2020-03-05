@@ -452,9 +452,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool invMuonpTval = false;
 
 		bool isGolden = false;
-		bool sip3dval = false;
-		bool absminiIsoval = false;
-		bool mediumIdval = false;
+		// bool sip3dval = false;
+		// bool absminiIsoval = false;
+		// bool mediumIdval = false;
 		Double_t invMuonpT;
 		Double_t invMuonMass;
 
@@ -502,11 +502,9 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					}
 				}
 				
-				if(isGoldenCounter == 0.0){
-					isGolden = false;
+				if(isGoldenCounter >= 1.0){
+					isGolden = true;
 				}
-				else isGolden = true;
-				cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 
 				
 				if(MET >= 200) METval = true;//continue;
@@ -579,7 +577,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// cout << "6" << endl;
 				// cout << isGolden << endl;
 
-				if(!isGolden) continue;
+				if(!isGolden) cout << "False " << isGolden << endl;
+				if(isGolden)  cout << "True " << isGolden << endl;
 
 				
 			}
