@@ -472,6 +472,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	    if(strstr(m_var.c_str(),"Muon")){
 		    int nMuon = l_nMuon->GetValue();
 		    float MET = l_MET->GetValue();
+		    if(nMuon != 2) continue;
 
 			if(m_cuts == "GoldenMuon"){
 				float mu_absMiniIso = 0.0;
@@ -497,11 +498,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					}
 				}
 				
-				if(isGoldenCounter >= 1.0){
-					isGolden = true;
-					cout << "# goldens: " << isGoldenCounter << endl;	
-				}
-				if(nMuon == 2) double_lep = true;
+				if(isGoldenCounter >= 1.0) isGolden = true;
+				
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
@@ -516,7 +514,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 			}
 
 			else if(m_cuts == "DoubleMuon"){
-				if(nMuon == 2) double_lep = true;
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
@@ -556,8 +553,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
 			if( m_cuts == "GoldenMuon"){ 
-				if(!double_lep) continue;
-				// cout << "1" << endl;
 				if(!METval) continue;
 				// cout << "2" << endl;
 
@@ -585,7 +580,6 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				
 			}
 			else if(m_cuts == "DoubleMuon"){
-				if(!double_lep) continue;
 				if(!METval) continue;
 				if(!mHTval) continue;
 				if(!reqTrig) continue;
