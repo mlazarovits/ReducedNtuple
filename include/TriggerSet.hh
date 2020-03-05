@@ -577,8 +577,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// cout << "6" << endl;
 				// cout << isGolden << endl;
 
-				if(!isGolden) cout << "False " << isGolden << endl;
-				if(isGolden)  cout << "True " << isGolden << endl;
+				if(!isGolden) continue;
 
 				
 			}
