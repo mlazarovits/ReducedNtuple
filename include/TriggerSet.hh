@@ -577,9 +577,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				// if(!sip3dval) continue;
 				// if(!absminiIsoval) continue;
 				// if(!mediumIdval) continue;
+				// cout << isGolden << endl;
 
-				if(isGolden) cout << "true" << endl;
-				if(!isGolden) cout << "false" << endl;
+				if(isGolden == true) cout << "true" << endl;
+				if(isGolden == false) cout << "false" << endl;
 
 				
 			}
