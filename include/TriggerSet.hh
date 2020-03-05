@@ -559,7 +559,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!mHTval) continue;
 				// cout << "3" << endl;
 
-				if(!reqTrig) continue;
+				// if(!reqTrig) continue;
 				// cout << "4" << endl;
 
 				// if(!invMuonMassval) continue;
