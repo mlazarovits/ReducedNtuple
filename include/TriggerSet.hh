@@ -556,7 +556,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		}
 
 		bool bPassed = l_trig->GetValue();
-		cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
+		// cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 
 
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
