@@ -494,12 +494,13 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					if(mu_absMiniIso < 6.) absminiIsoval = true;
 					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
 					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
-						isGoldenCounter += 1.0;
+						isGoldenCounter += 1.;
 
 					}
 				}
-				cout << "#goldens: " << isGoldenCounter << endl;
-				if(isGoldenCounter >= 1.0) isGolden = true;
+				
+				if(isGoldenCounter >= 1.) isGolden = true;
+				cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 				
 				if(MET >= 200) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
