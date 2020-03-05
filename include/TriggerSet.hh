@@ -493,7 +493,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					}
 					if(mu_absMiniIso < 6.) absminiIsoval = true;
 					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
-					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
+					if(mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
 						isGoldenCounter += 1.0;
 					}
 				}
