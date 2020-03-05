@@ -500,8 +500,8 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				}
 				
 				if(isGoldenCounter >= 1.){
-					cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 					isGolden = true;
+					cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 				}
 				
 				if(MET >= 200) METval = true;//continue;
