@@ -208,7 +208,7 @@ else if(sampleName=="tchiwz17" && physicsobj=="Muon"){
 
 	// vector<TEfficiency*> tchiwz17_mu_effs;
 	TEfficiency* tchiwz17_mu_eff;
-	TriggerSet tchiwz177_mu(f_tchiwz17,true);
+	TriggerSet tchiwz177_mu(f_tchiwz17,false);
 	tchiwz177_mu.SetSampleName("TChi to WZ, Z to LL 2017 No ID");
 
 	tchiwz177_mu.AddTrigger("HLT_DoubleMu3_DZ_PFMET50_PFMHT60");
@@ -217,7 +217,7 @@ else if(sampleName=="tchiwz17" && physicsobj=="Muon"){
 
 	tchiwz177_mu.SetVar("Muon_pt");
 	tchiwz177_mu.SetCuts("GoldenMuon");
-	tchiwz177_mu.SetOutputName("TChiWZ17_DoubleMuMETTrigs_METcut200.root");
+	tchiwz177_mu.SetOutputName("TChiWZ17_DoubleMuMETTrigs_AL1GoldenMuon_METcut200.root");
 
 	tchiwz17_mu_eff = tchiwz177_mu.Analyze2D();
 	tchiwz177_mu.make2DPlot(tchiwz17_mu_eff);
