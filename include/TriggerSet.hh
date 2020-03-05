@@ -442,7 +442,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 	
 
 	for(int evt = 0; evt < nEntries; evt++){
-		
+		cout << "evt: " << evt << endl;
 		bool iso = false;
 		bool double_lep = false;
 		bool METval = false;
@@ -495,9 +495,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					if(l_Muon_mediumId->GetValue(i)) mediumIdval = true;
 					if(mu_sip3d < 4. && mu_absMiniIso < 6. && l_Muon_mediumId->GetValue(i)){
 						isGoldenCounter += 1.0;
+
 					}
 				}
-				
+				cout << "#goldens: " << isGoldenCounter << endl;
 				if(isGoldenCounter >= 1.0) isGolden = true;
 				
 				if(MET >= 200) METval = true;//continue;
