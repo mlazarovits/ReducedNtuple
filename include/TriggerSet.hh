@@ -553,10 +553,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
 			if( m_cuts == "GoldenMuon"){ 
-				if(!METval) continue;
+				// if(!METval) continue;
 				// cout << "2" << endl;
 
-				if(!mHTval) continue;
+				// if(!mHTval) continue;
 				// cout << "3" << endl;
 
 				// if(!reqTrig) continue;
