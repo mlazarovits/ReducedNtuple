@@ -450,7 +450,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool reqTrig = false;
 		bool invMuonMassval = false;
 		bool invMuonpTval = false;
-		
+
 		bool isGolden = false;
 		bool sip3dval = false;
 		bool absminiIsoval = false;
@@ -563,30 +563,23 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 
 		if(strstr(m_triggers.at(0).c_str(),"Double")){
 			if( m_cuts == "GoldenMuon"){ 
-				// if(!METval) continue;
+				if(!METval) continue;
 				// cout << "2" << endl;
 
-				// if(!mHTval) continue;
+				if(!mHTval) continue;
 				// cout << "3" << endl;
 
-				// if(!reqTrig) continue;
+				if(!reqTrig) continue;
 				// cout << "4" << endl;
 
-				// if(!invMuonMassval) continue;
+				if(!invMuonMassval) continue;
 				// cout << "5" << endl;
 
-				// if(!invMuonpTval) continue;
+				if(!invMuonpTval) continue;
 				// cout << "6" << endl;
-
-
-
-				// if(!sip3dval) continue;
-				// if(!absminiIsoval) continue;
-				// if(!mediumIdval) continue;
 				// cout << isGolden << endl;
 
-				if(isGolden) cout << "true " << isGolden << endl;
-				if(!isGolden) cout << "fals e" << isGolden << endl;
+				if(!isGolden) continue;
 
 				
 			}
