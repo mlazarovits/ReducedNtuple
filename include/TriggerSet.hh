@@ -450,6 +450,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		bool reqTrig = false;
 		bool invMuonMassval = false;
 		bool invMuonpTval = false;
+		
 		bool isGolden = false;
 		bool sip3dval = false;
 		bool absminiIsoval = false;
@@ -460,7 +461,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 		float mu_absMiniIso = 0.0;
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
-				bool isGolden;
+				// bool isGolden;
 
 		m_tree->GetEntry(evt);
 		if (evt % 1000 == 0) {
