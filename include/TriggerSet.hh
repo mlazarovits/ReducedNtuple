@@ -780,6 +780,8 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
 	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
+	gr->GetZaxis()->SetMaximum(1.0);
+	gr->GetZaxis()->SetMinimum(0.0);
 	gr->GetXaxis()->SetTitle("Subleading Muon pT (GeV)");
 	gr->GetYaxis()->SetTitle("Subleading Muon #eta");
 	gr->SetTitle(g_PlotTitle);
