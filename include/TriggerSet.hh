@@ -503,7 +503,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 					cout << "# goldens: " << isGoldenCounter << endl;	
 				}
 				if(nMuon == 2) double_lep = true;
-				if(MET >= 80) METval = true;//continue;
+				if(MET >= 125) METval = true;//continue;
 				if(MHT.Pt() >= 60) mHTval = true;//continue;
 
 				invMuonMass = calcInvMass2Muons(0, 1);
@@ -568,10 +568,10 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(!reqTrig) continue;
 				cout << "4" << endl;
 
-				if(!invMuonMassval) continue;
+				// if(!invMuonMassval) continue;
 				cout << "5" << endl;
 
-				if(!invMuonpTval) continue;
+				// if(!invMuonpTval) continue;
 				cout << "6" << endl;
 
 
