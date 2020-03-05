@@ -478,7 +478,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				float mu_absMiniIso = 0.0;
 				float mu_sip3d = 0.0;
 				float isGoldenCounter = 0.0;
-				bool isGolden = true;
+				bool isGolden;
 				// if(nMuon == 2) double_lep = true;
 				// if(MET >= 80) METval = true;//continue;
 				// if(MHT.Pt() >= 60) mHTval = true;//continue;				
@@ -502,6 +502,7 @@ inline TEfficiency* TriggerSet::Analyze2D(){
 				if(isGoldenCounter == 0.0){
 					isGolden = false;
 				}
+				else isgolden = true;
 				cout << "#goldens: " << isGoldenCounter << " " << isGolden << endl;
 
 				
