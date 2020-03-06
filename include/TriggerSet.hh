@@ -787,6 +787,21 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	gr->GetYaxis()->SetTitle("Subleading Muon #eta");
 	gr->SetTitle(g_PlotTitle);
 
+	Int_t gBin;
+
+	for(int i = 0; i < 7; i++){
+		for(int j = 0; j < 5; j++){
+			gBin = gr->GetBin(i,j);
+			cout << "X bin #: " << i << " Y bin #: " << j endl;
+			cout << "global bin: " << gBin << endl;
+			cout << "Bin Content: " << gr->GetBinContent(gBin) << endl;
+			cout << "Bin Error: " << gr->GetBinError(gBin) << endl;
+			cout << "Efficiency: " << eff->GetEfficiency(gBin) << endl;
+			cout << "Eff error up: " << eff->GetEfficiencyErrorUp(gBin) << endl;
+			cout << "Eff error low: " << eff->GetEfficiencyErrorLow(gBin) << endl;
+		}
+	}
+
 	TLatex l;
 	l.SetTextFont(132);
 	l.SetNDC();
