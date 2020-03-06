@@ -768,39 +768,51 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	gStyle->SetPaintTextFormat("0.2f");
 	//GET EFFICIENCIES ON PLOT
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
+	cv->SetGrid();
 	cv->cd();
 	eff->Draw("colztext");
 	cv->Update();
 	
-	TH2* gr = eff->GetPaintedHistogram();
+	TH2* h = eff->GetPaintedHistogram();
 	
 	
-
 	cv->Update();
-	gr->Draw("colztextE");
 
 	TString g_PlotTitle = m_samplename+" Trigger Efficiencies";
-	gr->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
-	gr->SetMaximum(1.0);
-	gr->SetMinimum(0.0);
-	gr->GetXaxis()->SetTitle("Subleading Muon pT (GeV)");
-	gr->GetYaxis()->SetTitle("Subleading Muon #eta");
-	gr->SetTitle(g_PlotTitle);
+	h->GetZaxis()->SetTitle((m_triggers.at(0)+" Efficiency").c_str());
+	h->SetMaximum(1.0);
+	h->SetMinimum(0.0);
+	h->GetXaxis()->SetTitle("Subleading Muon pT (GeV)");
+	h->GetYaxis()->SetTitle("Subleading Muon #eta");
+	h->SetTitle(g_PlotTitle);
 
 	Int_t gBin;
-
-	for(int i = 0; i < 7; i++){
-		for(int j = 0; j < 5; j++){
-			gBin = gr->GetBin(i,j);
+	Double_t error;
+	
+	for(int i = 1; i < 10; i++){
+		for(int j = 1; j < 6; j++){
+			gBin = h->GetBin(i,j);
 			cout << "X bin #: " << i << " Y bin #: " << j << endl;
 			cout << "global bin: " << gBin << endl;
-			cout << "Bin Content: " << gr->GetBinContent(gBin) << endl;
-			cout << "Bin Error: " << gr->GetBinError(gBin) << endl;
+			cout << "Bin Content: " << h->GetBinContent(gBin) << endl;
+			cout << "Bin Error: " << h->GetBinError(gBin) << endl;
 			cout << "Efficiency: " << eff->GetEfficiency(gBin) << endl;
 			cout << "Eff error up: " << eff->GetEfficiencyErrorUp(gBin) << endl;
 			cout << "Eff error low: " << eff->GetEfficiencyErrorLow(gBin) << endl;
+			cout << "\n" << endl;
+
+			if(eff->GetEfficiencyErrorUp(gBin) >= eff->GetEfficiencyErrorLow(gBin)){
+				error = eff->GetEfficiencyErrorUp(gBin);
+			}
+			else if(eff->GetEfficiencyErrorUp(gBin) < eff->GetEfficiencyErrorLow(gBin)){
+				error = eff->GetEfficiencyErrorLow(gBin)	
+			}
+			h->SetBinError(gBin,error);
+			
 		}
 	}
+	cv->Update();
+	h->Draw("colztextE");
 
 	TLatex l;
 	l.SetTextFont(132);
