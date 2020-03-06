@@ -792,7 +792,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	for(int i = 0; i < 7; i++){
 		for(int j = 0; j < 5; j++){
 			gBin = gr->GetBin(i,j);
-			cout << "X bin #: " << i << " Y bin #: " << j endl;
+			cout << "X bin #: " << i << " Y bin #: " << j << endl;
 			cout << "global bin: " << gBin << endl;
 			cout << "Bin Content: " << gr->GetBinContent(gBin) << endl;
 			cout << "Bin Error: " << gr->GetBinError(gBin) << endl;
