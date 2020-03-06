@@ -805,7 +805,7 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 				error = eff->GetEfficiencyErrorUp(gBin);
 			}
 			else if(eff->GetEfficiencyErrorUp(gBin) < eff->GetEfficiencyErrorLow(gBin)){
-				error = eff->GetEfficiencyErrorLow(gBin)	
+				error = eff->GetEfficiencyErrorLow(gBin);	
 			}
 			h->SetBinError(gBin,error);
 			
