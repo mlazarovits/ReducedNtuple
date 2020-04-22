@@ -33,6 +33,11 @@
 #include "prod2017MC_reducedNANO_Triggers.h"
 #include "prod2016MC_reducedNANO_Triggers.h"
 
+//Event Filter classes
+#include "prod2018MC_reducedNANO_EventFilters.h"
+#include "prod2017MC_reducedNANO_EventFilters.h"
+#include "prod2016MC_reducedNANO_EventFilters.h"
+
 using namespace std;
 using std::vector;
 
@@ -207,6 +212,21 @@ int main(int argc, char* argv[]) {
 	std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
 	prod2016MC_reducedNANO_Triggers s(chain);
 	produceReducedTree(s,_ofilename);
+  }
+  else if(_selectorClassName.compare("prod2016MC_reducedNANO_EventFilters") == 0){
+  std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
+  prod2016MC_reducedNANO_EventFilters s(chain);
+  produceReducedTree(s,_ofilename);
+  }
+  else if(_selectorClassName.compare("prod2017MC_reducedNANO_EventFilters") == 0){
+  std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
+  prod2017MC_reducedNANO_EventFilters s(chain);
+  produceReducedTree(s,_ofilename);
+  }
+  else if(_selectorClassName.compare("prod2018MC_reducedNANO_EventFilters") == 0){
+  std::cout<<"Using selector: "<< _selectorClassName <<std::endl;
+  prod2018MC_reducedNANO_EventFilters s(chain);
+  produceReducedTree(s,_ofilename);
   }
   else{
     std::cout<<"Error: invalid selector class specified" <<std::endl; 
