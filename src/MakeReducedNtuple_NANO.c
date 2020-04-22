@@ -141,13 +141,12 @@ int main(int argc, char* argv[]) {
   }
 
   if(DO_LIST){
-    ifstream *inputFile = new ifstream(inputListName);
-    while( !(inputFile->eof()) ){
-      inputFile->getline(Buffer,500);
-      if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
+	ifstream *inputFile = new ifstream(inputListName);
+	while( !(inputFile->eof()) ){
+	inputFile->getline(Buffer,500);
+	if (!strstr(Buffer,"#") && !(strspn(Buffer," ") == strlen(Buffer))){
 	sscanf(Buffer,"%s",MyRootFile);
 	filenames.push_back(MyRootFile);
-	// cout << "file: " << MyRootFile << endl;
       }
     }
     inputFile->close();
