@@ -523,7 +523,7 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 	cv->Update();
 
 	if(!debug){
-		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/"+m_outname).c_str();
+		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/Filters"+m_outname).c_str();
 
 		TFile* file = new TFile(filename,"RECREATE");
 		cout << "file: " << filename << " created" << endl;
@@ -645,7 +645,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	cv->Update();
 
 	if(!debug){
-		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
+		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/effPlots/Filters/"+m_outname).c_str();
 
 		TFile* file = new TFile(filename,"RECREATE");
 		cout << "file: " << filename << " created" << endl;
