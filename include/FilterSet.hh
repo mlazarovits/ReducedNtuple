@@ -305,8 +305,11 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 		// }
 	}
 	else if(strstr(inputvar,"MET")){
-		for(int i = 0; i < 60; i++){
+		for(int i = 0; i < 30; i++){
 			effbins.push_back(i*10.);
+		}
+		for(int i = 30; i < 35; i++){
+			effbins.push_back(i*50);
 		}
 	}
 	else{
