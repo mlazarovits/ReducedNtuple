@@ -26,9 +26,9 @@ void PlotEfficiency_Filters(TString sampleName){
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/Fall17_94X_QCD_EventFilters.root").c_str());
 	TFile* f_wjets18 = TFile::Open((gPathname+"output/Autumn18_102X_WJetsLNu_EventFilters.root").c_str());
 
-	TFile* f_QCD16 = TFile::Open((gPathname+"output/Summer16_94X_QCD_EventFilters.root").c_str());
-	TFile* f_QCD17 = TFile::Open((gPathname+"output/Fall17_94X_QCD_EventFilters.root").c_str());
-	TFile* f_QCD18 = NULL; //TFile::Open((gPathname+".root").c_str());
+	TFile* f_QCD16 = TFile::Open((gPathname+"output/Summer16_102X_QCD_HT700to1000_EventFilters.root").c_str());
+	TFile* f_QCD17 = TFile::Open((gPathname+"output/Fall17_102X_QCD_HT700to1000_EventFilters.root").c_str());
+	TFile* f_QCD18 = NULLTFile::Open((gPathname+"output/Autumn18_102X_QCD_HT700to1000_EventFilters.root").c_str());
 
 if(sampleName=="wjets16"){
 	if(f_wjets16 == NULL) return;
