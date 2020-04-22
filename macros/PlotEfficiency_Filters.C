@@ -21,7 +21,7 @@ void PlotEfficiency_Filters(TString sampleName){
 	}
 
 	
-	string gPathname = "/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/";
+	string gPathname = "/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/";
 	TFile* f_wjets16 = TFile::Open((gPathname+"output/Summer16_94X_QCD_EventFilters.root").c_str());
 	TFile* f_wjets17 = TFile::Open((gPathname+"output/Fall17_94X_QCD_EventFilters.root").c_str());
 	TFile* f_wjets18 = TFile::Open((gPathname+"output/Autumn18_102X_WJetsLNu_EventFilters.root").c_str());
