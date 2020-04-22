@@ -30,7 +30,7 @@ void PlotEfficiency_Filters(TString sampleName){
 	TFile* f_QCD17 = TFile::Open((gPathname+"output/Fall17_94X_QCD_EventFilters.root").c_str());
 	TFile* f_QCD18 = NULL; //TFile::Open((gPathname+".root").c_str());
 
-if(sampleName=="wjets"){
+if(sampleName=="wjets16"){
 	if(f_wjets16 == NULL) return;
 	string name = "WJets16_AllFilters_loose";
 	TriggerSet wjets16(f_wjets16);
