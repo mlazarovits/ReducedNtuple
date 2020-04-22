@@ -393,7 +393,10 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 		// }
 	}
 	else{
-		cout << "Invalid variable specified" << endl;
+		//generic binning
+		for(int i = 0; i < 20; i++){
+			effbins.push_back(i*10.);
+		}
 	}
 	return effbins;
 }
