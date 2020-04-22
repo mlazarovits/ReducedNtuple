@@ -254,11 +254,7 @@ inline Double_t FilterSet::calcPt2Muons(int Muon1, int Muon2){
 
 
 inline void FilterSet::initializeAnalyze(){
-
-	if(strstr(m_samplename.c_str(),"2017")){
-		l_MET = m_tree->GetLeaf("METFixEE2017_pt");
-	}
-	else l_MET = m_tree->GetLeaf("MET_pt");
+	l_var = m_tree->GetLeaf(m_var.c_str());
 	
 	
 }
