@@ -568,7 +568,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chopcolor = gr_effs.size()/4;
+	Int_t chopcolor = gr_effs.size()/2;
 	Int_t chopmarker = gr_effs.size()/2;
 
 	for(int i = 0; i < gr_effs.size(); i++){
