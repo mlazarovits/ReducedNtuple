@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void Plot_Efficiency(TString sampleName, TString physicsobj){
+void PlotEfficiency_Triggers(TString sampleName, TString physicsobj){
 	if(gSystem->OpenDirectory("plots") == 0){
 		gSystem->mkdir("plots");
 		cout << "Created plots folder." << endl;
