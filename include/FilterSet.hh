@@ -305,7 +305,7 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 		// }
 	}
 	else if(strstr(inputvar,"MET")){
-		for(int i = 0; i < 100; i++){
+		for(int i = 0; i < 60; i++){
 			effbins.push_back(i*10.);
 		}
 	}
