@@ -402,8 +402,6 @@ inline std::vector<Double_t> TriggerSet::makeEffBins(TString inputvar){
 }
 
 
-
-
 inline TEfficiency* TriggerSet::Analyze2D(){
 	// vector<TEfficiency*> vec_eff;
 	// vector<TLeaf*> vec_ltrig;
