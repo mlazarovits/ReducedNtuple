@@ -7,9 +7,9 @@
 #include <TTree.h>
 #include <TEfficiency.h>
 #include <TLeaf.h>
-#include "../include/prod2016MC_reducedNANO_Filters.h"
-#include "../include/prod2017MC_reducedNANO_Filters.h"
-#include "../include/prod2018MC_reducedNANO_Filters.h"
+#include "../include/prod2016MC_reducedNANO_EventFilters.h"
+#include "../include/prod2017MC_reducedNANO_EventFilters.h"
+#include "../include/prod2018MC_reducedNANO_EventFilters.h"
 // #include "TEfficiency.h"
 #include <TLatex.h>
 
@@ -540,7 +540,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	cv->SetGridx();
 	cv->SetGridy();
 	cv->SetLeftMargin(0.13);
-	cv->SefilterhtMargin(0.04);
+	cv->SetRightMargin(0.04);
 	cv->SetBottomMargin(0.15);
 	cv->SetTopMargin(0.085);
 
