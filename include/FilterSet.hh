@@ -304,6 +304,11 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 		effbins.push_back(effbins.at(5) + 0.1);
 		// }
 	}
+	else if(strstr(inputvar,"MET")){
+		for(int i = 0; i < 100; i++){
+			effbins.push_back(i*10.);
+		}
+	}
 	else{
 		//generic binning
 		for(int i = 0; i < 20; i++){
@@ -512,7 +517,7 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 	cv->Update();
 
 	if(!debug){
-		TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
+		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/"+m_outname).c_str();
 
 		TFile* file = new TFile(filename,"RECREATE");
 		cout << "file: " << filename << " created" << endl;
@@ -563,8 +568,8 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	// gr_effs[imax]->Draw();
 
 	cv->Update();
-	Int_t chopcolor = gr_effs.size()/3;
-	Int_t chopmarker = gr_effs.size()/3;
+	Int_t chopcolor = gr_effs.size()/4;
+	Int_t chopmarker = gr_effs.size()/2;
 
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
@@ -634,7 +639,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	cv->Update();
 
 	if(!debug){
-		TString filename = ("/home/t3-ku/mlazarov/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
+		TString filename = ("/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/effPlots/"+m_outname).c_str();
 
 		TFile* file = new TFile(filename,"RECREATE");
 		cout << "file: " << filename << " created" << endl;
