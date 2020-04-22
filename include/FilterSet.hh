@@ -308,8 +308,11 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 		for(int i = 0; i < 30; i++){
 			effbins.push_back(i*10.);
 		}
-		for(int i = 30; i < 35; i++){
-			effbins.push_back(i*50);
+		for(int i = 0; i < 6; i++){
+			effbins.push_back(i*20 + 300);
+		}
+		for(int i = 0; i < 7; i++){
+			effbins.push_back(i*50 + 400);
 		}
 	}
 	else{
