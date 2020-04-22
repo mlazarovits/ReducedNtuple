@@ -1,10 +1,10 @@
-#define prod2016MC_reducedNANO_EventFilters_cxx
-#include "prod2016MC_reducedNANO_EventFilters.h"
+#define prod2018MC_reducedNANO_EventFilters_cxx
+#include "prod2018MC_reducedNANO_EventFilters.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
-void prod2016MC_reducedNANO_EventFilters::Loop()
+void prod2018MC_reducedNANO_EventFilters::Loop()
 {
 //   In a ROOT session, you can do:
 //      root> .L prod2016MC_reducedNANO_EventFilters.C

@@ -1,14 +1,13 @@
-#define prod2016MC_reducedNANO_EventFilters_cxx
-#include "prod2016MC_reducedNANO_EventFilters.h"
+#define prod2017MC_reducedNANO_EventFilters_cxx
+#include "prod2017MC_reducedNANO_EventFilters.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
-void prod2016MC_reducedNANO_EventFilters::Loop()
+void prod2017MC_reducedNANO_EventFilters::Loop()
 {
 //   In a ROOT session, you can do:
 //      root> .L prod2016MC_reducedNANO_EventFilters
-.C
 //      root> prod2016MC_reducedNANO_EventFilters t
 //      root> t.GetEntry(12); // Fill t data members with entry number 12
 //      root> t.Show();       // Show values of entry 12
