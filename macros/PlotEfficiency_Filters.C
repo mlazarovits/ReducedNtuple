@@ -81,14 +81,14 @@ else if(sampleName=="wjets18"){
 	TriggerSet wjets18(f_wjets18);
 	wjets18.SetSampleName(name);
 
-	wjets17.AddTrigger("Flag_HBHENoiseFilter");
-	wjets17.AddTrigger("Flag_HBHENoiseIsoFilter");
-	wjets17.AddTrigger("Flag_globalSuperTightHalo2016Filter");
-	wjets17.AddTrigger("Flag_EcalDeadCellTriggerPrimitiveFilter");
-	wjets17.AddTrigger("Flag_goodVertices");
-	wjets17.AddTrigger("Flag_eeBadScFilter");
-	wjets17.AddTrigger("Flag_BadChargedCandidateFilter");
-	wjets17.AddTrigger("Flag_BadPFMuonFilter");
+	wjets18.AddTrigger("Flag_HBHENoiseFilter");
+	wjets18.AddTrigger("Flag_HBHENoiseIsoFilter");
+	wjets18.AddTrigger("Flag_globalSuperTightHalo2016Filter");
+	wjets18.AddTrigger("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	wjets18.AddTrigger("Flag_goodVertices");
+	wjets18.AddTrigger("Flag_eeBadScFilter");
+	wjets18.AddTrigger("Flag_BadChargedCandidateFilter");
+	wjets18.AddTrigger("Flag_BadPFMuonFilter");
 
 	wjets18.SetVar("MET_pt");
 	wjets18.SetOutputName(name+".root");
