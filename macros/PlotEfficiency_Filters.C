@@ -33,7 +33,7 @@ void PlotEfficiency_Filters(TString sampleName){
 if(sampleName=="wjets16"){
 	if(f_wjets16 == NULL) return;
 	string name = "WJets16_AllFilters_loose";
-	FilterSet wjets16(f_wjets16,true);
+	FilterSet wjets16(f_wjets16);
 	wjets16.SetSampleName(name);
 
 	wjets16.AddFilter("Flag_HBHENoiseFilter");
