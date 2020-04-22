@@ -30,13 +30,20 @@ void PlotEfficiency_Filters(TString sampleName){
 	TFile* f_QCD17 = TFile::Open((gPathname+"output/Fall17_94X_QCD_EventFilters..root").c_str());
 	TFile* f_QCD18 = NULL; //TFile::Open((gPathname+".root").c_str());
 
-
-if(sampleName=="wjets16"){
+if(sampleName=="wjets"){
 	if(f_wjets16 == NULL) return;
 	string name = "WJets16_AllFilters_loose";
 	TriggerSet wjets16(f_wjets16);
 	wjets16.SetSampleName(name);
-	wjets16.AddTrigger("Flag"_);
+
+	wjets16.AddTrigger("Flag_HBHENoiseFilter");
+	wjets16.AddTrigger("Flag_HBHENoiseIsoFilter");
+	wjets16.AddTrigger("Flag_globalSuperTightHalo2016Filter");
+	wjets16.AddTrigger("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	wjets16.AddTrigger("Flag_goodVertices");
+	wjets16.AddTrigger("Flag_eeBadScFilter");
+	wjets16.AddTrigger("Flag_BadPFMuonFilter");
+
 	wjets16.SetVar("MET_pt");
 	wjets16.SetOutputName(name+".root");
 
@@ -51,9 +58,16 @@ else if(sampleName=="wjets17"){
 	TriggerSet wjets17(f_wjets17);
 	wjets17.SetSampleName(name);
 
-	wjets17.AddTrigger("Flag_");
+	wjets17.AddTrigger("Flag_HBHENoiseFilter");
+	wjets17.AddTrigger("Flag_HBHENoiseIsoFilter");
+	wjets17.AddTrigger("Flag_globalSuperTightHalo2016Filter");
+	wjets17.AddTrigger("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	wjets17.AddTrigger("Flag_goodVertices");
+	wjets17.AddTrigger("Flag_eeBadScFilter");
+	wjets17.AddTrigger("Flag_BadChargedCandidateFilter");
+	wjets17.AddTrigger("Flag_BadPFMuonFilter");
 
-	wjets17.SetVar("MET_pt");
+	wjets17.SetVar("METFixEE2017_pt");
 	wjets17.SetOutputName(name+".root");
 
 	vector<TEfficiency*> wjets17_effs = wjets17.Analyze();
@@ -64,10 +78,17 @@ else if(sampleName=="wjets17"){
 else if(sampleName=="wjets18"){
 	if(f_wjets18 == NULL) return;
 	string name = "WJets18_AllFilters_loose";
-	TriggerSet wjets17(f_wjets18);
+	TriggerSet wjets18(f_wjets18);
 	wjets18.SetSampleName(name);
 
-	wjets18.AddTrigger("Flag_");
+	wjets17.AddTrigger("Flag_HBHENoiseFilter");
+	wjets17.AddTrigger("Flag_HBHENoiseIsoFilter");
+	wjets17.AddTrigger("Flag_globalSuperTightHalo2016Filter");
+	wjets17.AddTrigger("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	wjets17.AddTrigger("Flag_goodVertices");
+	wjets17.AddTrigger("Flag_eeBadScFilter");
+	wjets17.AddTrigger("Flag_BadChargedCandidateFilter");
+	wjets17.AddTrigger("Flag_BadPFMuonFilter");
 
 	wjets18.SetVar("MET_pt");
 	wjets18.SetOutputName(name+".root");

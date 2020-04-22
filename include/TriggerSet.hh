@@ -768,7 +768,6 @@ inline void TriggerSet::make2DPlot(TEfficiency* eff){
 	gStyle->SetPaintTextFormat("0.2f");
 	//GET EFFICIENCIES ON PLOT
 	TCanvas* cv = new TCanvas("cv","cv",800,600);
-	cv->SetGrid();
 	cv->cd();
 	eff->Draw("colztext");
 	cv->Update();
