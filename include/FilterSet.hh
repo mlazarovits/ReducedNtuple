@@ -286,32 +286,22 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 	}
 	else if(inputvar == "eta"){
 
-		// nBins = 200;
-		// effbins.push_back(-3.05);
-		// for(int i = 1; i < nBins+2; i++){
-		// 	effbins.push_back(effbins.at(i-1) + 0.05);
-		// 	// cout << effbins.at(i) << endl;
-		// }
-		//SOS binning
-		// nBins = 5;
 		effbins.push_back(0.0);
-		// for(int i = 1; i < 2; i++){
 		effbins.push_back(effbins.at(0) + 0.8);
 		effbins.push_back(effbins.at(1) + 0.45);
 		effbins.push_back(effbins.at(2) + 0.35);
 		effbins.push_back(effbins.at(3) + 0.5);
 		effbins.push_back(effbins.at(4) + 0.3);
 		effbins.push_back(effbins.at(5) + 0.1);
-		// }
 	}
 	else if(strstr(inputvar,"MET")){
-		for(int i = 0; i < 30; i++){
+		for(int i = 0; i < 20; i++){
 			effbins.push_back(i*10.);
 		}
-		for(int i = 0; i < 2; i++){
-			effbins.push_back(i*50 + 300);
+		for(int i = 0; i < 4; i++){
+			effbins.push_back(i*50 + 200);
 		}
-		for(int i = 0; i < 2; i++){
+		for(int i = 0; i < 3; i++){
 			effbins.push_back(i*100 + 400);
 		}
 	}
