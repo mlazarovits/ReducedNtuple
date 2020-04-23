@@ -103,7 +103,13 @@ else if(sampleName=="QCD16"){
 	FilterSet QCD16(f_QCD16);
 	QCD16.SetSampleName(name);
 
-	QCD16.AddFilter("Flag_");
+	QCD16.AddFilter("Flag_HBHENoiseFilter");
+	QCD16.AddFilter("Flag_HBHENoiseIsoFilter");
+	QCD16.AddFilter("Flag_globalSuperTightHalo2016Filter");
+	QCD16.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	QCD16.AddFilter("Flag_goodVertices");
+	QCD16.AddFilter("Flag_eeBadScFilter");
+	QCD16.AddFilter("Flag_BadPFMuonFilter");
 
 	QCD16.SetVar("MET_pt");
 	QCD16.SetOutputName(name+".root");
@@ -120,7 +126,14 @@ else if(sampleName=="QCD17"){
 	FilterSet QCD17(f_QCD17);
 	QCD17.SetSampleName(name);
 
-	QCD17.AddFilter("Flag_");
+	QCD17.AddFilter("Flag_HBHENoiseFilter");
+	QCD17.AddFilter("Flag_HBHENoiseIsoFilter");
+	QCD17.AddFilter("Flag_globalSuperTightHalo2016Filter");
+	QCD17.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	QCD17.AddFilter("Flag_goodVertices");
+	QCD17.AddFilter("Flag_eeBadScFilter");
+	QCD17.AddFilter("Flag_BadChargedCandidateFilter");
+	QCD17.AddFilter("Flag_BadPFMuonFilter");
 
 	QCD17.SetVar("MET_pt");
 	QCD17.SetOutputName(name+".root");
@@ -138,7 +151,14 @@ else if(sampleName=="QCD18"){
 	FilterSet QCD18(f_QCD18);
 	QCD18.SetSampleName(name);
 
-	QCD18.AddFilter("Flag_");
+	QCD18.AddFilter("Flag_HBHENoiseFilter");
+	QCD18.AddFilter("Flag_HBHENoiseIsoFilter");
+	QCD18.AddFilter("Flag_globalSuperTightHalo2016Filter");
+	QCD18.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
+	QCD18.AddFilter("Flag_goodVertices");
+	QCD18.AddFilter("Flag_eeBadScFilter");
+	QCD18.AddFilter("Flag_BadChargedCandidateFilter");
+	QCD18.AddFilter("Flag_BadPFMuonFilter");
 
 	QCD18.SetVar("MET_pt");
 	QCD18.SetOutputName(name+".root");
