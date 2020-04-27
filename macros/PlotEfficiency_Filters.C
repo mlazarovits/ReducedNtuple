@@ -15,10 +15,10 @@
 using namespace std;
 
 void PlotEfficiency_Filters(TFile* file, TString sampleName){
-	if(gSystem->OpenDirectory("plots") == 0){
-		gSystem->mkdir("plots");
-		cout << "Created plots folder." << endl;
-	}
+	// if(gSystem->OpenDirectory("plots") == 0){
+	// 	gSystem->mkdir("plots");
+	// 	cout << "Created plots folder." << endl;
+	// }
 
 	
 	// string gPathname = "/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/";
