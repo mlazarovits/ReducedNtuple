@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TFile* file, TString sampleName){
+void PlotEfficiency_Filters(TString sfile, TString sampleName){
 	// if(gSystem->OpenDirectory("plots") == 0){
 	// 	gSystem->mkdir("plots");
 	// 	cout << "Created plots folder." << endl;
@@ -32,6 +32,7 @@ void PlotEfficiency_Filters(TFile* file, TString sampleName){
 
 
 TString name = sampleName+"AllFilters_loose";
+TFile* file = TFile::Open(sfile);
 FilterSet filters(file);
 filters.SetSampleName(name);
 
