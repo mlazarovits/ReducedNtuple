@@ -31,7 +31,7 @@ void PlotEfficiency_Filters(TFile* file, TString sampleName){
 	// TFile* f_QCD18 = TFile::Open((gPathname+"output/Autumn18_102X_QCD_HT700to1000_EventFilters.root").c_str());
 
 
-string name = sampleName+"AllFilters_loose";
+string name = (sampleName+"AllFilters_loose").c_str();
 FilterSet filters(file);
 filters.SetSampleName(name);
 
@@ -68,6 +68,10 @@ else if(strstr(sampleName,"18")){
 	filters.AddFilter("Flag_BadChargedCandidateFilter");
 	filters.SetVar("MET_pt");
 
+}
+
+else{
+	cout << "Check file and sampleName given" << endl;
 }
 
 filters.SetOutputName(name+".root");
