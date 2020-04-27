@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TFile* file, TString sampleName){
+void PlotEfficiency_Filters(TFile* file, string sampleName){
 	// if(gSystem->OpenDirectory("plots") == 0){
 	// 	gSystem->mkdir("plots");
 	// 	cout << "Created plots folder." << endl;
@@ -72,6 +72,7 @@ else if(strstr(sampleName,"18")){
 
 else{
 	cout << "Check file and sampleName given" << endl;
+	return;
 }
 
 filters.SetOutputName(name+".root");
@@ -80,14 +81,6 @@ vector<TEfficiency*> effs = filters.Analyze();
 filters.makePlots(effs);
 
 
-
-
-
-
-else{
-	cout << "Invalid sampleName" << endl;
-	return;
-}
 
 
 
