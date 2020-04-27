@@ -29,10 +29,10 @@ public:
 	int GetNFile() const;
 	string GetFile(int n);
 
-	void SetSampleName(const string& samplename);
+	void SetSampleName(const TString& samplename);
 	string GetSampleName() const;
 
-	void SetOutputName(const string& outname);
+	void SetOutputName(const TString& outname);
 	string GetOutputName() const;
 
 	void AddFilter(string Filter);
