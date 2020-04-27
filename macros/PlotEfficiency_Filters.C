@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TFile* file, char sampleName){
+void PlotEfficiency_Filters(TFile* file, TString sampleName){
 	// if(gSystem->OpenDirectory("plots") == 0){
 	// 	gSystem->mkdir("plots");
 	// 	cout << "Created plots folder." << endl;
@@ -31,7 +31,7 @@ void PlotEfficiency_Filters(TFile* file, char sampleName){
 	// TFile* f_QCD18 = TFile::Open((gPathname+"output/Autumn18_102X_QCD_HT700to1000_EventFilters.root").c_str());
 
 
-string name = (sampleName+"AllFilters_loose").c_str();
+string name = sampleName+"AllFilters_loose";
 FilterSet filters(file);
 filters.SetSampleName(name);
 
