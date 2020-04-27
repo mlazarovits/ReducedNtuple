@@ -146,7 +146,7 @@ inline string FilterSet::GetFile(int n){
 
 
 
-inline void FilterSet::SetSampleName(const string& samplename){
+inline void FilterSet::SetSampleName(const TString& samplename){
 	m_samplename = samplename;
 }
 
@@ -154,7 +154,7 @@ inline string FilterSet::GetSampleName() const{
 	return m_samplename;
 }
 
-inline void FilterSet::SetOutputName(const string& outname){
+inline void FilterSet::SetOutputName(const TString& outname){
 	m_outname = outname;
 }
 inline string FilterSet::GetOutputName() const {
