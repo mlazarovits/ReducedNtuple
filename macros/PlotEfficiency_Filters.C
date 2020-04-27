@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TFile* file, string sampleName){
+void PlotEfficiency_Filters(TFile* file, char sampleName){
 	// if(gSystem->OpenDirectory("plots") == 0){
 	// 	gSystem->mkdir("plots");
 	// 	cout << "Created plots folder." << endl;
