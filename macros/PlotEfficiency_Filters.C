@@ -31,7 +31,7 @@ void PlotEfficiency_Filters(TString sfile, TString sampleName){
 	// TFile* f_QCD18 = TFile::Open((gPathname+"output/Autumn18_102X_QCD_HT700to1000_EventFilters.root").c_str());
 
 
-TString name = sampleName+"AllFilters_loose";
+TString name = sampleName+"_AllFilters_loose";
 TFile* file = TFile::Open(sfile);
 FilterSet filters(file);
 filters.SetSampleName(name);
