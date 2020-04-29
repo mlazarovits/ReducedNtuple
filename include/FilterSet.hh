@@ -615,6 +615,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	string g_PlotTitle = m_samplename+" Filter Efficiencies";
 	mg->GetXaxis()->SetTitle(m_var.c_str());
 	mg->GetYaxis()->SetTitle("#epsilon");
+	mg->GetYaxis()->SetRange(0,1);
 	
 
 	TLatex l;

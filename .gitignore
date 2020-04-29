@@ -13,7 +13,7 @@ Fall17_94X_DYJetsToLL/
 Fall17_94X_SMS_EWK/
 Autumn18_102X_WJetsLNu/
 Fall17_94X_ZZinclusive/
-effPlots/*.pdf
+effPlots/*/*.pdf
 samples/
 Lists/
 Autumn18_102X_QCD/
