@@ -298,11 +298,11 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 		for(int i = 0; i < 20; i++){
 			effbins.push_back(i*10.);
 		}
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 2; i++){
 			effbins.push_back(i*50 + 200);
 		}
 		for(int i = 0; i < 3; i++){
-			effbins.push_back(i*100 + 400);
+			effbins.push_back(i*100 + 300);
 		}
 	}
 	else{
@@ -540,7 +540,6 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	cv->SetRightMargin(0.04);
 	cv->SetBottomMargin(0.15);
 	cv->SetTopMargin(0.085);
-	cv->SetLogy();
 
 	effs[0]->Draw("AP");
 	cv->Update();
@@ -617,6 +616,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	mg->GetXaxis()->SetTitle(m_var.c_str());
 	mg->GetYaxis()->SetTitle("1 - #epsilon");
 	mg->GetYaxis()->SetRangeUser(0.000001,0.1);
+	cv->SetLogy();
 	
 
 	TLatex l;
