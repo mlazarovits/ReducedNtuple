@@ -527,26 +527,22 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 
 
 inline void FilterSet::makePlots(vector<TEfficiency*> effs){
-	TCanvas* cv = new TCanvas("cv","cv",800,600);
+	TCanvas* cv = new TCanvas("cv","cv",900,700);
+	TCanvas* cv1 = new TCanvas("cv1","cv1",900,700);
 	TLegend* leg = new TLegend(0.35,0.2,0.95,0.4);
 	vector<TGraphAsymmErrors*> gr_effs;
 	TMultiGraph* mg = new TMultiGraph();
 
 
-	cv->cd();
-	cv->SetGridx();
-	cv->SetGridy();
-	cv->SetLeftMargin(0.13);
-	cv->SetRightMargin(0.04);
-	cv->SetBottomMargin(0.15);
-	cv->SetTopMargin(0.085);
+	cv1->cd();
+	
 
 	effs[0]->Draw("AP");
-	cv->Update();
+	cv1->Update();
 	gr_effs.push_back(effs[0]->GetPaintedGraph());
 	for(int i = 1; i < effs.size(); i++){
 		effs[i]->Draw("same");
-		cv->Update();
+		cv1->Update();
 		gr_effs.push_back(effs[i]->GetPaintedGraph());
 	}
 
@@ -563,14 +559,14 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	// cout << "imax: " << endl;
 	// gr_effs[imax]->Draw();
 
-	cv->Update();
+	cv1->Update();
 	Int_t chopcolor = gr_effs.size()/2;
 	Int_t chopmarker = gr_effs.size()/2;
 
 	for(int i = 0; i < gr_effs.size(); i++){
 		gr_effs[i]->SetMarkerSize(1.5);
 		gr_effs[i]->SetLineWidth(2);
-		gr_effs[i]->GetYaxis()->SetRangeUser(0.0,1.0);
+		// gr_effs[i]->GetYaxis()->SetRangeUser(0.0,1.0);
 		
 		if(i / chopmarker == 0){
 			gr_effs[i]->SetMarkerStyle(22); //triangle
@@ -602,6 +598,15 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 		// cv->Update();
 		leg->AddEntry(gr_effs[i]);
 	}
+	cv->cd();
+	cv->SetGridx();
+	cv->SetGridy();
+	cv->SetLeftMargin(0.13);
+	cv->SetRightMargin(0.04);
+	cv->SetBottomMargin(0.15);
+	cv->SetTopMargin(0.085);
+	cv->SetLogy();
+
 	leg->SetTextFont(132);
 	leg->SetTextSize(0.03);
 	leg->SetFillColor(kWhite);
@@ -614,7 +619,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 
 	string g_PlotTitle = m_samplename+" Filter Efficiencies";
 	mg->GetXaxis()->SetTitle(m_var.c_str());
-	mg->GetYaxis()->SetTitle("#epsilon");
+	mg->GetYaxis()->SetTitle("1 - #epsilon");
 	mg->GetYaxis()->SetRangeUser(0,1);
 	
 
