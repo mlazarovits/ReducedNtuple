@@ -434,7 +434,7 @@ inline vector<TEfficiency*> FilterSet::Analyze(){
 
 
 			bool bPassed = vec_lfilter.at(nfilter)->GetValue();
-			vec_eff.at(nfilter)->Fill((bPassed),l_var->GetValue()); 
+			vec_eff.at(nfilter)->Fill((!bPassed),l_var->GetValue()); 
 			
 			
 		}
