@@ -14,16 +14,16 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TString sfile, bool debug=false){
+void PlotEfficiency_Filters(TString sfile, TString outName, bool debug=false){
 TString name;
 if(debug) name = sfile+"test";
-else name = sfile+"_AllFilters_loose";
+else name = outName+"_AllFilters_loose";
 
-if(gSystem->AccessPathName(sfile+".root")){
+if(gSystem->AccessPathName(sfile)){
 	cout << "Error: file not found" << endl;
 	return;
 }
-TFile* file = TFile::Open(sfile+".root");
+TFile* file = TFile::Open(sfile);
 FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
