@@ -27,7 +27,7 @@ TFile* file = TFile::Open(sfile);
 FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
-if(strstr(sampleName,"16")){
+if(strstr(sfile,"16")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
@@ -37,7 +37,7 @@ if(strstr(sampleName,"16")){
 	filters.SetVar("MET_pt");
 
 }
-else if(strstr(sampleName,"17")){
+else if(strstr(sfile,"17")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
@@ -46,7 +46,7 @@ else if(strstr(sampleName,"17")){
 	filters.AddFilter("Flag_BadPFMuonFilter");
 	filters.SetVar("METFixEE2017_pt");
 }
-else if(strstr(sampleName,"18")){
+else if(strstr(sfile,"18")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
@@ -58,7 +58,7 @@ else if(strstr(sampleName,"18")){
 }
 
 else{
-	cout << "Invalid file or sampleName given" << endl;
+	cout << "Invalid file given" << endl;
 	return;
 }
 
