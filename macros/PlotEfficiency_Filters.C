@@ -15,7 +15,7 @@
 using namespace std;
 
 void PlotEfficiency_Filters(TString sfile, bool debug=false){
-TString name
+TString name;
 if(debug) name = sfile+"test";
 else name = sfile+"_AllFilters_loose";
 
