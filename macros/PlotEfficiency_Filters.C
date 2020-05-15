@@ -23,7 +23,7 @@ if(gSystem->AccessPathName(sfile+".root")){
 	cout << "Error: file not found" << endl;
 	return;
 }
-TFile* file = TFile::Open(sfile);
+TFile* file = TFile::Open(sfile+".root");
 FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
