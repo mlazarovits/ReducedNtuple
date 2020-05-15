@@ -16,6 +16,11 @@ using namespace std;
 
 void PlotEfficiency_Filters(TString sfile, TString sampleName){
 TString name = sampleName+"_AllFilters_loose";
+
+if(gSystem->AccessPathName(sfile)){
+	cout << "Error: file not found" << endl;
+	return;
+}
 TFile* file = TFile::Open(sfile);
 FilterSet filters(file);
 filters.SetSampleName(name);
@@ -51,7 +56,7 @@ else if(strstr(sampleName,"18")){
 }
 
 else{
-	cout << "Check file and sampleName given" << endl;
+	cout << "Invalid file or sampleName given" << endl;
 	return;
 }
 
