@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TString sfile, TString sampleName, bool debug){
+void PlotEfficiency_Filters(TString sfile, TString sampleName, bool debug=false){
 TString name = sampleName+"_AllFilters_loose";
 
 if(gSystem->AccessPathName(sfile)){
