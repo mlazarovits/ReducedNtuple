@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TString sfile, TString sampleName){
+void PlotEfficiency_Filters(TString sfile, TString sampleName, bool debug){
 TString name = sampleName+"_AllFilters_loose";
 
 if(gSystem->AccessPathName(sfile)){
@@ -22,7 +22,7 @@ if(gSystem->AccessPathName(sfile)){
 	return;
 }
 TFile* file = TFile::Open(sfile);
-FilterSet filters(file);
+FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
 if(strstr(sampleName,"16")){
