@@ -14,20 +14,20 @@
 
 using namespace std;
 
-void PlotEfficiency_Filters(TString sfile, TString outName, bool debug=false){
+void PlotEfficiency_Filters(TString inFile, TString outName, bool debug=false){
 TString name;
-if(debug) name = sfile+"test";
+if(debug) name = inFile+"test";
 else name = outName+"_AllFilters_loose";
 
-if(gSystem->AccessPathName(sfile)){
+if(gSystem->AccessPathName(inFile)){
 	cout << "Error: file not found" << endl;
 	return;
 }
-TFile* file = TFile::Open(sfile);
+TFile* file = TFile::Open(inFile);
 FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
-if(strstr(sfile,"16")){
+if(strstr(inFile,"16")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
@@ -38,7 +38,7 @@ if(strstr(sfile,"16")){
 	filters.SetVar("MET_pt");
 
 }
-else if(strstr(sfile,"17")){
+else if(strstr(inFile,"17")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
@@ -48,7 +48,7 @@ else if(strstr(sfile,"17")){
 	filters.AddJSONFile("json/GoodRunList/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt");
 	filters.SetVar("METFixEE2017_pt");
 }
-else if(strstr(sfile,"18")){
+else if(strstr(inFile,"18")){
 	filters.AddFilter("Flag_HBHENoiseFilter");
 	filters.AddFilter("Flag_HBHENoiseIsoFilter");
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");

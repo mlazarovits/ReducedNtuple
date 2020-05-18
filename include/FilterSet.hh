@@ -7,10 +7,10 @@
 #include <TTree.h>
 #include <TEfficiency.h>
 #include <TLeaf.h>
-#include "../include/prod2016MC_reducedNANO_EventFilters.h"
-#include "../include/prod2017MC_reducedNANO_EventFilters.h"
-#include "../include/prod2018MC_reducedNANO_EventFilters.h"
-#include "../include/JSONTool.hh"
+#include "prod2016MC_reducedNANO_EventFilters.h"
+#include "prod2017MC_reducedNANO_EventFilters.h"
+#include "prod2018MC_reducedNANO_EventFilters.h"
+#include "JSONTool.hh"
 #include <TLatex.h>
 
 
