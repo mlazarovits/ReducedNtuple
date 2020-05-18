@@ -1,4 +1,4 @@
-#include "../include/JSONTool.hh"
+#include "JSONTool.hh"
 
 block::block(int run, int lumi_beg, int lumi_end){
   m_run = run;

@@ -472,7 +472,7 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 	eff->Draw("colztext");
 	cv->Update();
 	
-	TH2D* h = eff->GetPaintedHistogram();
+	TH2* h = eff->GetPaintedHistogram();
 	
 	
 	cv->Update();
