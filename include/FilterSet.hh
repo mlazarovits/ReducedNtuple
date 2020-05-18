@@ -8,12 +8,16 @@
 #include <TEfficiency.h>
 #include <TLeaf.h>
 #include <TCanvas.h>
+#include <TMultiGraph.h>
+#include <TH2.h>
+#include <TLatex.h>
+#include <TLorentzVector.h>
 
 #include "prod2016MC_reducedNANO_EventFilters.h"
 #include "prod2017MC_reducedNANO_EventFilters.h"
 #include "prod2018MC_reducedNANO_EventFilters.h"
 #include "JSONTool.hh"
-#include <TLatex.h>
+
 
 
 using namespace std;

@@ -4,6 +4,7 @@
 #include "../include/prod2017MC_reducedNANO_EventFilters.h"
 #include "../include/prod2018MC_reducedNANO_EventFilters.h"
 #include "../include/FilterSet.hh"
+#include "../include/JSONTool.hh"
 
 #include "TEfficiency.h"
 #include "TGraphAsymmErrors.h"
