@@ -34,6 +34,7 @@ if(strstr(sfile,"16")){
 	filters.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
 	filters.AddFilter("Flag_goodVertices");
 	filters.AddFilter("Flag_BadPFMuonFilter");
+	filters.AddJSONFile("json/GoodRunList/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt");
 	filters.SetVar("MET_pt");
 
 }
@@ -44,6 +45,7 @@ else if(strstr(sfile,"17")){
 	filters.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
 	filters.AddFilter("Flag_goodVertices");
 	filters.AddFilter("Flag_BadPFMuonFilter");
+	filters.AddJSONFile("json/GoodRunList/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt");
 	filters.SetVar("METFixEE2017_pt");
 }
 else if(strstr(sfile,"18")){
@@ -52,6 +54,7 @@ else if(strstr(sfile,"18")){
 	filters.AddFilter("Flag_globalSuperTightHalo2016Filter");
 	filters.AddFilter("Flag_EcalDeadCellTriggerPrimitiveFilter");
 	filters.AddFilter("Flag_goodVertices");
+	filters.AddJSONFile("json/GoodRunList/Cert_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18_JSON.txt");
 	filters.AddFilter("Flag_BadPFMuonFilter");
 	filters.SetVar("MET_pt");
 

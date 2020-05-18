@@ -10,7 +10,7 @@
 #include "../include/prod2016MC_reducedNANO_EventFilters.h"
 #include "../include/prod2017MC_reducedNANO_EventFilters.h"
 #include "../include/prod2018MC_reducedNANO_EventFilters.h"
-// #include "TEfficiency.h"
+#include "../include/JSONTool.hh"
 #include <TLatex.h>
 
 
@@ -51,6 +51,8 @@ public:
 
 	void SetCuts(string cuts);
 
+	void AddJSONFile(const string& jsonfile);
+
 
 	
 
@@ -60,12 +62,13 @@ private:
 	TLorentzVector calcMHT(TLeaf* nJet_leaf, TLeaf* Jet_pt_leaf, TLeaf* Jet_eta_leaf, TLeaf* Jet_phi_leaf, TLeaf* Jet_mass_leaf);
 	Double_t calcInvMass2Muons(int Muon1, int Muon2);	
 	Double_t calcPt2Muons(int Muon1, int Muon2);
-	void initializeAnalyze();
 	std::vector<Double_t> makeEffBins(TString inputvar);
 
+	JSONTool m_JSONTool;
 
-	// bool GoldenMuonSelection();
-	// bool DoubleMuonSelection();
+	int run;
+	int lumiBlock;
+
 
 
 	string m_samplename;
@@ -104,6 +107,7 @@ private:
 	TLeaf* l_var;
 	TLeaf* l_weight;
 
+
 	vector<string> m_Filters;
 	
 	vector<string> m_filenames;
@@ -125,6 +129,7 @@ inline FilterSet::FilterSet(TFile* file,bool i_debug=false){
 		cout << "Error: No tree found" << endl;
 	}
 	debug = i_debug;
+	l_var = m_tree->GetLeaf(m_var.c_str());
 }
 
 
@@ -209,7 +214,9 @@ inline void FilterSet::SetCuts(string cuts){
 }
 
 
-
+inline void FilterSet::AddJSONFile(const string& jsonfile){
+	m_JSONTool.BuildMap(jsonfile);
+}
 
 
 
@@ -253,19 +260,13 @@ inline Double_t FilterSet::calcPt2Muons(int Muon1, int Muon2){
 
 
 
-inline void FilterSet::initializeAnalyze(){
-	l_var = m_tree->GetLeaf(m_var.c_str());
-	
-	
-}
-
 
 
 inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 	Int_t nBins;
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
-	if(inputvar == "pt"){
+	if(strstr(inputvar,"pt")){
 		nBins = 20;
 		effbins.push_back(0.0);
 		//SOS binning
@@ -284,7 +285,7 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 			effbins.push_back(effbins.at(i-1) + 5.);
 		}
 	}
-	else if(inputvar == "eta"){
+	else if(strstr(inputvar,"eta")){
 
 		effbins.push_back(0.0);
 		effbins.push_back(effbins.at(0) + 0.8);
@@ -321,7 +322,7 @@ inline TEfficiency* FilterSet::Analyze2D(){
 	TEfficiency* eff;
 	TLeaf* l_filter;
 	
-	initializeAnalyze();
+	
 
 	int nEntries;
 	if(l_var == NULL){
@@ -383,8 +384,10 @@ inline TEfficiency* FilterSet::Analyze2D(){
 inline vector<TEfficiency*> FilterSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_lfilter;
+
 	
-	initializeAnalyze();
+	
+
 
 	int nEntries;
 	if(l_var == NULL){
@@ -424,6 +427,15 @@ inline vector<TEfficiency*> FilterSet::Analyze(){
 		
 
 		m_tree->GetEntry(evt);
+		run = m_tree->GetLeaf("run")->GetValue();
+		lumiBlock = m_tree->GetLeaf("luminosityBlock")->GetValue();
+
+
+
+
+		//check for good run
+		if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
+
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
@@ -434,7 +446,7 @@ inline vector<TEfficiency*> FilterSet::Analyze(){
 
 
 			bool bPassed = vec_lfilter.at(nfilter)->GetValue();
-			vec_eff.at(nfilter)->Fill((!bPassed),l_var->GetValue()); 
+			vec_eff.at(nfilter)->Fill(!bPassed,l_var->GetValue()); 
 			
 			
 		}
