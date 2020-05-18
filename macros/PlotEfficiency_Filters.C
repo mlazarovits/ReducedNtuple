@@ -18,7 +18,7 @@ using namespace std;
 void PlotEfficiency_Filters(TString inFile, TString outName, bool debug=false){
 TString name;
 if(debug) name = inFile+"test";
-else name = outName+"_AllFilters_loose";
+else name = outName+"_AllFilters";
 
 if(gSystem->AccessPathName(inFile)){
 	cout << "Error: file not found" << endl;
