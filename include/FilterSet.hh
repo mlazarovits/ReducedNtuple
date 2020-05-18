@@ -7,6 +7,8 @@
 #include <TTree.h>
 #include <TEfficiency.h>
 #include <TLeaf.h>
+#include <TCanvas.h>
+
 #include "prod2016MC_reducedNANO_EventFilters.h"
 #include "prod2017MC_reducedNANO_EventFilters.h"
 #include "prod2018MC_reducedNANO_EventFilters.h"
@@ -466,7 +468,7 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 	eff->Draw("colztext");
 	cv->Update();
 	
-	TH2* h = eff->GetPaintedHistogram();
+	TH2D* h = eff->GetPaintedHistogram();
 	
 	
 	cv->Update();
