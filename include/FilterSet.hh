@@ -390,9 +390,9 @@ inline TEfficiency* FilterSet::Analyze2D(){
 inline vector<TEfficiency*> FilterSet::Analyze(){
 	vector<TEfficiency*> vec_eff;
 	vector<TLeaf*> vec_lfilter;
-	
 
-	l_var = m_tree->GetLeaf(GetVar());
+
+	l_var = m_tree->GetLeaf(GetVar().c_str());
 
 	
 	
