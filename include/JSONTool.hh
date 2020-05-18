@@ -1,5 +1,5 @@
-#ifndef JSONTool_h
-#define JSONTool_h
+#ifndef JSONTool_hh
+#define JSONTool_hh
 
 #include <iostream>
 #include <fstream>
