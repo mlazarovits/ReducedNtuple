@@ -16,7 +16,7 @@
 #include "prod2016MC_reducedNANO_EventFilters.h"
 #include "prod2017MC_reducedNANO_EventFilters.h"
 #include "prod2018MC_reducedNANO_EventFilters.h"
-#include "JSONTool.hh"
+#include "../src/JSONTool.cc"
 
 
 
