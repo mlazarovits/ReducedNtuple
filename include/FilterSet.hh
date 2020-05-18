@@ -442,13 +442,15 @@ inline vector<TEfficiency*> FilterSet::Analyze(){
 
 
 
-		//check for good run
-		if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
+		
 
 		if (evt % 1000 == 0) {
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
+
+	    //check for good run
+		if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
 
 
 		for(int nfilter = 0; nfilter < m_Filters.size(); nfilter++){
