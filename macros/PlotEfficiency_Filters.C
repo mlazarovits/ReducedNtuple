@@ -47,7 +47,7 @@ if(strstr(inFile, "all")){
 		chain->AddFile((gPath+"MET_Run2018D.root").c_str());
 	}
 	chain->CloneTree(-1,"fast");
-	file = new TFile((inFile+".root").c_str());
+	file = new TFile(inFile);
 	file->Write();
 
 }
