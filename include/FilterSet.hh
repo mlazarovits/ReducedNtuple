@@ -272,7 +272,7 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 	Int_t nBins;
 	std::vector<Double_t> effbins;
 	//set bins of TEff object
-	if(strstr(inputvar,"pt")){
+	if(inputvar=="pt"){
 		nBins = 20;
 		effbins.push_back(0.0);
 		//SOS binning
@@ -291,7 +291,7 @@ inline std::vector<Double_t> FilterSet::makeEffBins(TString inputvar){
 			effbins.push_back(effbins.at(i-1) + 5.);
 		}
 	}
-	else if(strstr(inputvar,"eta")){
+	else if(inputvar=="eta"){
 
 		effbins.push_back(0.0);
 		effbins.push_back(effbins.at(0) + 0.8);
@@ -369,6 +369,8 @@ inline TEfficiency* FilterSet::Analyze2D(){
 			fprintf(stdout, "\r  Processed events: %8d of %8d ", evt, nEntries);
 		}
 	    fflush(stdout);
+	    //check for good run
+		if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
 
 	    
 
