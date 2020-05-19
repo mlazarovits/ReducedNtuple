@@ -133,6 +133,7 @@ inline FilterSet::FilterSet(TFile* file,bool i_debug=false){
 	m_tree = (TTree*)file->Get("Events");
 	if(m_tree == NULL){
 		cout << "Error: No tree found" << endl;
+		return;
 	}
 	debug = i_debug;
 	l_var = m_tree->GetLeaf(m_var.c_str());
