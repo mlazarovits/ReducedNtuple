@@ -30,7 +30,6 @@ TFile* file;
 if(strstr(inFile, "all")){
 	file = new TFile(inFile, "RECREATE");
 	chain->SetBranchStatus("*",0);
-	chain->SetBranchStatus();
 	chain->SetBranchStatus("Flag_HBHENoiseFilter",1);
 	chain->SetBranchStatus("Flag_HBHENoiseIsoFilter",1);
 	chain->SetBranchStatus("Flag_globalSuperTightHalo2016Filter",1);
