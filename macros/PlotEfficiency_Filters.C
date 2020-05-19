@@ -28,6 +28,7 @@ TFile* file;
 
 
 if(strstr(inFile, "all")){
+	file = new TFile(inFile, "RECREATE");
 	if(strstr(inFile,"16")){
 		chain->AddFile((gPath+"MET_Run2016B.root").c_str());
 		chain->AddFile((gPath+"MET_Run2016C.root").c_str());
@@ -47,8 +48,9 @@ if(strstr(inFile, "all")){
 		chain->AddFile((gPath+"MET_Run2018D.root").c_str());
 	}
 	chain->CloneTree(-1,"fast");
-	file = new TFile(inFile);
+	
 	file->Write();
+	
 
 }
 else{ 
