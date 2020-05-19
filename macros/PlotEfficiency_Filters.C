@@ -36,6 +36,10 @@ if(strstr(inFile, "all")){
 	chain->SetBranchStatus("Flag_EcalDeadCellTriggerPrimitiveFilter",1);
 	chain->SetBranchStatus("Flag_goodVertices",1);
 	chain->SetBranchStatus("Flag_BadPFMuonFilter",1);
+
+	chain->SetBranchStatus("run",1);
+	chain->SetBranchStatus("luminosityBlock",1);
+
 	if(strstr(inFile,"16")){
 		chain->SetBranchStatus("MET_pt",1);
 		chain->AddFile((gPath+"MET_Run2016B.root").c_str());
