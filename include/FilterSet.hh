@@ -554,7 +554,7 @@ inline void FilterSet::make2DPlot(TEfficiency* eff){
 
 inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	TCanvas* cv = new TCanvas("cv","cv",900,700);
-	TLegend* leg = new TLegend(0.35,0.2,0.65,0.4);
+	TLegend* leg = new TLegend(0.55,0.2,0.95,0.4);
 	vector<TGraphAsymmErrors*> gr_effs;
 	TMultiGraph* mg = new TMultiGraph();
 
