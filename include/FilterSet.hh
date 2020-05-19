@@ -638,10 +638,10 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	leg->Draw("SAME");
 	cv->Update();
 
-	string g_PlotTitle = m_samplename+" Filter Efficiencies";
+	string g_PlotTitle = m_samplename+" Efficiencies";
 	mg->GetXaxis()->SetTitle(m_var.c_str());
 	mg->GetYaxis()->SetTitle("1 - #epsilon");
-	mg->GetYaxis()->SetRangeUser(0.000001,0.1);
+	mg->GetYaxis()->SetRangeUser(0.000001,1);
 	cv->SetLogy();
 	
 
