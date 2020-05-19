@@ -17,14 +17,49 @@ using namespace std;
 
 void PlotEfficiency_Filters(TString inFile, TString outName, bool debug=false){
 TString name;
+string gPath = "/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/DataRootFiles/";
 if(debug) name = inFile+"test";
 else name = outName+"_AllFilters";
+TChain* chain = new TChain("Events");
+TFile* file;
 
-if(gSystem->AccessPathName(inFile)){
-	cout << "Error: file not found" << endl;
-	return;
+
+
+
+
+if(strstr(inFile, "all")){
+	if(strstr(inFile,"16")){
+		chain->AddFile((gPath+"MET_Run2016B.root").c_str());
+		chain->AddFile((gPath+"MET_Run2016C.root").c_str());
+		chain->AddFile((gPath+"MET_Run2016D.root").c_str());
+		chain->AddFile((gPath+"MET_Run2016E.root").c_str());
+	}
+	else if(strstr(inFile,"17")){
+		chain->AddFile((gPath+"MET_Run2017B.root").c_str());
+		chain->AddFile((gPath+"MET_Run2017C.root").c_str());
+		chain->AddFile((gPath+"MET_Run2017D.root").c_str());
+		chain->AddFile((gPath+"MET_Run2017E.root").c_str());
+	}
+	else if(strstr(inFile,"18")){
+		chain->AddFile((gPath+"MET_Run2018A.root").c_str());
+		chain->AddFile((gPath+"MET_Run2018B.root").c_str());
+		chain->AddFile((gPath+"MET_Run2018C.root").c_str());
+		chain->AddFile((gPath+"MET_Run2018D.root").c_str());
+	}
+	chain->CloneTree(-1,"fast");
+	file = new TFile((inFile+".root").c_str());
+	file->Write();
+
 }
-TFile* file = TFile::Open(inFile);
+else{ 
+	if(gSystem->AccessPathName(inFile)){
+		cout << "Error: file not found" << endl;
+		return;
+	}
+	file = TFile::Open(inFile);
+}
+
+
 FilterSet filters(file, debug);
 filters.SetSampleName(name);
 
