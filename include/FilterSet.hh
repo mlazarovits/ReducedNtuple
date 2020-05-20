@@ -36,7 +36,7 @@ public:
 	string GetFile(int n);
 
 	void SetSampleName(const TString& samplename);
-	string GetSampleName() const;
+	TString GetSampleName() const;
 
 	void SetOutputName(const TString& outname);
 	string GetOutputName() const;
@@ -162,7 +162,7 @@ inline void FilterSet::SetSampleName(const TString& samplename){
 	m_samplename = samplename;
 }
 
-inline string FilterSet::GetSampleName() const{
+inline TString FilterSet::GetSampleName() const{
 	return m_samplename;
 }
 
@@ -642,7 +642,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	leg->Draw("SAME");
 	cv->Update();
 
-	string g_PlotTitle = m_samplename+" Efficiencies";
+	TString g_PlotTitle = m_samplename+" Efficiencies";
 	mg->GetXaxis()->SetTitle(m_var.c_str());
 	mg->GetYaxis()->SetTitle("1 - #epsilon");
 	mg->GetYaxis()->SetRangeUser(0.00000001,1);
