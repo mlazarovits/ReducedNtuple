@@ -77,7 +77,7 @@ private:
 
 
 
-	string m_samplename;
+	TString m_samplename;
 	string m_filtername;
 	string m_outname;
 	TTree* m_tree;
