@@ -28,44 +28,48 @@ TFile* file;
 
 
 if(strstr(inFile, "all")){
-	file = new TFile(inFile, "RECREATE");
-	chain->SetBranchStatus("*",0);
-	chain->SetBranchStatus("Flag_HBHENoiseFilter",1);
-	chain->SetBranchStatus("Flag_HBHENoiseIsoFilter",1);
-	chain->SetBranchStatus("Flag_globalSuperTightHalo2016Filter",1);
-	chain->SetBranchStatus("Flag_EcalDeadCellTriggerPrimitiveFilter",1);
-	chain->SetBranchStatus("Flag_goodVertices",1);
-	chain->SetBranchStatus("Flag_BadPFMuonFilter",1);
+	if(gSystem->AccessPathName(inFile)){
+		file = new TFile(inFile, "RECREATE");
+		chain->SetBranchStatus("*",0);
+		chain->SetBranchStatus("Flag_HBHENoiseFilter",1);
+		chain->SetBranchStatus("Flag_HBHENoiseIsoFilter",1);
+		chain->SetBranchStatus("Flag_globalSuperTightHalo2016Filter",1);
+		chain->SetBranchStatus("Flag_EcalDeadCellTriggerPrimitiveFilter",1);
+		chain->SetBranchStatus("Flag_goodVertices",1);
+		chain->SetBranchStatus("Flag_BadPFMuonFilter",1);
 
-	chain->SetBranchStatus("run",1);
-	chain->SetBranchStatus("luminosityBlock",1);
+		chain->SetBranchStatus("run",1);
+		chain->SetBranchStatus("luminosityBlock",1);
 
-	if(strstr(inFile,"16")){
-		chain->SetBranchStatus("MET_pt",1);
-		chain->AddFile((gPath+"MET_Run2016B.root").c_str());
-		chain->AddFile((gPath+"MET_Run2016C.root").c_str());
-		chain->AddFile((gPath+"MET_Run2016D.root").c_str());
-		chain->AddFile((gPath+"MET_Run2016E.root").c_str());
+		if(strstr(inFile,"16")){
+			chain->SetBranchStatus("MET_pt",1);
+			chain->AddFile((gPath+"MET_Run2016B.root").c_str());
+			chain->AddFile((gPath+"MET_Run2016C.root").c_str());
+			chain->AddFile((gPath+"MET_Run2016D.root").c_str());
+			chain->AddFile((gPath+"MET_Run2016E.root").c_str());
+		}
+		else if(strstr(inFile,"17")){
+			chain->SetBranchStatus("METFixEE2017_pt",1);
+			chain->AddFile((gPath+"MET_Run2017B.root").c_str());
+			chain->AddFile((gPath+"MET_Run2017C.root").c_str());
+			chain->AddFile((gPath+"MET_Run2017D.root").c_str());
+			chain->AddFile((gPath+"MET_Run2017E.root").c_str());
+		}
+		else if(strstr(inFile,"18")){
+			chain->SetBranchStatus("MET_pt",1);
+			chain->AddFile((gPath+"MET_Run2018A.root").c_str());
+			chain->AddFile((gPath+"MET_Run2018B.root").c_str());
+			chain->AddFile((gPath+"MET_Run2018C.root").c_str());
+			chain->AddFile((gPath+"MET_Run2018D.root").c_str());
+		}
+		chain->CloneTree(-1,"fast");
+		
+		file->Write();
 	}
-	else if(strstr(inFile,"17")){
-		chain->SetBranchStatus("METFixEE2017_pt",1);
-		chain->AddFile((gPath+"MET_Run2017B.root").c_str());
-		chain->AddFile((gPath+"MET_Run2017C.root").c_str());
-		chain->AddFile((gPath+"MET_Run2017D.root").c_str());
-		chain->AddFile((gPath+"MET_Run2017E.root").c_str());
-	}
-	else if(strstr(inFile,"18")){
-		chain->SetBranchStatus("MET_pt",1);
-		chain->AddFile((gPath+"MET_Run2018A.root").c_str());
-		chain->AddFile((gPath+"MET_Run2018B.root").c_str());
-		chain->AddFile((gPath+"MET_Run2018C.root").c_str());
-		chain->AddFile((gPath+"MET_Run2018D.root").c_str());
-	}
-	chain->CloneTree(-1,"fast");
 	
-	file->Write();
-	
-
+	else{
+		file = TFile::Open(inFile);
+	}
 }
 else{ 
 	if(gSystem->AccessPathName(inFile)){
