@@ -19,7 +19,10 @@ void PlotEfficiency_Filters(TString inFile, TString outName, bool debug=false){
 TString name;
 string gPath = "/home/t3-ku/mlazarov/Ewkinos/CMSSW_10_6_5/src/ReducedNtuple/DataRootFiles/";
 if(debug) name = inFile+"test";
-else name = outName+"_AllFilters";
+if(strstr(inFile,"Data")) name = outName+"_Data_AllFilters";
+else if(strstr(inFile, "MC")) name = outName+"_MC_AllFilters";
+else name = outName + "_AllFilters";
+
 TChain* chain = new TChain("Events");
 TFile* file;
 

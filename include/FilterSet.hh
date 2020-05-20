@@ -452,8 +452,12 @@ inline vector<TEfficiency*> FilterSet::Analyze(){
 		}
 	    fflush(stdout);
 
-	    //check for good run
-		if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
+	    //check for good run in data
+	    if(strstr(m_samplename,"Data")){
+	    	if(!m_JSONTool.IsGood(run,lumiBlock)) continue;
+	    }
+
+		
 
 
 		for(int nfilter = 0; nfilter < m_Filters.size(); nfilter++){
