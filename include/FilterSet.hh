@@ -643,7 +643,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	mg->GetYaxis()->SetTitle("1 - #epsilon");
 	mg->GetYaxis()->SetRangeUser(0.00000001,1);
 	cv->SetLogy();
-	
+	cv->Update();
 
 	TLatex l;
 	l.SetTextFont(132);
