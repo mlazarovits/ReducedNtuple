@@ -663,7 +663,7 @@ inline void FilterSet::makePlots(vector<TEfficiency*> effs){
 	l.SetNDC();
 	l.SetTextSize(0.05);
 	l.SetTextFont(132);
-	l.DrawLatex(0.40,0.92,g_PlotTitle.c_str());
+	l.DrawLatex(0.40,0.92,g_PlotTitle);
 	cv->Update();
 
 	if(!debug){
