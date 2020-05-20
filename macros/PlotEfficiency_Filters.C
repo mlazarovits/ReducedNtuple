@@ -73,7 +73,7 @@ if(strstr(inFile, "all")){
 }
 else{ 
 	if(gSystem->AccessPathName(inFile)){
-		cout << "Error: file not found" << endl;
+		cout << "Error: file " << inFile << " not found" << endl;
 		return;
 	}
 	file = TFile::Open(inFile);
